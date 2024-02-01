@@ -1,1 +1,1 @@
-# JSP-Web-Project---Sellre-Market
+# JSP Web Project / Sellre-Market
