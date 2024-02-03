@@ -180,7 +180,7 @@
 							class="css-1tfhwyj e13nap1l0">이용약관</a></li>
 							
 						<li class="bold css-slkv2p e13nap1l1"><a
-							href="/user-terms/privacy-policy" target="_self"
+							href="../jsp/privacy-policy.jsp" target="_self"
 							class="css-1tfhwyj e13nap1l0">개인정보처리방침</a></li>
 							
 						<li class=" css-slkv2p e13nap1l1"><a href="/user-guide"
