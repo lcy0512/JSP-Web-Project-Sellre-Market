@@ -12,7 +12,6 @@
 <meta name="keywords"
 	content="다이어트, 식단, 닭가슴살, 요리, 치아바타, 레시피, 상차림, 다이어트음식, 이유식, 건강이유식, 뷰티, 화장품" />
 <meta property="og:type" content="website" />
-<meta property="og:site_name" content="셀리 - 마켓셀리/뷰티셀리" />
 <meta property="og:title" content="셀리소개 - 셀리" />
 <meta property="og:description" content="셀리의 시작, 믿음 그리고 지켜야할 가치" />
 <meta property="og:image"
