@@ -39,6 +39,25 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    
+    <!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iK7t1TIq0IYzcqL/tnuU6J1bYWFIVXutUPnN0PBKpZQUMuXAfmgt5L9a1" crossorigin="anonymous">
+	
+	<!-- Bootstrap JavaScript (requires Popper.js) -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofNol/wwZQqjW9M4aPskD5S/R1HD87Hjr" crossorigin="anonymous"></script>
+	
+    <script>
+		function popup() {
+			/* 새로운 url 위치 */ 
+			var url = "popup.do";
+			/* 어떤 방식으로 띄울 것인가 */
+			var name = "_blank";
+			// option 스펙 설정
+			var specs = 'width=500, height=420, top=150, left=400, location=yes, toolbar=yes, menubar=yes, scrollbars=no, resizable=no'
+		   
+			window.open(url, name, specs);
+		}
+	</script>	
 </head>
 <body>
 	<!-- Topbar Start -->
@@ -327,10 +346,11 @@
 		                        </a>
 		                    </div>
 		                    <div style="margin-top: 7px; margin-left:1%; border: 1px solid lightgray; border-radius: 5px; width:98%;">
-		                    	<a href="goCart.do" class="btn btn-primary btn-light align-items-center" style="width:100%;">장바구니</a>
+		                    	<a href="popup.do" onclick="popup(); return false;" class="btn btn-primary btn-light align-items-center" style="width:100%;">장바구니</a>
 	                    	</div>
 		                    <div class="text-center py-4">
 		                        <a class="h6 text-decoration-none text-truncate" href="">[${dto.yname}] ${dto.rcontent}</a>
+		                        <input id="name" type="hidden" value="${dto.rcontent}">
 		                        <div class="d-flex align-items-center justify-content-center mt-2">
 		                            <h5>${dto.price}원</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
 		                        </div>

@@ -70,11 +70,11 @@ public class Controller extends HttpServlet {
 				
 				break;
 				
-			case "/goCart.do" :
+			case "/popup.do" :
 				command = new MCmainView();
 				command.execute(request, response);
 				
-				viewPage = "cartViewPage.jsp";
+				viewPage = "popup.jsp";
 				
 				break;
 		
