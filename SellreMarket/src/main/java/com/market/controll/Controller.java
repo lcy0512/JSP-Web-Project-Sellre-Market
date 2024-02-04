@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.market.command.MCmainView;
 import com.market.command.MCommand;
 
 /**
@@ -53,12 +54,29 @@ public class Controller extends HttpServlet {
 		String conPath = request.getContextPath();
 		String com = uri.substring(conPath.length());
 		
+		String id = null;
+		
 		switch(com) {
 			// 로그인 화면
 			case "/login.do" :
 				viewPage = "test.jsp";
 				break;
-		
+				
+			case "/mainPage.do" :
+				command = new MCmainView();
+				command.execute(request, response);
+				
+				viewPage = "mainViewPage.jsp";
+				
+				break;
+				
+			case "/goCart.do" :
+				command = new MCmainView();
+				command.execute(request, response);
+				
+				viewPage = "cartViewPage.jsp";
+				
+				break;
 		
 			default :
 				break;
