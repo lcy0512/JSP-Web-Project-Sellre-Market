@@ -35,7 +35,7 @@
 			<div class="sub_inner_bg"></div>
 			<div class="wrap">
 				<div class="article_header_inner">
-					<h1 class="article_title" lang="en">이용약관 샘플</h1>
+					<h1 class="article_title" lang="en">이용약관</h1>
 					<p class="article_subtitle"></p>
 				</div>
 				<!-- .article_header_inner -->
