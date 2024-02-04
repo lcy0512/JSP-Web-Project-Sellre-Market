@@ -36,32 +36,37 @@
 	
 </script>
 
-<!-- <script>
+<script>
 	let menuItems = document.querySelectorAll('.menu-item');
-	let mainContent = document.querySelector('.main_content');
 	
 	menuItems.forEach(function(item) {
 		item.onclick = changeSection;
 	});
 		
-	function changeSection(e) {
-		e.preventDefalut(); 	//링크 클릭 시 기본 동작 방지
+	function changeSection() {
 		
 		//get active page
-		/* let activePage = document.querySelector('.active');
-		console.log('ddd : '+activePage) */
+		let activePage = document.querySelector('.active');
+		console.log('ddd : '+activePage)
 		
 		
 		//get new page
 		let newPageId = this.getAttribute('href');
-		let newPage = document.querySelector('#'+newPageId+'.jsp');
+		let newPage = document.querySelector(newPageId);
 		console.log('1212 : '+newPageId);
 		console.log('ddd : '+newPage)
 		
 		//change active menu item 
-		let activeMenuItem = document.querySelector('.menu-item.active');
-		activePage.classList.remove('.active');
-		this.classList.add('active');
+/* 		let activeMenuItem = document.querySelector('.menu-item.active');
+ */		activePage.classList.remove('.active');
+ 		activePage.hidden = true;
+		
+ 		newPage.classList.add('active');
+ 		newPageId.hidden = false;
+		
+		
+		
+		/* this.classList.add('active');
 		
 		//load new Content : fetch를 통해 비동기적으로 로드, mainContent요소에 동적으로 삽입
 		fetch(newPageId)
@@ -71,12 +76,12 @@
 			})
 			.catch(error => {
 				console.error('error : ', error);
-			})
+			}) */
 		
 	}
 
 	
-</script> -->
+</script>
 <body id="body">
 
 	<nav class="sidebar close">
@@ -94,42 +99,42 @@
 				<ul class="menu-links">
 				
 					<li class="nav-link">
-						<a href="#" class="menu-item">
+						<a href="adminSales.do" class="menu-item">
 							<i class='bx bx-line-chart icon page1'></i>
 							<span class="text nav-text">매출현황</span>
 						</a>
 					</li>
 					
 					<li class="nav-link"> 
-						<a href="#" class="menu-item"  onclick="goToProduct()" >
+						<a href="adminProduct.do" class="menu-item"  >
 							<i class='bx bxs-bowl-rice icon page2'></i>
 							<span class="text nav-text">제품현황</span>
 						</a>
 					</li>
 					
 					<li class="nav-link">
-						<a href="#" class="menu-item">
+						<a href="adminCategory.do" class="menu-item">
 							<i class='bx bxs-category icon page3'></i>
 							<span class="text nav-text">카테고리</span>
 						</a>
 					</li>
 					
 					<li class="nav-link">
-						<a href="#" class="menu-item">
+						<a href="adminEvent.do" class="menu-item">
 							<i class='bx bxs-calendar-event icon page4'></i>
 							<span class="text nav-text">이벤트현황</span>
 						</a>
 					</li>
 					
 					<li class="nav-link">
-						<a href="#" class="menu-item">
+						<a href="adminOrder.do" class="menu-item">
 							<i class='bx bx-list-check icon page5'></i>
 							<span class="text nav-text">입고요청</span>
 						</a>
 					</li>
 					
 					<li class="nav-link">
-						<a href="#" class="menu-item">
+						<a href="adminStock.do" class="menu-item">
 							<i class='bx bx-package icon page6'></i>
 							<span class="text nav-text">재고현황</span>
 						</a>
@@ -140,8 +145,8 @@
 	</nav>
 	
 	
-	
-	<main>
+	<!-- 
+	<main class="active" id="sales">
 		<header class="home">
 			<div class="text">매출현황</div>
 			
@@ -153,7 +158,7 @@
 			
 		</header>
 		
-		<div class="main active">
+		<div class="main">
 			<div class="main_content">
 				매출현황 내용 ~!~~! !~
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt<br> ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco<br> laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate<br> velit esse cillum dolore eu fugiat nulla pariatur.<br> Excepteur sint occaecat cupidatat non proident, <br>sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -161,6 +166,27 @@
 		</div>
 	</main>
 	
+	<main id="product" hidden="true">
+		<header class="home">
+			<div class="text">제품현황</div>
+			
+			<div class="container">
+				<div class="info">
+					관리자님 환영합니다. &nbsp; <a href="logout.do">로그아웃</a>
+				</div>
+			</div>
+			
+		</header>
+		
+		<div class="main">
+			<div class="main_content">
+				제품현황 제발... <br>
+				please//
+				
+			</div>		
+		</div>
+	</main>
+	 -->
 	<script src="../js/admin_menu.js"></script>
 	
 </body>
