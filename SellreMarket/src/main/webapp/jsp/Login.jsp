@@ -7,6 +7,11 @@
 <title>로그인</title>
 </head>
 <body>
+<script type="text/javascript">
+	function signup() {
+		window.location.href = "CustomerSignup.jsp";
+	}
+</script>
 <link rel="preload"
 		href="https://res.kurly.com/_next/static/css/d59287ec5b86dc49.css"
 		as="style" />
@@ -45,8 +50,7 @@
 						radius="3">
 						<span class="css-nytqmg e4nu7ef1">로그인</span>
 					</button>
-					<button class="css-hxorrg e4nu7ef3" type="button" height="54"
-						radius="3">
+					<button class="css-hxorrg e4nu7ef3" type="button" height="54" radius="3" onclick="signup()">
 						<span class="css-nytqmg e4nu7ef1">회원가입</span>
 					</button>
 				</div>
