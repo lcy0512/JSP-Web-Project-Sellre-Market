@@ -176,18 +176,14 @@
 							target="_self" class="css-1tfhwyj e13nap1l0">셀리소개</a></li>
 							
 						<li class=" css-slkv2p e13nap1l1"><a
-							href="https://kurly.career.greetinghr.com" target="_blank"
-							class="css-1tfhwyj e13nap1l0">인재채용</a></li>
-							
-						<li class=" css-slkv2p e13nap1l1"><a
-							href="/user-terms/agreement" target="_self"
+							href="../jsp/agreement.jsp" target="_self"
 							class="css-1tfhwyj e13nap1l0">이용약관</a></li>
 							
 						<li class="bold css-slkv2p e13nap1l1"><a
-							href="/user-terms/privacy-policy" target="_self"
+							href="../jsp/privacy_policy.jsp" target="_self"
 							class="css-1tfhwyj e13nap1l0">개인정보처리방침</a></li>
 							
-						<li class=" css-slkv2p e13nap1l1"><a href="/user-guide"
+						<li class=" css-slkv2p e13nap1l1"><a href="../jsp/user_guide.jsp"
 							target="_self" class="css-1tfhwyj e13nap1l0">이용안내</a></li>
 					</ul>
 
