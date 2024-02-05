@@ -7,18 +7,18 @@
 <title>Insert title here</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script src="../js/Category.js"></script>
+<script src="../js/category.js"></script>
+<link rel="preload"
+	href="https://res.kurly.com/_next/static/css/d59287ec5b86dc49.css"
+	as="style" />
+<link rel="stylesheet"
+	href="https://res.kurly.com/_next/static/css/d59287ec5b86dc49.css"
+	data-n-g />
+<link rel="stylesheet" href="../css/header.css" />
 <body>
-	<link rel="preload"
-		href="https://res.kurly.com/_next/static/css/d59287ec5b86dc49.css"
-		as="style" />
-	<link rel="stylesheet"
-		href="https://res.kurly.com/_next/static/css/d59287ec5b86dc49.css"
-		data-n-g />
-	<link rel="stylesheet" href="../css/header.css" />
 	<div class="css-16h7nba e1p13h9k3">
 		<div class="css-pqw0uk e1p13h9k2">
-			<a href="#" rel="noreferrer" target="_self"
+			<a href="Login.jsp" rel="noreferrer" target="_self"
 				class="css-129c9b5 e1p13h9k1"><div>
 					지금 바로, <b>셀리마켓</b> 가입하세요!
 				</div></a>
@@ -57,11 +57,12 @@
 				</div>
 			</div>
 			<div class="css-r7wmjj e15sbxqa3">
-				<div class="css-boc80u ekdqe1a1"><a href="header.jsp">
-					<img src="../image/Sellre.png" alt="셀리마켓 로고"
-						class="css-17mnrrx e1s3pt0j0">
-					<button class="active css-mxd3pm ekdqe1a0">셀리마켓</button>
-				</a></div>
+				<div class="css-boc80u ekdqe1a1">
+					<a href="header.jsp"> <img src="../image/Sellre.png"
+						alt="셀리마켓 로고" class="css-17mnrrx e1s3pt0j0">
+						<button class="active css-mxd3pm ekdqe1a0">셀리마켓</button>
+					</a>
+				</div>
 				<div class="css-pqw0uk e1493ofl4">
 					<div class="css-w444a2 e1493ofl1">
 						<input id="gnb_search" placeholder="검색어를 입력해주세요" required=""
@@ -85,10 +86,10 @@
 			<div class="css-mlddcv e17w4cfr6">
 				<div class="css-0 e17w4cfr3">
 					<div id="categorySpan" class="css-axtlq9 eqn756m2">
-						<span class="css-1k5gn9s eqn756m1"></span> 
-						<span class="css-t75x7c eqn756m0">카테고리</span>
+						<span class="css-1k5gn9s eqn756m1"></span> <span
+							class="css-t75x7c eqn756m0">카테고리</span>
 						<div id="categoryBar" class="css-taug43 e7s0tnu0"></div>
-					</div>	
+					</div>
 				</div>
 				<ul class="css-1887xqd e17w4cfr5">
 					<li class="css-59mmhh e17w4cfr4"><span
@@ -99,10 +100,12 @@
 						class="css-1xyu7j9 e17w4cfr2">알뜰쇼핑</span></li>
 					<li class="css-59mmhh e17w4cfr4"><span
 						class="css-1xyu7j9 e17w4cfr2">특가/혜택</span></li>
+					<li class="css-59mmhh e17w4cfr4"><span
+						class="css-1xyu7j9 e17w4cfr2">레시피</span></li>
 				</ul>
 				<div class="css-s5xdrg e17w4cfr0">
 					<div class="css-dnwaeo e1mmzaxa1">
-						<span class="css-1s2o3jp e1mmzaxa0">샛별・하루</span> 배송안내
+						<span class="css-1s2o3jp e1mmzaxa0">셀리마켓 </span> 배송안내
 					</div>
 				</div>
 			</div>
