@@ -27,8 +27,9 @@ textarea {
 
 .css-mhmtvt {
 	width: 640px;
-	margin-top: 0px;
-	margin-right: 100px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 120px;
 }
 
 .css-rb0i47 {
@@ -118,6 +119,15 @@ textarea {
 }
 
 .css-nytqmg {
+	text-align: center;
+	display: inline-block;
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.css-nytqmgq {
+	margin-top: 7px;
+	text-align: center;
 	display: inline-block;
 	font-size: 16px;
 	font-weight: 500;
@@ -131,7 +141,6 @@ textarea {
 .css-ufulao {
 	display: block;
 	padding-top: 0px;
-	padding-right: 10px;
 	text-align: center;
 	overflow-x: hidden;
 	overflow-y: hidden;
@@ -141,7 +150,7 @@ textarea {
 	border-top-right-radius: 3px;
 	border-bottom-right-radius: 3px;
 	border-bottom-left-radius: 3px;
-	color: rgb(95, 0, 128);
+	color: rgb(0, 0, 0);
 	background-color: rgb(255, 255, 255);
 	border-top-width: 1px;
 	border-right-width: 1px;
@@ -151,10 +160,7 @@ textarea {
 	border-right-style: solid;
 	border-bottom-style: solid;
 	border-left-style: solid;
-	border-top-color: rgb(95, 0, 128);
-	border-right-color: rgb(95, 0, 128);
-	border-bottom-color: rgb(95, 0, 128);
-	border-left-color: rgb(95, 0, 128);
+	border-color: rgb(186,190,0);
 }
 
 .css-1schgvv {
@@ -170,7 +176,6 @@ textarea {
 	border-top-right-radius: 4px;
 	border-bottom-right-radius: 4px;
 	border-bottom-left-radius: 4px;
-	color: rgb(95, 0, 128);
 	background-color: rgb(255, 255, 255);
 	border-top-width: 1px;
 	border-right-width: 1px;
@@ -180,10 +185,7 @@ textarea {
 	border-right-style: solid;
 	border-bottom-style: solid;
 	border-left-style: solid;
-	border-top-color: rgb(95, 0, 128);
-	border-right-color: rgb(95, 0, 128);
-	border-bottom-color: rgb(95, 0, 128);
-	border-left-color: rgb(95, 0, 128);
+	border-color: rgb(186,190,0);
 }
 
 .css-vukl2m {
@@ -270,7 +272,7 @@ textarea {
 	border-top-right-radius: 50%;
 	border-bottom-right-radius: 50%;
 	border-bottom-left-radius: 50%;
-	background-color: rgb(95, 0, 128);
+	background-color: rgb(186,190,0);
 }
 
 .css-1vic0rk {
@@ -391,7 +393,7 @@ textarea {
 
 .css-ov2xfu {
 	display: flex;
-	padding-top: 8px;
+	padding-top: 12px;
 	padding-right: 0px;
 	-webkit-box-pack: justify;
 	justify-content: space-between;
@@ -460,7 +462,7 @@ svg:not(:root) {
 
 .css-7chi73 {
 	padding-right: 22px;
-	color: rgb(95, 0, 128);
+	color: rgb(186,190,0);
 	letter-spacing: 0px;
 }
 
@@ -484,7 +486,6 @@ svg:not(:root) {
 .css-18m884r {
 	display: block;
 	padding-top: 0px;
-	padding-right: 10px;
 	text-align: center;
 	overflow-x: hidden;
 	overflow-y: hidden;
@@ -494,8 +495,8 @@ svg:not(:root) {
 	border-top-right-radius: 3px;
 	border-bottom-right-radius: 3px;
 	border-bottom-left-radius: 3px;
-	color: rgb(255, 255, 255);
-	background-color: rgb(95, 0, 128);
+	color: rgb(0,0,0);
+	background-color: rgb(249,249,228);
 	border-top-width: 0px;
 	border-right-width: 0px;
 	border-bottom-width: 0px;
@@ -504,4 +505,49 @@ svg:not(:root) {
 	border-right-style: none;
 	border-bottom-style: none;
 	border-left-style: none;
+}
+
+.css-1mjkje9 {
+	position: relative;
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+	vertical-align: top;
+	line-height: normal;
+	color: rgb(51, 51, 51);
+	padding-top: 0px;
+	font-size: 14px;
+}
+
+input[type=checkbox],
+input[type=radio] {
+	box-sizing: border-box;
+	padding: 0;
+}
+
+.css-7chi73::after {
+	content: "";
+	display: inline-block;
+	margin-left: 4px;
+	width: 6px;
+	height: 9px;
+	background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zd…5vZGQiIGQ9Ik0xIDExTDYgNS41IDEgMCAwIDEuMSA0IDUuNSAwIDkuOXoiLz4KPC9zdmc+Cg==");
+	background-position-x: 50%;
+	background-position-y: 50%;
+	background-repeat: no-repeat;
+	background-size: 6px 9px;
+}
+
+.css-5lnvt6::after {
+	content: "/";
+	font-size: 14px;
+	color: rgb(204, 204, 204);
+	text-align: center;
+	line-height: 40px;
+}
+
+.css-mgd87h {
+	position: relative;
+	font-size: 16px;
+	margin-left: 12px;
 }

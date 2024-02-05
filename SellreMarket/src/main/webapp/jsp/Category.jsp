@@ -153,13 +153,6 @@
 			<li class="css-you2kh e1vs1ym83"><div
 				class="css-11n7bn4 e1vs1ym81">
 				<img
-					src="https://collection-image.kurly.com/site-category-groups/19/DeT1R9JFqxgxubAIJuFcbZPPbBu8DHUkFJmGZBlJ.png"
-					alt="반려동물" class="css-ar6ptu e1vs1ym82"><span
-						class="css-mhaka4 e1vs1ym84">반려동물</span>
-			</div></li>
-			<li class="css-you2kh e1vs1ym83"><div
-				class="css-11n7bn4 e1vs1ym81">
-				<img
 					src="https://collection-image.kurly.com/site-category-groups/88/4I6SaHETxo0wHnukmvAS2xxO8Nej9DM0eEPi6NWa.png"
 					alt="럭셔리뷰티" class="css-ar6ptu e1vs1ym82"><span
 						class="css-mhaka4 e1vs1ym84">럭셔리뷰티</span>
@@ -177,20 +170,6 @@
 					src="https://collection-image.kurly.com/site-category-groups/16/APNr2Xb1ZeF9WcBDky1V9GWHZaCy7kifCkwSjTjy.png"
 					alt="헤어·바디·구강" class="css-ar6ptu e1vs1ym82"><span
 						class="css-mhaka4 e1vs1ym84">헤어·바디·구강</span>
-			</div></li>
-			<li class="css-you2kh e1vs1ym83"><div
-				class="css-11n7bn4 e1vs1ym81">
-				<img
-					src="https://collection-image.kurly.com/site-category-groups/97/0uyGW98fc3mjC75GoKbDuDAAOTBiv10Smg2Hf82u.png"
-					alt="컬리상품권" class="css-ar6ptu e1vs1ym82"><span
-						class="css-mhaka4 e1vs1ym84">컬리상품권</span>
-			</div></li>
-			<li class="css-you2kh e1vs1ym83"><div
-				class="css-11n7bn4 e1vs1ym81">
-				<img
-					src="https://res.kurly.com/pc/service/common/2207/icon_recommend_inactive.png"
-					alt="recommend" class="css-ar6ptu e1vs1ym82"><span
-						class="css-mhaka4 e1vs1ym84">컬리의 추천</span>
 			</div></li>
 			<li width="0" class="css-1xy9xh5 e1vs1ym85"></li>
 		</ul>
