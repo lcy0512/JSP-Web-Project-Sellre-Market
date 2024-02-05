@@ -42,10 +42,11 @@ public class MainViewDao {
 			String query = "select y.yname, y.ysrc, ry.rcontent, format(i.price, 0) price, likecount "
 					+ "					from youtuber y "
 					+ "					join recipeofYoutuber ry on y.youtubeid = ry.youtubeid "
-					+ "                    join recipelike rl on ry.recipeid = rl.recipeid "
+					+ "					left join recipelike rl on ry.recipeid = rl.recipeid "
 					+ "					join productOfRecipe pr on ry.recipeid = pr.recipeid "
 					+ "					join product p on p.productid = pr.productid "
-					+ "					join price i on i.productid = p.productid";
+					+ "					join price i on i.productid = p.productid "
+					+ "                    order by y.youtubeid desc";
 			
 			ps = con.prepareStatement(query);
 			rs = ps.executeQuery();
