@@ -5,7 +5,7 @@ public class AdminProductDto {
 	int productid;
 	String pname;
 	String pEngname;
-	String nutrition;
+	String origin;
 	String pinsertdate;
 	String expirationdate;
 	String status;
@@ -14,18 +14,6 @@ public class AdminProductDto {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public AdminProductDto(int productid, String pname, String pEngname, String nutrition, String pinsertdate,
-			String expirationdate, String status) {
-		super();
-		this.productid = productid;
-		this.pname = pname;
-		this.pEngname = pEngname;
-		this.nutrition = nutrition;
-		this.pinsertdate = pinsertdate;
-		this.expirationdate = expirationdate;
-		this.status = status;
-	}
-
 
 	public int getProductid() {
 		return productid;
@@ -49,14 +37,6 @@ public class AdminProductDto {
 
 	public void setpEngname(String pEngname) {
 		this.pEngname = pEngname;
-	}
-
-	public String getNutrition() {
-		return nutrition;
-	}
-
-	public void setNutrition(String nutrition) {
-		this.nutrition = nutrition;
 	}
 
 	public String getPinsertdate() {
@@ -83,5 +63,13 @@ public class AdminProductDto {
 		this.status = status;
 	}
 	
+	public String getOrigin() {
+		return origin;
+	}
+
+	public void setOrigin(String origin) {
+		this.origin = origin;
+	}
+
 	
 }
