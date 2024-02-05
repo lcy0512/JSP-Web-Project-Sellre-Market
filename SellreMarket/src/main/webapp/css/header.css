@@ -32,7 +32,7 @@ button {
 
 .css-xygizb {
     display: block;
-    color: rgb(95, 0, 128);
+    color: rgb(0,0,0);
     cursor: pointer;
 }
 
@@ -102,8 +102,9 @@ button {
 }
 
 .css-mxd3pm {
+	margin-top: 12px;
     flex-shrink: 0;
-    margin-left: 20px;
+    margin-left: 25px;
     font-size: 18px;
     font-weight: normal;
     line-height: 1.33;
@@ -234,11 +235,11 @@ button {
 }
 
 .css-axtlq9:hover > span:first-of-type {
-    background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAxNiAxNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik0wIDBoMTZ2MS43SDBWMHptMCA2LjE1aDE2djEuN0gwdi0xLjd6bTAgNi4xNWgxNlYxNEgwdi0xLjd6IiBmaWxsPSIjNUYwMDgwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz4KPC9zdmc+Cg==) 0px 0px no-repeat;
+    background: url(../image/menu.png) 0px 0px no-repeat;
 }
 
 .css-axtlq9:hover > span:last-of-type {
-    color: rgb(95, 0, 128);
+    color: rgb(186,190,0);
 }
 
 .css-1k5gn9s {
@@ -281,6 +282,13 @@ button {
     cursor: pointer;
 }
 
+.css-1xyu7j9:hover {
+	color: rgb(186,190,0);
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: rgb(186,190,0);
+}
+
 .css-s5xdrg {
     display: flex;
     -webkit-box-align: center;
@@ -288,6 +296,7 @@ button {
 }
 
 .css-dnwaeo {
+	cursor: pointer;
     height: 32px;
     padding: 6px 16px;
     border-radius: 18px;
@@ -325,11 +334,11 @@ button {
 
 .css-129c9b5 {
     display: block;
-    font-size: 14px;
-    line-height: 42px;
+    font-size: 18px;
+    line-height: 60px;
 /*    color: rgb(255, 255, 255);*/
     color: rgb(51, 51, 51);
-    height: 42px;
+    height: 60px;
 }
 
 .css-10w9uhr {

@@ -16,8 +16,9 @@ $(document).ready(function() {
     });
 
     // 마우스를 뗐을 때 이벤트 처리
-    $("#categorySpan").mouseout(function() {
+    
+    $("#categoryBar").mouseout(function() {
         // JSP 페이지를 숨김
         $("#categoryBar").html("");
-    });
+    }); 
 });

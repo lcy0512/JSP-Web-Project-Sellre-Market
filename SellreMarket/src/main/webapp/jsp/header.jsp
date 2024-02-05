@@ -41,9 +41,9 @@
 	<div>
 		<div class="css-t79vuj e15sbxqa2">
 			<div class="css-1xfyvd1 eo7pjfk4">
-				<a class="css-xygizb eo7pjfk2">회원가입</a>
+				<a class="css-xygizb eo7pjfk2" href="CustomerSignup.jsp">회원가입</a>
 				<div class="css-1qgm48u eo7pjfk0"></div>
-				<a class="css-oyffzd eo7pjfk2">로그인</a>
+				<a class="css-oyffzd eo7pjfk2" href="Login.jsp">로그인</a>
 				<div class="css-1qgm48u eo7pjfk0"></div>
 				<div class="css-1qolcqm eo7pjfk3">
 					<a class="css-oyffzd eo7pjfk2">고객센터<span
@@ -57,11 +57,11 @@
 				</div>
 			</div>
 			<div class="css-r7wmjj e15sbxqa3">
-				<div class="css-boc80u ekdqe1a1">
+				<div class="css-boc80u ekdqe1a1"><a href="header.jsp">
 					<img src="../image/Sellre.png" alt="셀리마켓 로고"
 						class="css-17mnrrx e1s3pt0j0">
 					<button class="active css-mxd3pm ekdqe1a0">셀리마켓</button>
-				</div>
+				</a></div>
 				<div class="css-pqw0uk e1493ofl4">
 					<div class="css-w444a2 e1493ofl1">
 						<input id="gnb_search" placeholder="검색어를 입력해주세요" required=""
@@ -84,9 +84,9 @@
 		<div id="header" class="css-17tqugj e17w4cfr1">
 			<div class="css-mlddcv e17w4cfr6">
 				<div class="css-0 e17w4cfr3">
-					<div class="css-axtlq9 eqn756m2">
+					<div id="categorySpan" class="css-axtlq9 eqn756m2">
 						<span class="css-1k5gn9s eqn756m1"></span> 
-						<span  id="categorySpan" class="css-t75x7c eqn756m0">카테고리</span>
+						<span class="css-t75x7c eqn756m0">카테고리</span>
 						<div id="categoryBar" class="css-taug43 e7s0tnu0"></div>
 					</div>	
 				</div>
