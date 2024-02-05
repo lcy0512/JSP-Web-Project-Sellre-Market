@@ -1,0 +1,48 @@
+@font-face {
+    font-family: 'SCoreDream';
+    font-weight: 200; 
+    font-style: normal; 
+    src: url(https://cdn.jsdelivr.net/gh/webfontworld/SCoreDream/SCoreDream1.woff2) format('woff2'),
+         url(https://cdn.jsdelivr.net/gh/webfontworld/SCoreDream/SCoreDream1.woff) format('woff');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SCoreDream';
+    font-weight: 300; 
+    font-style: normal; 
+    src: url(https://cdn.jsdelivr.net/gh/webfontworld/SCoreDream/SCoreDream3.woff2) format('woff2'),
+         url(https://cdn.jsdelivr.net/gh/webfontworld/SCoreDream/SCoreDream3.woff) format('woff');
+    font-display: swap;
+}
+
+* {
+	font-family: 'SCoreDream';
+	
+}
+
+
+.wrap {
+	display: flex; 
+	justify-content: center;
+	align-items: flex-start; 
+	height: 150px;
+	margin-top : 100px;	
+}
+
+.article_header_inner {
+	text-align: center;
+}
+.article_body {
+	padding : 0px 20px 50px 20px;
+}
+
+.article_subtitle {
+	margin-top : 30px;
+	margin-bottom: 100px;
+	
+}
+.line {
+	margin-bottom: 20px;
+	border-color : #f1f3f5
+}
