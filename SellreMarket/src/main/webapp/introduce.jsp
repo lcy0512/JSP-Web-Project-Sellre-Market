@@ -29,7 +29,7 @@
 	href="http://localhost:8080/sellreMarket/image/logo.png" />
 
 <link rel="manifest" href="/manifest.json" />
-<link rel="stylesheet" href="../css/introduce.css" />
+<link rel="stylesheet" href="css/introduce.css" />
 </head>
 
 <body>

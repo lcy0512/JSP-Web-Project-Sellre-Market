@@ -79,29 +79,55 @@
 </style>
 
 <script>
-	$(document).ready(function(){
+		
+	window.onload=function(){
+		
 		$.ajax({
 			type : "POST",
 			url : "adminProduct.do",
-			dataType : 'json',
-			data : {},
-			success : function(data){
-				alert('성공!!');
-				var list = data.list;
-				console.log(data);
+			success : function(response){
+				alert('성공');
+				createTable(response)
 			},
-			error : function(xhr, status, error){
-				console.log('에러 : '+error);
+			 error:function(request, status, error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
 			
 		});
-	});
+	}
+	
+	//productid, pname, pEngname, nutrition, pinsertdate, expirationdate, status from product";
+	function createTable(data) {
+		let table = "<table border='2'>"
+		table += "<tr><th>번호</th><th>상품명</th><th>영문명</th><th>영양정보</th><th>입고일</th><th>소비기한</th><th>상태</th></tr>"
+		
+		//데이터 행 추가
+		for(let i=0; i<data.length; i++){
+			table += "<tr>" +
+						"<td>" + data[i].productid +"</td>" +
+						"<td>" + data[i].pname +"</td>" +
+						"<td>" + data[i].pEngname +"</td>" +
+						"<td>" + data[i].nutrition +"</td>" +
+						"<td>" + data[i].pinsertdate +"</td>" +
+						"<td>" + data[i].expirationdate +"</td>" +
+						"<td>" + data[i].status +"</td>" +
+					"</tr>" 
+		}
+		
+		table += "</table>"
+		
+		$("#result").html(table);
+	}	 
+		
 </script>
 <body>
-	
-<jsp:include page="admin_menu.jsp" flush="false" />
 
+<!-- sidebar include start-->	
+<jsp:include page="admin_menu.jsp" flush="false" />
+<!-- sidebar include end-->
+	
 	<main>
+		<!-- header start -->
 		<header class="home">
 			<div class="text">제품현황</div>
 			<div class="container">
@@ -110,14 +136,15 @@
 				</div>
 			</div>
 		</header>
+		<!-- header end -->
 		
+		<!-- content start -->
 		<div class="main">
 			<div class="main_content">
-				제품현황 제발... <br>
-				please//
-				
+				<div id="result"></div>
 			</div>		
 		</div>
+		<!-- content end -->
 	</main>
 	
 </body>

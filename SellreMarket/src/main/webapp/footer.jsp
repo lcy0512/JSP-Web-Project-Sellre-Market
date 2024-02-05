@@ -56,8 +56,8 @@
 	as="style" />
 <link rel="stylesheet"
 	href="https://res.kurly.com/_next/static/css/d59287ec5b86dc49.css"
-	data-n-g />
-<noscript data-n-css></noscript>
+	data-n-g /><noscript data-n-css></noscript>
+
 <script defer nomodule src="https://res.kurly.com/_next/static/chunks/polyfills-5cd94c89d3acac5f.js"></script>
 <script src="https://res.kurly.com/_next/static/chunks/webpack-9a046e6028963528.js" defer></script>
 <script src="https://res.kurly.com/_next/static/chunks/framework-f8115f7fae64930e.js" defer></script>
@@ -112,7 +112,7 @@
 <script
 	src="https://res.kurly.com/_next/static/68L4oDF5CxrH0qdDqMtse/_middlewareManifest.js"
 	defer></script>
-<link rel="stylesheet" href="../css/footer.css" />
+<link rel="stylesheet" href="css/footer.css" />
 <script type="text/javascript" src="//developers.kakao.com/sdk/js/kakao.min.js" charset="utf-8"></script>
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.6.0/kakao.min.js"
   integrity="sha384-6MFdIr0zOira1CHQkedUqJVql0YtcZA1P0nbPrQYJXVJZUkTk/oX4U9GhUIs3/z8" crossorigin="anonymous"></script>
@@ -172,18 +172,18 @@
 
 					<ul class="css-17hse91 e13nap1l2">
 
-						<li class=" css-slkv2p e13nap1l1"><a href="../jsp/introduce.jsp"
+						<li class=" css-slkv2p e13nap1l1"><a href="introduce.jsp"
 							target="_self" class="css-1tfhwyj e13nap1l0">셀리소개</a></li>
 							
 						<li class=" css-slkv2p e13nap1l1"><a
-							href="../jsp/agreement.jsp" target="_self"
+							href="agreement.jsp" target="_self"
 							class="css-1tfhwyj e13nap1l0">이용약관</a></li>
 							
 						<li class="bold css-slkv2p e13nap1l1"><a
-							href="../jsp/privacy_policy.jsp" target="_self"
+							href="privacy_policy.jsp" target="_self"
 							class="css-1tfhwyj e13nap1l0">개인정보처리방침</a></li>
 							
-						<li class=" css-slkv2p e13nap1l1"><a href="../jsp/user_guide.jsp"
+						<li class=" css-slkv2p e13nap1l1"><a href="user_guide.jsp"
 							target="_self" class="css-1tfhwyj e13nap1l0">이용안내</a></li>
 					</ul>
 

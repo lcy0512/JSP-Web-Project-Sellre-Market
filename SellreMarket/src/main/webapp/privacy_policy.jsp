@@ -9,7 +9,7 @@
 <link rel="icon" href="http://localhost:8080/sellreMarket/image/logo.png" />
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:8080/sellreMarket/image/logo.png" />
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:8080/sellreMarket/image/logo.png" />
-<link rel="stylesheet" href="../css/privacy_policy.css" />
+<link rel="stylesheet" href="css/privacy_policy.css" />
 <title>개인정보처리방침 - 셀리</title>
 </head>
 <body>

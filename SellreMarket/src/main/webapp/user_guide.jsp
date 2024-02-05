@@ -12,7 +12,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:8080/sellreMarket/image/logo.png" />
 <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-<link rel="stylesheet" href="../css/user_guide.css" />
+<link rel="stylesheet" href="css/user_guide.css" />
 </head>
 <body>
 
