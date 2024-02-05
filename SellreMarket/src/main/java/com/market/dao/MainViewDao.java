@@ -15,6 +15,13 @@ import com.market.dto.MainViewDto;
 
 public class MainViewDao {
 	
+/*
+	1. Date : 2024.02.02
+	2. Author : Woody Jo
+	3. Version : v1.0.0
+	4. Description : 메인 body 페이지 Dto 
+*/
+	
 	DataSource dataSource;
 	
 	
@@ -27,6 +34,39 @@ public class MainViewDao {
 			e.printStackTrace();
 		}
 	}
+	
+	// Create
+	public void insertCart(int qty) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		try {
+			con = dataSource.getConnection();
+			
+			String query = "insert into cart (qty, userid, productid) values (?, admin, 1)";
+			
+			ps = con.prepareStatement(query);
+			
+			ps.setInt(1, qty);
+			
+			ps.executeUpdate();
+				
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if (ps != null) ps.close();
+				if (con != null) con.close();
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	
 	
 	// 제품 정보 불러오기 for 메인 화면 출력
 	public List<MainViewDto> productView() {
@@ -118,4 +158,5 @@ public class MainViewDao {
 		}
 		return dtos;
 	}
+	
 }

@@ -3,6 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
+<!--
+	1. Date : 2024.02.02
+	2. Author : Woody Jo
+	3. Version : v1.0.0
+	4. Description : 메인 body 페이지 Dto 
+-->
 <head>
 	<meta charset="UTF-8">
     <title>Sellre Market</title>
@@ -48,12 +54,13 @@
 	
     <script>
 		function popup() {
+			
 			/* 새로운 url 위치 */ 
 			var url = "popup.do";
 			/* 어떤 방식으로 띄울 것인가 */
 			var name = "_blank";
 			// option 스펙 설정
-			var specs = 'width=500, height=420, top=150, left=400, location=yes, toolbar=yes, menubar=yes, scrollbars=no, resizable=no'
+			var specs = 'width=500, height=420, top=450, left=600, location=yes, toolbar=yes, menubar=yes, scrollbars=no, resizable=no'
 		   
 			window.open(url, name, specs);
 		}
@@ -61,7 +68,7 @@
 </head>
 <body>
 	<!-- Topbar Start -->
-    
+    <jsp:include page="/jsp/header.jsp"></jsp:include>
     <!-- Topbar End -->
 
 
@@ -122,7 +129,8 @@
 		                <div class="product-item bg-light mb-4">
 		                    <div class="product-img position-relative overflow-hidden">
 		                        <a href="#">
-		                        	<img class="img-fluid w-200" src="${pageContext.request.contextPath}/image/product/${dto.ysrc}" alt="">
+		                        	<img class="img-fluid w-100" src="${pageContext.request.contextPath}/image/product/${dto.ysrc}" alt="Product Image">
+		                        	<c:set var="ySrc" value="${dto.ysrc}" scope="session" />
 		                        </a>
 		                    </div>
 		                    <div style="margin-top: 7px; margin-left:1%; border: 1px solid lightgray; border-radius: 5px; width:98%;">
@@ -130,6 +138,9 @@
 	                    	</div>
 		                    <div class="text-center py-4">
 		                        <a class="h6 text-decoration-none text-truncate" href="">[${dto.yname}] ${dto.rcontent}</a>
+		                        <c:set var="yName" value="${dto.yname}" scope="session" />
+		                        <c:set var="rContent" value="${dto.rcontent}" scope="session" />
+		                        <c:set var="price" value="${dto.price}" scope="session" />
 		                        <input id="name" type="hidden" value="${dto.rcontent}">
 		                        <div class="d-flex align-items-center justify-content-center mt-2">
 		                            <h5>${dto.price}원</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>

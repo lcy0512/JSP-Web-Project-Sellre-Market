@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script src="../js/Category.js"></script>
+<script src="Category.js"></script>
 <body>
 	<link rel="preload"
 		href="https://res.kurly.com/_next/static/css/d59287ec5b86dc49.css"

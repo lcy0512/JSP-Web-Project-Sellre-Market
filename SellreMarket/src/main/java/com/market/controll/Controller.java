@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.market.command.MCgetCart;
 import com.market.command.MCmainView;
 import com.market.command.MCommand;
 
@@ -56,6 +57,11 @@ public class Controller extends HttpServlet {
 		
 		String id = null;
 		
+		String yName = (String) session.getAttribute("yName");
+		String rContent = (String) session.getAttribute("rContent");
+		String ySrc = (String) session.getAttribute("ySrc");
+		String price = (String) session.getAttribute("price");
+		
 		switch(com) {
 			// 로그인 화면
 			case "/login.do" :
@@ -71,13 +77,31 @@ public class Controller extends HttpServlet {
 				break;
 				
 			case "/popup.do" :
+				
 				command = new MCmainView();
 				command.execute(request, response);
+				
+				session.setAttribute("yName", yName);
+				session.setAttribute("rContent", rContent);
+				session.setAttribute("ySrc", ySrc);
+				session.setAttribute("price", price);
 				
 				viewPage = "popup.jsp";
 				
 				break;
-		
+				
+			case "/getCart.do" : 
+				
+				command = new MCgetCart();
+				command.execute(request, response);
+				
+				session.setAttribute("yName", yName);
+				session.setAttribute("rContent", rContent);
+				session.setAttribute("ySrc", ySrc);
+				session.setAttribute("price", price);
+				
+				viewPage = "mainViewPage.jsp";
+				
 			default :
 				break;
 		}
