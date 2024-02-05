@@ -99,7 +99,7 @@
 	</div>
 	
 	<footer class="text-muted py-5">
-		<jsp:include page="footer.jsp" flush="false" />
+		<jsp:include page="footer.html" flush="false" />
 	</footer>
 </body>
 </html>
