@@ -6,25 +6,18 @@
 <meta charSet="utf-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover" />
-<title>셀리소개 - 셀리</title>
+<title>셀리마켓</title>
 <meta name="description" content="셀리의 시작, 믿음 그리고 지켜야할 가치" />
 <meta name="keywords"
 	content="다이어트, 식단, 닭가슴살, 요리, 치아바타, 레시피, 상차림, 다이어트음식, 이유식, 건강이유식" />
 <meta property="og:type" content="website" />
-<meta property="og:site_name" content="셀리 - 셀리마켓" />
-<meta property="og:title" content="셀리소개 - 셀리" />
+<meta property="og:site_name" content="셀리마켓" />
+<meta property="og:title" content="셀리마켓" />
 <meta property="og:description" content="셀리의 시작, 믿음 그리고 지켜야할 가치" />
-<meta property="og:image" content="localhost:8080/" />
-
-
-<meta property="og:url" content="https://www.kurly.com/introduce" />
-<meta property="twitter:card" content="summary" />
-<meta property="twitter:title" content="셀리소개 - 셀리" />
-<meta property="twitter:description" content="셀리의 시작, 믿음 그리고 지켜야할 가치" />
-<meta property="twitter:image" content="https://res.kurly.com/images/marketkurly/logo/logo_sns_marketkurly.jpg" />
-<meta property="twitter:url" content="https://www.kurly.com/introduce" />
+<meta property="og:image" content="http://localhost:8080/sellreMarket/image/logo.png" />
+<meta property="twitter:url" content="localhost:8080/" />
 <link rel="canonical" href="https://www.kurly.com/introduce" />
-<script type="application/ld+json">{"@context":"https://schema.org","@id":"https://www.kurly.com","@type":"Organization","name":"Kurly","url":"https://www.kurly.com","logo":"https://res.kurly.com/images/marketkurly/logo/logo_x3.png","contactPoint":[{"@type":"ContactPoint","telephone":"+82-1511-0000","contactType":"customer support","areaServed":"KR","availableLanguage":["KO"]}],"sameAs":["https://www.instagram.com/marketkurly","https://www.youtube.com/channel/UCfpdjL5pl-1qKT7Xp4UQzQg","https://ko-kr.facebook.com/marketkurly","https://blog.naver.com/marketkurly","https://twitter.com/marketkurly","https://apps.apple.com/kr/app/id1080244833","https://play.google.com/store/apps/details?id=com.dbs.kurly.m2","https://www.youtube.com/channel/UCWaWvDRyhmSKOQWah7t7wuA"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@id":"https://www.kurly.com","@type":"Organization","name":"Kurly","url":"https://www.kurly.com","logo":"http://localhost:8080/sellreMarket/image/logo.pnghttp://localhost:8080/sellreMarket/image/logo.png","contactPoint":[{"@type":"ContactPoint","telephone":"+82-1511-0000","contactType":"customer support","areaServed":"KR","availableLanguage":["KO"]}],"sameAs":["https://www.instagram.com/marketkurly","https://www.youtube.com/channel/UCfpdjL5pl-1qKT7Xp4UQzQg","https://ko-kr.facebook.com/marketkurly","https://blog.naver.com/marketkurly","https://twitter.com/marketkurly","https://apps.apple.com/kr/app/id1080244833","https://play.google.com/store/apps/details?id=com.dbs.kurly.m2","https://www.youtube.com/channel/UCWaWvDRyhmSKOQWah7t7wuA"]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","url":"https://www.kurly.com/main","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://www.kurly.com/search?sword={search_term_string}&ref=site_search"},"query-input":"required name=search_term_string"}}</script>
 <meta name="next-head-count" content="19" />
 <meta charSet="utf-8" />
@@ -32,54 +25,26 @@
 <meta name="application-name" content="셀리" />
 <meta name="referrer" content="no-referrer-when-downgrade" />
 <meta name="format-detection" content="telephone=no" />
-<link rel="shortcut icon" href="https://res.kurly.com/favicon.ico" />
-<link rel="icon" href="https://res.kurly.com/favicon.ico" />
-<link rel="icon" type="image/png" sizes="16x16"
-	href="https://res.kurly.com/icons/favicon-16x16.png" />
-<link rel="icon" type="image/png" sizes="32x32"
-	href="https://res.kurly.com/icons/favicon-32x32.png" />
-<link rel="apple-touch-icon" sizes="128x128"
-	href="https://res.kurly.com/icons/favicon-128x128.png" />
-<link rel="apple-touch-icon" sizes="144x144"
-	href="https://res.kurly.com/icons/favicon-144x144.png" />
-<link rel="apple-touch-icon" sizes="152x152"
-	href="https://res.kurly.com/icons/favicon-152x152.png" />
-<link rel="apple-touch-icon" sizes="167x167"
-	href="https://res.kurly.com/icons/favicon-167x167.png" />
-<link rel="apple-touch-icon" sizes="180x180"
-	href="https://res.kurly.com/icons/favicon-180x180.png" />
-<link rel="apple-touch-icon" sizes="192x192"
-	href="https://res.kurly.com/icons/favicon-192x192.png" />
-<link rel="apple-touch-startup-image"
-	media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
-	href="https://res.kurly.com/images/splashs/iphone5_splash.png" />
-<link rel="apple-touch-startup-image"
-	media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
-	href="https://res.kurly.com/images/splashs/iphone6_splash.png" />
-<link rel="apple-touch-startup-image"
-	media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)"
-	href="https://res.kurly.com/images/splashs/iphoneplus_splash.png" />
-<link rel="apple-touch-startup-image"
-	media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)"
-	href="https://res.kurly.com/images/splashs/iphonex_splash.png" />
-<link rel="apple-touch-startup-image"
-	media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)"
-	href="https://res.kurly.com/images/splashs/iphonexr_splash.png" />
-<link rel="apple-touch-startup-image"
-	media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)"
-	href="https://res.kurly.com/images/splashs/iphonexsmax_splash.png" />
-<link rel="apple-touch-startup-image"
-	media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)"
-	href="https://res.kurly.com/images/splashs/ipad_splash.png" />
-<link rel="apple-touch-startup-image"
-	media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)"
-	href="https://res.kurly.com/images/splashs/ipadpro1_splash.png" />
-<link rel="apple-touch-startup-image"
-	media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)"
-	href="https://res.kurly.com/images/splashs/ipadpro3_splash.png" />
-<link rel="apple-touch-startup-image"
-	media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)"
-	href="https://res.kurly.com/images/splashs/ipadpro2_splash.png" />
+ <link rel="shortcut icon" type="image/x-icon" href="http://localhost:8080/sellreMarket/image/logo.png">
+<link rel="icon" href="http://localhost:8080/sellreMarket/image/logo.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:8080/sellreMarket/image/logo.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:8080/sellreMarket/image/logo.png" />
+<link rel="apple-touch-icon" sizes="128x128" href="https://res.kurly.com/icons/favicon-128x128.png" />
+<link rel="apple-touch-icon" sizes="144x144" href="https://res.kurly.com/icons/favicon-144x144.png" />
+<link rel="apple-touch-icon" sizes="152x152" href="https://res.kurly.com/icons/favicon-152x152.png" />
+<link rel="apple-touch-icon" sizes="167x167" href="https://res.kurly.com/icons/favicon-167x167.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://res.kurly.com/icons/favicon-180x180.png" />
+<link rel="apple-touch-icon" sizes="192x192" href="https://res.kurly.com/icons/favicon-192x192.png" />
+<link rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" href="https://res.kurly.com/images/splashs/iphone5_splash.png" />
+<link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" href="https://res.kurly.com/images/splashs/iphone6_splash.png" />
+<link rel="apple-touch-startup-image" media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)" href="https://res.kurly.com/images/splashs/iphoneplus_splash.png" />
+<link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" href="https://res.kurly.com/images/splashs/iphonex_splash.png" />
+<link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)" href="https://res.kurly.com/images/splashs/iphonexr_splash.png" />
+<link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)" href="https://res.kurly.com/images/splashs/iphonexsmax_splash.png" />
+<link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)" href="https://res.kurly.com/images/splashs/ipad_splash.png" />
+<link rel="apple-touch-startup-image" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)" href="https://res.kurly.com/images/splashs/ipadpro1_splash.png" />
+<link rel="apple-touch-startup-image" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)" href="https://res.kurly.com/images/splashs/ipadpro3_splash.png" />
+<link rel="apple-touch-startup-image" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)" href="https://res.kurly.com/images/splashs/ipadpro2_splash.png" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-title" content="셀리" />
@@ -93,23 +58,12 @@
 	href="https://res.kurly.com/_next/static/css/d59287ec5b86dc49.css"
 	data-n-g />
 <noscript data-n-css></noscript>
-<script defer nomodule
-	src="https://res.kurly.com/_next/static/chunks/polyfills-5cd94c89d3acac5f.js"></script>
-<script
-	src="https://res.kurly.com/_next/static/chunks/webpack-9a046e6028963528.js"
-	defer></script>
-<script
-	src="https://res.kurly.com/_next/static/chunks/framework-f8115f7fae64930e.js"
-	defer></script>
-<script
-	src="https://res.kurly.com/_next/static/chunks/main-849da2e2e3898e8b.js"
-	defer></script>
-<script
-	src="https://res.kurly.com/_next/static/chunks/pages/_app-bdbb52cff774c251.js"
-	defer></script>
-<script
-	src="https://res.kurly.com/_next/static/chunks/49089-9b005c12d23d9836.js"
-	defer></script>
+<script defer nomodule src="https://res.kurly.com/_next/static/chunks/polyfills-5cd94c89d3acac5f.js"></script>
+<script src="https://res.kurly.com/_next/static/chunks/webpack-9a046e6028963528.js" defer></script>
+<script src="https://res.kurly.com/_next/static/chunks/framework-f8115f7fae64930e.js" defer></script>
+<script src="https://res.kurly.com/_next/static/chunks/main-849da2e2e3898e8b.js" defer></script>
+<script src="https://res.kurly.com/_next/static/chunks/pages/_app-bdbb52cff774c251.js" defer></script>
+<script src="https://res.kurly.com/_next/static/chunks/49089-9b005c12d23d9836.js" defer></script>
 <script
 	src="https://res.kurly.com/_next/static/chunks/78359-54f29aae1d7b3216.js"
 	defer></script>
@@ -158,18 +112,13 @@
 <script
 	src="https://res.kurly.com/_next/static/68L4oDF5CxrH0qdDqMtse/_middlewareManifest.js"
 	defer></script>
-<link rel="stylesheet" href="footer.css" />
+<link rel="stylesheet" href="../css/footer.css" />
 <script type="text/javascript" src="//developers.kakao.com/sdk/js/kakao.min.js" charset="utf-8"></script>
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.6.0/kakao.min.js"
   integrity="sha384-6MFdIr0zOira1CHQkedUqJVql0YtcZA1P0nbPrQYJXVJZUkTk/oX4U9GhUIs3/z8" crossorigin="anonymous"></script>
 <script>
-  Kakao.init('ce9aa48349f4e12d726406c5ad402bfd'); // 사용하려는 앱의 JavaScript 키 입력
+	Kakao.init('ce9aa48349f4e12d726406c5ad402bfd'); // 사용하려는 앱의 JavaScript 키 입력
 </script>
-
-<!-- <a id="chat-channel-button" href="javascript:chatChannel()">
-  <img src="/tool/resource/static/img/button/channel/consult/consult_small_yellow_pc.png"
-    alt="카카오톡 채널 채팅하기 버튼" />
-</a> -->
 
 <script>
   function chatChannel() {
@@ -223,26 +172,18 @@
 
 					<ul class="css-17hse91 e13nap1l2">
 
-						<li class=" css-slkv2p e13nap1l1"><a href="/introduce"
+						<li class=" css-slkv2p e13nap1l1"><a href="../jsp/introduce.jsp"
 							target="_self" class="css-1tfhwyj e13nap1l0">셀리소개</a></li>
 							
 						<li class=" css-slkv2p e13nap1l1"><a
-							href="https://ir.kurly.com" target="_blank"
-							class="css-1tfhwyj e13nap1l0">투자정보</a></li>
-							
-						<li class=" css-slkv2p e13nap1l1"><a
-							href="https://kurly.career.greetinghr.com" target="_blank"
-							class="css-1tfhwyj e13nap1l0">인재채용</a></li>
-							
-						<li class=" css-slkv2p e13nap1l1"><a
-							href="/user-terms/agreement" target="_self"
+							href="../jsp/agreement.jsp" target="_self"
 							class="css-1tfhwyj e13nap1l0">이용약관</a></li>
 							
 						<li class="bold css-slkv2p e13nap1l1"><a
-							href="/user-terms/privacy-policy" target="_self"
+							href="../jsp/privacy_policy.jsp" target="_self"
 							class="css-1tfhwyj e13nap1l0">개인정보처리방침</a></li>
 							
-						<li class=" css-slkv2p e13nap1l1"><a href="/user-guide"
+						<li class=" css-slkv2p e13nap1l1"><a href="../jsp/user_guide.jsp"
 							target="_self" class="css-1tfhwyj e13nap1l0">이용안내</a></li>
 					</ul>
 
