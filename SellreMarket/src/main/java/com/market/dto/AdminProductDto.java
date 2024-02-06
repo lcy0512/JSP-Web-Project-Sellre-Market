@@ -5,6 +5,7 @@ public class AdminProductDto {
 	int productid;
 	String pname;
 	String pEngname;
+	String origin;
 	String nutrition;
 	String pinsertdate;
 	String expirationdate;
@@ -83,5 +84,13 @@ public class AdminProductDto {
 		this.status = status;
 	}
 	
+	public String getOrigin() {
+		return origin;
+	}
+
+	public void setOrigin(String origin) {
+		this.origin = origin;
+	}
+
 	
 }
