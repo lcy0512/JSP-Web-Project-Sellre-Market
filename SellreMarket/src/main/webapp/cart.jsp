@@ -5,17 +5,17 @@
     <head>
         <meta charSet="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover"/>
-        <title>컬리 - 마켓컬리/뷰티컬리</title>
+        <title>Sellre - 셀리마켓</title>
         <meta name="description" content="Better Life for All. 건강한 식재료부터 믿을 수 있는 뷰티, 라이프스타일 상품까지. 나와 내 가족이 사고 싶은 상품을 판매합니다. 내일 아침 문 앞에서 만나요!"/>
         <meta name="keywords" content="다이어트, 식단, 닭가슴살, 요리, 치아바타, 레시피, 상차림, 다이어트음식, 이유식, 건강이유식, 뷰티, 화장품"/>
         <meta property="og:type" content="website"/>
-        <meta property="og:site_name" content="컬리 - 마켓컬리/뷰티컬리"/>
-        <meta property="og:title" content="컬리 - 마켓컬리/뷰티컬리"/>
+        <meta property="og:site_name" content="Sellre - 셀리마켓"/>
+        <meta property="og:title" content="Sellre - 셀리마켓"/>
         <meta property="og:description" content="Better Life for All. 건강한 식재료부터 믿을 수 있는 뷰티, 라이프스타일 상품까지. 나와 내 가족이 사고 싶은 상품을 판매합니다. 내일 아침 문 앞에서 만나요!"/>
         <meta property="og:image" content="https://res.kurly.com/images/marketkurly/logo/logo_sns_marketkurly.jpg"/>
         <meta property="og:url" content="https://www.kurly.com/cart"/>
         <meta property="twitter:card" content="summary"/>
-        <meta property="twitter:title" content="컬리 - 마켓컬리/뷰티컬리"/>
+        <meta property="twitter:title" content="Sellre - 셀리마켓"/>
         <meta property="twitter:description" content="Better Life for All. 건강한 식재료부터 믿을 수 있는 뷰티, 라이프스타일 상품까지. 나와 내 가족이 사고 싶은 상품을 판매합니다. 내일 아침 문 앞에서 만나요!"/>
         <meta property="twitter:image" content="https://res.kurly.com/images/marketkurly/logo/logo_sns_marketkurly.jpg"/>
         <meta property="twitter:url" content="https://www.kurly.com/cart"/>
@@ -284,8 +284,7 @@
                                     background-color: #e2e2e2;
                                 }
                             </style>
-                            <button class="active css-mxd3pm ekdqe1a0">마켓컬리</button>
-                            <button class=" css-mxd3pm ekdqe1a0">뷰티컬리</button>
+                            <button class="active css-mxd3pm ekdqe1a0">셀리마켓</button>
                         </div>
                         <style data-emotion="css pqw0uk">
                             .css-pqw0uk {
