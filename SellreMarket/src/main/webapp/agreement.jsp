@@ -27,7 +27,7 @@
 <link rel="icon" type="image/png" sizes="32x32"
 	href="http://localhost:8080/sellreMarket/image/logo.png" />
 <link rel="manifest" href="/manifest.json" />
-<link rel="stylesheet" href="../css/agreement.css" />
+<link rel="stylesheet" href="css/agreement.css" />
 </head>
 <body>
 	<main id="main" class="main_container">
@@ -350,7 +350,7 @@
 	<hr class="line"> 
 	
 	<footer class="text-muted py-5">
-		<jsp:include page="footer.jsp" flush="false" />
+		<jsp:include page="footer.html" flush="false" />
 	</footer>
 </body>
 </html>

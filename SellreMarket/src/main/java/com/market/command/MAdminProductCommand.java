@@ -17,7 +17,6 @@ public class MAdminProductCommand implements MCommand{
 		ArrayList<AdminProductDto> list = dao.selectList();
 		
 		reqeust.setAttribute("list", list);
-		
 	}
 
 }

@@ -12,7 +12,7 @@
 <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<link rel="stylesheet" href="../css/admin_menu.css" />
+<link rel="stylesheet" href="css/admin_menu.css" />
 </head>
 <script>
 
@@ -88,7 +88,7 @@
 		<header>
 			<div class="image-text">
 				<span class="image">
-					<img alt="logo" src="../image/logo.png">
+					<img alt="logo" src="image/logo.png">
 				</span>
 			</div>
 			<i class='bx bx-chevron-right toggle'></i>
@@ -187,7 +187,7 @@
 		</div>
 	</main>
 	 -->
-	<script src="../js/admin_menu.js"></script>
+	<script src="js/admin_menu.js"></script>
 	
 </body>
 </html>
