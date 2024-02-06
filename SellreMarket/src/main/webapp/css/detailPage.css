@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+.css-n48rgu {
+    width: 100%;
+    position: relative;
+}
+
+.css-16c0d8l {
+    position: relative;
+    width: 1050px;
+    margin: 0px auto;
+    padding-top: 30px;
+}
+
+.css-1eoy87d {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+
+.css-5v50l3 {
+    width: 430px;
+    height: 552px;
+    background: 
+    url(http://localhost:8080/SellreMarket/image/food.png) 0% 0% / cover, 
+    url(http://localhost:8080/SellreMarket/image/introduce1.jpeg) 50% 50% / contain no-repeat rgb(245, 245, 245);
+}
