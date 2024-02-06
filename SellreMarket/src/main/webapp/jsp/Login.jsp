@@ -7,18 +7,13 @@
 <title>로그인</title>
 </head>
 <body>
-<script type="text/javascript">
-	function signup() {
-		window.location.href = "CustomerSignup.jsp";
-	}
-</script>
 <link rel="preload"
 		href="https://res.kurly.com/_next/static/css/d59287ec5b86dc49.css"
 		as="style" />
 	<link rel="stylesheet"
 		href="https://res.kurly.com/_next/static/css/d59287ec5b86dc49.css"
 		data-n-g />
-	<link rel="stylesheet" href="css/login.css" />
+	<link rel="stylesheet" href="../css/login.css" />
 	<jsp:include page="header.jsp"/>
 	<div class="css-1bb6q2p etkckst2">
 		<div class="css-a7gihu etkckst1">로그인</div>
@@ -50,13 +45,14 @@
 						radius="3">
 						<span class="css-nytqmg e4nu7ef1">로그인</span>
 					</button>
-					<button class="css-hxorrg e4nu7ef3" type="button" height="54" radius="3" onclick="signup()">
+					<button class="css-hxorrg e4nu7ef3" type="button" height="54"
+						radius="3">
 						<span class="css-nytqmg e4nu7ef1">회원가입</span>
 					</button>
 				</div>
 			</form>
 		</div>
 	</div>
-	<jsp:include page="footer.html"/>
+	<jsp:include page="footer.jsp"/>
 </body>
 </html>

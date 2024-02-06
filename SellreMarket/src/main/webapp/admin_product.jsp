@@ -6,155 +6,42 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자 - 셀리</title>
-<link rel="shortcut icon" href="http://localhost:8080/sellreMarket/image/logo.png" />
+<link rel="shortcut icon" href="http://localhost:8080/SellreMarket/image/logo.png" />
 <link rel="icon" href="http://localhost:8080/sellreMarket/image/logo.png" />
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:8080/sellreMarket/image/logo.png" />
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:8080/sellreMarket/image/logo.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:8080/SellreMarket/image/logo.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:8080/SellreMarket/image/logo.png" />
 <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
+<link rel="stylesheet" href="css/admin_product.css" />
 </head>
 <style>
-    
-    /* 관리자환영합니다. 로그아웃 css start*/
-    header {
-    	text-align : right;
-    	padding: 30px;
-	    font-size : 12px;
-    }
-	/* 관리자환영합니다. 로그아웃 css end*/
-    
-    
-	/* 내용 css 시작 */
-	.main {
-		position : relative;
-		top : 80px;
-		height: 100vh; 
-		left : 50px;
-		justify-content : center;
-		height: 600px;
-		width: calc(100%-260px);
-		transition : var(--trans-05);
-		display: flex;
-		align-items: center;
-		
-	}
-	/* 내용 css 끝 */
 
-	
-	/* 제목 css 시작 */
-	.title {
-		display: block;
-		font-size: 27px; /* 제목의 글꼴 크기 조정 */
-  		font-weight: 700; /* 제목의 글꼴 굵기 조정 */
-    	color: #333333; /* 제목의 글꼴 색상 조정 */
-    	justify-content : center;
-    	text-align: center;
-    	margin-top : 60px;
-    	padding-bottom: 40px;
-    	
-	}
-	/* 제목 css 끝 */
-	
-	/* javascript table css start */
-	.table-style {
-		border-collapse: collapse;
-		width: 100%;
-		padding-top : 0px;
-	}
-	
-	.table-style th, .table-style td {
-		 border: 1px solid black;
-		 padding: 8px;
-		 text-align: left;
-	}
-	
-	.table-style th {
-		background-color: #f2f2f2;
-	}
-	
-	.table-style tr:nth-child(even) {
-		background-color: #f9f9f9;
-	}
-	
-	.table-style tr:hover {
-		background-color: #ddd;
-	}
-	
-	.table-style td {
-	    border: none; /* 좌우 테두리 제거 */
-	    padding: 15px;
-	    text-align: left;
-	    padding-left: 40px; /* 열 간격을 넓게 주기 위한 왼쪽 패딩 설정 */
-	    padding-right: 40px; /* 열 간격을 넓게 주기 위한 오른쪽 패딩 설정 */
-	}
-	
-	.table-style th {
-	 	padding: 20px;
-		border: none; /* 좌우 테두리 제거 */
-		text-align: center;
-	    padding-left: 20px; /* 열 간격을 넓게 주기 위한 왼쪽 패딩 설정 */
-	    padding-right: 20px; /* 열 간격을 넓게 주기 위한 오른쪽 패딩 설정 */
-	}
-	
-	#paging {
-		display: flex;
-    	justify-content: center;
-    	align-items: center;
-		margin-top : 30px;
-	}
-	
-	#paging button {
-	    background-color: #f2f2f2;
-	    border: none;
-	    color: #333;
-	    padding: 8px 16px;
-	    margin: 4px;
-	    cursor: pointer;
-	    border-radius: 4px;
-	}
-	
-	#paging button:hover {
-	    background-color: #f9f9f9;
-	}
-	
-	#paging button:disabled {
-	    background-color: #ddd;
-	    cursor: not-allowed;
-	}
-	
-	
-	
-	/* javascript table css end */
+
 </style>
-
 <script>
 		
 	window.onload=function(){
-		//제품 list 조회
+		init();
+	}	
+		
+	function init() {
+		paging();
+	}
+	
+	
+	function paging(pageNum) {
+		
+		//pageNum이 null일 때 처리
+		if(pageNum == null ){
+			pageNum = "1";
+		}
+		
 		$.ajax({
 			type : "POST",
 			url : "adminProduct.do",
+			data : {pageNum : pageNum},
 			success : function(response){
-				createTable(response)
-			},
-			 error:function(request, status, error){
-				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			}
-		});
-		
-		/* let pageNum = $("#pageNum").val() */
-		
-		
-		$.ajax({
-			type : "POST",
-			url : "adminProductCnt.do",
-			data : {pageNum : 1},
-			success : function(response){
-				ㅣ
-				
 				createPaging(response)
-	
 			},
 			 error:function(request, status, error){
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -162,132 +49,89 @@
 		});
 	}
 	
-	function btnClick(pageNum) {
-		$.ajax({
-			type : "POST",
-			url : "adminProductCnt.do",
-			data : {pageNum : pageNum} ,
-			success : function(response){
-				createPaging(response)
 	
-			},
-			 error:function(request, status, error){
-				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			}
-		});
-	}
-	
-	//productid, pname, pEngname, nutrition, pinsertdate, expirationdate, status from product";
-	function createTable(data) {
-		let table = "<table class='table-style'>";
-		table += "<tr><th>번호</th><th>상품명</th><th>영문명</th><th>원산지</th><th>입고일</th><th>소비기한</th><th>상태</th></tr>"
+	function createPaging(data) {
 		
+		document.getElementById("result").innerHTML = "";
+		//페이지 번호 보여주기 위해 div태그 생성
+		let rownumber = data.total - data.index_no;	//행번호
+		let index_no = data.index_no;	//행번호
+		let lastPage = data.lastPage;
+		let div = "<div>";
+		
+		//데이터 조회하기 위해 테이블 생성
+		let table = "<table id='listTable' class='table-style'>";
+		table += "<tr><th>행번호</th><th>상품명</th><th>영문명</th><th>원산지</th><th>입고일</th><th>소비기한</th><th>상태</th></tr>"
+		
+		//데이터가 없을 때 처리
 		if(data.length == 0) {
 			table += "<tr><td colspan='7'></td></tr>";
 		}
 		
-		//데이터 행 추가
-		for(let i=0; i<data.length; i++){
-			table += "<tr>" +
-						"<td style='text-align:center'>" + data[i].productid +"</td>" +
-						"<td style='text-align:left'>" + data[i].pname +"</td>" +
-						"<td>" + data[i].pEngname +"</td>" +
-						"<td style='text-align:center'>" + data[i].origin +"</td>" +
-						"<td style='text-align:center'>" + data[i].pinsertdate +"</td>" +
-						"<td style='text-align:center'>" + data[i].expirationdate +"</td>" +
-						"<td style='text-align:center'>" + data[i].status +"</td>" +
-					"</tr>" 
+		//이중 for문으로 페이징처리와 해당 페이지에 데이터 조회를 동시에 처리
+		for(let j= 1; j <= lastPage; j++){
+			
+			for(let i=0; i < data.productList.length; i++){ //=> 범위를 0~9까지 계속 10개씩 가져오는 것이 아니라, data 길이만큼씩 보여주게 해야된다잇!!
+				table += "<tr>" +
+				
+							"<td style='text-align:center'>" + rownumber +"</td>" +
+							"<td style='text-align:left'>" + data.productList[i].pname +"</td>" +
+							"<td>" + data.productList[i].pEngname +"</td>" +
+							"<td style='text-align:center'>" + data.productList[i].origin +"</td>" +
+							"<td style='text-align:center'>" + data.productList[i].pinsertdate +"</td>" +
+							"<td style='text-align:center'>" + data.productList[i].expirationdate +"</td>" +
+							"<td style='text-align:center'>" + data.productList[i].status +"</td>" +
+							"<td hidden style='width:0px;'>" + data.productList[i].productid +"</td>" +
+						"</tr>" 
+						rownumber--;
+						
+				
+			}
+			table += "</table>"
+			div += "<button onclick='paging("+j+")'>"+j+"</button> ";
+			
 		}
-		
-		table += "</table>"
-		
+ 		$("#paging").html(div);
 		$("#result").html(table);
 		
-	}	 
-
-	
-	function createPaging(data) {
-		
-		//listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
-		let currentPage = data.pageInfo.currentPage
-		let startPage = data.pageInfo.startPage;
-		let endPage = data.pageInfo.endPage;
-		let maxPage = data.pageInfo.maxPage;
-		
-		let div ="<div>"
-		
-		if (currentPage != 1) {
-		    //div += "<button onclick='location.href=\"/adminProductCnt.do?pageNum=" + (currentPage - 1) + "\"'>&lt;</button>";
-		    div += "<button onclick='btnClick(" + (currentPage - 1) + ")'>&lt;</button>";
-		}
-
-		for (let p = startPage; p <= endPage; p++) {
-		    if (p == currentPage) {
-		        div += "<button style='background: #f9f9f9' disabled>" + p + "</button>";
-		    } else {
-		   		 //div += "<button onclick='location.href=\"/adminProductCnt.do?pageNum=" + p + "\"'>" + p + "</button>";
-		    	   div += "<button onclick='btnClick(" +p+ ")'>" + p + "</button>";
-		    }
-		}
-
-		if (currentPage != maxPage) {
-		   //div += "<button onclick='location.href=\"/adminProductCnt.do?pageNum=" + (currentPage + 1) + "\"'>&gt;</button>";
-			div += "<button onclick='btnClick(" + (currentPage + 1) + ")'>&gt;</button>";
-		}
-
-		div += "</div>";
-
-		
-		$("#paging").html(div);
-
+		// 텍스트 제거
+	    var tableElement = document.getElementById("listTable");
+	    var nextSibling = tableElement.nextSibling;
+	    while (nextSibling) {
+	        var nextElement = nextSibling.nextSibling;
+	        nextSibling.parentNode.removeChild(nextSibling);
+	        nextSibling = nextElement;
+	    }
 	}	
-	
-	* {
-		backco : blue';
-	}
+
+
 	
 </script>
 <body>
 
-<!-- sidebar include start-->	
 <jsp:include page="admin_menu.jsp" flush="false" />
-<!-- sidebar include end-->
 	
 	<main>
-		<!-- header start -->
 		<header>
 			<div class="info">
 				관리자님 환영합니다. &nbsp; <a href="logout.do">로그아웃</a>
 			</div>
 		</header>
 		
-		<!-- header end -->
 		
-		<!-- title start -->
-		<div class="title">제품현황</div>
 		
 		<div class="btnGroup">
 			
 		</div>
-		<!-- title end -->
 		
-		<!-- content start -->
 		<div class="main">
+			<div class="title">제품현황</div>
 			<div class="main_content">
-				<div id="result"></div>
-				<div id="paging">
-				
-				</div>		
+				<div id="result" class="tableContainer"></div> <!-- 테이블 조회 위치 -->
 			</div>
+			<div id="paging"></div>	<!-- 페이징 조회 위치 -->
 		</div>
-		<!-- content end -->
-		
-		
 	</main>
-	
-	
-	<!-- 	페이징 처리 -->
-	
 	
 </body>
 </html>

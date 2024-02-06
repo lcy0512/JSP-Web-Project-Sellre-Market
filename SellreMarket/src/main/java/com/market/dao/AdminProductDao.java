@@ -24,7 +24,7 @@ public class AdminProductDao {
 		try {
 			
 			Context context = new InitialContext();
-			dataSource = (DataSource) context.lookup("java:comp/jdbc/sellreMarket");
+			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/sellreMarket");
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -90,7 +90,7 @@ public class AdminProductDao {
 	
 	
 	/************************************************************************************************
-	 * Function : 상품의 전체 갯수 조회
+	 * Function : 상품의 전체 갯수 조회 => 페이징처리 위해
 	 * @param 	: null
 	 * @return 	: int
 	************************************************************************************************/
@@ -126,7 +126,7 @@ public class AdminProductDao {
 	 * @param 	: PageInfo에 있는 페이징 정보
 	 * @return 	: ArrayList
 	************************************************************************************************/
-	public ArrayList<AdminProductDto> selectList(PageInfo pageInfo) {
+	public ArrayList<AdminProductDto> selectList(int index_no) {
 		
 		ArrayList<AdminProductDto> list = new ArrayList<AdminProductDto>();
 		
@@ -137,18 +137,34 @@ public class AdminProductDao {
 		try {
 			
 			conn = dataSource.getConnection();
-			String query = "SELECT * FROM PRODUCT ORDER BY PRODUCTID DESC LIMIT ?, 10 ";
+			String query = 
+							"""
+							SELECT 
+								
+								productid, 
+								pname, 
+								IFNULL(pEngname, '') as pEngname, 
+								IFNULL(origin, '') as origin, 
+								date(pinsertdate), 
+								date(expirationdate), 
+								CASE status
+									WHEN '0' THEN '판매종료'
+									WHEN '1' THEN '판매중'
+								ELSE '' END AS status 
+								
+							FROM product
+							ORDER BY productid DESC
+							LIMIT ?, 15 
+				
+					"""; //limit 시작번호, 출력갯수
+			
 
 			ps = conn.prepareStatement(query);
 			
-			int startRow = (pageInfo.getCurrentPage() - 1) * 10 + 1;
-			int endRow = startRow + 10 - 1;
-			
-			ps.setInt(1, startRow-1);
+			ps.setInt(1, index_no);
 			//ps.setInt(2, endRow);
 			
-			System.out.println("adminproductDAO[startRow] : "+startRow);
-			System.out.println("adminproductDAO[endRow] : "+endRow);
+			System.out.println("AdminProductDao[selectList] : "+index_no);
 			
 			rs = ps.executeQuery();
 			

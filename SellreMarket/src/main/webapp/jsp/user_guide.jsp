@@ -12,14 +12,14 @@
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:8080/sellreMarket/image/logo.png" />
 <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-<link rel="stylesheet" href="css/user_guide.css" />
+<link rel="stylesheet" href="../css/user_guide.css" />
 </head>
 <body>
-	<jsp:include page="header.jsp"/>
+
 	<div class="tContainer">
 		<div class="mainTitle">이용안내</div>
 	</div>
-	<div class="css-rb0i47 e1yyjjij1"></div>
+
 	<div class="mn1n">
 		<div class="wrap">
 			<div class="section">
@@ -99,7 +99,7 @@
 	</div>
 	
 	<footer class="text-muted py-5">
-		<jsp:include page="footer.html" flush="false" />
+		<jsp:include page="footer.jsp" flush="false" />
 	</footer>
 </body>
 </html>
