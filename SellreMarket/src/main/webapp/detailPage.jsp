@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -24,6 +25,7 @@
 		<link rel="stylesheet" href="css/detailPage.css" />
 	</head>
 <body>
+	<script src="js/detailPage.js" />
 	<jsp:include page="header.jsp" />
 	<div class="css-n48rgu ex9g78v0">
 		<div class="css-16c0d81 e1brqtzw0">
@@ -31,7 +33,7 @@
 				<div class="css-5v50l3 e17iylht4"></div>
 				<section class="css-1ua1wyk e17iylht3">
 					<div class="css-1qy9c46 ezpe9l12">
-						<h1 class="css-79gmk3 ezpe9l11">[선물세트] 유명산지 사과세트 3.8kg (15입)</h1>
+						<h1 class="css-79gmk3 ezpe9l11">${name}</h1>
 					</div>
 					<h2 class="css-abwjr2 e1q8tigr4">
 						<span class="css-5nirzt e1q8tigr3">16<!-- -->%</span>
@@ -45,9 +47,8 @@
 							<li class="css-e6zlnr epzddad2">
 								<dt class="css-lytdfk epzddad1">배송</dt>
 								<dd class="css-1k8t52o epzddad0">
-									<p class="css-c02hqi e6qx2kx1">샛별배송</p>
-									<p class="css-uy94b2 e6qx2kx0">23시 전 주문 시 내일 아침 7시 전 도착
-																							(대구·부산·울산 샛별배송 운영시간 별도 확인)
+									<p class="css-c02hqi e6qx2kx1">배송이름</p>
+									<p class="css-uy94b2 e6qx2kx0">배송에 대한 내용
 									</p>
 								</dd>
 							</li>
@@ -58,7 +59,7 @@
 								</dd>
 							</li>
 							<li class="css-e6zlnr epzddad2">
-								<dt class="css-lytdfk epzddad1">포장타입</dt>
+								<dt class="css-lytdfk epzddad1">포장방법</dt>
 								<dd class="css-1k8t52o epzddad0">
 									<p class="css-c02hqi e6qx2kx1">냉장 (종이포장)</p>
 									<p class="css-uy94b2 e6qx2kx0">택배배송은 에코 포장이 스티로폼으로 대체됩니다.</p>
@@ -98,7 +99,7 @@
 									<dd class="css-1k8t52o epzddad0">
 										<div class="cart-option-item css-1cb5lnc e1bjklo18">
 											<div class="css-1qdyvok e1bjklo16">
-												<span class="css-1yojl0t e1bjklo14">[선물세트] 유명산지 사과세트 3.8kg (15입)</span>
+												<span class="css-1yojl0t e1bjklo14">상품 이름</span>
 											</div>
 											<div class="css-tk6lxo e1bjklo15">
 												<div class="css-nx0orh e1cqr3m40">
