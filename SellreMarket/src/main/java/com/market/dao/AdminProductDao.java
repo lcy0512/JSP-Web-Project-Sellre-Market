@@ -11,11 +11,9 @@ import javax.sql.DataSource;
 
 import com.market.dto.AdminProductDto;
 import com.market.dto.PageInfo;
-
 public class AdminProductDao {
 
 	DataSource dataSource;
-	
 	
 	/************************************************************************************************
 	 * Function : context.xml에 설정한 db이름을 가져온다. 
@@ -24,8 +22,9 @@ public class AdminProductDao {
 	************************************************************************************************/
 	public AdminProductDao() {
 		try {
+			
 			Context context = new InitialContext();
-			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/sellreMarket");
+			dataSource = (DataSource) context.lookup("java:comp/jdbc/sellreMarket");
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -82,6 +81,7 @@ public class AdminProductDao {
 			}
 			
 			conn.close();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -137,10 +137,8 @@ public class AdminProductDao {
 		try {
 			
 			conn = dataSource.getConnection();
-			String query = """
-							SELECT * FROM PRODUCT ORDER BY PRODUCTID DESC LIMIT ?, 10 ;
+			String query = "SELECT * FROM PRODUCT ORDER BY PRODUCTID DESC LIMIT ?, 10 ";
 
-					""";
 			ps = conn.prepareStatement(query);
 			
 			int startRow = (pageInfo.getCurrentPage() - 1) * 10 + 1;
@@ -174,4 +172,3 @@ public class AdminProductDao {
 		return list;
 	}
 }
-
