@@ -14,6 +14,9 @@ import com.market.command.ClickData;
 import com.market.command.MCgetCart;
 import com.market.command.MCmainView;
 import com.market.command.MCommand;
+import com.market.command.MLoadInquiryList;
+import com.market.dto.AdminProductDto;
+import com.market.dto.PageInfo;
 import com.market.command.Paging;
 
 /**
@@ -64,6 +67,21 @@ public class Controller extends HttpServlet {
 			case "/login.do" :
 				viewPage = "test.jsp";
 				break;
+				
+			case "/inquiry.do" :
+				command = new MLoadInquiryList();
+				command.execute(request, response);
+				viewPage = "individualInquiry.jsp";
+				break;
+				
+			//관리자 제품 조회 
+			case "/adminProduct.do":
+				command = new MAdminProductCommand();
+				command.execute(request, response);
+				ArrayList<AdminProductDto> list = (ArrayList) request.getAttribute("list");
+				out.print(new Gson().toJson(list)); 
+				out.flush(); //실행 => ajax로 불러오므로 viewPage값 없이 바로 return;
+				return;
 				
 			case "/mainPage.do" :
 				// 페이징 처리를 위한
