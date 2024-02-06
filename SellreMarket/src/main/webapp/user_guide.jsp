@@ -15,11 +15,11 @@
 <link rel="stylesheet" href="css/user_guide.css" />
 </head>
 <body>
-
+	<jsp:include page="header.jsp"/>
 	<div class="tContainer">
 		<div class="mainTitle">이용안내</div>
 	</div>
-
+	<div class="css-rb0i47 e1yyjjij1"></div>
 	<div class="mn1n">
 		<div class="wrap">
 			<div class="section">

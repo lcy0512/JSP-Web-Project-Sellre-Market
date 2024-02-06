@@ -1,11 +1,7 @@
 @charset "UTF-8";
 
-html,
-button,
-input,
-select,
-textarea {
-	font-family: "Noto Sans", "malgun gothic", AppleGothic, dotum, sans-serif;
+html, button, input, select, textarea {
+    font-family: "Noto Sans", "malgun gothic", AppleGothic, dotum, sans-serif;
 }
 
 .css-pculus {
