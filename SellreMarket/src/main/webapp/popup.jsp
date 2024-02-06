@@ -34,7 +34,7 @@
     </style>
     
     
-    <script>
+    <%-- <script>
     	let unitPrice = <%= session.getAttribute("price") %>;
         let selectedNumber = 1; // Initial value
 
@@ -59,15 +59,19 @@
             window.location.href = "getCart.do";
         }
         
-    </script>
+    </script> --%>
+<!-- // js 따로 관리한다. -->
+<script src="cartQuery.js"></script>
 </head>
 
 
 <body>
 
-<!-- // js 따로 관리한다. -->
-<script src="cartQuery.js"></script>
-	<div
+	${ySrc }
+	${yName }
+	${rContent }
+	${price }
+	<%-- <div
 		style="display: flex; align-items: center; padding-left: 20px; padding-top: 34px;">
 		<a href="#"> <img class="img-fluid"
 			style="width: 50px; height: 50px;"
@@ -107,7 +111,7 @@
 	<div style="display: flex; justify-content: center; align-items: center; margin: auto;">
         <button type="button" style="margin-right: 10px;" onclick="window.close()">취소</button>
         <button id="addCart" type="button" style="background-color: green; color: white;" onclick="addCart()">장바구니 담기</button>
-    </div>
+    </div> --%>
 </body>
 </html>
 

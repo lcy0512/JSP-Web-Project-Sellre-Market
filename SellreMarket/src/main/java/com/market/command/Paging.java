@@ -1,49 +1,53 @@
 package com.market.command;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.market.dao.MainViewDao;
+import com.market.dto.MainViewDto;
 
 public class Paging implements MCommand {
 
-	int startNo; // 페이지 블록 시작번호
-	int endNo; // 페이지 블록 끝 번호
-	int realEnd; // 게시물 끝 페이지 번호 
-	boolean prev;
-	boolean next;
-	int total; // 총 게시물 수
-	int pageNo;// 요청한 페이지 번호
-	
 	@Override
 	public void execute(HttpServletRequest reqeust, HttpServletResponse response) {
 		
 		MainViewDao dao = new MainViewDao();
 		
-		int cPage;
 		
-		String tempPage = reqeust.getParameter("page");
-		 
-		// cPage(현재 페이지 정하기) 값이 없는 경우 1로 설정
-		if (tempPage == null || tempPage.length() == 0) {
-		    cPage = 1;
-		}
+		int curPage = 0;
+		
+		// 처음에 받아오는 페이지가 값이 없는 경우는 1로 설정하기 위한 트라이
 		try {
-		    cPage = Integer.parseInt(tempPage);
-		} catch (NumberFormatException e) {
-		    cPage = 1;
+			curPage = Integer.parseInt(reqeust.getParameter("curPage"));
+		}
+		catch (Exception e) {
+			curPage = 1;
 		}
 		
-		// 한 페이지 당 몇개의 데이터를 넣을 것인가 = 12개
-		int eachPage = 12;
+		// 전체 페이지 수를 카운트하여 가져옴
+		int totalpageCount = dao.totalpageCount();
+		// 한 페이지에 몇개를 넣을 것인가?
+		int eachPageCount = 5;
 		
-		// 페이지 한 묶음을 몇개로 하겠는가? = 5묶음
-		int block = 5;
+		int limitFrom = (curPage - 1) * eachPageCount;
 		
+		// 블록 페이지 1~5, 6~10
+		int blockPage = ((curPage-1) / eachPageCount) + 1;
 		
+		int blockStart = (blockPage-1) * eachPageCount + 1;
+		
+		List<MainViewDto> dtos = dao.productView(limitFrom, eachPageCount);
+		
+		// 마지막 페이지 정하기
+		int endPage = (totalpageCount / eachPageCount) == 0 ? totalpageCount / eachPageCount : (totalpageCount / eachPageCount) + 1 ;
+		
+		reqeust.setAttribute("curPage", curPage);
+		reqeust.setAttribute("endPage", endPage);
+		reqeust.setAttribute("dtos", dtos);
+		reqeust.setAttribute("blockStart", blockStart);
 		
 	} 
-	
-	
-	
 }

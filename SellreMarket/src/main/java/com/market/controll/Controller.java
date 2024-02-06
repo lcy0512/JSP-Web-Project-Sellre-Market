@@ -10,9 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.market.command.ClickData;
 import com.market.command.MCgetCart;
 import com.market.command.MCmainView;
 import com.market.command.MCommand;
+import com.market.command.Paging;
 
 /**
  * Servlet implementation class Controller
@@ -57,10 +59,7 @@ public class Controller extends HttpServlet {
 		
 		String id = null;
 		
-		String yName = (String) session.getAttribute("yName");
-		String rContent = (String) session.getAttribute("rContent");
-		String ySrc = (String) session.getAttribute("ySrc");
-		String price = (String) session.getAttribute("price");
+		
 		
 		switch(com) {
 			// 로그인 화면
@@ -69,6 +68,21 @@ public class Controller extends HttpServlet {
 				break;
 				
 			case "/mainPage.do" :
+				// 페이징 처리를 위한
+				int curPage = 0;
+				
+				try {
+					curPage = Integer.parseInt(request.getParameter("curPage"));
+				}
+				catch (Exception e) {
+					curPage = 1;
+				}
+				
+				request.setAttribute("curPage", curPage);
+				// 페이징 처리를 위한
+				
+				command = new Paging();
+				command.execute(request, response);
 				command = new MCmainView();
 				command.execute(request, response);
 				
@@ -78,32 +92,60 @@ public class Controller extends HttpServlet {
 				
 			case "/popup.do" :
 				
-				command = new MCmainView();
-				command.execute(request, response);
+				String yName = (String) session.getAttribute("yName");
+				String rContent = (String) session.getAttribute("rContent");
+				String ySrc = (String) session.getAttribute("ySrc");
+				String price = (String) session.getAttribute("price");
 				
 				session.setAttribute("yName", yName);
 				session.setAttribute("rContent", rContent);
 				session.setAttribute("ySrc", ySrc);
 				session.setAttribute("price", price);
+				System.out.println(yName);
+				System.out.println(rContent);
+				System.out.println(ySrc);
+				System.out.println(price);
+				
+//				command = new ClickData();
+//				command.execute(request, response);
+//				
+//				// "javax.servlet.http.HttpSession.getAttribute(String)" is null
+//				int recipeId = (int) session.getAttribute("recipeId");
+//				session.setAttribute("recipeId", recipeId);
 				
 				viewPage = "popup.jsp";
 				
 				break;
 				
-			case "/getCart.do" : 
+//			case "/getCart.do" : 
+//				
+//				command = new MCgetCart();
+//				command.execute(request, response);
+//				
+//				viewPage = "mainViewPage.jsp";
+//				
+//			default :
+//				break;
 				
-				command = new MCgetCart();
-				command.execute(request, response);
-				
-				session.setAttribute("yName", yName);
-				session.setAttribute("rContent", rContent);
-				session.setAttribute("ySrc", ySrc);
-				session.setAttribute("price", price);
-				
-				viewPage = "mainViewPage.jsp";
-				
-			default :
-				break;
+//			case "/page.do" : 
+//				int curPage = 0;
+//				
+//				try {
+//					curPage = Integer.parseInt(request.getParameter("curPage"));
+//				}
+//				catch (Exception e) {
+//					curPage = 1;
+//				}
+//				
+//				request.setAttribute("curPage", curPage);
+//				
+//				command = new Paging();
+//				command.execute(request, response);
+//				
+//				
+//				viewPage = "Test.jsp";
+//				
+//				break;
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher(viewPage);

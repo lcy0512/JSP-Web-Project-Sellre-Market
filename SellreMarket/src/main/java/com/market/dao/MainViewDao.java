@@ -36,40 +36,92 @@ public class MainViewDao {
 	}
 	
 	// Create
-	public void insertCart(int qty) {
-		Connection con = null;
-		PreparedStatement ps = null;
-		
-		try {
-			con = dataSource.getConnection();
-			
-			String query = "insert into cart (qty, userid, productid) values (?, admin, 1)";
-			
-			ps = con.prepareStatement(query);
-			
-			ps.setInt(1, qty);
-			
-			ps.executeUpdate();
-				
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-		finally {
-			try {
-				if (ps != null) ps.close();
-				if (con != null) con.close();
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
+//	public void insertCart(int qty, int productId) {
+//		Connection con = null;
+//		PreparedStatement ps = null;
+//		
+//		try {
+//			con = dataSource.getConnection();
+//			
+//			String query = "insert into cart (qty, userid, productid) values (?, admin, ?)";
+//			
+//			ps = con.prepareStatement(query);
+//			
+//			ps.setInt(1, qty);
+//			ps.setInt(2, productId);
+//			
+//			ps.executeUpdate();
+//				
+//		}
+//		catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		finally {
+//			try {
+//				if (ps != null) ps.close();
+//				if (con != null) con.close();
+//			}
+//			catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		}
+//	}
 	
 	
+	
+//	// 제품 정보 불러오기 for 메인 화면 출력
+//	public List<MainViewDto> productView() {
+//		List<MainViewDto> dtos = new ArrayList<MainViewDto>();
+//		
+//		Connection con = null;
+//		PreparedStatement ps = null;
+//		ResultSet rs = null;
+//		
+//		try {
+//			con = dataSource.getConnection();
+//			
+//			String query = "select y.yname, y.ysrc, ry.rcontent, format(i.price, 0) price, likecount "
+//					+ "					from youtuber y "
+//					+ "					join recipeofYoutuber ry on y.youtubeid = ry.youtubeid "
+//					+ "					left join recipelike rl on ry.recipeid = rl.recipeid "
+//					+ "					join productOfRecipe pr on ry.recipeid = pr.recipeid "
+//					+ "					join product p on p.productid = pr.productid "
+//					+ "					join price i on i.productid = p.productid "
+//					+ "                    order by y.youtubeid desc";
+//			
+//			ps = con.prepareStatement(query);
+//			rs = ps.executeQuery();
+//			
+//			while(rs.next()) {
+//				String yname = rs.getString("yname");
+//				String ysrc = rs.getString("ysrc");
+//				String rcontent = rs.getString("rcontent");
+//				String price = rs.getString("price");
+//				int like = rs.getInt("likecount");
+//				
+//				MainViewDto dto = new MainViewDto(yname, ysrc, rcontent, price, like);
+//				
+//				dtos.add(dto);
+//			}
+//		}
+//		catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		finally {
+//			try {
+//				if (rs != null) rs.close();
+//				if (ps != null) ps.close();
+//				if (con != null) con.close();
+//			}
+//			catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		return dtos;
+//	}
 	
 	// 제품 정보 불러오기 for 메인 화면 출력
-	public List<MainViewDto> productView() {
+	public List<MainViewDto> productView(int limitFrom, int eachPageCount) {
 		List<MainViewDto> dtos = new ArrayList<MainViewDto>();
 		
 		Connection con = null;
@@ -86,9 +138,12 @@ public class MainViewDao {
 					+ "					join productOfRecipe pr on ry.recipeid = pr.recipeid "
 					+ "					join product p on p.productid = pr.productid "
 					+ "					join price i on i.productid = p.productid "
-					+ "                    order by y.youtubeid desc";
+					+ "                    order by y.youtubeid desc "
+					+ "					limit ?, ?";
 			
 			ps = con.prepareStatement(query);
+			ps.setInt(1, limitFrom);
+			ps.setInt(2, eachPageCount);
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
@@ -160,10 +215,9 @@ public class MainViewDao {
 	}
 	
 	// paging을 위한 count 세기
-	public List<MainViewDto> pageCount() {
+	public int totalpageCount() {
 		int amount = 0;
 		
-		List<MainViewDto> dtos = new ArrayList<MainViewDto>();
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -171,29 +225,20 @@ public class MainViewDao {
 		try {
 			con = dataSource.getConnection();
 			
-			String query = "select y.yname, y.ysrc, ry.rcontent, format(i.price, 0) price, likecount "
+			String query = "select count(*) count "
 					+ "					from youtuber y "
 					+ "					join recipeofYoutuber ry on y.youtubeid = ry.youtubeid "
 					+ "					left join recipelike rl on ry.recipeid = rl.recipeid "
 					+ "					join productOfRecipe pr on ry.recipeid = pr.recipeid "
 					+ "					join product p on p.productid = pr.productid "
 					+ "					join price i on i.productid = p.productid "
-					+ "					order by y.youtubeid desc"
-					+ "					limit 0, 5";
+					+ "					order by y.youtubeid desc";
 			
 			ps = con.prepareStatement(query);
 			rs = ps.executeQuery();
 			
-			while(rs.next()) {
-				String yname = rs.getString("yname");
-				String ysrc = rs.getString("ysrc");
-				String rcontent = rs.getString("rcontent");
-				String price = rs.getString("price");
-				int like = rs.getInt("likecount");
-				
-				MainViewDto dto = new MainViewDto(yname, ysrc, rcontent, price, like);
-				
-				dtos.add(dto);
+			if(rs.next()) {
+				amount = rs.getInt(1);
 			}
 		}
 		catch (Exception e) {
@@ -209,7 +254,50 @@ public class MainViewDao {
 				e.printStackTrace();
 			}
 		}
-		return dtos;
+		return amount;
+	}
+	
+	public int clickCart(String rContent) {
+		
+		int recipeId = 0;
+		
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		
+		try {
+			con = dataSource.getConnection();
+			
+			String query = "select recipeid from recipeOfYoutuber where rcontent = ?";
+			
+			ps = con.prepareStatement(query);
+			
+			ps.setString(1, rContent);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				recipeId = rs.getInt("recipeid");
+			}
+			System.out.println(rContent + " inside dao");
+			System.out.println(recipeId + " inside dao");
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if (rs != null) rs.close();
+				if (ps != null) ps.close();
+				if (con != null) con.close();
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return recipeId;
+		
 	}
 	
 }
