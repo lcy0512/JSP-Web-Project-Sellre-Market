@@ -11,12 +11,12 @@ import com.market.dto.AdminProductDto;
 public class MAdminProductCommand implements MCommand{
 
 	@Override
-	public void execute(HttpServletRequest reqeust, HttpServletResponse response) {
+	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		
 		AdminProductDao dao = new AdminProductDao();
 		ArrayList<AdminProductDto> list = dao.selectList();
 		
-		reqeust.setAttribute("list", list);
+		request.setAttribute("list", list);
 		
 	}
 
