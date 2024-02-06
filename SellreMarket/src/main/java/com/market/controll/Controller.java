@@ -1,10 +1,6 @@
 package com.market.controll;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,12 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.google.gson.Gson;
-import com.market.command.MAdminProductCommand;
-import com.market.command.MAdminProductCount;
+import com.market.command.ClickData;
+import com.market.command.MCgetCart;
+import com.market.command.MCmainView;
 import com.market.command.MCommand;
-import com.market.dto.AdminProductDto;
-import com.market.dto.PageInfo;
+import com.market.command.Paging;
 
 /**
  * Servlet implementation class Controller
@@ -62,49 +57,93 @@ public class Controller extends HttpServlet {
 		String conPath = request.getContextPath();
 		String com = uri.substring(conPath.length());
 		
-		response.setContentType("applicaton/json");
-		response.setCharacterEncoding("UTF-8");
-		PrintWriter out = response.getWriter();
+		String id = null;
 		
 		switch(com) {
 			// 로그인 화면
 			case "/login.do" :
 				viewPage = "test.jsp";
 				break;
-		
-			//관리자 제품 조회 
-			case "/adminProduct.do":
-				command = new MAdminProductCommand();
+				
+			case "/mainPage.do" :
+				// 페이징 처리를 위한
+				int curPage = 0;
+				
+				try {
+					curPage = Integer.parseInt(request.getParameter("curPage"));
+				}
+				catch (Exception e) {
+					curPage = 1;
+				}
+				
+				request.setAttribute("curPage", curPage);
+				// 페이징 처리를 위한
+				
+				command = new Paging();
 				command.execute(request, response);
-				ArrayList<AdminProductDto> list = (ArrayList) request.getAttribute("list");
-				out.print(new Gson().toJson(list)); 
-				out.flush(); //실행 => ajax로 불러오므로 viewPage값 없이 바로 return;
-				return;
-				
-			//관리자 제품 조회 - 페이징처리	
-			case "/adminProductCnt.do":
-				command = new MAdminProductCount();
+				command = new MCmainView();
 				command.execute(request, response);
 				
-				PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
-				ArrayList<AdminProductDto> pageList = (ArrayList)request.getAttribute("list");
-				int listCount = (int) request.getAttribute("listCount");
+				viewPage = "mainViewPage.jsp";
 				
-				//ajax로 데이터를 한번에 보내기 위해 키-값 형태의 Map 이용.
-				Map<String, Object> data = new HashMap<>();
-				data.put("pageInfo", pageInfo);
-				data.put("pageList", pageList);
-				data.put("listCount", listCount);
-				
-				out.print(new Gson().toJson(data)); 
-				out.flush(); //실행 => ajax로 불러오므로 viewPage값 없이 바로 return;
-				
-				
-				return;	
-				
-				
-			default :
 				break;
+				
+			case "/popup.do" :
+				
+				String yName = (String) session.getAttribute("yName");
+				String ytitle = (String) session.getAttribute("ytitle");
+				String ySrc = (String) session.getAttribute("ySrc");
+				String price = (String) session.getAttribute("price");
+				
+				session.setAttribute("yName", yName);
+				session.setAttribute("ytitle", ytitle);
+				session.setAttribute("ySrc", ySrc);
+				session.setAttribute("price", price);
+				System.out.println(yName + " controller");
+				System.out.println(ytitle);
+				System.out.println(ySrc);
+				System.out.println(price);
+				
+//				command = new ClickData();
+//				command.execute(request, response);
+//				
+//				// "javax.servlet.http.HttpSession.getAttribute(String)" is null
+//				int recipeId = (int) session.getAttribute("recipeId");
+//				session.setAttribute("recipeId", recipeId);
+				
+				viewPage = "popup.jsp";
+				
+				break;
+				
+//			case "/getCart.do" : 
+//				
+//				command = new MCgetCart();
+//				command.execute(request, response);
+//				
+//				viewPage = "mainViewPage.jsp";
+//				
+//			default :
+//				break;
+				
+//			case "/page.do" : 
+//				int curPage = 0;
+//				
+//				try {
+//					curPage = Integer.parseInt(request.getParameter("curPage"));
+//				}
+//				catch (Exception e) {
+//					curPage = 1;
+//				}
+//				
+//				request.setAttribute("curPage", curPage);
+//				
+//				command = new Paging();
+//				command.execute(request, response);
+//				
+//				
+//				viewPage = "Test.jsp";
+//				
+//				break;
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher(viewPage);
