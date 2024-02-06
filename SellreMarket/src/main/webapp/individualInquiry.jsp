@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,15 +23,29 @@
 					<div width="100" class="css-16tcewl e16adls20">작성일</div>
 					<div width="100" class="css-16tcewl e16adls20">답변상태</div>
 				</div>
-				<div class="css-l0r8ps e1cfowvj1">게시글이 없습니다.</div>
-				<div class="css-15jhycr e3tf63e0">
-					<button class="css-1ibxj4m e4nu7ef3" type="button" width="120"
-						height="44" radius="3">
-						<span class="css-nytqmg e4nu7ef1">문의하기</span>
+				<div class="css-l0r8ps e1cfowvj1">
+					<c:choose>
+	       				<c:when test="${empty InquiryList}">
+	            			게시글이 없습니다.
+	        			</c:when>
+	        			<c:otherwise>
+	            			<c:forEach items="${InquiryList}" var="inquiry">
+	            				<div class="css-e24nfx">
+	            					<div class="css-1ym7aqm"><a href="">${inquiry.intitle}</a></div>
+	               					<div width="100" class="css-15tcewl">${inquiry.insertdate}</div>
+	                				<div width="100" class="css-15tcewl">${inquiry.status}</div>
+	                			</div>
+	            			</c:forEach>
+	        			</c:otherwise>
+	    			</c:choose>
+				
+				<div class="css-15jhycr e3tf63e0"></div>
+					<button class="css-1ibxj4m e4nu7ef3" type="button" width="120" radius="3">
+						문의하기
 					</button>
-				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 	<jsp:include page="footer.html"/>
 </body>

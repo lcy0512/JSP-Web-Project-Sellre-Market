@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 import com.market.command.MAdminProductCommand;
 import com.market.command.MAdminProductCount;
 import com.market.command.MCommand;
+import com.market.command.MLoadInquiryList;
 import com.market.dto.AdminProductDto;
 import com.market.dto.PageInfo;
 
@@ -71,7 +72,13 @@ public class Controller extends HttpServlet {
 			case "/login.do" :
 				viewPage = "test.jsp";
 				break;
-		
+				
+			case "/inquiry.do" :
+				command = new MLoadInquiryList();
+				command.execute(request, response);
+				viewPage = "individualInquiry.jsp";
+				break;
+				
 			//관리자 제품 조회 
 			case "/adminProduct.do":
 				command = new MAdminProductCommand();
