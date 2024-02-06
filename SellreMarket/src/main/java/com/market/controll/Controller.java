@@ -59,8 +59,6 @@ public class Controller extends HttpServlet {
 		
 		String id = null;
 		
-		
-		
 		switch(com) {
 			// 로그인 화면
 			case "/login.do" :
@@ -93,16 +91,16 @@ public class Controller extends HttpServlet {
 			case "/popup.do" :
 				
 				String yName = (String) session.getAttribute("yName");
-				String rContent = (String) session.getAttribute("rContent");
+				String ytitle = (String) session.getAttribute("ytitle");
 				String ySrc = (String) session.getAttribute("ySrc");
 				String price = (String) session.getAttribute("price");
 				
 				session.setAttribute("yName", yName);
-				session.setAttribute("rContent", rContent);
+				session.setAttribute("ytitle", ytitle);
 				session.setAttribute("ySrc", ySrc);
 				session.setAttribute("price", price);
-				System.out.println(yName);
-				System.out.println(rContent);
+				System.out.println(yName + " controller");
+				System.out.println(ytitle);
 				System.out.println(ySrc);
 				System.out.println(price);
 				

@@ -67,28 +67,32 @@
 
 <body>
 
-	${ySrc }
-	${yName }
-	${rContent }
-	${price }
-	<%-- <div
-		style="display: flex; align-items: center; padding-left: 20px; padding-top: 34px;">
-		<a href="#"> <img class="img-fluid"
-			style="width: 50px; height: 50px;"
-			src="${pageContext.request.contextPath}/image/product/<%= session.getAttribute("ySrc") %>"
-			alt="Cart Click Image">
+	<!-- 이미지, 유튜버 이름, 제품 타이틀 가져오기 -->
+	<div style="display: flex; align-items: center; padding-left: 20px; padding-top: 34px;">
+		<a href="#">
+			<!-- 이미지 불러오기 -->
+			<img class="img-fluid" style="width: 50px; height: 50px;"
+				src="${pageContext.request.contextPath}/image/product/<%= session.getAttribute("ySrc") %>"
+				alt="Cart Click Image">
 		</a>
+		
+		<!-- 제품의 타이틀 가져오기 -->
 		<div style="padding-top: 40px; padding-left: 15px;">
-			<strong>[<%=session.getAttribute("yName") %>] <%=session.getAttribute("rContent") %></strong>
+			<strong>[<%=session.getAttribute("yName") %>] <%=session.getAttribute("ytitle") %></strong>
 		</div>
 	</div>
+	
+	
+	<!-- 줄 긋기 -->
 	<hr style="border-color: lightgray;">
 
+	<!--  유튜버 이름, 제품 타이틀 가져오기 -->
 	<div style="padding-left: 20px; padding-top: 6px; font-size: 14px;">
-		<p>
-			[<%=session.getAttribute("yName") %>]
-			<%=session.getAttribute("rContent") %></p>
+		<p>[<%=session.getAttribute("yName") %>] <%=session.getAttribute("ytitle") %></p>
 	</div>
+	
+	
+	<!-- 제품 갯수 카운트 -->
 	<div style="display: flex; padding-left: 20px; padding-top: 6px;">
 		<strong id="price"><%=session.getAttribute("price") %>원</strong>
 		<div style="margin-left: auto; margin-right:20%; border:1px solid lightgray; border-radius:4px; ">
@@ -99,7 +103,12 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- 줄 긋기 -->
 	<hr style="border-color: lightgray;">
+	
+	
+	<!-- 합계 -->
 	<div class="total" style="display: flex;">
         <p>합계</p>
         <div style="margin-left: auto; margin-right:20%; margin-top: 20px;">
@@ -108,10 +117,14 @@
         </div>
     </div>
 	
+	
+	<!-- 버튼 섹션 -->
 	<div style="display: flex; justify-content: center; align-items: center; margin: auto;">
         <button type="button" style="margin-right: 10px;" onclick="window.close()">취소</button>
         <button id="addCart" type="button" style="background-color: green; color: white;" onclick="addCart()">장바구니 담기</button>
-    </div> --%>
+    </div>
+    
+    
 </body>
 </html>
 

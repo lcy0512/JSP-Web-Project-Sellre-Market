@@ -14,6 +14,7 @@ public class MainViewDto {
 	int yid;
 	String yname;
 	String ysrc;
+	String ytitle;
 	int rid;
 	String rcontent;
 	int pid;
@@ -43,11 +44,11 @@ public class MainViewDto {
 		this.eimg = eimg;
 	}
 
-	public MainViewDto(String yname, String ysrc, String rcontent, String price, int like) {
+	public MainViewDto(String yname, String ysrc, String ytitle, String price, int like) {
 		super();
 		this.yname = yname;
 		this.ysrc = ysrc;
-		this.rcontent = rcontent;
+		this.ytitle = ytitle;
 		this.price = price;
 		this.like = like;
 	}
@@ -74,6 +75,14 @@ public class MainViewDto {
 
 	public void setYsrc(String ysrc) {
 		this.ysrc = ysrc;
+	}
+
+	public String getYtitle() {
+		return ytitle;
+	}
+
+	public void setYtitle(String ytitle) {
+		this.ytitle = ytitle;
 	}
 
 	public int getRid() {

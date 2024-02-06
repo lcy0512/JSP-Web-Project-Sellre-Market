@@ -10,6 +10,16 @@
 	4. Description : 메인 body 페이지 Dto 
 -->
 <head>
+	<!-- <style>
+		.container {
+		  display: flex;
+		  justify-content: center; /* 가로 가운데 정렬 */
+		  align-items: center; /* 세로 가운데 정렬 */
+		  margin-left: auto; /* 왼쪽 여백 설정 */
+		  margin-right: auto; /* 오른쪽 여백 설정 */
+		}
+	</style> -->
+	
 	<meta charset="UTF-8">
     <title>Sellre Market</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -53,54 +63,47 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofNol/wwZQqjW9M4aPskD5S/R1HD87Hjr" crossorigin="anonymous"></script>
 	
     <script>
-		/* function popup() {
-			 새로운 url 위치 
+    
+		/* function popup(yname, ysrc, ytitle, price) {
+			 /* 새로운 url 위치 
 			var url = "popup.do";
-			 어떤 방식으로 띄울 것인가 
+			 /* 어떤 방식으로 띄울 것인가  
 			var name = "_blank";
 			// option 스펙 설정
 			var specs = 'width=500, height=420, top=360, left=820, location=no, toolbar=no, menubar=no, scrollbars=no, resizable=no'
 		   
-			getCart();
+			/* getCart(); 
 			
 			window.open(url, name, specs);
-		} */
+		}  */
 		
-		function getCart() {
-			var ySrc = document.getElementById('src');
-		    var yName = document.getElementById('name');
-		    var rContent = document.getElementById('content');
-		    var price = ocument.getElementById('price');
-		    
-		    console.log(ySrc);
-		    console.log(yName);
-		    console.log(rContent);
-		    console.log(price);
-
-		    // Prepare data to send to the server
-		    var requestData = {
-		        ySrc: ySrc,
-		        yName: yName,
-		        rContent: rContent,
+		function sendProductInfo(yname, ysrc, ytitle, price) {
+		    // 클릭한 상품의 정보를 가져옵니다.
+		    var data = {
+		        yname: yname,
+		        ysrc: ysrc,
+		        ytitle: ytitle,
 		        price: price
 		    };
+			
+		    // 데이터를 전송하기 위한 AJAX 요청을 생성합니다.
+		    var xhr = new XMLHttpRequest();
+		    xhr.open('POST', 'popup.do');  // popup.do의 URL을 설정합니다.
+		    xhr.setRequestHeader('Content-Type', 'application/json');
 
-		    // Make an AJAX request to send the data to the server
-		    $.ajax({
-		        type: 'POST',
-		        url: 'popup.do', // Replace with your server endpoint
-		        data: requestData,
-		        success: function(response) {
-		            // Handle the server response if needed
-		            console.log('Data sent successfully:', response);
-		        },
-		        error: function(error) {
-		            // Handle errors if any
-		            console.error('Error sending data:', error);
-		        }
-		    });
+		    // 데이터를 문자열로 변환하여 전송합니다.
+		    xhr.send(JSON.stringify(data));
 		    
-		   	window.open("", "_blank");
+		    /* 새로운 url 위치  */
+			var url = "popup.do";
+			 /* 어떤 방식으로 띄울 것인가  */
+			var name = "_blank";
+			// option 스펙 설정
+			var specs = 'width=500, height=420, top=300, left=780, location=no, toolbar=no, menubar=no, scrollbars=no, resizable=no'
+		   
+			/* getCart(); */
+			
+			window.open(url, name, specs);
 		}
 	</script>	
 </head>
@@ -160,29 +163,23 @@
 
     <!-- Products Start -->
     <div class="container-fluid pt-5 pb-3">
-        <div class="row px-xl-5">
+        <div class="row px-xl-5 justify-content-center" style="margin-left: 386px; margin-right: 306px;">
         	<c:if test="${not empty productList}">
 	        	<c:forEach items="${productList}" var="dto">
-		            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-		                <div class="product-item bg-light mb-4">
+		            <div class="col-lg-4 col-md-4 col-sm-6 pb-10 mx-auto" >
+		                <div class="product-item bg-light mb-4" style="width: 300px; height: 350px; display: flex; flex-direction: column; justify-content: center;">
 		                    <div class="product-img position-relative overflow-hidden">
 		                        <a href="#">
 		                        	<img class="img-fluid w-100" src="${pageContext.request.contextPath}/image/product/${dto.ysrc}" alt="Product Image">
-		                        	
 		                        </a>
 		                    </div>
 		                    <div style="margin-top: 7px; margin-left:1%; border: 1px solid lightgray; border-radius: 5px; width:98%;">
-		                    	<a href="popup.do" onclick="getCart(); return false;" class="btn btn-primary btn-light align-items-center" style="width:100%;">장바구니</a>
+		                    	<button onclick="sendProductInfo('${dto.yname}, ${dto.ysrc}, ${dto.ytitle}, ${dto.price}'); return false;" class="btn btn-primary btn-light align-items-center" style="width:100%;">장바구니</button>
 	                    	</div>
-		                    <div class="text-center py-4">
-		                        <a class="h6 text-decoration-none text-truncate" href="">[${dto.yname}] ${dto.rcontent}</a>
-		                        <%-- <c:set var="yName" value="${dto.yname}" scope="session" />
-		                        <c:set var="rContent" value="${dto.rcontent}" scope="session" />
-		                        <c:set var="price" value="${dto.price}" scope="session" /> --%>
-		                        <input id="src" type="hidden" value="${dto.ysrc}">
-		                        <input id="name" type="hidden" value="${dto.yname}">
-		                        <input id="content" type="hidden" value="${dto.rcontent}">
-		                        <input id="price" type="hidden" value="${dto.price}">
+		                    <div class="text-center py-4" style="display: flex; flex-direction: column; justify-content: center;">
+		                        <a class="h6 text-decoration-none text-truncate" href="">[${dto.yname}] ${dto.ytitle}</a>
+		                        <!-- 현재의 데이터 장바구니 클릭 시 데이터 보내기 위한 세션 -->
+		                        
 		                        <div class="d-flex align-items-center justify-content-center mt-2">
 		                            <h5>${dto.price}원</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
 		                        </div>
@@ -193,38 +190,35 @@
 		                    </div>
 		                </div>
 		            </div>
+		            <%-- <c:set var="yName" value="${dto.yname}" scope="session" />
+                    <c:set var="ySrc" value="${dto.ysrc}" scope="session" />
+                    <c:set var="ytitle" value="${dto.ytitle}" scope="session" />
+                    <c:set var="price" value="${dto.price}" scope="session" /> --%>
 	            </c:forEach>
-	            <%
-					int i = 1;
-					int current = (int) request.getAttribute("curPage");
-					out.print(current);
-				%> 
-				<%-- 
-				<!-- data 불러오기 -->
-				<div align="center">
-					<c:forEach items="${dtos}" var="dto">
-					${dto.ysrc } : ${dto.rcontent } : ${dto.price }<br>
-						<hr/>
-					</c:forEach>
-				</div> --%>
-				<%=current -1 %>
-				<!-- 블록과 페이지 가져오기 -->
-				<div style="display:flex; justify-content: center; font-size: 15px; gap: 0 10px;">
-					<a href="page.do?curPage=<%= current - 1 %>" class="prev" onclick="prev()"> << </a>
-					
-					<c:forEach begin="${blockStart}" end="${endPage}">
-						<%
-							out.print("<a href='page.do?curPage=" + i + "'>" + i + "</a>");
-							request.setAttribute("curPage", i);
-							i++;
-						%>
-					</c:forEach>
-					<a href="page.do?curPage=<%= current + 1 %>" class="next"> >> </a>
-				</div>
             </c:if>
         </div>
     </div>
     <!-- Products End -->
+    
+    <!-- Paging Start -->
+    <%
+		int i = 1;
+		int current = (int) request.getAttribute("curPage");
+	%> 
+	<!-- 블록과 페이지 가져오기 -->
+	<div style="display:flex; justify-content: center; font-size: 20px; gap: 0 10px;">
+		<a href="mainPage.do?curPage=<%= current - 1 %>" class="prev" onclick="prev()"> << </a>
+		
+		<c:forEach begin="${blockStart}" end="${endPage}">
+			<%
+				out.print("<a href='mainPage.do?curPage=" + i + "'>" + i + "</a>");
+				request.setAttribute("curPage", i);
+				i++;
+			%>
+		</c:forEach>
+		<a href="mainPage.do?curPage=<%= current + 1 %>" class="next"> >> </a>
+	</div>
+	<!-- Paging End -->
 
     <!-- Vendor Start -->
 <!--     <div class="container-fluid py-5">
@@ -263,7 +257,7 @@
 
 
     <!-- Footer Start -->
-   	<%-- <jsp:include page="footer.jsp"></jsp:include> --%>
+   	<jsp:include page="footer.html"></jsp:include>
     <!-- Footer End -->
 
 

@@ -40,7 +40,7 @@ public class MCmainView implements MCommand{
 		// 전체 페이지 수를 카운트하여 가져옴
 		int totalpageCount = mainDao.totalpageCount();
 		// 한 페이지에 몇개를 넣을 것인가?
-		int eachPageCount = 5;
+		int eachPageCount = 12;
 		
 		int limitFrom = (curPage - 1) * eachPageCount;
 		
