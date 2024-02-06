@@ -68,6 +68,17 @@ button {
     display: none;
 }
 
+.css-1qolcqm:hover .menu {
+    display: block;
+}
+
+.css-12olpw6 {
+    display: block;
+    height: 24px;
+    line-height: 24px;
+    cursor: pointer;
+}
+
 .css-1ho29iy {
     position: absolute;
     right: 0px;
@@ -428,6 +439,20 @@ button {
     background-color: rgb(247, 247, 247);
     z-index: -1;
     animation: 0.2s linear 0s 1 normal none running animation-1rae3xd;
+}
+
+.css-rpv8dm {
+    padding: 7px 0px 9px 14px;
+    background-color: rgb(247, 247, 247);
+}
+
+.css-ytod8z {
+    position: relative;
+    z-index: 321;
+    width: 517px;
+    border: 1px solid rgb(221, 221, 221);
+    background-color: rgb(255, 255, 255);
+    animation: 0.2s linear 0s 1 normal none running animation-tb0mmg;
 }
 
 

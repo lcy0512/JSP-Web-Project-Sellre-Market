@@ -7,6 +7,7 @@
 <title>회원가입</title>
 </head>
 <link rel="stylesheet" href="../css/signup.css"/>
+<script src="../js/signup.js"></script>
 <body>
 	<jsp:include page="header.jsp" />
 	<div class="css-pculus e1ovi4141">
@@ -94,7 +95,7 @@
 						<div class="css-jmalg e1uzxhvi6">
 							<div class="css-176lya2 e1uzxhvi3">
 								<input data-testid="input-box" id="email" name="email"
-									placeholder="예: marketkurly@kurly.com" type="text" required=""
+									placeholder="예: SellreMarket@sellre.com" type="text" required=""
 									class="css-u52dqk e1uzxhvi2" value="">
 							</div>
 						</div>
@@ -301,6 +302,6 @@
 		</div>
 	</div>
 	
-	<jsp:include page="footer.jsp" />
+	<jsp:include page="footer.html" />
 </body>
 </html>
