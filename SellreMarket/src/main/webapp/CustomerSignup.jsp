@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입</title>
+<title>회원가입 - 셀리마켓</title>
 </head>
 <link rel="stylesheet" href="css/signup.css"/>
 <script src="js/signup.js"></script>
