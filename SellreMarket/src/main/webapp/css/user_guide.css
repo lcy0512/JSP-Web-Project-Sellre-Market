@@ -41,9 +41,16 @@
 	align-items: center;
 	justify-content: center;
 	height: 200px;
-	border-bottom: 1px solid rgb(76, 76, 76);
 }
 
+.css-rb0i47 {
+	margin-right: auto;
+	margin-left: auto;
+	width: 960px;
+	border-bottom-width: 2px;
+	border-bottom-style: solid;
+	border-bottom-color: rgb(51, 51, 51);
+}
 
 /* title 끝 */
 

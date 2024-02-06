@@ -7,14 +7,14 @@
 <title>Insert title here</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script src="../js/category.js" ></script>
+<script src="js/category.js" ></script>
 <link rel="preload"
 	href="https://res.kurly.com/_next/static/css/d59287ec5b86dc49.css"
 	as="style" />
 <link rel="stylesheet"
 	href="https://res.kurly.com/_next/static/css/d59287ec5b86dc49.css"
 	data-n-g />
-<link rel="stylesheet" href="../css/header.css" />
+<link rel="stylesheet" href="css/header.css" />
 <body>
 	<div class="css-16h7nba e1p13h9k3">
 		<div class="css-pqw0uk e1p13h9k2">
@@ -48,19 +48,20 @@
 				<div class="css-1qolcqm eo7pjfk3">
 					<a class="css-oyffzd eo7pjfk2">고객센터<span class="css-1lrerrk eo4j3y50"></span></a>
 					<div class="menu css-1ho29iy ecncdj41">
-						<div class="css-12olpw6 ecncdj40">공지사항</div>
-						<div class="css-12olpw6 ecncdj40">자주하는 질문</div>
-						<div class="css-12olpw6 ecncdj40">1:1 문의</div>
-						<div class="css-12olpw6 ecncdj40">대량주문 문의</div>
+						<div class="css-12olpw6 ecncdj40"><a href="#">공지사항</a></div>
+						<div class="css-12olpw6 ecncdj40"><a href="#">1:1 문의</a></div>
+						<div class="css-12olpw6 ecncdj40"><a href="user_guide.jsp">이용안내</a></div>
 					</div>
 				</div>
 			</div>
 			<div class="css-r7wmjj e15sbxqa3">
 				<div class="css-boc80u ekdqe1a1">
-					<a href="header.jsp"> <img src="../image/Sellre.png"
+					<div class="css-boc80u ekdqe1a1">
+					<a href="header.jsp"> <img src="image/Sellre.png"
 						alt="셀리마켓 로고" class="css-17mnrrx e1s3pt0j0">
 						<button class="active css-mxd3pm ekdqe1a0">셀리마켓</button>
 					</a>
+				</div>
 				</div>
 				<div class="css-pqw0uk e1493ofl4">
 					<div class="css-w444a2 e1493ofl1">

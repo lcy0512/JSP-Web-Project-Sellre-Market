@@ -18,7 +18,7 @@
 	<link rel="stylesheet"
 		href="https://res.kurly.com/_next/static/css/d59287ec5b86dc49.css"
 		data-n-g />
-	<link rel="stylesheet" href="../css/login.css" />
+	<link rel="stylesheet" href="css/login.css" />
 	<jsp:include page="header.jsp"/>
 	<div class="css-1bb6q2p etkckst2">
 		<div class="css-a7gihu etkckst1">로그인</div>
