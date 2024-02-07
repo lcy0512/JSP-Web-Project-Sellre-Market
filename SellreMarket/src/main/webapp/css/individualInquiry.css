@@ -1,0 +1,252 @@
+@charset "UTF-8";
+
+.css-2b29tl {
+	position: relative;
+	min-width: 1050px;
+}
+
+.css-luwwab {
+	display: flex;
+	width: 1050px;
+	padding-top: 50px;
+	padding-right: 0px;
+	padding-bottom: 80px;
+	padding-left: 0px;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-left: auto;
+	flex-direction: row;
+	-webkit-box-pack: justify;
+	justify-content: space-between;
+}
+
+.css-833hqy {
+	width: 200px;
+}
+
+.css-1v4whg {
+	height: 75px;
+	padding-top: 5px;
+	padding-right: 0px;
+	padding-bottom: 35px;
+	padding-left: 1px;
+	font-weight: 500;
+	font-size: 28px;
+	line-height: 35px;
+	color: rgb(51, 51, 51);
+	letter-spacing: -1px;
+}
+
+.css-1x9bshx {
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: rgb(242, 242, 242);
+	border-right-color: rgb(242, 242, 242);
+	border-bottom-color: rgb(242, 242, 242);
+	border-left-color: rgb(242, 242, 242);
+}
+
+.css-g4g0eu {
+	cursor: pointer;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: rgb(242, 242, 242);
+	padding-top: 15px;
+	padding-right: 13px;
+	padding-bottom: 15px;
+	padding-left: 20px;
+	display: flex;
+	-webkit-box-pack: justify;
+	justify-content: space-between;
+	-webkit-box-align: center;
+	align-items: center;
+	line-height: 19px;
+	letter-spacing: -0.3px;
+	font-size: 14px;
+	color: rgb(102, 102, 102);
+}
+
+.css-g4g0eu:hover {
+	background-color: rgb(250, 250, 250);
+	color: rgb(186,190,0);
+	font-weight: 500;
+}
+
+.css-196gwz9 {
+	width: 100%;
+	height: 60px;
+	padding-top: 0px;
+	padding-right: 14px;
+	padding-bottom: 0px;
+	padding-left: 20px;
+	margin-top: 36px;
+	display: flex;
+	-webkit-box-pack: justify;
+	justify-content: space-between;
+	-webkit-box-align: center;
+	align-items: center;
+	background-color: rgb(250, 250, 250);
+	line-height: 20px;
+}
+
+.css-rmee6s {
+	display: flex;
+	flex-direction: column;
+	color: rgb(51, 51, 51);
+}
+
+.css-1sdidca {
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.css-rnnx2x {
+	font-size: 12px;
+}
+
+.css-171zbec {
+	width: 820px;
+}
+
+.css-j0lifa {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	padding-bottom: 27px;
+	-webkit-box-pack: justify;
+	justify-content: space-between;
+}
+
+.css-fhxb3m {
+	display: flex;
+	flex-direction: row;
+	-webkit-box-align: center;
+	align-items: center;
+}
+
+.css-1268zpe {
+	font-weight: 500;
+	font-size: 24px;
+	color: rgb(51, 51, 51);
+	letter-spacing: -0.5px;
+	line-height: 48px;
+}
+
+.css-e23nfx {
+	display: flex;
+	width: 100%;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-right: 0px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: rgb(51, 51, 51);
+	border-top-width: 2px;
+	border-top-style: solid;
+	border-top-color: rgb(51, 51, 51);
+	
+}
+
+.css-e24nfx {
+	display: flex;
+	width: 100%;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-right: 0px;
+}
+
+.css-1ym8aqm {
+	-webkit-box-flex: 1;
+	flex-grow: 1;
+	text-align: center;
+	line-height: 20px;
+	font-weight: 400;
+	color: rgb(51, 51, 51);
+}
+
+.css-1ym7aqm {
+	-webkit-box-flex: 1;
+	flex-grow: 1;
+	text-align: center;
+	line-height: 20px;
+	font-weight: 400;
+	color: rgb(51, 51, 51);
+}
+
+.css-16tcewl {
+	flex-basis: 100px;
+	text-align: center;
+	line-height: 20px;
+	font-weight: 400;
+	color: rgb(51, 51, 51);
+}
+
+.css-15tcewl {
+	flex-basis: 100px;
+	text-align: center;
+	line-height: 20px;
+	font-weight: 400;
+	color: rgb(51, 51, 51);
+}
+
+.css-l0r8ps {
+	margin-top: 10px;
+	font-size: 16px;
+	font-weight: 500;
+	color: rgb(51, 51, 51);
+	text-align: center;
+}
+
+.css-15jhycr {
+	position: relative;
+	min-height: 44px;
+	text-align: center;
+}
+
+.css-15jhycr>button {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+}
+
+.css-1ibxj4m {
+	display: block;
+	padding-top: 0px;
+	text-align: center;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	width: 120px;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+	border-bottom-left-radius: 3px;
+	color: rgb(0, 0, 0);
+	background-color: rgb(249,249,228);
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	margin-left: auto;
+	height: 44px;
+}
+
+.css-1ibxj4m span {
+	font-size: 13px;
+}
+
+.css-nytqmg {
+	color: rgb(0, 0, 0);
+	display: inline-block;
+	font-size: 16px;
+	font-weight: 500;
+}

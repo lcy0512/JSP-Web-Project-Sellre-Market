@@ -1,0 +1,120 @@
+@font-face {
+    font-family: 'SCoreDream';
+    font-weight: 200; 
+    font-style: normal; 
+    src: url(https://cdn.jsdelivr.net/gh/webfontworld/SCoreDream/SCoreDream1.woff2) format('woff2'),
+         url(https://cdn.jsdelivr.net/gh/webfontworld/SCoreDream/SCoreDream1.woff) format('woff');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SCoreDream';
+    font-weight: 300; 
+    font-style: normal; 
+    src: url(https://cdn.jsdelivr.net/gh/webfontworld/SCoreDream/SCoreDream3.woff2) format('woff2'),
+         url(https://cdn.jsdelivr.net/gh/webfontworld/SCoreDream/SCoreDream3.woff) format('woff');
+    font-display: swap;
+}
+
+* {
+	font-family: 'SCoreDream';
+	
+}
+
+.css-a0w530 {
+	padding-bottom: 20px;
+}
+
+.css-t0emrl {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	-webkit-justify-content: center;
+	justify-content: center;
+	-webkit-align-items: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	position: relative;
+	height: 400px;
+}
+
+.css-1pgr644 {
+	width: 1050px;
+	margin: 0 auto;
+	padding-top: 55px;
+	padding-bottom: 110px;
+}
+
+.css-hkulda {
+	margin-bottom: 40px;
+	font-weight: 500;
+	font-size: 34px;
+	line-height: 1.5;
+	text-align: center;
+}
+
+.css-qp0vo8 {
+	font-weight: 300;
+	font-size: 18px;
+	line-height: 1.6;
+	text-align: justify;
+}
+
+.css-1pg8zze {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-align-items: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	width: 1050px;
+	margin: 0 auto 40px;
+}
+
+
+.css-4xckrs {
+	position: relative;
+	min-width: 364px;
+	height: 200px;
+	background-color: #f4f4f4;
+	-webkit-align-items: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+}
+
+.css-mg06eq {
+	padding-left: 50px;
+}
+
+.css-1xe27bk {
+	display: block;
+	padding-bottom: 15px;
+	border-bottom: 1px solid #ddd;
+	font-weight: 500;
+	font-size: 20px;
+	color: #5f0080;
+}
+
+.css-1kbtcpk {
+	padding: 15px 0 20px;
+	font-weight: 300;
+	font-size: 16px;
+	line-height: 24px;
+}
+
+.css-1s0p9iw {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	font-weight: 500;
+	color: #5f0080;
+}
+
