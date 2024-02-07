@@ -66,4 +66,41 @@ public class AdminGetPackTypeDao {
 		return dtos;
 	}
 	
+	
+	/************************************************************************************************
+	 * Function : 포장종류 조회
+	 * @param 	: null
+	 * @return 	: ArrayList
+	************************************************************************************************/		
+	
+	public ArrayList<AdminGetPackTypeDto> selectPackKind() {
+		ArrayList<AdminGetPackTypeDto> dtos = new ArrayList<AdminGetPackTypeDto>();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			conn = dataSource.getConnection();
+			String query = "SELECT packkind FROM packing group by packkind";
+		
+			ps = conn.prepareStatement(query);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				AdminGetPackTypeDto pack = new AdminGetPackTypeDto();
+				pack.setPackkind(rs.getString(1));
+				dtos.add(pack);
+			}
+			
+			conn.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dtos;
+	}
+	
+	
+	
 }
