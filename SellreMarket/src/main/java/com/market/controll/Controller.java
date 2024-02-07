@@ -75,8 +75,19 @@ public class Controller extends HttpServlet {
 		switch(com) {
 			// 로그인 화면
 			case "/login.do" :
-				viewPage = "test.jsp";
+				viewPage = "Login.jsp";
 				break;
+				
+			case "/loginCheck.do" : 
+				id = request.getParameter("setId");
+				String password = request.getParameter("password");
+				
+				System.out.println(id);
+				System.out.println(password);
+				
+				viewPage = "Login.jsp";
+				break;
+				
 				
 			case "/inquiry.do" :
 				command = new MLoadInquiryList();
