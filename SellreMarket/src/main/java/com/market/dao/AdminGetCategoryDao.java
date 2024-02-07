@@ -77,7 +77,6 @@ public class AdminGetCategoryDao {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		System.out.println("중분류 가져오기");
 		try {
 			
 			conn = dataSource.getConnection();
