@@ -20,6 +20,8 @@ import com.market.command.MAdminProductCount;
 import com.market.command.MCgetCart;
 import com.market.command.MCmainView;
 import com.market.command.MCommand;
+import com.market.command.MInquiryDetail;
+import com.market.command.MInsertInquiry;
 import com.market.command.MLoadInquiryList;
 import com.market.dto.AdminProductDto;
 import com.market.dto.PageInfo;
@@ -79,40 +81,120 @@ public class Controller extends HttpServlet {
 				break;
 				
 			case "/inquiry.do" :
+				System.out.println("마지막");
 				command = new MLoadInquiryList();
 				command.execute(request, response);
 				viewPage = "individualInquiry.jsp";
 				break;
 				
-			//관리자 제품 조회 
+			case "/inquiryInsert.do" :
+				System.out.println("inquiryInsert");
+				command = new MInsertInquiry();
+				command.execute(request, response);
+				viewPage = "inquiry.do";
+				break;
+				
+			case "/inquirydetail.do" :
+				System.out.println("inquirydetail.do");
+				command = new MInquiryDetail();
+				command.execute(request, response);
+				// 문의 상세페이지로 이동, 
+				viewPage = "InquiryDetail.jsp";
+				break;
+			
+			case "/signup.do" :
+				// 받아짐!!
+				String id1 = request.getParameter("memberId");
+				System.out.println(id1);
+				break;
+				
+				//관리자 제품 조회 + 페이징처리	
 			case "/adminProduct.do":
 				command = new MAdminProductCount();
 				command.execute(request, response);
-				ArrayList<AdminProductDto> list = (ArrayList) request.getAttribute("list");
-				out.print(new Gson().toJson(list)); 
-				out.flush(); //실행 => ajax로 불러오므로 viewPage값 없이 바로 return;
-				return;
 				
-				//관리자 제품 조회 - 페이징처리	
-			case "/adminProductCnt.do":
-				command = new MAdminProductCount();
-				command.execute(request, response);
-				
-				PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
-				ArrayList<AdminProductDto> pageList = (ArrayList)request.getAttribute("list");
-				int listCount = (int) request.getAttribute("listCount");
+				int total = (int) request.getAttribute("total");
+				int lastPage = (int) request.getAttribute("lastPage");
+				int index_no = (int) request.getAttribute("index_no");
+				ArrayList<AdminProductDto> productList = (ArrayList) request.getAttribute("list");
 				
 				//ajax로 데이터를 한번에 보내기 위해 키-값 형태의 Map 이용.
 				Map<String, Object> data = new HashMap<>();
-				data.put("pageInfo", pageInfo);
-				data.put("pageList", pageList);
-				data.put("listCount", listCount);
-				
-				out.print(new Gson().toJson(data)); 
-				out.flush(); //실행 => ajax로 불러오므로 viewPage값 없이 바로 return;
+				data.put("total", total);
+				data.put("lastPage", lastPage);
+				data.put("index_no", index_no);
+				data.put("productList", productList);
 				
 				
-				return;	
+				out.print(new Gson().toJson(data));
+				out.flush();
+				return;
+				
+				
+			//관리자 제품 등록페이지
+			case "/adminProductRegister.do" :
+				viewPage = "adminProductRegister.jsp";
+				break;
+			
+				
+			//관리자 제품등록 - 카테고리 조회	
+			case "/selectCategory.do" :
+				command = new MAdminGetCategory();
+				command.execute(request, response);
+				
+				ArrayList<AdminGetCategoryDto> typeList = (ArrayList) request.getAttribute("typeList");
+				request.setAttribute("typeList", typeList);
+				out.print(new Gson().toJson(typeList));
+				out.flush();
+				return;
+		
+			//관리자 제품등록 - 카테고리 중분류 조회		
+			case "/selectSubCategory.do" :
+				command = new MAdminGetSubCategory();
+				command.execute(request, response);
+				
+				ArrayList<AdminGetCategoryDto> subList = (ArrayList) request.getAttribute("subList");
+				request.setAttribute("subList", subList);
+				
+				out.print(new Gson().toJson(subList));
+				out.flush();
+				return;
+			
+			//관리자 제품등록 - 포장타입 조회	
+			case "/selectPackType.do" :
+				command = new MAdminGetPackType();
+				command.execute(request, response);
+				
+				ArrayList<AdminGetPackTypeDto> packType = (ArrayList) request.getAttribute("packType");
+				request.setAttribute("packType", packType);
+				
+				out.print(new Gson().toJson(packType));
+				out.flush();
+				return;
+			
+			//관리자 제품등록 - 포장종류 조회	
+			case "/selectPackKind.do" :
+				command = new MAdminGetPackKind();
+				command.execute(request, response);
+				
+				ArrayList<AdminGetPackTypeDto> packKind = (ArrayList) request.getAttribute("packKind");
+				request.setAttribute("packKind", packKind);
+				
+				out.print(new Gson().toJson(packKind));
+				out.flush();
+				return;
+				
+				
+			//관리자 제품등록 - 제품등록등록!!
+			case "/insertProduct.do" :
+				command = new MAdminProductInsert();
+				command.execute(request, response);
+				
+				int result = (int) request.getAttribute("result");
+				request.setAttribute("result", result);
+				out.print(new Gson().toJson(result));
+				out.flush();
+				return;
 				
 				
 			default :

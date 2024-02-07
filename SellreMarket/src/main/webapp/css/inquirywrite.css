@@ -1,0 +1,94 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: 'SCoreDream';
+	font-weight: 200;
+	font-style: normal;
+	src:
+		url(https://cdn.jsdelivr.net/gh/webfontworld/SCoreDream/SCoreDream1.woff2)
+		format('woff2'),
+		url(https://cdn.jsdelivr.net/gh/webfontworld/SCoreDream/SCoreDream1.woff)
+		format('woff');
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'SCoreDream';
+	font-weight: 300;
+	font-style: normal;
+	src:
+		url(https://cdn.jsdelivr.net/gh/webfontworld/SCoreDream/SCoreDream3.woff2)
+		format('woff2'),
+		url(https://cdn.jsdelivr.net/gh/webfontworld/SCoreDream/SCoreDream3.woff)
+		format('woff');
+	font-display: swap;
+}
+
+* {
+	font-family: 'SCoreDream';
+}
+
+.css-inputrow {
+	display: flex;
+	padding-top: 12px;
+	padding-right: 0px;
+	-webkit-box-align: start;
+	align-items: start;
+	margin-bottom: 20px;
+	font-size: 16px;
+}
+
+.css-titlename {
+	width: 140px;
+	font-size: 15px;
+	line-height: 44px;
+	padding-left: 25px;
+}
+
+.css-width {
+	width: 640px;
+}
+
+.css-textarea {
+	padding-top: 12px;
+	padding-left: 5px;
+	width: 640px;
+	height: 510px;
+	resize: none;
+	border-color: lightslategrey;
+}
+
+.css-line12 {
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	width: 820px;
+	margin-left: 0px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+.css-submitbtn {
+	display: block;
+	padding-top: 0px;
+	text-align: center;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	width: 120px;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+	border-bottom-left-radius: 3px;
+	color: rgb(0, 0, 0);
+	background-color: rgb(249,249,228);
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	margin-left: auto;
+	height: 44px;
+}
+
