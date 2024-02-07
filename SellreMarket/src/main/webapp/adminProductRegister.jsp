@@ -72,20 +72,22 @@
     
     
     .registerBtn {
-      padding: 20px 20px;
-      background-color: #4CAF50;
-      color: #fff;
+      padding: 10px 20px;
+      background-color: #E5E5D1;
+      color: #6F6F67;
       border: none;
       border-radius: 3px;
       font-size: 16px;
       cursor: pointer;
-      width: 1438px;
+      width: 100%;
       margin-top: 30px;
-      margin-bottom: 100px;
+      margin-bottom: 200px;
+      margin-left : 10px;
     }
     
     .registerBtn:hover {
-      background-color: #45a049;
+      background-color: #DADAC8;
+      color : black;
     }
     
     
@@ -148,6 +150,8 @@
 	
 	function init() {
 		selectCategory();
+		selectPackType();
+		selectPackKind();
 	}
 	
 	
@@ -266,16 +270,51 @@
 		
 		for (var i = 0; i < data.length; i++) {
 			if(i == 0){
-				option +="<option value='option" + (i + 1) + "' selected='selected'>"+data[i].type+"</option>";
+				option +="<option value='option" + (i + 1) + "' selected='selected'>"+data[i].packtype+"</option>";
 			} else {
-				option +="<option value='option" + (i + 1) + "'>"+data[i].type+"</option>";
+				option +="<option value='option" + (i + 1) + "'>"+data[i].packtype+"</option>";
 			}
 		}
 		
 		$("#packType").html(option);
 		
 	}
-	
+
+	/************************************************************************************************
+	 * Function : 포장종류 조회 - ajax, 가져온 데이터 해당 id에 넣기
+	 * @param 	: null
+	 * @return 	: null
+	************************************************************************************************/
+	function selectPackKind() {
+		 
+		$.ajax({
+			type : "POST",
+			url : "selectPackKind.do",
+			success : function(response){
+				createPackKind(response)
+			},
+			error:function(request, status, error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	} 
+ 
+ 
+	function createPackKind(data) {
+		
+		let option = "";
+		
+		for (var i = 0; i < data.length; i++) {										
+			if(i == 0){
+				option +="<option value='option" + (i + 1) + "' selected='selected'>"+data[i].packkind+"</option>";
+			} else {
+				option +="<option value='option" + (i + 1) + "'>"+data[i].packkind+"</option>";
+			}
+		}
+		
+		$("#packKind").html(option);
+		
+	}
 	
 	
 	/************************************************************************************************
@@ -326,7 +365,177 @@
 			document.getElementById('preview').src = "";
 		}
 	}
+	
+	
+	
+	/************************************************************************************************
+	 * Function : 숫자입력 시 3자리마다 쉼표 
+	 * @param 	: 입력한 price 값
+	 * @return 	: null
+	************************************************************************************************/	
+	function formatNumber(value) {
+		
+		let number = parseFloat(value.replace(/,/g, ''));	// 숫자만 추출
+		
+		let formattedNumber = number.toLocaleString();		// 3자리마다 쉼표 추가
+		
+		if (!isNaN(number)) {								// 입력값 업데이트
+			document.registerForm.price.value = formattedNumber
+		}
+	}
+	
+	
+	
+	/************************************************************************************************
+	 * Function : 정규식 체크 
+	 * @param 	: null
+	 * @return 	: null
+	************************************************************************************************/
+	function infoCheck(){
+		
+		let form = document.productForm;
+		let num = 0;
+		
+		let file = form.image.value;
+		let bname = form.bname.value;
+		let pname = form.pname.value;
+		let pEngname = form.pEngname.value;
+		let pstock = form.pstock.value;
+		let origin = form.origin.value;
+		let expirationdate = form.expirationdate.value;
+		let description = form.description.value;
+		let price = form.price.value;
+		
+		if(file == ""){
+			alert("이미지를 등록하세요.");
+			num++;
+			return
+		}
+		
+		if(bname == ""){
+			alert("제조사명을 등록하세요.");
+			form.bname.select()
+			num++;
+			return
+		}
+		
+		if(pname == ""){
+			alert("제품명을 등록하세요.");
+			form.pname.select()
+			num++;
+			return
+		}
+		
+		if(pEngname == ""){
+			alert("영문명을 등록하세요.");
+			form.pEngname.select()
+			num++;
+			return
+		}
+		
+		if(pstock == ""){
+			alert("수량을 등록하세요.");
+			form.pstock.select()
+			num++;
+			return
+		}
+		
+		if(origin == ""){
+			alert("원산지를 등록하세요.");
+			form.origin.select()
+			num++;
+			return
+		}
+		
+		if(expirationdate == ""){
+			alert("소비기한을 등록하세요.");
+			num++;
+			return
+		}
+		
+		if(description == ""){
+			alert("설명을 등록하세요.");
+			form.description.select()
+			num++;
+			return
+		}	
+		
+		if(price == ""){
+			alert("가격을 등록하세요.");
+			form.price.select()
+			num++;
+			return
+		}	
+	
+		if(num == 0) {
+			insertProduct();
+		}
+	}
 
+	
+	/************************************************************************************************
+	 * Function : 작성한 정보 inset하기
+	 * @param 	: null
+	 * @return 	: null
+	************************************************************************************************/
+	
+	function insertProduct() {
+					 
+		let image = $("#image").val();
+		let bname = $("#bname").val();
+		let pname = $("#pname").val();
+		let pEngname = $("#pEngname").val();
+		let allery = $("#allery").val();
+		let nutrition = $("#nutrition").val();
+		let pstock = $("#pstock").val();
+		let origin = $("#origin").val();
+		let expirationdate = $("#expirationdate").val();
+		let description = $("#description").val();
+		let price = $("#price").val();
+		let type = $("#type").val();
+		let subType = $("#subType").val();
+		let packType = $("#packType").val();
+		let packKind = $("#packKind").val();
+		let utype = $("#utype").val();
+		let ugram = $("#ugram").val();
+		 
+		$.ajax({
+			
+			type : "POST",
+			url : "insertProduct.do",
+			data : {
+					image: image,
+					bname : bname,
+					pname : pname,
+					pEngname : pEngname,
+					allery : allery,
+					nutrition : nutrition, 
+					pstock : pstock,
+					origin : origin,
+					expirationdate : expirationdate,
+					description : description,
+					price : price,
+					type : type,
+					subType : subType,
+					packType : packType,
+					packKind : packKind,
+					utype : utype,
+					ugram : ugram
+					
+			},
+			success : function(response){
+				alert(pname+'['+pstock+']개 등록되었습니다.');
+				window.location.href = "admin_product.jsp";	//성공 시 admin_product.jsp로 이동
+				
+			},
+			 error:function(request, status, error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+			
+		});
+			
+	}
+	
 </script>
 </head>
 <body>
@@ -336,31 +545,29 @@
 			<div class="title">제품 등록</div>
 				
 		
-			<form>
+			<form name="productForm">
 				
 				<!-- product_image -->				
 					<div class="form-group">
-						<label for="image">이미지</label>
+						<label for="image">이미지 *</label>
 						 <img id="preview" src="" style="max-width: 100%; max-height: 200px;">
 						<input type="file" id="image" name="image" onchange="readURL(this);">
 					</div>
 					
-					
 				<!-- product_image -->
-				
 				<!-- product -->
 					<div class="form-group">
-						<label for="bname">제조사명</label>
+						<label for="bname">제조사명 *</label>
 						<input type="text" id="bname" name="bname">
 					</div>
 					
 					<div class="form-group">
-						<label for="pname">제품명</label>
+						<label for="pname">제품명 *</label>
 						<input type="text" id="pname" name="pname">
 					</div>
 					
 					<div class="form-group">
-						<label for="pEngname">영문명</label>
+						<label for="pEngname">영문명 *</label>
 						<input type="text" id="pEngname" name="pEngname">
 					</div>
 					
@@ -375,53 +582,54 @@
 					</div>
 					
 					<div class="form-group">
-						<label for="pstock">수량</label>
+						<label for="pstock">수량 *</label>
 						<input type="text" id="pstock" name="pstock">
 					</div>
 					
 					
 					<div class="form-group">
-						<label for="origin">원산지</label>
+						<label for="origin">원산지 *</label>
 						<input type="text" id="origin" name="origin">
 					</div>
 					
 					<div class="form-group">
-						<label for="expirationdate">소비기한</label>
+						<label for="expirationdate">소비기한 *</label>
 						<input type="date" id="expirationdate" name="expirationdate">
 					</div>
 					
 					
 					<div class="form-group"> 
-						<label for="description">제품 설명</label>
+						<label for="description">설명 *</label>
 						<textarea id="description" name="description"></textarea>
 					</div>
 				<!-- product -->
 				
+				
 				<!-- price -->				
 					<div class="form-group">
-						<label for="price">가격</label>
-						<input type="text" id="price" name="price">
+						<label for="price">가격 *</label>
+						<input type="text" id="price" name="price" oninput="formatNumber(this.value)">
 					</div>
 				<!-- price -->	
 				
 				
 				<!-- category -->	
 					<div class="form-group2">
-						<label for="category">카테고리</label>
-						<select id="type" name="selectBox"></select>
-						<select id="subType" name="selectBox"></select>
+						<label for="category">카테고리 *</label>
+						<select id="type" name="type"></select>
+						<select id="subType" name="subType"></select>
 					</div>
 				<!-- category -->	
 				
 				<!-- packing -->	
 					<div class="form-group1">
 						<label for="packtype">포장타입</label>
-						<select id="packType" name="selectBox"></select>
+						<select id="packType" name="packType"></select>
 					</div>
 	
 					<div class="form-group1">
 						<label for="packkind">포장종류</label>
-						<select id="packKind" name="selectBox"></select>
+						<select id="packKind" name="packKind"></select>
 					</div>
 				<!-- packing -->
 				
@@ -433,12 +641,11 @@
 					
 					<div class="form-group">
 						<label for="ugram">중량</label>
-						<input type="text" id="utype" name="ugram">
+						<input type="text" id="ugram" name="ugram">
 					</div>
 				<!-- saleunit -->
 
-				      
-				<input type="submit" class="registerBtn" value="등록">
+				<input type="submit" class="registerBtn" onclick="insertProduct()" value="등록">
 			</form>
 </div>
 </body>
