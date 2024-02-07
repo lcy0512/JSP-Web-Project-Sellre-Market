@@ -12,7 +12,7 @@ import com.market.dto.MainViewDto;
 public class Paging implements MCommand {
 
 	@Override
-	public void execute(HttpServletRequest reqeust, HttpServletResponse response) {
+	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		
 		MainViewDao dao = new MainViewDao();
 		
@@ -21,7 +21,7 @@ public class Paging implements MCommand {
 		
 		// 처음에 받아오는 페이지가 값이 없는 경우는 1로 설정하기 위한 트라이
 		try {
-			curPage = Integer.parseInt(reqeust.getParameter("curPage"));
+			curPage = Integer.parseInt(request.getParameter("curPage"));
 		}
 		catch (Exception e) {
 			curPage = 1;
@@ -44,10 +44,10 @@ public class Paging implements MCommand {
 		// 마지막 페이지 정하기
 		int endPage = (totalpageCount / eachPageCount) == 0 ? totalpageCount / eachPageCount : (totalpageCount / eachPageCount) + 1 ;
 		
-		reqeust.setAttribute("curPage", curPage);
-		reqeust.setAttribute("endPage", endPage);
-		reqeust.setAttribute("dtos", dtos);
-		reqeust.setAttribute("blockStart", blockStart);
+		request.setAttribute("curPage", curPage);
+		request.setAttribute("endPage", endPage);
+		request.setAttribute("dtos", dtos);
+		request.setAttribute("blockStart", blockStart);
 		
 	} 
 }

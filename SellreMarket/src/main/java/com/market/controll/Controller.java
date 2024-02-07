@@ -111,9 +111,57 @@ public class Controller extends HttpServlet {
 				out.print(new Gson().toJson(data)); 
 				out.flush(); //실행 => ajax로 불러오므로 viewPage값 없이 바로 return;
 				
-				
 				return;	
 				
+			case "/mainPage.do" :
+				// 페이징 처리를 위한
+				int curPage = 0;
+				
+				try {
+					curPage = Integer.parseInt(request.getParameter("curPage"));
+				}
+				catch (Exception e) {
+					curPage = 1;
+				}
+				
+				request.setAttribute("curPage", curPage);
+				// 페이징 처리를 위한
+				
+				command = new Paging();
+				command.execute(request, response);
+				command = new MCmainView();
+				command.execute(request, response);
+				
+				viewPage = "mainViewPage.jsp";
+				
+				break;
+				
+			case "/popup.do" :
+				
+				String yName = (String) session.getAttribute("yName");
+				String ytitle = (String) session.getAttribute("ytitle");
+				String ySrc = (String) session.getAttribute("ySrc");
+				String price = (String) session.getAttribute("price");
+				
+				session.setAttribute("yName", yName);
+				session.setAttribute("ytitle", ytitle);
+				session.setAttribute("ySrc", ySrc);
+				session.setAttribute("price", price);
+				System.out.println(yName + " controller");
+				System.out.println(ytitle);
+				System.out.println(ySrc);
+				System.out.println(price);
+				
+//				command = new ClickData();
+//				command.execute(request, response);
+//				
+//				// "javax.servlet.http.HttpSession.getAttribute(String)" is null
+//				int recipeId = (int) session.getAttribute("recipeId");
+//				session.setAttribute("recipeId", recipeId);
+				
+				viewPage = "popup.jsp";
+				
+				break;
 				
 			default :
 				break;

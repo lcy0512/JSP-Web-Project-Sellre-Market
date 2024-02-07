@@ -9,8 +9,8 @@ import com.market.dao.MainViewDao;
 public class MCgetCart implements MCommand {
 
 	@Override
-	public void execute(HttpServletRequest reqeust, HttpServletResponse response) {
-		HttpSession session = reqeust.getSession();
+	public void execute(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
 		MainViewDao dao = new MainViewDao();
 //		
 //		String name = (String) session.getAttribute("yName");
@@ -20,7 +20,7 @@ public class MCgetCart implements MCommand {
 		int recipeId = (int) session.getAttribute("recipeId");
 		
 		// AJAX에서 전달한 key 데이터 받기
-		int selectedNum = Integer.parseInt(reqeust.getParameter("selectedNumber"));
+		int selectedNum = Integer.parseInt(request.getParameter("selectedNumber"));
 		
 		dao.insertCart(selectedNum, recipeId);
 		System.out.println("inside mcgetCart.java  = " + selectedNum + ", " + recipeId);
