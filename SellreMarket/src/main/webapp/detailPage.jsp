@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -33,22 +34,26 @@
 				<div class="css-5v50l3 e17iylht4"></div>
 				<section class="css-1ua1wyk e17iylht3">
 					<div class="css-1qy9c46 ezpe9l12">
-						<h1 class="css-79gmk3 ezpe9l11">${name}</h1>
+						<h1 class="css-79gmk3 ezpe9l11">${pname}</h1>
 					</div>
 					<h2 class="css-abwjr2 e1q8tigr4">
-						<span class="css-5nirzt e1q8tigr3">16<!-- -->%</span>
-						<span class="css-9pf1ze e1q8tigr2">49,900</span>
+						<span class="css-5nirzt e1q8tigr3">${salerate}<!-- -->%</span>
+						<span class="css-9pf1ze e1q8tigr2">
+						<fmt:formatNumber value="${discountedPrice}" pattern="#,###" />
+						</span>
 						<span class="css-1x9cx9j e1q8tigr1">원</span>
 					</h2>
 					<span class="css-1e1rd4p e1q8tigr0">
-						<span>59,900<!-- -->원</span>
+						<span>
+							<fmt:formatNumber value="${price}" pattern="#,###" />
+						<!-- -->원
+						</span>
 						</span>
 						<ul class="css-iqoq9n e6qx2kx2">
 							<li class="css-e6zlnr epzddad2">
 								<dt class="css-lytdfk epzddad1">배송</dt>
 								<dd class="css-1k8t52o epzddad0">
-									<p class="css-c02hqi e6qx2kx1">배송이름</p>
-									<p class="css-uy94b2 e6qx2kx0">배송에 대한 내용
+									<p class="css-c02hqi e6qx2kx1">${dname}</p>
 									</p>
 								</dd>
 							</li>
