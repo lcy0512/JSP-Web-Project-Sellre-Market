@@ -1,9 +1,32 @@
 @charset "UTF-8";
 
-html, button, input, select, textarea {
-    font-family: "Noto Sans", "malgun gothic", AppleGothic, dotum, sans-serif;
+@font-face {
+	font-family: 'SCoreDream';
+	font-weight: 200;
+	font-style: normal;
+	src:
+		url(https://cdn.jsdelivr.net/gh/webfontworld/SCoreDream/SCoreDream1.woff2)
+		format('woff2'),
+		url(https://cdn.jsdelivr.net/gh/webfontworld/SCoreDream/SCoreDream1.woff)
+		format('woff');
+	font-display: swap;
 }
 
+@font-face {
+	font-family: 'SCoreDream';
+	font-weight: 300;
+	font-style: normal;
+	src:
+		url(https://cdn.jsdelivr.net/gh/webfontworld/SCoreDream/SCoreDream3.woff2)
+		format('woff2'),
+		url(https://cdn.jsdelivr.net/gh/webfontworld/SCoreDream/SCoreDream3.woff)
+		format('woff');
+	font-display: swap;
+}
+
+* {
+	font-family: 'SCoreDream';
+}
 button {
 	border-radius: 0;
     overflow: visible;

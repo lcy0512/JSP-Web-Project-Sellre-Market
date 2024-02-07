@@ -2,6 +2,7 @@ package com.market.dto;
 
 public class InquiryDto {
 	
+	String inquiryid;
 	String intitle;
 	String incontent;
 	String inimage;
@@ -12,8 +13,9 @@ public class InquiryDto {
 	String questid;
 	String userid;
 	
+	// detailInquiry
 	public InquiryDto(String intitle, String incontent, String inimage, String answer, String insertdate,
-			String answerdate, String status, String questid, String userid) {
+			String answerdate, String status, String questid) {
 		super();
 		this.intitle = intitle;
 		this.incontent = incontent;
@@ -23,14 +25,16 @@ public class InquiryDto {
 		this.answerdate = answerdate;
 		this.status = status;
 		this.questid = questid;
-		this.userid = userid;
 	}
-
-	public InquiryDto(String intitle, String insertdate, String status) {
+	
+	// list
+	public InquiryDto(String inquiryid, String intitle, String insertdate, String status, String questid) {
 		super();
+		this.inquiryid = inquiryid;
 		this.intitle = intitle;
 		this.insertdate = insertdate;
 		this.status = status;
+		this.questid = questid;
 	}
 
 	public String getIntitle() {
@@ -104,5 +108,14 @@ public class InquiryDto {
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
+
+	public String getInquiryid() {
+		return inquiryid;
+	}
+
+	public void setInquiryid(String inquiryid) {
+		this.inquiryid = inquiryid;
+	}
+	
 	
 }

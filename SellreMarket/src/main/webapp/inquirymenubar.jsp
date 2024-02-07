@@ -30,7 +30,7 @@
 				</g></g></g></g></g></svg></a>
 			</li>
 			<li id="3">
-				<a class="active css-g4g0eu ecbxmj0">1:1 문의
+				<a class="active css-g4g0eu ecbxmj0" href="inquiry.do">1:1 문의
 				<svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24">
 				<defs><path id="gfk9q0rhta" d="M1.657 1.657L9.657 1.657 9.657 9.657"></path></defs>
 				<g fill="none" fill-rule="evenodd"><g><g><g>

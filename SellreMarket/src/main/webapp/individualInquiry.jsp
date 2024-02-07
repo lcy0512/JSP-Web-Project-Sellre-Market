@@ -19,6 +19,7 @@
 					</div>
 				</div>
 				<div class="css-e23nfx e16adls21">
+					<div width="100" class="css-16tcewl e16adls20">유형</div>
 					<div class="css-1ym8aqm e16adls20">제목</div>
 					<div width="100" class="css-16tcewl e16adls20">작성일</div>
 					<div width="100" class="css-16tcewl e16adls20">답변상태</div>
@@ -30,17 +31,22 @@
 	        			</c:when>
 	        			<c:otherwise>
 	            			<c:forEach items="${InquiryList}" var="inquiry">
-	            				<div class="css-e24nfx">
-	            					<div class="css-1ym7aqm"><a href="">${inquiry.intitle}</a></div>
+	            			 <form action="inquirydetail.do" method="post">
+	            			<input type="hidden" name="inquiryid" value="${inquiry.inquiryid}">
+	            				<button type="submit" class="css-e24nfx">
+	            					<div width="100" class="css-15tcewl">${inquiry.questid}</div>
+	            					<div class="css-1ym7aqm">${inquiry.intitle}</div>
 	               					<div width="100" class="css-15tcewl">${inquiry.insertdate}</div>
 	                				<div width="100" class="css-15tcewl">${inquiry.status}</div>
-	                			</div>
+	                			</button>
+	                			</form>
 	            			</c:forEach>
 	        			</c:otherwise>
 	    			</c:choose>
 				
 				<div class="css-15jhycr e3tf63e0"></div>
-					<button class="css-1ibxj4m e4nu7ef3" type="button" width="120" radius="3">
+					<button class="css-1ibxj4m e4nu7ef3" type="button" width="120" radius="3"
+					onclick="window.location.href='inquirywrite.jsp'">
 						문의하기
 					</button>
 			</div>
