@@ -36,36 +36,36 @@ public class MainViewDao {
 	}
 	
 	// Create
-//	public void insertCart(int qty, int productId) {
-//		Connection con = null;
-//		PreparedStatement ps = null;
-//		
-//		try {
-//			con = dataSource.getConnection();
-//			
-//			String query = "insert into cart (qty, userid, productid) values (?, admin, ?)";
-//			
-//			ps = con.prepareStatement(query);
-//			
-//			ps.setInt(1, qty);
-//			ps.setInt(2, productId);
-//			
-//			ps.executeUpdate();
-//				
-//		}
-//		catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		finally {
-//			try {
-//				if (ps != null) ps.close();
-//				if (con != null) con.close();
-//			}
-//			catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//		}
-//	}
+	public void insertCart(int qty, int productId) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		try {
+			con = dataSource.getConnection();
+			
+			String query = "insert into cart (qty, userid, productid) values (?, admin, ?)";
+			
+			ps = con.prepareStatement(query);
+			
+			ps.setInt(1, qty);
+			ps.setInt(2, productId);
+			
+			ps.executeUpdate();
+				
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if (ps != null) ps.close();
+				if (con != null) con.close();
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	
 	
 	// 제품 정보 불러오기 for 메인 화면 출력
@@ -79,7 +79,7 @@ public class MainViewDao {
 		try {
 			con = dataSource.getConnection();
 			
-			String query = "select y.yname, y.ysrc, y.ytitle, format(i.price, 0) price, likecount "
+			String query = "select y.yname, y.ysrc, y.ytitle, format(i.price, 0) price, likecount, ry.recipeid, p.productid "
 					+ "					from youtuber y "
 					+ "					join recipeofYoutuber ry on y.youtubeid = ry.youtubeid "
 					+ "					left join recipelike rl on ry.recipeid = rl.recipeid "
@@ -100,8 +100,10 @@ public class MainViewDao {
 				String ytitle = rs.getString("ytitle");
 				String price = rs.getString("price");
 				int like = rs.getInt("likecount");
+				int recipeid = rs.getInt("recipeid");
+				int productid = rs.getInt("productid");
 				
-				MainViewDto dto = new MainViewDto(yname, ysrc, ytitle, price, like);
+				MainViewDto dto = new MainViewDto(yname, ysrc, ytitle, price, like, recipeid, productid);
 				
 				dtos.add(dto);
 			}

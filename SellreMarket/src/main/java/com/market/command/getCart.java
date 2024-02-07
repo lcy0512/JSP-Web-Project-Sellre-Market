@@ -6,7 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import com.market.dao.MainViewDao;
 
-public class ClickData implements MCommand {
+public class getCart implements MCommand {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
@@ -14,6 +14,7 @@ public class ClickData implements MCommand {
 		HttpSession session = request.getSession();
 		
 		MainViewDao dao = new MainViewDao();
+		
 		String rContent = (String) session.getAttribute("rContent");
 		int recipeId = dao.clickCart(rContent);
 		

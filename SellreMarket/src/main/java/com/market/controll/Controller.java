@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
-import com.market.command.ClickData;
+import com.market.command.getCart;
 import com.market.command.MAdminProductCount;
 import com.market.command.MCgetCart;
 import com.market.command.MCmainView;
@@ -138,19 +138,20 @@ public class Controller extends HttpServlet {
 				
 			case "/popup.do" :
 				
-				String yName = (String) session.getAttribute("yName");
-				String ytitle = (String) session.getAttribute("ytitle");
-				String ySrc = (String) session.getAttribute("ySrc");
-				String price = (String) session.getAttribute("price");
+				String yName = request.getParameter("yName");
+				String ySrc = request.getParameter("ySrc");
+				String price =  request.getParameter("price");
+				String yTitle = request.getParameter("yTitle");
+				
+				int recipeid = Integer.parseInt(request.getParameter("recipeid"));
+				int productid = Integer.parseInt(request.getParameter("productid"));
 				
 				session.setAttribute("yName", yName);
-				session.setAttribute("ytitle", ytitle);
 				session.setAttribute("ySrc", ySrc);
 				session.setAttribute("price", price);
-				System.out.println(yName + " controller");
-				System.out.println(ytitle);
-				System.out.println(ySrc);
-				System.out.println(price);
+				session.setAttribute("yTitle", yTitle);
+				session.setAttribute("recipeid", recipeid);
+				session.setAttribute("productid", productid);
 				
 //				command = new ClickData();
 //				command.execute(request, response);
@@ -162,6 +163,34 @@ public class Controller extends HttpServlet {
 				viewPage = "popup.jsp";
 				
 				break;
+				
+				
+				// 카트 수정 해야함
+			case "/getCart.do" :
+				int ri = Integer.parseInt(request.getParameter("recipeid"));
+				int pi = Integer.parseInt(request.getParameter("productid"));
+				
+				System.out.println(ri);
+				System.out.println(pi);
+				
+				viewPage = "mainViewPage.jsp";
+//				받아 올 것 productid, recipeid , qty
+//				int productid = Integer.parseInt(request.getParameter("productid"));
+//				int recipeid = Integer.parseInt(request.getParameter("recipeid"));
+//				int selectedNumber = Integer.parseInt(request.getParameter("selectedNumber"));
+//				
+//				System.out.println(productid);
+//				System.out.println(recipeid);
+//				System.out.println(selectedNumber);
+				
+//				session.setAttribute("productid", productid);
+//				session.setAttribute("recipeid", recipeid);
+//				session.setAttribute("selectedNumber", selectedNumber);
+//				
+//				command = new getCart();
+//				command.execute(request, response);
+//				
+//				viewPage = "mainViewPage.jsp";
 				
 			default :
 				break;
