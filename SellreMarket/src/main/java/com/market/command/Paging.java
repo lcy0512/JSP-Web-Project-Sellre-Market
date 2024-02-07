@@ -29,20 +29,23 @@ public class Paging implements MCommand {
 		
 		// 전체 페이지 수를 카운트하여 가져옴
 		int totalpageCount = dao.totalpageCount();
-		// 한 페이지에 몇개를 넣을 것인가?
-		int eachPageCount = 5;
+		// 한 번에 몇개의 블럭을 보여줄 것인가?
+		int blockGroup = 5;
 		
-		int limitFrom = (curPage - 1) * eachPageCount;
+		// db에 limit의 시작점 ex) (1-1) * 5 = 0, (2-1) * 5 = 5, 
+		int limitFrom = (curPage - 1) * blockGroup;
 		
 		// 블록 페이지 1~5, 6~10
-		int blockPage = ((curPage-1) / eachPageCount) + 1;
+		// ex) 1~5까지 = 1, 6~10 = 2
+		int blockPage = ((curPage-1) / blockGroup) + 1;
 		
-		int blockStart = (blockPage-1) * eachPageCount + 1;
+		// bloackPage가 1이면 시작 페이지가 1 2이면 6
+		int blockStart = (blockPage-1) * blockGroup + 1;
 		
-		List<MainViewDto> dtos = dao.productView(limitFrom, eachPageCount);
+		List<MainViewDto> dtos = dao.productView(limitFrom, blockGroup);
 		
 		// 마지막 페이지 정하기
-		int endPage = (totalpageCount / eachPageCount) == 0 ? totalpageCount / eachPageCount : (totalpageCount / eachPageCount) + 1 ;
+		int endPage = (totalpageCount / blockGroup) == 0 ? totalpageCount / blockGroup : (totalpageCount / blockGroup) + 1 ;
 		
 		request.setAttribute("curPage", curPage);
 		request.setAttribute("endPage", endPage);
