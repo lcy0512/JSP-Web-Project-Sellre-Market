@@ -19,7 +19,7 @@ public class MCmainView implements MCommand{
 */
 
 	@Override
-	public void execute(HttpServletRequest reqeust, HttpServletResponse response) {
+	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		MainViewDao mainDao = new MainViewDao();
 		
 		
@@ -31,7 +31,7 @@ public class MCmainView implements MCommand{
 		
 		// 처음에 받아오는 페이지가 값이 없는 경우는 1로 설정하기 위한 트라이
 		try {
-			curPage = Integer.parseInt(reqeust.getParameter("curPage"));
+			curPage = Integer.parseInt(request.getParameter("curPage"));
 		}
 		catch (Exception e) {
 			curPage = 1;
@@ -57,15 +57,15 @@ public class MCmainView implements MCommand{
 		// 마지막 페이지 정하기
 		int endPage = (totalpageCount / eachPageCount) == 0 ? totalpageCount / eachPageCount : (totalpageCount / eachPageCount) + 1 ;
 		
-		reqeust.setAttribute("curPage", curPage);
-		reqeust.setAttribute("endPage", endPage);
+		request.setAttribute("curPage", curPage);
+		request.setAttribute("endPage", endPage);
 //		reqeust.setAttribute("dtos", dtos);
-		reqeust.setAttribute("blockStart", blockStart);
+		request.setAttribute("blockStart", blockStart);
 		// 페이징 처리를 위한@@@@@@@@@@@@@@@
 		
 		
-		reqeust.setAttribute("productList", productDtos);
-		reqeust.setAttribute("eventImgs", eventDtos);
+		request.setAttribute("productList", productDtos);
+		request.setAttribute("eventImgs", eventDtos);
 		
 		
 	}
