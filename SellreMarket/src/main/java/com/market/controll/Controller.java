@@ -22,6 +22,7 @@ import com.market.command.MAdminGetPackType;
 import com.market.command.MAdminGetSubCategory;
 import com.market.command.MAdminProductCount;
 import com.market.command.MAdminProductInsert;
+import com.market.command.MClogin;
 import com.market.command.MCmainView;
 import com.market.command.MCommand;
 import com.market.command.MInquiryDetail;
@@ -88,14 +89,26 @@ public class Controller extends HttpServlet {
 				break;
 				
 			case "/loginCheck.do" : 
-				id = request.getParameter("setId");
+				id = request.getParameter("id");
 				String password = request.getParameter("password");
 				
 				System.out.println(id);
 				System.out.println(password);
 				
-				viewPage = "Login.jsp";
-				break;
+				session.setAttribute("id", id);
+				session.setAttribute("password", password);
+				
+				
+				command = new MClogin();
+				command.execute(request, response);
+				
+				String alertMessage = (String) session.getAttribute("alertMessage");
+
+				System.out.println(alertMessage);
+				out.print(new Gson().toJson(alertMessage));
+				out.flush();
+				
+				return;
 				
 				
 			case "/inquiry.do" :

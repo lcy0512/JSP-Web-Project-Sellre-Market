@@ -35,7 +35,7 @@
     
     
 <!-- // js 따로 관리한다. -->
-<script src="popup.js"></script>
+<script src="/js/popup.js"></script>
 </head>
 
 <body>
