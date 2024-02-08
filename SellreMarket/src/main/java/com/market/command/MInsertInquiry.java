@@ -16,8 +16,7 @@ public class MInsertInquiry implements MCommand {
 		HttpSession session = request.getSession();
 		
 		String inimage = "";
-//		String userid = (String)session.getAttribute("userid");
-		String userid = "admin";
+		String userid = (String)session.getAttribute("id");
 		
 		try {
 			// 서버 경로

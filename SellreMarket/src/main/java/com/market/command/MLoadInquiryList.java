@@ -20,8 +20,7 @@ public class MLoadInquiryList implements MCommand {
 		String userid = null;
 		
 		try {
-//			userid = (String)session.getAttribute("userid");
-			userid = "admin";
+			userid = (String)session.getAttribute("id");
 			
 			InquiryDao dao = new InquiryDao();
 			ArrayList<InquiryDto> inquiryList = dao.list(userid);

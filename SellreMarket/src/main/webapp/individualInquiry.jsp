@@ -5,8 +5,26 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>1:1 문의 - 셀리마켓</title>
 </head>
+<script type="text/javascript">
+
+var id = '<%=(String)session.getAttribute("id")%>';
+
+	function inquirywrite() {
+		// 로그인 여부 확인
+		if (id !== "null") {
+			window.location.href = 'inquirywrite.jsp';
+		} 
+		else {
+			var result = window.confirm("로그인 후 이용 가능합니다. 로그인 하시겠습니까?")
+			if (result === true) {
+				window.location.href = 'Login.jsp';
+			}
+		}
+	}
+
+</script>
 <body>
 <jsp:include page="header.jsp"/>
 	<div class="css-2b29tl eug5r8l2">
@@ -48,8 +66,7 @@
 	        			</c:otherwise>
 	    			</c:choose>
 				<div class="css-15jhycr e3tf63e0"></div>
-					<button class="css-1ibxj4m e4nu7ef3" type="button" width="120" radius="3"
-					onclick="window.location.href='inquirywrite.jsp'">
+					<button class="css-1ibxj4m e4nu7ef3" id="inquirybtn" type="button" width="120" radius="3" onclick="inquirywrite()">
 						문의하기
 					</button>
 			</div>

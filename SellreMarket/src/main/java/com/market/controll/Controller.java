@@ -372,6 +372,10 @@ public class Controller extends HttpServlet {
 				
 				break;
 				
+			case "/logout.do" :
+				session.invalidate();
+				viewPage = "mainPage.do";
+				
 			default :
 				break;
 				

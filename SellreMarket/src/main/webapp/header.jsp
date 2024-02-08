@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="js/category.js" ></script>
@@ -44,7 +43,7 @@
 			<div class="css-1xfyvd1 eo7pjfk4">
 			<%-- --%>
 			<c:choose>
-				<c:when test="${empty sessionScope.userid}">
+				<c:when test="${empty sessionScope.id}">
 				<a class="css-xygizb eo7pjfk2" href="CustomerSignup.jsp">회원가입</a>
 				<div class="css-1qgm48u eo7pjfk0"></div>
 				<a class="css-oyffzd eo7pjfk2" href="Login.jsp">로그인</a>
@@ -52,7 +51,7 @@
 				</c:when>
 				<c:otherwise>
 				<div class="css-1qolcqm eo7pjfk3">
-					<a class="css-oyffzd eo7pjfk2">${sessionScope.name} 님<span class="css-1lrerrk eo4j3y50"></span></a>
+					<a class="css-oyffzd eo7pjfk2">${sessionScope.userName} 님<span class="css-1lrerrk eo4j3y50"></span></a>
 					<div class="menu css-1ho29iy ecncdj41">
 						<div class="css-12olpw6 ecncdj40"><a href="#">개인정보 수정</a></div>
 						<div class="css-12olpw6 ecncdj40"><a href="#">장바구니</a></div>
