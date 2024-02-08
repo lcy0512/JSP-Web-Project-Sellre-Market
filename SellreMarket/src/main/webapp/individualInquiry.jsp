@@ -24,13 +24,16 @@
 					<div width="100" class="css-16tcewl e16adls20">작성일</div>
 					<div width="100" class="css-16tcewl e16adls20">답변상태</div>
 				</div>
-				<div class="css-l0r8ps e1cfowvj1">
+				
 					<c:choose>
 	       				<c:when test="${empty InquiryList}">
+	       				<div class="css-l0r8ps e1cfowvj1" style="margin-top: 40px;">
 	            			게시글이 없습니다.
+	            			</div>
 	        			</c:when>
 	        			<c:otherwise>
 	            			<c:forEach items="${InquiryList}" var="inquiry">
+	            			<div class="css-l0r8ps e1cfowvj1" style="margin-top: 0px;">
 	            			 <form action="inquirydetail.do" method="post">
 	            			<input type="hidden" name="inquiryid" value="${inquiry.inquiryid}">
 	            				<button type="submit" class="css-e24nfx">
@@ -40,10 +43,10 @@
 	                				<div width="100" class="css-15tcewl">${inquiry.status}</div>
 	                			</button>
 	                			</form>
+	                			</div>
 	            			</c:forEach>
 	        			</c:otherwise>
 	    			</c:choose>
-				
 				<div class="css-15jhycr e3tf63e0"></div>
 					<button class="css-1ibxj4m e4nu7ef3" type="button" width="120" radius="3"
 					onclick="window.location.href='inquirywrite.jsp'">
@@ -51,7 +54,6 @@
 					</button>
 			</div>
 		</div>
-	</div>
 	</div>
 	<jsp:include page="footer.html"/>
 </body>

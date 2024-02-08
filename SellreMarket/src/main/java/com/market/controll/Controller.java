@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
-import com.market.command.getCart;
 import com.market.command.MAdminGetCategory;
 import com.market.command.MAdminGetPackKind;
 import com.market.command.MAdminGetPackType;
@@ -28,6 +27,7 @@ import com.market.command.MInquiryDetail;
 import com.market.command.MInsertInquiry;
 import com.market.command.MLoadInquiryList;
 import com.market.command.MProductDetailPageCommand;
+import com.market.command.MSignUp;
 import com.market.dto.AdminGetCategoryDto;
 import com.market.dto.AdminGetPackTypeDto;
 import com.market.dto.AdminProductDto;
@@ -82,20 +82,35 @@ public class Controller extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		switch(com) {
-			// 로그인 화면
+		// 로그인 화면
 			case "/login.do" :
 				viewPage = "Login.jsp";
 				break;
 				
 			case "/loginCheck.do" : 
-				id = request.getParameter("setId");
+				id = request.getParameter("id");
 				String password = request.getParameter("password");
 				
-				System.out.println(id);
-				System.out.println(password);
+				// 아이디 비밀번호를 LoginDao로 보내기
+				session.setAttribute("id", id);
+				session.setAttribute("password", password);
 				
-				viewPage = "Login.jsp";
-				break;
+				
+				command = new MClogin();
+				command.execute(request, response);
+				
+				String alertMessage = (String) session.getAttribute("alertMessage");
+				// 아이디 비밀번호 일치 시 이름 보내기
+				String userName = (String) session.getAttribute("userName");
+				session.setAttribute("userName", userName);
+				
+				System.out.println(userName + "  userName in controller");
+
+				System.out.println(alertMessage + " controller alert message");
+				out.print(new Gson().toJson(alertMessage));
+				out.flush();
+				
+				return;
 				
 				
 			case "/inquiry.do" :
@@ -119,15 +134,17 @@ public class Controller extends HttpServlet {
 				// 문의 상세페이지로 이동, 
 				viewPage = "InquiryDetail.jsp";
 				break;
-			
+		/*
 			case "/signup.do" :
-				// 받아짐!!
-				String id1 = request.getParameter("memberId");
-				System.out.println(id1);
+				command = new MSignUp();
+				command.execute(request, response);
+				
+				viewPage = "mainPage.do";
 				break;
+		*/
 			
 			case "/test.do" :
-				viewPage = "testProductselection.jsp";
+				viewPage = "TestProductSelection.jsp";
 				System.out.println(viewPage);
 				break;
 				
@@ -135,6 +152,19 @@ public class Controller extends HttpServlet {
 				command = new MProductDetailPageCommand();
 				command.execute(request, response);
 				viewPage = "detailPage.jsp";
+				break;
+				
+			case "/productDetail.do" :
+		        // 요청에서 선택된 상품 번호를 가져옴
+				String selectProductId = request.getParameter("productId");				
+		        // 선택된 상품 번호를 세션에 저장
+		        session.setAttribute("productID", selectProductId);
+		       
+				System.out.println("보낼 아이디 : " + selectProductId);
+		       
+				command = new MProductDetailPageCommand();
+				command.execute(request, response);
+				viewPage = "ProductDetailPage.jsp";
 				break;
 				
 				//관리자 제품 조회 + 페이징처리	
@@ -223,7 +253,6 @@ public class Controller extends HttpServlet {
 				out.print(new Gson().toJson(result));
 				out.flush();
 				return;
-
 				
 			case "/mainPage.do" :
 				// 페이징 처리를 위한
@@ -285,7 +314,7 @@ public class Controller extends HttpServlet {
 				System.out.println(ri);
 				System.out.println(pi);
 				
-				viewPage = "mainViewPage.jsp";
+				viewPage = "mainViewPage.do";
 //				받아 올 것 productid, recipeid , qty
 //				int productid = Integer.parseInt(request.getParameter("productid"));
 //				int recipeid = Integer.parseInt(request.getParameter("recipeid"));
@@ -306,7 +335,6 @@ public class Controller extends HttpServlet {
 				
 			default :
 				break;
-				
 				
 		}
 		

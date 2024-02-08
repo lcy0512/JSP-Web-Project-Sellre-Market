@@ -8,6 +8,8 @@
 </head>
 <link rel="stylesheet" href="css/signup.css"/>
 <script src="js/signup.js"></script>
+<script src="js/address.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <body>
 	<jsp:include page="header.jsp" />
 	<form action="signup.do" method="post">
@@ -115,8 +117,7 @@
 					<div class="css-82a6rk e744wfw3">
 						<div class="css-jmalg e1uzxhvi6">
 							<div class="css-176lya2 e1uzxhvi3">
-								<input data-testid="input-box" id="mobileNumber"
-									name="mobileNumber" placeholder="숫자만 입력해주세요." type="tel"
+								<input data-testid="input-box" id="mobileNumber" name="mobileNumber" placeholder="숫자만 입력해주세요." type="tel"
 									required="" class="css-u52dqk e1uzxhvi2" value="">
 							</div>
 						</div>
@@ -124,22 +125,26 @@
 					<div class="css-1w0ksfz e744wfw2">
 					</div>
 				</div>
+				<%-- 주소 div row --%>
 				<div class="css-1pjgd36 e744wfw6">
 					<div class="css-1y8737n e744wfw5">
-						<label class="css-1obgjqh e744wfw4">주소<span
-							class="css-qq9ke6 e744wfw0">*</span></label>
+						<label class="css-1obgjqh e744wfw4">주소<span class="css-qq9ke6 e744wfw0">*</span></label>
 					</div>
 					<div class="css-82a6rk e744wfw3">
-						<button class="css-1schgvv e4nu7ef3" type="button" height="44"
-							radius="4">
-							<img src="/image/searchImage.png" alt="" class="css-1m3kac1 e4nu7ef0">
-							<span class="css-nytqmgq e4nu7ef1">주소 검색</span>
-						</button>
-						<span class="css-vukl2m eq6ygzw0">배송지에 따라 상품 정보가 달라질 수
-							있습니다.</span>
+					<div class="css-jmalg e1uzxhvi6">
+						<input class="css-u52dqk e1uzxhvi2" type="text" id="postcode" placeholder="우편번호" style="width: 100px;" readonly="readonly">
+						<input class="css-u52dqk e1uzxhvi2" type="text" name="address" id="address" placeholder="주소" style="margin-top: 10px;" readonly="readonly">
+						<input class="css-u52dqk e1uzxhvi2" type="text" name="detailAddress" id="detailAddress" placeholder="상세주소" style="margin-top: 10px;">
 					</div>
-					<div class="css-1w0ksfz e744wfw2"></div>
+						<span class="css-vukl2m eq6ygzw0">배송지에 따라 상품 정보가 달라질 수 있습니다.</span>
+					</div>
+					<div class="css-1w0ksfz e744wfw2">
+						<button class="css-1schgvv e4nu7ef3" type="button" height="44" radius="4" onclick="execDaumPostcode()" style="padding-right: 0px;">
+							<span class="css-nytqmgq e4nu7ef1" style="margin-top:5px;">주소 검색</span>
+						</button>
+					</div>
 				</div>
+				<%-- 주소 div row --%>
 				<div class="css-1pjgd36 e744wfw6">
 					<div class="css-1y8737n e744wfw5">
 						<label class="css-1obgjqh e744wfw4">성별</label>
@@ -211,18 +216,7 @@
 						<label class="css-1obgjqh e744wfw4">이용약관동의<span class="css-qq9ke6 e744wfw0">*</span></label>
 					</div>
 					<div class="css-82a6rk e744wfw3">
-						<div class="css-ov2xfu e1sjmfnv7">
-							<label class="css-msja7w e1dcessg3" for="TermsAgreeAll"><input id="TermsAgreeAll" type="checkbox" class="css-agvwxo e1dcessg2">
-								<div class="css-79hxr7 e1dcessg1">
-									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-										<path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z" stroke="#ddd" fill="#fff"></path>
-										<path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-									</svg>
-								</div>
-								<span>전체 동의합니다.</span>
-							</label>
-							<p class="css-nygcgj e1sjmfnv6">선택항목에 동의하지 않은 경우도 회원가입 및 일반적인 서비스를 이용할 수 있습니다.</p>
-						</div>
+					<%-- 1 --%>
 						<div class="css-ov2xfu e1sjmfnv7">
 							<div class="css-s5xdrg e1sjmfnv4">
 								<label class="css-1mjkje9 e1dcessg3" for="RequiredTermsCondition">
@@ -230,18 +224,16 @@
 								<div class="css-79hxr7 e1dcessg1">
 									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z" stroke="#ddd" fill="#fff"></path>
-										<path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-									</svg>
-								</div>
-								<span>이용약관 동의</span></label><span class="css-64z8en e1sjmfnv5">(필수)</span></div>
-							<a class="css-7chi73 e1sjmfnv3">약관보기</a>
+										<path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+								</div><span>이용약관 동의</span></label><span class="css-64z8en e1sjmfnv5">(필수)</span>
+							</div>
+							<a class="css-7chi73 e1sjmfnv3" style="margin-top: 3px;">약관보기</a>
 						</div>
+					<%-- 2 --%>
 						<div class="css-ov2xfu e1sjmfnv7">
 							<div class="css-s5xdrg e1sjmfnv4">
-								<label class="css-1mjkje9 e1dcessg3"
-									for="RequiredTermsOfPrivacy"><input
-									id="RequiredTermsOfPrivacy" type="checkbox"
-									class="css-agvwxo e1dcessg2">
+								<label class="css-1mjkje9 e1dcessg3" for="RequiredTermsOfPrivacy">
+								<input id="RequiredTermsOfPrivacy" type="checkbox" class="css-agvwxo e1dcessg2">
 									<div class="css-79hxr7 e1dcessg1">
 										<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z" stroke="#ddd" fill="#fff"></path>
@@ -250,6 +242,7 @@
 							</div>
 							<a class="css-7chi73 e1sjmfnv3">약관보기</a>
 						</div>
+					<%-- 3 --%>
 						<div class="css-ov2xfu e1sjmfnv7">
 							<div class="css-s5xdrg e1sjmfnv4">
 								<label class="css-1mjkje9 e1dcessg3" for="OptionalTermsOfPrivacy">
@@ -292,6 +285,7 @@
 	</div>
 	</div>
 	</form>
+
 	<jsp:include page="footer.html" />
 </body>
 </html>

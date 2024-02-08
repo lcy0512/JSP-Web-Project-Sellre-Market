@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,10 +42,30 @@
 	<div>
 		<div class="css-t79vuj e15sbxqa2">
 			<div class="css-1xfyvd1 eo7pjfk4">
+			<%-- --%>
+			<c:choose>
+				<c:when test="${empty sessionScope.userid}">
 				<a class="css-xygizb eo7pjfk2" href="CustomerSignup.jsp">회원가입</a>
 				<div class="css-1qgm48u eo7pjfk0"></div>
 				<a class="css-oyffzd eo7pjfk2" href="Login.jsp">로그인</a>
 				<div class="css-1qgm48u eo7pjfk0"></div>
+				</c:when>
+				<c:otherwise>
+				<div class="css-1qolcqm eo7pjfk3">
+					<a class="css-oyffzd eo7pjfk2">${sessionScope.name} 님<span class="css-1lrerrk eo4j3y50"></span></a>
+					<div class="menu css-1ho29iy ecncdj41">
+						<div class="css-12olpw6 ecncdj40"><a href="#">개인정보 수정</a></div>
+						<div class="css-12olpw6 ecncdj40"><a href="#">장바구니</a></div>
+						<div class="css-12olpw6 ecncdj40"><a href="#">주문내역</a></div>
+						<div class="css-12olpw6 ecncdj40"><a href="#">찜한 상품</a></div>
+						<div class="css-12olpw6 ecncdj40"><a href="#">찜한 레시피</a></div>
+						<div class="css-12olpw6 ecncdj40"><a href="inquiry.do">1:1 문의</a></div>
+						<div class="css-12olpw6 ecncdj40"><a href="logout.do">로그아웃</a></div>
+					</div>
+				</div>
+				<div class="css-1qgm48u eo7pjfk0"></div>
+				</c:otherwise>
+				</c:choose>
 				<div class="css-1qolcqm eo7pjfk3">
 					<a class="css-oyffzd eo7pjfk2">고객센터<span class="css-1lrerrk eo4j3y50"></span></a>
 					<div class="menu css-1ho29iy ecncdj41">
@@ -57,7 +78,7 @@
 			<div class="css-r7wmjj e15sbxqa3">
 				<div class="css-boc80u ekdqe1a1">
 					<div class="css-boc80u ekdqe1a1">
-					<a href="header.jsp"> <img src="image/Sellre.png"
+					<a href="mainPage.do"> <img src="image/Sellre.png"
 						alt="셀리마켓 로고" class="css-17mnrrx e1s3pt0j0">
 						<button class="active css-mxd3pm ekdqe1a0">셀리마켓</button>
 					</a>
