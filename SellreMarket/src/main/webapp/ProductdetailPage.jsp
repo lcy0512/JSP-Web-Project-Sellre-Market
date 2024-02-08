@@ -12,7 +12,7 @@
 		<meta charset="UTF-8">
 		
 		<!-- 제목 -->
-		<title>CSS 도전!</title>
+		<title>상품 상세페이지</title>
 		
 		<!-- Favicon 설정 부분  -->
 		<link rel="shortcut icon" href="http://localhost:8080/SellreMarket/image/logo.png" />
@@ -153,5 +153,17 @@
 		</main>
 	</div>
 	<jsp:include page="footer.html" flush="false" />
+	<script>
+	    // 페이지 로드 시 자동으로 지정된 URL로 이동하는 함수
+	    function redirectToURL() {
+	        window.location.href = "/detail.do.do"; // 이동할 URL 설정
+	    }
+	
+	    // 페이지가 로드될 때 redirectToURL 함수 호출
+	    window.onload = function() {
+	        // 새로고침 버튼 클릭 시에만 redirectToURL 함수 호출
+	        document.querySelector('.css-3z91zj.e4nu7ef3').addEventListener('click', redirectToURL);
+	    };
+	</script>
 </body>
 </html>
