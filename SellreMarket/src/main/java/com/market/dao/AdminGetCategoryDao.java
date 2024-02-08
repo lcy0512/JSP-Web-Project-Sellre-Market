@@ -47,7 +47,7 @@ public class AdminGetCategoryDao {
 		try {
 			
 			conn = dataSource.getConnection();
-			String query = "SELECT type FROM selreMarket.catetory group by type";
+			String query = "SELECT type FROM catetory group by type";
 		
 			ps = conn.prepareStatement(query);
 			rs = ps.executeQuery();
@@ -80,7 +80,7 @@ public class AdminGetCategoryDao {
 		try {
 			
 			conn = dataSource.getConnection();
-			String query = "SELECT subtype FROM selreMarket.catetory where type=? group by subtype;";
+			String query = "SELECT subtype FROM catetory where type=? group by subtype;";
 		
 			ps = conn.prepareStatement(query);
 			ps.setString(1, type);
