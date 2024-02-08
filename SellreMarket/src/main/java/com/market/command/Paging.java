@@ -32,14 +32,15 @@ public class Paging implements MCommand {
 		// 한 번에 몇개의 블럭을 보여줄 것인가?
 		int blockGroup = 5;
 		
-		// db에 limit의 시작점 ex) (1-1) * 5 = 0, (2-1) * 5 = 5, 
+		// db에 limit의 시작점
+		// ex) (1-1) * 5 = 0, (2-1) * 5 = 5, 
 		int limitFrom = (curPage - 1) * blockGroup;
 		
 		// 블록 페이지 1~5, 6~10
 		// ex) 1~5까지 = 1, 6~10 = 2
 		int blockPage = ((curPage-1) / blockGroup) + 1;
 		
-		// bloackPage가 1이면 시작 페이지가 1 2이면 6
+		// bloackPage가 1이면 시작 페이지가 '1 2 3 4 5'  2이면 '6 7 8 9 10'
 		int blockStart = (blockPage-1) * blockGroup + 1;
 		
 		List<MainViewDto> dtos = dao.productView(limitFrom, blockGroup);

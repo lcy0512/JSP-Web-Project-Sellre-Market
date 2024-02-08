@@ -66,6 +66,10 @@
 	crossorigin="anonymous">
 </script>
 
+<!-- // js 따로 관리한다. -->
+<script src="js/mainViewPage.js"></script>
+
+
 </head>
 <body>
 	<!-- Topbar Start -->
@@ -198,6 +202,7 @@
 		</a>
 	</div>
 	<!-- Paging End -->
+
 
 	<!-- Footer Start -->
 	<jsp:include page="footer.html"></jsp:include>
