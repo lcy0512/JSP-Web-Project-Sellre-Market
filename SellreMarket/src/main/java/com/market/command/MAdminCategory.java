@@ -5,13 +5,15 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.market.dao.AdminCategoryDao;
 import com.market.dao.AdminProductDao;
+import com.market.dto.AdminCategoryDto;
 import com.market.dto.AdminProductDto;
 
-public class MAdminProductCount implements MCommand{
+public class MAdminCategory implements MCommand {
 
 	@Override
-	public void execute(HttpServletRequest reqeust, HttpServletResponse response) {
+	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		
 		/*
 		 * currentPage : ajax로 넘어온 현재페이지 (사용자가 클린한 페이지번호)
@@ -19,18 +21,17 @@ public class MAdminProductCount implements MCommand{
 		 */
 		int currentPage = 0;
 		
-		if(reqeust.getParameter("pageNum") == null) {
+		if(request.getParameter("pageNum") == null) {
 			currentPage = 1;
 		} else {
-			currentPage = Integer.parseInt(reqeust.getParameter("pageNum"));
+			currentPage = Integer.parseInt(request.getParameter("pageNum"));
 		}
-		
 		
 		
 		/*
 		 * total : product 전체 리스트 갯수 
 		 */
-		int total = new AdminProductDao().getProductCnt();
+		int total = new AdminCategoryDao().getProductCnt();
 		
 		
 		/*
@@ -49,14 +50,12 @@ public class MAdminProductCount implements MCommand{
 
 		
 		//클릭한 페이지에 맞게 10개씩 자른 list가져옴
-		ArrayList<AdminProductDto> list = new AdminProductDao().selectList(index_no);	// 클릭한 페이지의 리스트 조회
+		ArrayList<AdminCategoryDto> list = new AdminCategoryDao().selectList(index_no);	// 클릭한 페이지의 리스트 조회
 
-		reqeust.setAttribute("total", total);
-		reqeust.setAttribute("lastPage", lastPage);
-		reqeust.setAttribute("index_no", index_no);
-		reqeust.setAttribute("list", list);
-		
-		
+		request.setAttribute("total", total);
+		request.setAttribute("lastPage", lastPage);
+		request.setAttribute("index_no", index_no);
+		request.setAttribute("list", list);
 	}
-	
+
 }

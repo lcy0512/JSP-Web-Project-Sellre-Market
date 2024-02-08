@@ -9,9 +9,11 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.market.dto.AdminCategoryDto;
 import com.market.dto.AdminProductDto;
-import com.market.dto.PageInfo;
-public class AdminProductDao {
+import com.market.dto.AdminProductInputDto;
+
+public class AdminCategoryDao {
 
 	DataSource dataSource;
 	
@@ -20,7 +22,7 @@ public class AdminProductDao {
 	 * @param 	: null
 	 * @return 	: null
 	************************************************************************************************/
-	public AdminProductDao() {
+	public AdminCategoryDao() {
 		try {
 			
 			Context context = new InitialContext();
@@ -29,8 +31,6 @@ public class AdminProductDao {
 			e.printStackTrace();
 		}
 	}
-	
-	
 	
 	/************************************************************************************************
 	 * Function : 상품의 전체 갯수 조회 => 페이징처리 위해
@@ -47,7 +47,7 @@ public class AdminProductDao {
 		try {
 			
 			conn = dataSource.getConnection();
-			String query = "SELECT count(productid) FROM product ";
+			String query = "select count(catetoryid) from catetory;";
 		
 			ps = conn.prepareStatement(query);
 			rs = ps.executeQuery();
@@ -63,15 +63,14 @@ public class AdminProductDao {
 		return productCnt;
 	}
 	
-	
 	/************************************************************************************************
 	 * Function : 현재페이지에 해당하는 리스트 조회
 	 * @param 	: PageInfo에 있는 페이징 정보
 	 * @return 	: ArrayList
 	************************************************************************************************/
-	public ArrayList<AdminProductDto> selectList(int index_no) {
+	public ArrayList<AdminCategoryDto> selectList(int index_no) {
 		
-		ArrayList<AdminProductDto> list = new ArrayList<AdminProductDto>();
+		ArrayList<AdminCategoryDto> list = new ArrayList<AdminCategoryDto>();
 		
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -82,22 +81,8 @@ public class AdminProductDao {
 			conn = dataSource.getConnection();
 			String query = 
 							"""
-							SELECT 
-								
-								productid, 
-								pname, 
-								IFNULL(pEngname, '') as pEngname, 
-								IFNULL(origin, '') as origin, 
-								date(pinsertdate), 
-								date(expirationdate), 
-								CASE status
-									WHEN '0' THEN '판매종료'
-									WHEN '1' THEN '판매중'
-								ELSE '' END AS status 
-								
-							FROM product
-							ORDER BY productid DESC
-							LIMIT ?, 15 
+							select type, subtype from catetory order by catetoryid desc
+							limit ?, 15
 				
 					"""; //limit 시작번호, 출력갯수
 			
@@ -105,23 +90,17 @@ public class AdminProductDao {
 			ps = conn.prepareStatement(query);
 			
 			ps.setInt(1, index_no);
-			//ps.setInt(2, endRow);
 			
-			System.out.println("AdminProductDao[selectList] : "+index_no);
+			System.out.println("admincategorydao[selectList] : "+index_no);
 			
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				AdminProductDto product = new AdminProductDto();
-				product.setProductid(rs.getInt(1));
-				product.setPname(rs.getString(2));
-				product.setpEngname(rs.getString(3));
-				product.setOrigin(rs.getString(4));
-				product.setPinsertdate(rs.getString(5));
-				product.setExpirationdate(rs.getString(6));
-				product.setStatus(rs.getString(7));
+				AdminCategoryDto cate = new AdminCategoryDto();
+				cate.setType(rs.getString(1));
+				cate.setSubtype(rs.getString(2));
 				
-				list.add(product);
+				list.add(cate);
 			}
 			
 			conn.close();
@@ -130,4 +109,45 @@ public class AdminProductDao {
 		}
 		return list;
 	}
+	
+	
+	/************************************************************************************************
+	 * Function : 카테고리 등록
+	 * @param 	: 입력한 대분류, 중분류 
+	 * @return 	: int
+	************************************************************************************************/
+	public int insertCategory(String type, String subtype) {
+		System.out.println("ddd : "+type);
+		System.out.println("eee : "+subtype);
+		
+		int num = 0;
+		Connection conn = null;
+		PreparedStatement ps = null;
+		
+		try {
+			conn = dataSource.getConnection();	
+			String query = """
+						insert into catetory (
+							   type,
+							   subtype,
+							   status
+							) values (?,?,'1')
+
+							""";
+			ps = conn.prepareStatement(query);
+			ps.setString(1, type);
+			ps.setString(2, subtype);
+			
+			ps.executeUpdate();
+			num++;
+			conn.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return num;
+		}
+		return num;
+		
+	}
+	
 }
