@@ -135,14 +135,14 @@ public class Controller extends HttpServlet {
 				// 문의 상세페이지로 이동, 
 				viewPage = "InquiryDetail.jsp";
 				break;
-		/*
+		
 			case "/signup.do" :
 				command = new MSignUp();
 				command.execute(request, response);
 				
 				viewPage = "mainPage.do";
 				break;
-		*/
+		
 			
 			case "/test.do" :
 				viewPage = "TestProductSelection.jsp";
