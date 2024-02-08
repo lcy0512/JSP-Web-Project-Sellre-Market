@@ -1,6 +1,5 @@
 package com.market.command;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +13,7 @@ public class MProductDetailPageCommand implements MCommand {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 	    // id 파라미터 가져오기
-	    String id = request.getParameter("1");
+	    String id = (String)request.getSession().getAttribute("productID");
 	    
 	    if (id == null) {
 	        // id가 없는 경우 처리
