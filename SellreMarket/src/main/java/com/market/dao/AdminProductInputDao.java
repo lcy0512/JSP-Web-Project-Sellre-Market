@@ -38,7 +38,16 @@ public class AdminProductInputDao {
 	************************************************************************************************/
 	public int insertProduct(String bname, String pname, String pEngname, String allery, String nutrition, int pstock, String origin, String expirationdate, String description) {
 		
+		System.out.println("insertProduct : "+bname);
+		System.out.println("insertProduct : "+pname);
+		System.out.println("insertProduct : "+pEngname);
+		System.out.println("insertProduct : "+allery);
+		System.out.println("insertProduct : "+nutrition);
+		System.out.println("insertProduct : "+pstock);
+		System.out.println("insertProduct : "+pstock);
+		
 		int num = 0;
+		char status = '1';
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -47,30 +56,28 @@ public class AdminProductInputDao {
 		try {
 			conn = dataSource.getConnection();	
 			String query = """
-							insert into product (
-													pname, 
-													pEngname, 
-													allery, 
-													nutrition, 
-													pstock, 
-													pinsertdate, 
-													origin, 
-													expirationdate, 
-													description, 
-													status 
-												) values (?,?,?,?,?,sysdate(),?,?,?,?)
+						insert into product (
+							    pname, 
+							    pEngname, 
+							    allery, 
+							    nutrition, 
+							    pstock, 
+							    origin, 
+							    description, 
+							    status,
+							    pinsertdate
+							) values (?,?,?,?,?,?,?,?,now())
+
 							""";
-		
 			ps = conn.prepareStatement(query);
-			ps.setString(1, product.getPname());
-			ps.setString(2, product.getpEngname());
-			ps.setString(3, product.getAllery());
-			ps.setString(4, product.getNutrition());
-			ps.setInt(5, product.getPstock());
-			ps.setString(7, product.getOrigin());
-			ps.setString(8, product.getExpirationdate());
-			ps.setString(9, product.getDescription());
-			ps.setString(10, product.getStatus());
+			ps.setString(1, pname);
+			ps.setString(2, pEngname);
+			ps.setString(3, allery);
+			ps.setString(4, nutrition);
+			ps.setInt(5, pstock);
+			ps.setString(6, origin);
+			ps.setString(7, description);
+			ps.setLong(8, status);
 			
 			ps.executeUpdate();
 			num++;
@@ -91,6 +98,8 @@ public class AdminProductInputDao {
 	************************************************************************************************/
 		
 	public int insertImage(String image) {
+		
+		System.out.println("insertImage : "+image);
 		
 		int num = 0;
 		Connection conn = null;
@@ -129,6 +138,7 @@ public class AdminProductInputDao {
 		
 	public int insertPrice(int price) {
 		
+		System.out.println("price : "+price);
 		int num = 0;
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -164,6 +174,9 @@ public class AdminProductInputDao {
 	 * @return 	: null
 	************************************************************************************************/
 	public int insertCategory(String type, String subType) {
+		
+		System.out.println("type : "+type);
+	
 		
 		int num = 0;
 		Connection conn = null;
@@ -202,6 +215,9 @@ public class AdminProductInputDao {
 	 * @return 	: null
 	************************************************************************************************/
 	public int insertPacking(String packType, String packKind) {
+		
+		
+		System.out.println("packType : "+packType);
 		
 		int num = 0;
 		Connection conn = null;
@@ -244,8 +260,6 @@ public class AdminProductInputDao {
 		int num = 0;
 		Connection conn = null;
 		PreparedStatement ps = null;
-		ResultSet rs = null;
-		AdminProductInputDto product = new AdminProductInputDto();
 		
 		try {
 			conn = dataSource.getConnection();	
