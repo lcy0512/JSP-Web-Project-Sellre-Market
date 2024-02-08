@@ -103,6 +103,8 @@ public class MainViewDao {
 				int recipeid = rs.getInt("recipeid");
 				int productid = rs.getInt("productid");
 				
+				System.out.println(ysrc);
+				
 				MainViewDto dto = new MainViewDto(yname, ysrc, ytitle, price, like, recipeid, productid);
 				
 				dtos.add(dto);
