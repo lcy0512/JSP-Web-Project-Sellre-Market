@@ -8,6 +8,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.market.dto.LoginDto;
+
 public class LoginDao {
 	
 	DataSource dataSource;
@@ -22,8 +24,8 @@ public class LoginDao {
 		}
 	}
 	
-	// 아이디 체크 
-	public boolean checkLoginId(String id) {
+	// 아이디 체크, 비밀번호 체크 후 이름 띄우기
+	public boolean checkLogin(String id, String password) {
 		boolean check = false;
 		
 		Connection con = null;
@@ -33,13 +35,17 @@ public class LoginDao {
 		try {
 			con = dataSource.getConnection();
 			
-			String query = "select userid from customer where userid = ?";
+			String query = "select userid, password, name from customer where userid = ? and password = ?";
 			
 			ps = con.prepareStatement(query);
 			ps.setString(1, id);
+			ps.setString(2, password);
 			rs = ps.executeQuery();
 			
 			if (rs.next()) {
+				String name = rs.getString("name");
+				LoginDto dto = new LoginDto(name);
+				
 				check = true;
 			}
 		}
@@ -60,42 +66,6 @@ public class LoginDao {
 		return check;
 	}
 	
-	// 비밀번호 체크 
-	public boolean checkLoginPw(String password) {
-		boolean check = false;
-		
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		
-		try {
-			con = dataSource.getConnection();
-			
-			String query = "select password from customer where password = ?";
-			
-			ps = con.prepareStatement(query);
-			ps.setString(1, password);
-			rs = ps.executeQuery();
-			
-			if (rs.next()) {
-				check = true;
-			}
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-		finally {
-			try {
-				if (rs != null) rs.close();
-				if (ps != null) ps.close();
-				if (con != null) con.close();
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
-		return check;
-	}
+	// 
 	
 }

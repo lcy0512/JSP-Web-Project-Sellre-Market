@@ -92,9 +92,7 @@ public class Controller extends HttpServlet {
 				id = request.getParameter("id");
 				String password = request.getParameter("password");
 				
-				System.out.println(id);
-				System.out.println(password);
-				
+				// 아이디 비밀번호를 LoginDao로 보내기
 				session.setAttribute("id", id);
 				session.setAttribute("password", password);
 				
@@ -103,8 +101,13 @@ public class Controller extends HttpServlet {
 				command.execute(request, response);
 				
 				String alertMessage = (String) session.getAttribute("alertMessage");
+				// 아이디 비밀번호 일치 시 이름 보내기
+				String userName = (String) session.getAttribute("userName");
+				session.setAttribute("userName", userName);
+				
+				System.out.println(userName + "  userName in controller");
 
-				System.out.println(alertMessage);
+				System.out.println(alertMessage + " controller alert message");
 				out.print(new Gson().toJson(alertMessage));
 				out.flush();
 				
@@ -298,7 +301,7 @@ public class Controller extends HttpServlet {
 				System.out.println(ri);
 				System.out.println(pi);
 				
-				viewPage = "mainViewPage.jsp";
+				viewPage = "mainViewPage.do";
 //				받아 올 것 productid, recipeid , qty
 //				int productid = Integer.parseInt(request.getParameter("productid"));
 //				int recipeid = Integer.parseInt(request.getParameter("recipeid"));

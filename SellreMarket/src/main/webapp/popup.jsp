@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<link rel="stylesheet" href="css/popup.css" />
 
 	<style>
         .number-selector {
@@ -36,6 +37,7 @@
     
 <!-- // js 따로 관리한다. -->
 <script src="/js/popup.js"></script>
+
 </head>
 
 <body>

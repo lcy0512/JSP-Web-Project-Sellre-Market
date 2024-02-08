@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.market.dao.LoginDao;
+import com.market.dto.LoginDto;
 
 public class MClogin implements MCommand {
 
@@ -17,28 +18,20 @@ public class MClogin implements MCommand {
 		String password = (String) session.getAttribute("password");
 		
 		LoginDao login = new LoginDao();
+		LoginDto dto = new LoginDto();
 		String alertMessage = null;
 		
-		// 아이디 체크
-		boolean idCheck = login.checkLoginId(id);
-		// 비밀번호 체크
-		boolean pwCheck = login.checkLoginPw(password);
+		// 아이디 체크, 비밀번호 체크 후 true일 때 이름 반납
+		boolean idCheck = login.checkLogin(id, password);
 		
-		
-		if (!idCheck && !pwCheck) {
+		System.out.println(dto.getName());
+		if (idCheck) {
+			session.setAttribute("userName", dto.getName());
+		}
+		else {
 			alertMessage = "아이디와 비밀번호를 확인 해주세요.";
+			session.setAttribute("alertMessage", alertMessage);
 		}
-		else if (!idCheck) {
-			alertMessage = "아이디를 확인 해주세요.";
-		}
-		else if (!pwCheck) {
-			alertMessage = "비밀번호를 확인 해주세요.";
-		}
-		else if (idCheck && pwCheck) {
-			alertMessage = "success";
-		}
-		
-		session.setAttribute("alertMessage", alertMessage);
 		
 	}
 

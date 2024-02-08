@@ -67,7 +67,8 @@
 </script>
 
 <!-- // js 따로 관리한다. -->
-<script src="/js/mainViewPage.js"></script>
+<script src="js/mainViewPage.js"></script>
+
 
 </head>
 <body>

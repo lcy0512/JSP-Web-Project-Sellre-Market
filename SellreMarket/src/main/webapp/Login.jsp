@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="css/login.css" />
 
 </head>
-<script src="/js/Login.js"></script>
+<script src="js/Login.js"></script>
 
 <body>
 
