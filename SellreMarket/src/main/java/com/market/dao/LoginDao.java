@@ -3,6 +3,8 @@ package com.market.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -25,9 +27,11 @@ public class LoginDao {
 	}
 	
 	// 아이디 체크, 비밀번호 체크 후 이름 띄우기
-	public boolean checkLogin(String id, String password) {
-		boolean check = false;
+	public Map<String, Object> checkLogin(String id, String password) {
 		
+		Map<String, Object> data = new HashMap<>();
+		boolean check = false;
+		String name = "";
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -35,7 +39,7 @@ public class LoginDao {
 		try {
 			con = dataSource.getConnection();
 			
-			String query = "select userid, password, name from customer where userid = ? and password = ?";
+			String query = "select name from customer where userid = ? and password = ?";
 			
 			ps = con.prepareStatement(query);
 			ps.setString(1, id);
@@ -43,10 +47,19 @@ public class LoginDao {
 			rs = ps.executeQuery();
 			
 			if (rs.next()) {
-				String name = rs.getString("name");
-				LoginDto dto = new LoginDto(name);
-				
 				check = true;
+				name = rs.getString("name");
+				
+				System.out.println(name + " insdie dao");
+				System.out.println(check + " insdie dao");
+				
+				data.put("name", name);
+				data.put("check", check);
+			}
+			else {
+				// If no data is found, you can still put default values in the map
+	            data.put("name", "");   // or null, depending on your requirement
+	            data.put("check", false);
 			}
 		}
 		catch (Exception e) {
@@ -62,10 +75,6 @@ public class LoginDao {
 				e.printStackTrace();
 			}
 		}
-		
-		return check;
+		return data;
 	}
-	
-	// 
-	
 }

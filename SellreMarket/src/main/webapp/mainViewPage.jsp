@@ -133,7 +133,7 @@
 	<!-- Products Start -->
 	<div class="container-fluid pt-5 pb-3">
 		<div class="row px-xl-5 justify-content-center"
-			style="margin-left: 386px; margin-right: 306px;">
+			style="margin-left: 240px; margin-right: 110px;">
 			<c:if test="${not empty productList}">
 				<c:forEach items="${productList}" var="dto">
 					<div class="col-lg-4 col-md-4 col-sm-6 pb-10 mx-auto">

@@ -1,7 +1,3 @@
-function signup() {
-	window.location.href = "CustomerSignup.jsp";
-}
-
 // 정규식
 function checkMember() {
 	

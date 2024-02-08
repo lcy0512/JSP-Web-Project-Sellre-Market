@@ -13,7 +13,6 @@ function updateNumber(change) {
 
 	// Update the total price when the selected number changes
 	updateTotalPrice(selectedNumber);
-	addCart(selectedNumber);
 }
 
 // total price sum을 위한 함수
@@ -34,15 +33,18 @@ function updateTotalPrice(selectedNumber) {
 
 function addCart(selectedNumber) {
 	/* var selectedNumber = document.getElementById('selectedNumber').textContent; */
-
+	/* var form = document.myForm;
+	document.getElementById("hiddenNum") = selectedNumber;
+	
+	form.submit(); */
 	$.ajax({
 		type: 'POST',
 		url: 'getCart.do',
-		data: { selectedNumber: selectedNumber }
+		data: { selectedNumber: selectedNumber}
 		/* success: function(response) {
 			window.location.href('getCart.do');
 		} */
-	});
+	}); 
 
         /* document.getElementById('addCart').value = selectedNumber;
         document.getElementById('myForm').action = 'getCart.do';
