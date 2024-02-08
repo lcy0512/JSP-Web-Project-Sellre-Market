@@ -18,10 +18,8 @@
 
 <body>
 
-<jsp:include page="admin_menu.jsp" flush="false" />
-	
 	<main>
-	<jsp:include page="admin_header.jsp" flush="false" />
+	<jsp:include page="adminHeader.jsp" flush="false" />
 		<div class="main">
 			<div class="title" style="display : inline-block">제품현황</div>
 			<div class="btnGroup" style="display : inline-block">

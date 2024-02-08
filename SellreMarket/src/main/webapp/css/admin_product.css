@@ -163,4 +163,24 @@
 	.registerBtn a {
 	   	text-decoration: none;
 	}
-	 
+	
+/* 	
+	@media (max-width:1450px){ 가로 너비가 600px 이하일 때 아래 스타일 적용
+	     .main {
+	        position : relative;
+	        top : 10px;
+	        left : 200px;
+	        flex-direction: column;
+	        align-items: center;
+	    	overflow-y: auto;
+	    }
+	    
+	    .btnGroup{
+	    	margin-left: 68%;
+	    }
+	    
+	    .main_content {
+	    	height: 950px;
+	    }
+	} 
+ */
