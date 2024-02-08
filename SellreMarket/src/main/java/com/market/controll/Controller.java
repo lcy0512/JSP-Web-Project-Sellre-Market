@@ -16,13 +16,20 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.market.command.getCart;
+import com.market.command.MAdminGetCategory;
+import com.market.command.MAdminGetPackKind;
+import com.market.command.MAdminGetPackType;
+import com.market.command.MAdminGetSubCategory;
 import com.market.command.MAdminProductCount;
-import com.market.command.MCgetCart;
+import com.market.command.MAdminProductInsert;
 import com.market.command.MCmainView;
 import com.market.command.MCommand;
 import com.market.command.MInquiryDetail;
 import com.market.command.MInsertInquiry;
 import com.market.command.MLoadInquiryList;
+import com.market.command.MProductDetailPageCommand;
+import com.market.dto.AdminGetCategoryDto;
+import com.market.dto.AdminGetPackTypeDto;
 import com.market.dto.AdminProductDto;
 import com.market.dto.PageInfo;
 import com.market.command.Paging;
@@ -117,6 +124,17 @@ public class Controller extends HttpServlet {
 				// 받아짐!!
 				String id1 = request.getParameter("memberId");
 				System.out.println(id1);
+				break;
+			
+			case "/test.do" :
+				viewPage = "testProductselection.jsp";
+				System.out.println(viewPage);
+				break;
+				
+			case "/detail.do" :
+				command = new MProductDetailPageCommand();
+				command.execute(request, response);
+				viewPage = "detailPage.jsp";
 				break;
 				
 				//관리자 제품 조회 + 페이징처리	
