@@ -20,8 +20,7 @@ public class MInquiryDetail implements MCommand {
 			ArrayList<InquiryDto> detail = new ArrayList<InquiryDto>();
 			
 			String inquiryid = request.getParameter("inquiryid");
-//			String userid = (String)session.getAttribute("userid");
-			String userid = "admin";
+			String userid = (String)session.getAttribute("id");
 			
 			InquiryDao dao = new InquiryDao();
 			detail = dao.detailInquiry(userid, inquiryid);

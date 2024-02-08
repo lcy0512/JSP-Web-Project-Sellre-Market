@@ -9,15 +9,12 @@ document.addEventListener('DOMContentLoaded', function() {
 	// 라디오 버튼에 이벤트 리스너 추가
 	radioButtons.forEach(function(radioButton) {
 		radioButton.addEventListener('click', function() {
-			// console 에서 확인
+			// gender값 연결
 			gender = radioButton.value
-			console.log(gender)
 		});
 	});
 
 });
-
-
 
 document.addEventListener('DOMContentLoaded', function() {
 	var noneradio = document.getElementById("gender-none1");
@@ -42,7 +39,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 function checkInput() {
-	/* 		let regExpId = /^[a-z|A-Z|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/; */
 	let regExpId = /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{6,}$/;
 	let regExpPasswd = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()-=_+])[A-Za-z\d!@#$%^&*()-=_+]{8,}$/;
 	let regExpName = /^[가-힣]*$/;
@@ -142,12 +138,6 @@ function checkInput() {
 	}
 	if (!regExpAddress.test(detailAddress)) {
 		alert("상세주소는 한글과 숫자만 입력해주세요.")
-		return
-	}
-
-	// gender
-	if (gender === null) {
-		alert("성별을 선택해주세요.")
 		return
 	}
 

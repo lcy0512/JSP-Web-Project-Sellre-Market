@@ -38,7 +38,7 @@ DataSource dataSource;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-		
+		System.out.println("아이디 : " + userid);
 		String query = "select i.inquiryid , i.intitle, i.insertdate, i.status, q.qname "
 					 + "from personal_inquiry i, questcode q "
 					 + "where q.questid = i.questid and userid = ?";
