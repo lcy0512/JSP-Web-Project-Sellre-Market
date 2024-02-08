@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.market.command.MAdminCategory;
+import com.market.command.MAdminCategoryInsert;
 import com.market.command.MAdminGetCategory;
 import com.market.command.MAdminGetPackKind;
 import com.market.command.MAdminGetPackType;
@@ -29,6 +31,7 @@ import com.market.command.MInsertInquiry;
 import com.market.command.MLoadInquiryList;
 import com.market.command.MProductDetailPageCommand;
 import com.market.command.MSignUp;
+import com.market.dto.AdminCategoryDto;
 import com.market.dto.AdminGetCategoryDto;
 import com.market.dto.AdminGetPackTypeDto;
 import com.market.dto.AdminProductDto;
@@ -262,7 +265,48 @@ public class Controller extends HttpServlet {
 				out.print(new Gson().toJson(result));
 				out.flush();
 				return;
+			
+				//관리자 카테고리 현황
+			case "/adminCategory.do" :
+				command = new MAdminCategory();
+				command.execute(request, response);
 				
+				int categoryTotal = (int) request.getAttribute("total");
+				int categoryLastPage = (int) request.getAttribute("lastPage");
+				int categoryIndex_no = (int) request.getAttribute("index_no");
+				ArrayList<AdminCategoryDto> categoryList = (ArrayList) request.getAttribute("list");
+				
+				//ajax로 데이터를 한번에 보내기 위해 키-값 형태의 Map 이용.
+				Map<String, Object> dataCategory = new HashMap<>();
+				dataCategory.put("total", categoryTotal);
+				dataCategory.put("lastPage", categoryLastPage);
+				dataCategory.put("index_no", categoryIndex_no);
+				dataCategory.put("categoryList", categoryList);
+				
+				out.print(new Gson().toJson(dataCategory));
+				out.flush();
+				return;
+				
+			//관리자 카테고리 페이지
+			case "/goToadminCategory.do" :
+				viewPage = "adminCategory.jsp";
+				return;
+			
+			//관리자 카테고리 등록 페이지 전환
+			case "/adminCategoryRegister.do" :
+				viewPage = "adminCategoryRegister.jsp";
+				break;
+					
+			//관리자 카테고리 등록하기
+			case "/insertCategory.do" :
+				command = new MAdminCategoryInsert();
+				command.execute(request, response);
+				
+				int num = (int) request.getAttribute("num");
+				request.setAttribute("num", num);
+				out.print(new Gson().toJson(num));
+				out.flush();
+				return;
 				
 			// 메인 페이지 
 			case "/mainPage.do" :
