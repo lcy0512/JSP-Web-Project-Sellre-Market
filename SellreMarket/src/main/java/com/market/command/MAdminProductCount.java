@@ -17,7 +17,14 @@ public class MAdminProductCount implements MCommand{
 		 * currentPage : ajax로 넘어온 현재페이지 (사용자가 클린한 페이지번호)
 		 *
 		 */
-		int currentPage = Integer.parseInt(reqeust.getParameter("pageNum"));
+		int currentPage = 0;
+		
+		if(reqeust.getParameter("pageNum") == null) {
+			currentPage = 1;
+		} else {
+			currentPage = Integer.parseInt(reqeust.getParameter("pageNum"));
+		}
+		
 		
 		
 		/*

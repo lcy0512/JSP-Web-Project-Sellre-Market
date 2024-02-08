@@ -31,12 +31,6 @@
 		font-family: 'SCoreDream';
 	}	
 	
-	/* body{
-		height: 100vh;
-		background-color: skyblue;
-		transition: var(--trans-05);
-	} */
-	
 	.sidebar {
 		position : fixed;
 		top : 0;
@@ -181,70 +175,6 @@
 		color : var(--sidebar-color);
 	}
 	
-	/* .home {
-		position : relative;
-		top : 0px;
-		height: 100vh;
-		left : 220px;
-		width: calc(100%-220px);
-		transition : var(--trans-05);
-		height: 100px;
-		display: flex;
-		align-items: center;
-	}
-	
-	.home .text{
-		font-size: 25px;
-		font-weight: 700;
-		font-weight : bold;
-		padding: 15px 40px;
-		display: flex;
-		align-items: center;
-		height: 63px;
-		
-	}
-	
-	.sidebar.close ~ .home {
-		left : 140px;
-		width: calc(100%-140px);
-	}
-	
-		
-		
-	.container {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-   		
-	}
-
-    .info {
-        white-space: nowrap; 텍스트 줄 바꿈을 방지합니다.
- 	   	overflow: auto; 내용이 넘칠 경우 스크롤이 표시됩니다.
-  		width: 100%; 가로 너비를 100%로 설정합니다.
-  		font-size: 12px;
-  		display: flex;
-  		justify-content: center;
-  		
-    }
-    
-	
-	.main {
-		position : absolute;
-		top : 0px;
-		height: 100vh;
-		left : 260px;
-		width: calc(100%-260px);
-		transition : var(--trans-05);
-		display: flex;
-		align-items: center;
-		
-	}
-	
-	.sidebar.close ~ .main {
-		left : 200px;
-		width: calc(100%-160px);
-	} */
 	
 	
 	

@@ -1,11 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>1:1 문의 - 셀리마켓</title>
 </head>
+<script type="text/javascript">
+
+var id = '<%=(String)session.getAttribute("id")%>';
+
+	function inquirywrite() {
+		// 로그인 여부 확인
+		if (id !== "null") {
+			window.location.href = 'inquirywrite.jsp';
+		} 
+		else {
+			var result = window.confirm("로그인 후 이용 가능합니다. 로그인 하시겠습니까?")
+			if (result === true) {
+				window.location.href = 'Login.jsp';
+			}
+		}
+	}
+
+</script>
 <body>
 <jsp:include page="header.jsp"/>
 	<div class="css-2b29tl eug5r8l2">
@@ -18,17 +37,38 @@
 					</div>
 				</div>
 				<div class="css-e23nfx e16adls21">
+					<div width="100" class="css-16tcewl e16adls20">유형</div>
 					<div class="css-1ym8aqm e16adls20">제목</div>
 					<div width="100" class="css-16tcewl e16adls20">작성일</div>
 					<div width="100" class="css-16tcewl e16adls20">답변상태</div>
 				</div>
-				<div class="css-l0r8ps e1cfowvj1">게시글이 없습니다.</div>
-				<div class="css-15jhycr e3tf63e0">
-					<button class="css-1ibxj4m e4nu7ef3" type="button" width="120"
-						height="44" radius="3">
-						<span class="css-nytqmg e4nu7ef1">문의하기</span>
+				
+					<c:choose>
+	       				<c:when test="${empty InquiryList}">
+	       				<div class="css-l0r8ps e1cfowvj1" style="margin-top: 40px;">
+	            			게시글이 없습니다.
+	            			</div>
+	        			</c:when>
+	        			<c:otherwise>
+	            			<c:forEach items="${InquiryList}" var="inquiry">
+	            			<div class="css-l0r8ps e1cfowvj1" style="margin-top: 0px;">
+	            			 <form action="inquirydetail.do" method="post">
+	            			<input type="hidden" name="inquiryid" value="${inquiry.inquiryid}">
+	            				<button type="submit" class="css-e24nfx">
+	            					<div width="100" class="css-15tcewl">${inquiry.questid}</div>
+	            					<div class="css-1ym7aqm">${inquiry.intitle}</div>
+	               					<div width="100" class="css-15tcewl">${inquiry.insertdate}</div>
+	                				<div width="100" class="css-15tcewl">${inquiry.status}</div>
+	                			</button>
+	                			</form>
+	                			</div>
+	            			</c:forEach>
+	        			</c:otherwise>
+	    			</c:choose>
+				<div class="css-15jhycr e3tf63e0"></div>
+					<button class="css-1ibxj4m e4nu7ef3" id="inquirybtn" type="button" width="120" radius="3" onclick="inquirywrite()">
+						문의하기
 					</button>
-				</div>
 			</div>
 		</div>
 	</div>

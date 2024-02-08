@@ -121,6 +121,9 @@
 	padding-bottom: 27px;
 	-webkit-box-pack: justify;
 	justify-content: space-between;
+	border-bottom-style: solid;
+	border-bottom-width: 2px;
+	border-bottom-color: rgb(51, 51, 51);
 }
 
 .css-fhxb3m {
@@ -147,12 +150,31 @@
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
 	border-bottom-color: rgb(51, 51, 51);
-	border-top-width: 2px;
-	border-top-style: solid;
-	border-top-color: rgb(51, 51, 51);
+}
+
+.css-e24nfx {
+	display: flex;
+	width: 100%;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	padding-right: 0px;
+}
+
+.css-e24nfx:hover {
+	background-color: rgb(250, 250, 250) !important;
+	font-weight: 500;
 }
 
 .css-1ym8aqm {
+	-webkit-box-flex: 1;
+	flex-grow: 1;
+	text-align: center;
+	line-height: 20px;
+	font-weight: 400;
+	color: rgb(51, 51, 51);
+}
+
+.css-1ym7aqm {
 	-webkit-box-flex: 1;
 	flex-grow: 1;
 	text-align: center;
@@ -169,10 +191,16 @@
 	color: rgb(51, 51, 51);
 }
 
+.css-15tcewl {
+	flex-basis: 100px;
+	text-align: center;
+	line-height: 20px;
+	font-weight: 400;
+	color: rgb(51, 51, 51);
+}
+
 .css-l0r8ps {
-	width: 100%;
-	height: 200px;
-	line-height: 200px;
+	margin-top: 20px;
 	font-size: 16px;
 	font-weight: 500;
 	color: rgb(51, 51, 51);
@@ -182,7 +210,6 @@
 .css-15jhycr {
 	position: relative;
 	min-height: 44px;
-	margin-top: 20px;
 	text-align: center;
 }
 
@@ -199,7 +226,6 @@
 	overflow-x: hidden;
 	overflow-y: hidden;
 	width: 120px;
-	height: 44px;
 	border-top-left-radius: 3px;
 	border-top-right-radius: 3px;
 	border-bottom-right-radius: 3px;
@@ -214,6 +240,8 @@
 	border-right-style: none;
 	border-bottom-style: none;
 	border-left-style: none;
+	margin-left: auto;
+	height: 44px;
 }
 
 .css-1ibxj4m span {
@@ -221,6 +249,7 @@
 }
 
 .css-nytqmg {
+	color: rgb(0, 0, 0);
 	display: inline-block;
 	font-size: 16px;
 	font-weight: 500;

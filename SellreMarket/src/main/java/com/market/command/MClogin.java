@@ -1,0 +1,47 @@
+package com.market.command;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.market.dao.LoginDao;
+import com.market.dto.LoginDto;
+
+public class MClogin implements MCommand {
+
+	@Override
+	public void execute(HttpServletRequest request, HttpServletResponse response) {
+		
+		HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("id");
+		String password = (String) session.getAttribute("password");
+		
+		LoginDao login = new LoginDao();
+		
+		// 로그인 시도 시 알람 메시지
+		String alertMessage = null;
+		
+		
+		// map으로 dao에서 받아온다.
+		Map<String, Object> data = login.checkLogin(id, password);
+
+		String userName = (String) data.get("name");
+		boolean check = (boolean) data.get("check");
+		
+		System.out.println(userName);
+		System.out.println(check);
+		
+		
+		if (check) {
+			alertMessage = "success";
+		}
+		else {
+			alertMessage = "아이디와 비밀번호를 확인 해주세요.";
+		}
+		session.setAttribute("userName", userName);
+		session.setAttribute("alertMessage", alertMessage);
+	}
+}

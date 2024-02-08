@@ -13,6 +13,7 @@
 <title>개인정보처리방침 - 셀리</title>
 </head>
 <body>
+	<jsp:include page="header.jsp"/>
 	<main id="main" class="main_container">
 
 
