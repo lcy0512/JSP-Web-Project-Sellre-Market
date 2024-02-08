@@ -98,7 +98,8 @@
 	<div style="display: flex; justify-content: center; align-items: center; margin: auto;">
         <button type="button" style="margin-right: 10px;" onclick="window.close()">취소</button>
         <form id="myForm" method="post">
-        	<button id="addCart" type="button" style="background-color: green; color: white;" onclick="addCart()">장바구니 담기</button>
+        	<button id="addCart" type="button" style="background-color: green; color: white;" onclick="addCart(document.getElementById('selectedNumber').textContent)">장바구니 담기</button>
+        	<!-- <input type="hidden" id="hiddenNum"> -->
         </form>
     </div>
     

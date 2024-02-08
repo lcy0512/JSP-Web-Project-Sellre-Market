@@ -52,8 +52,6 @@ public class MCmainView implements MCommand{
 		
 		int blockStart = (blockPage-1) * eachPageCount + 1;
 		
-//		List<MainViewDto> dtos = dao.productView(limitFrom, eachPageCount);
-		
 		// 마지막 페이지 정하기
 		int endPage = (totalpageCount / eachPageCount) == 0 ? totalpageCount / eachPageCount : (totalpageCount / eachPageCount) + 1 ;
 		

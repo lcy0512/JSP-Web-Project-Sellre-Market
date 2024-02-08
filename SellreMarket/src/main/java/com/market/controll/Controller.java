@@ -88,7 +88,8 @@ public class Controller extends HttpServlet {
 				viewPage = "Login.jsp";
 				break;
 				
-				
+			
+			// 로그인 아이디 체크
 			case "/loginCheck.do" : 
 				id = request.getParameter("id");
 				String password = request.getParameter("password");
@@ -262,6 +263,8 @@ public class Controller extends HttpServlet {
 				out.flush();
 				return;
 				
+				
+			// 메인 페이지 
 			case "/mainPage.do" :
 				// 페이징 처리를 위한
 				int curPage = 0;
@@ -274,8 +277,8 @@ public class Controller extends HttpServlet {
 				}
 				
 				request.setAttribute("curPage", curPage);
-				// 페이징 처리를 위한
 				
+				// 페이징 처리를 위한
 				command = new Paging();
 				command.execute(request, response);
 				command = new MCmainView();
@@ -284,7 +287,8 @@ public class Controller extends HttpServlet {
 				viewPage = "mainViewPage.jsp";
 				
 				break;
-				
+			
+			// 장바구니 클릭 시 띄우는 팝업
 			case "/popup.do" :
 				
 				String yName = request.getParameter("yName");
@@ -295,19 +299,15 @@ public class Controller extends HttpServlet {
 				int recipeid = Integer.parseInt(request.getParameter("recipeid"));
 				int productid = Integer.parseInt(request.getParameter("productid"));
 				
+				System.out.println(recipeid);
+				System.out.println(productid);
+				
 				session.setAttribute("yName", yName);
 				session.setAttribute("ySrc", ySrc);
 				session.setAttribute("price", price);
 				session.setAttribute("yTitle", yTitle);
 				session.setAttribute("recipeid", recipeid);
 				session.setAttribute("productid", productid);
-				
-//				command = new ClickData();
-//				command.execute(request, response);
-//				
-//				// "javax.servlet.http.HttpSession.getAttribute(String)" is null
-//				int recipeId = (int) session.getAttribute("recipeId");
-//				session.setAttribute("recipeId", recipeId);
 				
 				viewPage = "popup.jsp";
 				
@@ -316,30 +316,17 @@ public class Controller extends HttpServlet {
 				
 				// 카트 수정 해야함
 			case "/getCart.do" :
-				int ri = Integer.parseInt(request.getParameter("recipeid"));
-				int pi = Integer.parseInt(request.getParameter("productid"));
+				int selectedNumber = Integer.parseInt(request.getParameter("selectedNumber"));
+				System.out.println(selectedNumber);
+//				int ri = (int) session.getAttribute("recipeid");
+//				int pi = (int) session.getAttribute("productid");
 				
-				System.out.println(ri);
-				System.out.println(pi);
+//				System.out.println(ri + " ?????????");
+//				System.out.println(pi + " ?????????");
 				
 				viewPage = "mainViewPage.do";
-//				받아 올 것 productid, recipeid , qty
-//				int productid = Integer.parseInt(request.getParameter("productid"));
-//				int recipeid = Integer.parseInt(request.getParameter("recipeid"));
-//				int selectedNumber = Integer.parseInt(request.getParameter("selectedNumber"));
-//				
-//				System.out.println(productid);
-//				System.out.println(recipeid);
-//				System.out.println(selectedNumber);
 				
-//				session.setAttribute("productid", productid);
-//				session.setAttribute("recipeid", recipeid);
-//				session.setAttribute("selectedNumber", selectedNumber);
-//				
-//				command = new getCart();
-//				command.execute(request, response);
-//				
-//				viewPage = "mainViewPage.jsp";
+				break;
 				
 			default :
 				break;
