@@ -19,8 +19,9 @@ public class MSignUp implements MCommand {
 		String address = request.getParameter("address");
 		String detailAddress = request.getParameter("detailAddress");
 		String allAddress = address.concat(detailAddress);
-		String gender = request.getParameter("gender");
 		
+		String gender = request.getParameter("gender");
+			
 		if(gender.length() == 4) {
 			// 성별 선택안함
 			gender = Integer.toString(2);

@@ -7,12 +7,14 @@
 <title>회원가입 - 셀리마켓</title>
 </head>
 <link rel="stylesheet" href="css/signup.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
 <script src="js/signup.js"></script>
 <script src="js/address.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <body>
 	<jsp:include page="header.jsp" />
-	<form action="signup.do" method="post">
+	<form name="signupForm" action="signup.do" method="post">
 	<div class="css-pculus e1ovi4141">
 		<div class="css-o5dw7d e1ovi4140">회원가입</div>
 		<div class="css-mhmtvt e15so55l1">
@@ -28,8 +30,7 @@
 					<div class="css-82a6rk e744wfw3">
 						<div class="css-jmalg e1uzxhvi6">
 							<div class="css-176lya2 e1uzxhvi3">
-								<input data-testid="input-box" id="memberId" name="memberId"
-									placeholder="아이디를 입력해주세요" type="text" required=""
+								<input data-testid="input-box" id="memberId" name="memberId" placeholder="아이디를 입력해주세요" type="text" required=""
 									class="css-u52dqk e1uzxhvi2" value="">
 							</div>
 						</div>
@@ -64,8 +65,7 @@
 					<div class="css-82a6rk e744wfw3">
 						<div class="css-jmalg e1uzxhvi6">
 							<div class="css-176lya2 e1uzxhvi3">
-								<input data-testid="input-box" id="passwordConfirm"
-									name="passwordConfirm" placeholder="비밀번호를 한번 더 입력해주세요"
+								<input data-testid="input-box" id="passwordConfirm" name="passwordConfirm" placeholder="비밀번호를 한번 더 입력해주세요"
 									type="password" autocomplete="off" class="css-u52dqk e1uzxhvi2"
 									value="">
 							</div>
@@ -166,8 +166,8 @@
 								<span aria-labelledby="gender-woman" class="css-mgd87h et8nqc31">여자</span>
 							</label>
 							<label class="css-z9g6s0 et8nqc33" for="gender-none">
-								<input data-testid="radio-NONE" id="gender-none" name="gender" type="radio" class="css-1pes2r6 et8nqc32" value="NONE">
-								<span id="gender-none1" class="css-198i9ca e2sqze61">
+								<input data-testid="radio-NONE" id="gender-none" name="gender" type="radio" class="css-1pes2r6 et8nqc32" value="NONE" checked="checked">
+								<span id="gender-none1" class="css-5xw1m2 e2sqze61">
 									<div class="css-1vic0rk e2sqze60"></div>
 								</span>
 								<span aria-labelledby="gender-none" class="css-mgd87h et8nqc31">선택안함</span>
@@ -215,12 +215,12 @@
 					<div class="css-1y8737n e744wfw5">
 						<label class="css-1obgjqh e744wfw4">이용약관동의<span class="css-qq9ke6 e744wfw0">*</span></label>
 					</div>
-					<div class="css-82a6rk e744wfw3">
+					<div class="css-82a6rk e744wfw3" id="checkboxContainer">
 					<%-- 1 --%>
 						<div class="css-ov2xfu e1sjmfnv7">
 							<div class="css-s5xdrg e1sjmfnv4">
 								<label class="css-1mjkje9 e1dcessg3" for="RequiredTermsCondition">
-								<input id="RequiredTermsCondition" type="checkbox" class="css-agvwxo e1dcessg2">
+								<input id="RequiredTermsCondition" type="checkbox" class="css-agvwxo e1dcessg2" onclick="clickCheckBox('RequiredTermsCondition')">
 								<div class="css-79hxr7 e1dcessg1">
 									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z" stroke="#ddd" fill="#fff"></path>
@@ -233,7 +233,7 @@
 						<div class="css-ov2xfu e1sjmfnv7">
 							<div class="css-s5xdrg e1sjmfnv4">
 								<label class="css-1mjkje9 e1dcessg3" for="RequiredTermsOfPrivacy">
-								<input id="RequiredTermsOfPrivacy" type="checkbox" class="css-agvwxo e1dcessg2">
+								<input id="RequiredTermsOfPrivacy" type="checkbox" class="css-agvwxo e1dcessg2" onclick="clickCheckBox('RequiredTermsOfPrivacy')">
 									<div class="css-79hxr7 e1dcessg1">
 										<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z" stroke="#ddd" fill="#fff"></path>
@@ -245,24 +245,8 @@
 					<%-- 3 --%>
 						<div class="css-ov2xfu e1sjmfnv7">
 							<div class="css-s5xdrg e1sjmfnv4">
-								<label class="css-1mjkje9 e1dcessg3" for="OptionalTermsOfPrivacy">
-								<input id="OptionalTermsOfPrivacy" type="checkbox" class="css-agvwxo e1dcessg2">
-									<div class="css-79hxr7 e1dcessg1">
-										<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-											<path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z" stroke="#ddd" fill="#fff"></path>
-											<path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-										</svg>
-									</div>
-								<span>개인정보 수집∙이용 동의</span>
-								</label>
-								<span class="css-64z8en e1sjmfnv5">(선택)</span>
-							</div>
-							<a class="css-7chi73 e1sjmfnv3">약관보기</a>
-						</div>
-						<div class="css-ov2xfu e1sjmfnv7">
-							<div class="css-s5xdrg e1sjmfnv4">
 								<label class="css-1mjkje9 e1dcessg3" for="RequiredSignupAge">
-									<input id="RequiredSignupAge" type="checkbox" class="css-agvwxo e1dcessg2">
+									<input id="RequiredSignupAge" type="checkbox" class="css-agvwxo e1dcessg2" onclick="clickCheckBox('RequiredSignupAge')">
 									<div class="css-79hxr7 e1dcessg1">
 										<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z" stroke="#ddd" fill="#fff"></path>
@@ -277,7 +261,7 @@
 				</div>
 			</div>
 			<div class="css-ud3rkg e1utgeno0">
-				<button class="css-18m884r e4nu7ef3" type="submit" width="240" height="56" radius="3">
+				<button class="css-18m884r e4nu7ef3" type="button" width="240" height="56" radius="3" onclick='checkInput()'>
 					<span class="css-nytqmg e4nu7ef1">가입하기</span>
 				</button>
 			</div>
