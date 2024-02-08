@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
-import com.market.command.ClickData;
+import com.market.command.getCart;
 import com.market.command.MAdminProductCount;
 import com.market.command.MCgetCart;
 import com.market.command.MCmainView;
@@ -77,8 +77,19 @@ public class Controller extends HttpServlet {
 		switch(com) {
 			// 로그인 화면
 			case "/login.do" :
-				viewPage = "test.jsp";
+				viewPage = "Login.jsp";
 				break;
+				
+			case "/loginCheck.do" : 
+				id = request.getParameter("setId");
+				String password = request.getParameter("password");
+				
+				System.out.println(id);
+				System.out.println(password);
+				
+				viewPage = "Login.jsp";
+				break;
+				
 				
 			case "/inquiry.do" :
 				System.out.println("마지막");
@@ -124,7 +135,6 @@ public class Controller extends HttpServlet {
 				data.put("lastPage", lastPage);
 				data.put("index_no", index_no);
 				data.put("productList", productList);
-				
 				
 				out.print(new Gson().toJson(data));
 				out.flush();
@@ -195,10 +205,91 @@ public class Controller extends HttpServlet {
 				out.print(new Gson().toJson(result));
 				out.flush();
 				return;
+
 				
+			case "/mainPage.do" :
+				// 페이징 처리를 위한
+				int curPage = 0;
+				
+				try {
+					curPage = Integer.parseInt(request.getParameter("curPage"));
+				}
+				catch (Exception e) {
+					curPage = 1;
+				}
+				
+				request.setAttribute("curPage", curPage);
+				// 페이징 처리를 위한
+				
+				command = new Paging();
+				command.execute(request, response);
+				command = new MCmainView();
+				command.execute(request, response);
+				
+				viewPage = "mainViewPage.jsp";
+				
+				break;
+				
+			case "/popup.do" :
+				
+				String yName = request.getParameter("yName");
+				String ySrc = request.getParameter("ySrc");
+				String price =  request.getParameter("price");
+				String yTitle = request.getParameter("yTitle");
+				
+				int recipeid = Integer.parseInt(request.getParameter("recipeid"));
+				int productid = Integer.parseInt(request.getParameter("productid"));
+				
+				session.setAttribute("yName", yName);
+				session.setAttribute("ySrc", ySrc);
+				session.setAttribute("price", price);
+				session.setAttribute("yTitle", yTitle);
+				session.setAttribute("recipeid", recipeid);
+				session.setAttribute("productid", productid);
+				
+//				command = new ClickData();
+//				command.execute(request, response);
+//				
+//				// "javax.servlet.http.HttpSession.getAttribute(String)" is null
+//				int recipeId = (int) session.getAttribute("recipeId");
+//				session.setAttribute("recipeId", recipeId);
+				
+				viewPage = "popup.jsp";
+				
+				break;
+				
+				
+				// 카트 수정 해야함
+			case "/getCart.do" :
+				int ri = Integer.parseInt(request.getParameter("recipeid"));
+				int pi = Integer.parseInt(request.getParameter("productid"));
+				
+				System.out.println(ri);
+				System.out.println(pi);
+				
+				viewPage = "mainViewPage.jsp";
+//				받아 올 것 productid, recipeid , qty
+//				int productid = Integer.parseInt(request.getParameter("productid"));
+//				int recipeid = Integer.parseInt(request.getParameter("recipeid"));
+//				int selectedNumber = Integer.parseInt(request.getParameter("selectedNumber"));
+//				
+//				System.out.println(productid);
+//				System.out.println(recipeid);
+//				System.out.println(selectedNumber);
+				
+//				session.setAttribute("productid", productid);
+//				session.setAttribute("recipeid", recipeid);
+//				session.setAttribute("selectedNumber", selectedNumber);
+//				
+//				command = new getCart();
+//				command.execute(request, response);
+//				
+//				viewPage = "mainViewPage.jsp";
 				
 			default :
 				break;
+				
+				
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher(viewPage);
