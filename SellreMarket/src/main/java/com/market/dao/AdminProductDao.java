@@ -31,63 +31,6 @@ public class AdminProductDao {
 	}
 	
 	
-	/************************************************************************************************
-	 * Function : 상품 리스트를 가져온다. 
-	 * @param 	: null
-	 * @return 	: ArrayList
-	************************************************************************************************/
-	public ArrayList<AdminProductDto> selectList() {
-		ArrayList<AdminProductDto> dtos = new ArrayList<AdminProductDto>();
-		Connection conn = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		
-		try {
-			
-			conn = dataSource.getConnection();
-			String query = """
-							SELECT 
-								
-								productid, 
-								pname, 
-								IFNULL(pEngname, '') as pEngname, 
-								IFNULL(origin, '') as origin, 
-								date(pinsertdate), 
-								date(expirationdate), 
-								CASE status
-									WHEN '0' THEN '판매종료'
-									WHEN '1' THEN '판매중'
-								ELSE '' END AS status 
-								
-							FROM product
-							ORDER BY productid DESC
-
-					""";
-		
-			ps = conn.prepareStatement(query);
-			rs = ps.executeQuery();
-			
-			while(rs.next()) {
-				AdminProductDto product = new AdminProductDto();
-				product.setProductid(rs.getInt(1));
-				product.setPname(rs.getString(2));
-				product.setpEngname(rs.getString(3));
-				product.setOrigin(rs.getString(4));
-				product.setPinsertdate(rs.getString(5));
-				product.setExpirationdate(rs.getString(6));
-				product.setStatus(rs.getString(7));
-				
-				dtos.add(product);
-			}
-			
-			conn.close();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return dtos;
-	}
-	
 	
 	/************************************************************************************************
 	 * Function : 상품의 전체 갯수 조회 => 페이징처리 위해
