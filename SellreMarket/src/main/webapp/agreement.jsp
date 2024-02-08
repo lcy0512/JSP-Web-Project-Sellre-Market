@@ -30,6 +30,7 @@
 <link rel="stylesheet" href="css/agreement.css" />
 </head>
 <body>
+	<jsp:include page="header.jsp"/>
 	<main id="main" class="main_container">
 		<div class="article article_privacy">
 			<div class="sub_inner_bg"></div>

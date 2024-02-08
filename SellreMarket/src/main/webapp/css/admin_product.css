@@ -1,173 +1,7 @@
-/* 관리자환영합니다. 로그아웃 css start*/
- /*    header {
-    	text-align : right;
-    	padding: 30px;
-	    font-size : 12px;
-    }
-	관리자환영합니다. 로그아웃 css end
-    
-    
-	내용 css 시작
-	.main {
-		position : relative;
-		top : 80px;
-		height: 100vh; 
-		left : 220px;
-		justify-content : center;
-		height: 600px;
-		width: calc(100%-260px);
-		transition : var(--trans-05);
-		display: flex;
-		align-items: center;
-		margin-right:40px;
-		margin-top : 40px;
-		
-	}
-	내용 css 끝
-
-	
-	제목 css 시작
-	.title {
-		display: block;
-		font-size: 27px; 제목의 글꼴 크기 조정
-  		font-weight: 700; 제목의 글꼴 굵기 조정
-    	color: #333333; 제목의 글꼴 색상 조정
-    	justify-content : center;
-    	text-align: center;
-    	margin-top : 60px;
-    	padding-bottom: 40px;
-    	
-	}
-	제목 css 끝
-	
-	javascript table css start
-	
-	CSS 코드
-	#listTable {
-		position: fixed;
-		top: 200px; 표의 상단 위치 조정
-		left: 250px; 표의 왼쪽 위치 조정
-		width: 500px; 표의 너비를 500px로 고정
-		height: 100%; 표의 높이를 300px로 고정
-	}
-	
-	
-	.table-style {
-		border-collapse: collapse;
-		position : fixed;
-		top : 80px;
-		left : 220px;
-		width: 80%;
-		height: 700px;
-		padding-top : 0px;
-		min-width: 80%; 표의 최대 너비를 800px로 제한
- 		min-height: 700px; 표의 최대 높이를 500px로 제한
-	}
-	
-	.table-style th, .table-style td {
-		 border: 1px solid black;
-		 padding: 8px;
-		 text-align: left;
-	}
-	
-	.table-style th {
-		background-color: #f2f2f2;
-	}
-	
-	.table-style tr:nth-child(even) {
-		background-color: #f9f9f9;
-	}
-	
-	.table-style tr:hover {
-		background-color: #ddd;
-	}
-	
-	.table-style td {
-	    border: none; 좌우 테두리 제거
-	    padding: 15px;
-	    text-align: left;
-	    padding-left: 40px; 열 간격을 넓게 주기 위한 왼쪽 패딩 설정
-	    padding-right: 40px; 열 간격을 넓게 주기 위한 오른쪽 패딩 설정
-	}
-	
-	.table-style th {
-	 	padding: 20px;
-		border: none; 좌우 테두리 제거
-		text-align: center;
-	    padding-left: 20px; 열 간격을 넓게 주기 위한 왼쪽 패딩 설정
-	    padding-right: 20px; 열 간격을 넓게 주기 위한 오른쪽 패딩 설정
-	}
-	
-	#paging {
-		display: flex;
-    	justify-content: center;
-    	align-items: center;
-		margin-top : 30px;
-	}
-	
-	#paging {
-		position: fixed;
-		top: 1000px; 표의 상단 위치 조정
-		left : 500px;
-		width: 500px; 표의 너비를 500px로 고정
-		justify-content: center;
-		margin-top : 30px;
-	}
-	
-	
-	
-	#paging button {
-	    background-color: #f2f2f2;
-	    border: none;
-	    color: #333;
-	    padding: 8px 16px;
-	    margin: 4px;
-	    cursor: pointer;
-	    border-radius: 4px;
-	}
-	
-	#paging button:hover {
-	    background-color: #f9f9f9;
-	}
-	
-	#paging button:disabled {
-	    background-color: #ddd;
-	    cursor: not-allowed;
-	} */
-	/* javascript table css end */
-	
     /* 전체 페이지 스타일 */
     body {
         margin: 0;
         padding: 0;
-    }
-
-    /* 헤더 스타일 */
-   /*  header {
-    	text-align : right;
-    	padding: 30px;
-	    font-size : 10px;
-	    background-color: #F9F9E4;
-	    height: 12px;
-    } */
-    
-    header {
-	    position: fixed;
-	    top: 0;
-	    left: 0;
-	    right: 0;
-	    text-align: right;
-	    padding: 30px;
-	    font-size: 10px;
-	    background-color: #F9F9E4;
-	    height: 12px;
-	    z-index: 50;
-	}
-    
-
-    .info {
-        float: right;
-        font-size: 14px;
     }
 
     /* 타이틀 스타일 */
@@ -194,11 +28,7 @@
         top : 10px;
         left : 240px;
         flex-direction: column;
-        
-        /* justify-content: center; */
         align-items: center;
-        /* height: 400px; */
-        /* min-height: calc(100vh - 40px); 헤더와 푸터 높이 고려 */
     	overflow-y: auto;
     }
 
@@ -217,13 +47,6 @@
 	    height: 800px;
     }
     
-    /* .main_content {
-	 	display: flex;
-	 	justify-content: center;
-	 	align-items: center;
-	 	flex-direction: column;
-	} */
-    
     /* 결과 테이블 스타일 */
     #result {
         margin-bottom: 20px;
@@ -237,27 +60,6 @@
         width: 100%;
         border-collapse: collapse;
     }
-
-   /*  #listTable th,
-    #listTable td {
-        padding: 10px;
-         padding: 8px;
-		 text-align: left;
-        border: 1px solid #ddd;
-    }
-    
-    #listTable th {
-		background-color: #f2f2f2;
-		text-align : center;
-	}
-	
-	#listTable tr:nth-child(even) {
-		background-color: #f9f9f9;
-	}
-	
-	#listTable tr:hover {
-		background-color: #ddd;
-	} */
 	
 	.table-style th, .table-style td {
 		 border: 1px solid black;
@@ -329,3 +131,36 @@
         border-top: 1px solid #ddd;
         text-align: center;
     }
+    
+	.btnGroup {
+		margin-left : 72%;
+	} 
+	 
+	div.btnGroup {
+	    display: flex;
+	    justify-content: center;
+	}
+	
+	div.btnGroup button {
+	    background-color: #f2f2f2;
+	    border: none;
+	    color: #333;
+	    padding: 8px 16px;
+	    margin: 4px;
+	    cursor: pointer;
+	    border-radius: 4px;
+	}
+	
+	div.btnGroup button:hover {
+	    background-color: #f9f9f9;
+	}
+	
+	div.btnGroup button:disabled {
+	    background-color: #ddd;
+	    cursor: not-allowed;
+	}
+	
+	.registerBtn a {
+	   	text-decoration: none;
+	}
+	 
