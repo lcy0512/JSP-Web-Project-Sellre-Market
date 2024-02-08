@@ -88,6 +88,7 @@ public class Controller extends HttpServlet {
 				viewPage = "Login.jsp";
 				break;
 				
+				
 			case "/loginCheck.do" : 
 				id = request.getParameter("id");
 				String password = request.getParameter("password");
@@ -100,14 +101,20 @@ public class Controller extends HttpServlet {
 				command = new MClogin();
 				command.execute(request, response);
 				
+				// MC login으로 받아온 message
 				String alertMessage = (String) session.getAttribute("alertMessage");
-				// 아이디 비밀번호 일치 시 이름 보내기
+				// MC login으로 받아온 userName
 				String userName = (String) session.getAttribute("userName");
+				
+				
 				session.setAttribute("userName", userName);
 				
+				// 확인
 				System.out.println(userName + "  userName in controller");
-
 				System.out.println(alertMessage + " controller alert message");
+				
+				
+				// login.js 로 보내기 message 보내기
 				out.print(new Gson().toJson(alertMessage));
 				out.flush();
 				

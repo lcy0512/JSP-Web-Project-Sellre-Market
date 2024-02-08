@@ -9,11 +9,6 @@ public class LoginDto {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public LoginDto(String name) {
-		super();
-		this.name = name;
-	}
-	
 	
 	public String getId() {
 		return id;
