@@ -11,6 +11,9 @@ public class MAdminProductInsert implements MCommand {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
+		
 		String image = request.getParameter("image");
 		String bname = request.getParameter("bname");
 		String pname = request.getParameter("bname");

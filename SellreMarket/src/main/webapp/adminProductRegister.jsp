@@ -524,9 +524,12 @@
 					
 			},
 			success : function(response){
-				alert(pname+'['+pstock+']개 등록되었습니다.');
-				window.location.href = "admin_product.jsp";	//성공 시 admin_product.jsp로 이동
-				
+				if(response == 6){
+					alert(pname+'['+pstock+']개 등록되었습니다.');
+					window.location.href = "admin_product.jsp";	//성공 시 admin_product.jsp로 이동
+				} else {
+					console.log("error")
+				}
 			},
 			 error:function(request, status, error){
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -539,8 +542,7 @@
 </script>
 </head>
 <body>
-	<jsp:include page="admin_menu.jsp" flush="false" />
-	<jsp:include page="admin_header.jsp" flush="false" />
+	<jsp:include page="adminHeader.jsp" flush="false" />
 		<div class="main">
 			<div class="title">제품 등록</div>
 				
@@ -591,12 +593,6 @@
 						<label for="origin">원산지 *</label>
 						<input type="text" id="origin" name="origin">
 					</div>
-					
-					<div class="form-group">
-						<label for="expirationdate">소비기한 *</label>
-						<input type="date" id="expirationdate" name="expirationdate">
-					</div>
-					
 					
 					<div class="form-group"> 
 						<label for="description">설명 *</label>
