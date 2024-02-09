@@ -130,7 +130,7 @@ html, button, input, select, textarea {
 }
 
 .css-ufulao:disabled {
-	border-top-color: rgb(221, 221, 221);
+	border-color: rgb(221, 221, 221);
 	color: rgb(221, 221, 221);
 }
 

@@ -26,6 +26,7 @@ import com.market.command.MAdminProductInsert;
 import com.market.command.MClogin;
 import com.market.command.MCmainView;
 import com.market.command.MCommand;
+import com.market.command.MDuplicatedCheck;
 import com.market.command.MInquiryDetail;
 import com.market.command.MInsertInquiry;
 import com.market.command.MLoadInquiryList;
@@ -371,7 +372,12 @@ public class Controller extends HttpServlet {
 				viewPage = "mainViewPage.do";
 				
 				break;
-				
+			
+			case "/duplicatedCheck.do" :
+				command = new MDuplicatedCheck();
+				command.execute(request, response);
+				return;
+
 			case "/logout.do" :
 				session.invalidate();
 				viewPage = "mainPage.do";

@@ -43,7 +43,11 @@ public class MSignUp implements MCommand {
 		
 		SignUpDao dao = new SignUpDao();
 		
+		// 회원가입 정보 입력
 		dao.customerSignUp(userid, password, tel, name, email ,allAddress, gender, birthdate);
+		// 배송지 정보 입력
+		int defaultset = 1;
+		dao.deliveryInfo(allAddress, defaultset, userid);
 	}
 
 }
