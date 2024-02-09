@@ -2,6 +2,7 @@ package com.market.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -21,7 +22,7 @@ public class SignUpDao {
 		}
 	}
 	
-	public void customerSignUp(String userid, String password, String tel, String name, String email, String address, String gender, String birthdate) { // 사용자가 상품등록 form에 입력한 값 DB에 추가 
+	public void customerSignUp(String userid, String password, String tel, String name, String email, String address, String gender, String birthdate) { 
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -33,7 +34,6 @@ public class SignUpDao {
 			
 			preparedStatement = connection.prepareStatement(query);
 			
-			// 브랜드 영문명,한글명
 			preparedStatement.setString(1, userid);
 			preparedStatement.setString(2, password);
 			preparedStatement.setString(3, tel);
@@ -57,7 +57,116 @@ public class SignUpDao {
 				e.printStackTrace();
 			}
 		} // finally
-} // insertInquiry
+} // customerSignUp
+	
+	public void deliveryInfo(String address, int defaultset, String userid) { 
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		String query = "insert into addresslist (address,defaultset,userid) values (?,?,?)";
+		try {
+			connection = dataSource.getConnection();
+			
+			preparedStatement = connection.prepareStatement(query);
+			
+			preparedStatement.setString(1, address);
+			preparedStatement.setInt(2, defaultset);
+			preparedStatement.setString(3, userid);
+			
+			preparedStatement.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally { 
+			// 메모리정리
+			try {
+				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		} // finally
+	} // deliveryInfo
+	
+	public boolean checkDuplicatedId(String userid) { // id 중복확인
+		boolean result = true;
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultset = null;
+		
+		String query = "select userid from customer where userid = ?";
+		try {
+			connection = dataSource.getConnection();
+			
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, userid);
+			resultset = preparedStatement.executeQuery();
+			
+			if(resultset.next()) {
+				result = false;
+				
+				System.out.println("중복된 id : "+ resultset.getString("userid"));
+			}
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally { 
+			// 메모리정리
+			try {
+				if(resultset != null) resultset.close();
+				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		} // finally
+		
+		return result;
+	} // checkDuplicatedId
+	
+	public boolean checkDuplicatedemail(String email) { // id 중복확인
+		boolean result = true;
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultset = null;
+		
+		String query = "select email from customer where email = ?";
+		try {
+			connection = dataSource.getConnection();
+			
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, email);
+			resultset = preparedStatement.executeQuery();
+			
+			if(resultset.next()) {
+				result = false;
+				
+				System.out.println("중복된 email : "+ resultset.getString("email"));
+			}
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally { 
+			// 메모리정리
+			try {
+				if(resultset != null) resultset.close();
+				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		} // finally
+		
+		return result;
+	} // checkDuplicatedId
 	
 	
 	

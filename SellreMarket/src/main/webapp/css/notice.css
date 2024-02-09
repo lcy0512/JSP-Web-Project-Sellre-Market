@@ -1,0 +1,61 @@
+@charset "UTF-8";
+
+.css-1fttcpj {
+    display: flex;
+    flex-direction: column;
+}
+
+.css-14yglsw {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid rgb(244, 244, 244);
+}
+
+.css-3o6rrk {
+    text-align: center;
+    padding: 20px 0px;
+    color: rgb(76, 76, 76);
+    flex-basis: 50px;
+}
+
+.css-fzefrb {
+    padding: 20px 0px 20px 20px;
+    color: rgb(76, 76, 76);
+    flex: 1 1 0%;
+    text-align: left;
+}
+
+.css-3d2kks {
+    text-align: center;
+    padding: 20px 0px;
+    color: rgb(76, 76, 76);
+    flex-basis: 100px;
+}
+
+.css-b1hszl {
+    text-align: center;
+    padding: 20px 0px;
+    flex-basis: 100px;
+    color: rgb(153, 153, 153);
+}
+
+.css-a3vgo2 {
+    padding-left: 11px;
+    font-size: 14px;
+    letter-spacing: -0.3px;
+    color: rgb(153, 153, 153);
+    line-height: 20px;
+}
+
+.css-14yglsw:hover {
+	background-color: rgb(250, 250, 250) !important;
+	font-weight: 500;
+}
+
+.css-mbsaqp {
+    flex-basis: 50px;
+    text-align: center;
+    line-height: 20px;
+    font-weight: 400;
+    color: rgb(51, 51, 51);
+}

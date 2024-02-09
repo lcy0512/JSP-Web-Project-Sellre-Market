@@ -34,9 +34,10 @@
 									class="css-u52dqk e1uzxhvi2" value="">
 							</div>
 						</div>
+						<span id="idcheckmessage"></span>
 					</div>
 					<div class="css-1w0ksfz e744wfw2">
-						<button class="css-ufulao e4nu7ef3" type="button">
+						<button class="css-ufulao e4nu7ef3" type="button" id="idDuplicatedCheck">
 							<span class="css-nytqmg e4nu7ef1">중복확인</span>
 						</button>
 					</div>
@@ -54,6 +55,7 @@
 									class="css-u52dqk e1uzxhvi2" value="">
 							</div>
 						</div>
+						
 					</div>
 					<div class="css-1w0ksfz e744wfw2"></div>
 				</div>
@@ -70,6 +72,7 @@
 									value="">
 							</div>
 						</div>
+						<span id="passwordcheck"></span>
 					</div>
 					<div class="css-1w0ksfz e744wfw2"></div>
 				</div>
@@ -86,6 +89,7 @@
 									class="css-u52dqk e1uzxhvi2" value="">
 							</div>
 						</div>
+						<span id="namemessage"></span>
 					</div>
 					<div class="css-1w0ksfz e744wfw2"></div>
 				</div>
@@ -102,9 +106,10 @@
 									class="css-u52dqk e1uzxhvi2" value="">
 							</div>
 						</div>
+						<span id="emailcheckmessage"></span>
 					</div>
 					<div class="css-1w0ksfz e744wfw2">
-						<button class="css-ufulao e4nu7ef3" type="button">
+						<button class="css-ufulao e4nu7ef3" type="button" id="emailDuplicatedCheck">
 							<span class="css-nytqmg e4nu7ef1">중복확인</span>
 						</button>
 					</div>
@@ -118,9 +123,10 @@
 						<div class="css-jmalg e1uzxhvi6">
 							<div class="css-176lya2 e1uzxhvi3">
 								<input data-testid="input-box" id="mobileNumber" name="mobileNumber" placeholder="숫자만 입력해주세요." type="tel"
-									required="" class="css-u52dqk e1uzxhvi2" value="">
+									required="" class="css-u52dqk e1uzxhvi2" value="" maxlength="11">
 							</div>
 						</div>
+						<span id="phonemessage"></span>
 					</div>
 					<div class="css-1w0ksfz e744wfw2">
 					</div>
@@ -184,22 +190,23 @@
 						<div class="css-18n8lnw e1ke3ehm1">
 							<div class="css-1dkwuq4 e1uzxhvi6">
 								<div height="40" class="css-xsmgyi e1uzxhvi3">
-									<input data-testid="input-box" name="birthYear" placeholder="YYYY" type="text" height="40" class="css-151eme7 e1uzxhvi2" value="">
+									<input data-testid="input-box" id="birthYear" name="birthYear" placeholder="YYYY" type="text" height="40" class="css-151eme7 e1uzxhvi2" value="" maxlength="4">
 								</div>
 							</div>
 							<span class="css-5lnvt6 e1ke3ehm0"></span>
 							<div class="css-1dkwuq4 e1uzxhvi6">
 								<div height="40" class="css-xsmgyi e1uzxhvi3">
-									<input data-testid="input-box" name="birthMonth" placeholder="MM" type="text" height="40" class="css-151eme7 e1uzxhvi2" value="">
+									<input data-testid="input-box"  id="birthMonth" name="birthMonth" placeholder="MM" type="text" height="40" class="css-151eme7 e1uzxhvi2" value="" maxlength="2">
 								</div>
 							</div>
 							<span class="css-5lnvt6 e1ke3ehm0"></span>
 							<div class="css-1dkwuq4 e1uzxhvi6">
 								<div height="40" class="css-xsmgyi e1uzxhvi3">
-									<input data-testid="input-box" name="birthDay" placeholder="DD" type="text" height="40" class="css-151eme7 e1uzxhvi2" value="">
+									<input data-testid="input-box"  id="birthDay" name="birthDay" placeholder="DD" type="text" height="40" class="css-151eme7 e1uzxhvi2" value="" maxlength="2">
 								</div>
 							</div>
 						</div>
+						<span id="birthdatemessage"></span>
 					</div>
 					<div class="css-1w0ksfz e744wfw2"></div>
 				</div>

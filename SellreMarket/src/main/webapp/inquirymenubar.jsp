@@ -12,7 +12,7 @@
 		<div class="css-1v4whg ecbxmj2">고객센터</div>
 		<ul id="myList" class="css-1x9bshx ecbxmj1">
 			<li id="1">
-			<a class=" css-g4g0eu ecbxmj0">공지사항
+			<a class=" css-g4g0eu ecbxmj0" href="notice.jsp">공지사항
 			<svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24">
 				<defs><path id="gfk9q0rhta" d="M1.657 1.657L9.657 1.657 9.657 9.657"></path></defs>
 				<g fill="none" fill-rule="evenodd"><g><g><g>
