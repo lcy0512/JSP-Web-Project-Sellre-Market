@@ -1,4 +1,4 @@
-function sendProductInfo(productid) {
+function sendProductInfo(recipeid, productid) {
 		    // Get product information from the current clicked button's parent element
 		    // 아이템을 담기 위해 컨테이너 하나 만들기
 		    var productContainer = event.target.closest('.product-item');
@@ -15,6 +15,7 @@ function sendProductInfo(productid) {
 		    		ySrc:ySrc,
 		    		yTitle:yTitle,
 		    		price:price,
+		    		recipeid:recipeid,
 		    		productid:productid
 		    	},
 		    	success: function(response){

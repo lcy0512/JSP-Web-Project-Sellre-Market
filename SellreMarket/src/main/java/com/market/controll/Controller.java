@@ -24,7 +24,6 @@ import com.market.command.MAdminGetSubCategory;
 import com.market.command.MAdminProductCount;
 import com.market.command.MAdminProductInsert;
 import com.market.command.MClogin;
-import com.market.command.MCmainView;
 import com.market.command.MCommand;
 import com.market.command.MInquiryDetail;
 import com.market.command.MInsertInquiry;
@@ -325,8 +324,6 @@ public class Controller extends HttpServlet {
 				// 페이징 처리를 위한
 				command = new Paging();
 				command.execute(request, response);
-				command = new MCmainView();
-				command.execute(request, response);
 				
 				viewPage = "mainViewPage.jsp";
 				
@@ -375,6 +372,16 @@ public class Controller extends HttpServlet {
 			case "/logout.do" :
 				session.invalidate();
 				viewPage = "mainPage.do";
+				
+				break;
+				
+			case "/newProductList.do" :
+				
+				command = new Paging();
+				command.execute(request, response);
+				
+				viewPage = "newProductPage.jsp";
+				break;
 				
 			default :
 				break;

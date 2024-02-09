@@ -67,7 +67,7 @@
 </script>
 
 <!-- // js 따로 관리한다. -->
-<script src="js/mainViewPage.js"></script>
+<script src="js/newProductPage.js"></script>
 
 
 </head>
@@ -80,50 +80,18 @@
 	<!-- Navbar Start -->
 
 	<!-- Navbar End -->
-
-
-	<!-- Carousel Start -->
+	
+	
+	<!-- Ad Start -->
 	<div class="container" style="width: 100%">
-		<div id="imgslider" class="carousel slide" data-ride="carousel"
-			style="width: 100%;">
-			<!-- indicator 없음 -->
-
-			<!-- 슬라이드 쇼 실행 -->
-			<div class="carousel-inner">
-				<c:forEach items="${getMainAdImgs}" var="ad">
-					<!-- 첫번째 이미지일 때 active 설정 -->
-					<c:choose>
-						<c:when test="${ad.eimg eq '1.jpg'}">
-							<div class="carousel-item active">
-								<img class="d-block w-100"
-									src="${pageContext.request.contextPath}/image/event/${ad.eimg}"
-									alt="Event Image">
-								<!-- 캡션 없음 -->
-							</div>
-						</c:when>
-						<c:otherwise>
-							<div class="carousel-item">
-								<img
-									src="${pageContext.request.contextPath}/image/event/${ad.eimg}"
-									class="d-block w-100" alt="Event Image">
-								<!-- 캡션 없음 -->
-							</div>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
-			</div>
-
-
-			<!-- 컨트롤 -->
-			<a href="#imgslider" class="carousel-control-prev" data-slide="prev">
-				<span class="carousel-control-prev-icon"></span>
-			</a> <a href="#imgslider" class="carousel-control-next" data-slide="next">
-				<span class="carousel-control-next-icon"></span>
-			</a>
-		</div>
+		<a href="#"><img class="img-fluid"
+			src="${pageContext.request.contextPath}/image/event/new/${getNewAdImg}"
+			alt="Event Image">
+		</a>
 	</div>
 	<br>
-	<!-- Carousel End -->
+	<!-- Ad End -->
+	
 
 	<h2 align="center">설 선물특가 실시간 랭킹🔥🔥</h2>
 	<p class="css-149yh9z ej3ms6t1" align="center">지금 주목해야할 인기 상품 최대
@@ -131,32 +99,40 @@
 
 
 	<!-- Products Start -->
+	<!-- 왜 에러가 뜨는지 모르겠따 낼 수정 해야함 -->
+	<!-- 왜 에러가 뜨는지 모르겠따 낼 수정 해야함 -->
+	<!-- 왜 에러가 뜨는지 모르겠따 낼 수정 해야함 -->
+	<!-- 왜 에러가 뜨는지 모르겠따 낼 수정 해야함 -->
+	<!-- 왜 에러가 뜨는지 모르겠따 낼 수정 해야함 -->
+	<!-- 왜 에러가 뜨는지 모르겠따 낼 수정 해야함 -->
+	<!-- 왜 에러가 뜨는지 모르겠따 낼 수정 해야함 -->
+	<!-- 왜 에러가 뜨는지 모르겠따 낼 수정 해야함 -->
+	
 	<div class="container-fluid pt-5 pb-3">
 		<div class="row px-xl-5 justify-content-center"
 			style="margin-left: 90px; margin-right: 30px;">
-			<c:if test="${not empty productList}">
-				<c:forEach items="${productList}" var="dto">
+			<c:if test="${not empty newProducts}">
+				<c:forEach items="${newProducts}" var="dto">
 					<div class="col-lg-4 col-md-4 col-sm-6 pb-10 mx-auto">
 						<div class="product-item bg-light mb-4"
 							style="width: 300px; height: 350px; display: flex; flex-direction: column; justify-content: center;">
 							<div class="product-img position-relative overflow-hidden">
 								<a href="#"> <img class="img-fluid w-100"
-									src="${pageContext.request.contextPath}/image/product/${dto.ysrc}"
+									src="${pageContext.request.contextPath}/image/product/${dto.pimage}"
 									alt="Product Image">
 								</a>
 							</div>
 							<div
 								style="margin-top: 7px; margin-left: 1%; border: 1px solid lightgray; border-radius: 5px; width: 98%;">
 								<button
-									onclick="sendProductInfo(${dto.recipeid}, ${dto.productid}); return false;"
+									onclick="sendProductInfo(${dto.productid}); return false;"
 									class="btn btn-primary btn-light align-items-center"
 									style="width: 100%;">장바구니</button>
 							</div>
 							
 							<div class="text-center py-4"
 								style="display: flex; flex-direction: column; justify-content: center;">
-								<a class="h6 text-decoration-none text-truncate" href="">[${dto.yname}]</a>
-									<a class="ytitle" href="">${dto.ytitle}</a>
+								<a class="h6 text-decoration-none text-truncate" href="">${dto.pname}</a>
 
 								<div class="d-flex align-items-center justify-content-center mt-2">
 									<h5>${dto.price}</h5>
@@ -169,7 +145,7 @@
 									class="d-flex align-items-center justify-content-center mb-1">
 									<img
 										src="https://cdn-icons-png.flaticon.com/128/535/535234.png"
-										style="width: 12px; height: 12px;">&nbsp; <small>${dto.like}</small>
+										style="width: 12px; height: 12px;">&nbsp; <small>${dto.plikecount)}</small>
 								</div>
 							</div>
 						</div>
@@ -178,6 +154,13 @@
 			</c:if>
 		</div>
 	</div>
+	<!-- 왜 에러가 뜨는지 모르겠따 낼 수정 해야함 -->
+	<!-- 왜 에러가 뜨는지 모르겠따 낼 수정 해야함 -->
+	<!-- 왜 에러가 뜨는지 모르겠따 낼 수정 해야함 -->
+	<!-- 왜 에러가 뜨는지 모르겠따 낼 수정 해야함 -->
+	<!-- 왜 에러가 뜨는지 모르겠따 낼 수정 해야함 -->
+	<!-- 왜 에러가 뜨는지 모르겠따 낼 수정 해야함 -->
+	
 	<!-- Products End -->
 
 	<!-- Paging Start -->

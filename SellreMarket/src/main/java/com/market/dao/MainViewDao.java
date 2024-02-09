@@ -103,8 +103,6 @@ public class MainViewDao {
 				int recipeid = rs.getInt("recipeid");
 				int productid = rs.getInt("productid");
 				
-				System.out.println(ysrc);
-				
 				MainViewDto dto = new MainViewDto(yname, ysrc, ytitle, price, like, recipeid, productid);
 				
 				dtos.add(dto);
@@ -126,8 +124,9 @@ public class MainViewDao {
 		return dtos;
 	}
 	
-	// 할인 이벤트 이미지들 저장
-	public List<MainViewDto> getEventImgs() {
+	
+	// 신제품 정보 불러오기 
+	public List<MainViewDto> newProductList(int limitFrom, int eachPageCount) {
 		List<MainViewDto> dtos = new ArrayList<MainViewDto>();
 		
 		Connection con = null;
@@ -137,7 +136,59 @@ public class MainViewDao {
 		try {
 			con = dataSource.getConnection();
 			
-			String query = "select img from event";
+			String query = "select distinct pr.price, p.pname, pi.image, pl.likecount, p.productid "
+					+ "from price pr "
+					+ "join product p on p.productid = pr.productid "
+					+ "join product_image pi on pi.productid = p.productid "
+					+ "left join productlike pl on pl.productid = p.productid "
+					+ "order by p.pname desc "
+					+ "limit ?, ?";
+			
+			ps = con.prepareStatement(query);
+			ps.setInt(1, limitFrom);
+			ps.setInt(2, eachPageCount);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				String pname = rs.getString("pname");
+				String price = rs.getString("price");
+				String pimage = rs.getString("image");
+				int plikecount = rs.getInt("likecount");
+				int productid = rs.getInt("productid");
+				
+				MainViewDto dto = new MainViewDto(pname, price, pimage, plikecount, productid);
+				
+				dtos.add(dto);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if (rs != null) rs.close();
+				if (ps != null) ps.close();
+				if (con != null) con.close();
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return dtos;
+	}
+	
+	// 할인 이벤트 이미지들 저장
+	public List<MainViewDto> getMainAdImgs() {
+		List<MainViewDto> dtos = new ArrayList<MainViewDto>();
+		
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			con = dataSource.getConnection();
+			
+			String query = "select img from event where category = 1";
 			
 			ps = con.prepareStatement(query);
 			rs = ps.executeQuery();
@@ -164,6 +215,42 @@ public class MainViewDao {
 			}
 		}
 		return dtos;
+	}
+	
+	// 신제품 광고 이미지
+	public String getNewAdImg() {
+		String adImg = null;
+		
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			con = dataSource.getConnection();
+			
+			String query = "select max(img) img from event where category = 2";
+			
+			ps = con.prepareStatement(query);
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				adImg = rs.getString("img");
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if (rs != null) rs.close();
+				if (ps != null) ps.close();
+				if (con != null) con.close();
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return adImg;
 	}
 	
 	// paging을 위한 count 세기
@@ -209,6 +296,8 @@ public class MainViewDao {
 		return amount;
 	}
 	
+	
+	// 장바구니 담기 클릭 시 
 	public int clickCart(String rContent) {
 		
 		int recipeId = 0;
@@ -232,8 +321,6 @@ public class MainViewDao {
 			while(rs.next()) {
 				recipeId = rs.getInt("recipeid");
 			}
-			System.out.println(rContent + " inside dao");
-			System.out.println(recipeId + " inside dao");
 		}
 		catch (Exception e) {
 			e.printStackTrace();

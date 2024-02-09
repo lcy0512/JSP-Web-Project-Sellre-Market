@@ -36,14 +36,21 @@ public class MainViewDto {
 	String eimg;
 	int recipeid;
 	int productid;
-	
-	public MainViewDto() {
-		// TODO Auto-generated constructor stub
-	}
+	String pimage;
+	int plikecount;
 	
 	public MainViewDto(String eimg) {
 		super();
 		this.eimg = eimg;
+	}
+	
+	public MainViewDto(String pname, String price, String pimage, int plikecount, int productid) {
+		super();
+		this.pname = pname;
+		this.price = price;
+		this.pimage = pimage;
+		this.plikecount = plikecount;
+		this.productid = productid;
 	}
 
 	public MainViewDto(String yname, String ysrc, String ytitle, String price, int like, int recipeid, int productid) {
@@ -255,6 +262,22 @@ public class MainViewDto {
 
 	public void setProductid(int productid) {
 		this.productid = productid;
+	}
+
+	public String getPimage() {
+		return pimage;
+	}
+
+	public void setPimage(String pimage) {
+		this.pimage = pimage;
+	}
+
+	public int getPlikecount() {
+		return plikecount;
+	}
+
+	public void setPlikecount(int plikecount) {
+		this.plikecount = plikecount;
 	}
 	
 }
