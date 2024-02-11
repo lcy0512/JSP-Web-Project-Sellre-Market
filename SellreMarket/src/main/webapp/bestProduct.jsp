@@ -4,14 +4,14 @@
 <!DOCTYPE html>
 <html>
 <!--
-	1. Date : 2024.02.02
+	1. Date : 2024.02.11
 	2. Author : Woody Jo
 	3. Version : v1.0.0
-	4. Description : 메인 body 페이지 Dto 
+	4. Description : best 제품들 가져오는 jsp 
 -->
 <head>
 <meta charset="UTF-8">
-<title>Sellre Market</title>
+<title>Sellre Market Best</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="Free HTML Templates" name="keywords">
 <meta content="Free HTML Templates" name="description">
@@ -67,8 +67,7 @@
 </script>
 
 <!-- // js 따로 관리한다. -->
-<script src="js/newProductPage.js"></script>
-
+<script src="js/bestProductPage.js"></script>
 
 </head>
 <body>
@@ -81,45 +80,54 @@
 
 	<!-- Navbar End -->
 	
-	
-	<!-- Ad Start -->
-	<div class="container" style="width: 100%">
-		<a href="#"><img class="img-fluid"
-			src="${pageContext.request.contextPath}/image/event/new/${getNewAdImg}"
-			alt="Event Image">
-		</a>
-	</div>
 	<br>
-	<!-- Ad End -->
+	<br>
+	<br>
+	<h3 align="center">베스트</h3>
+	<br>
+
+	<!-- Align Start -->
+	<div class="setAlign" style="margin-left: 70%; color: #919492;">
+		<c:if test="${alignCategory eq '베스트순'}">
+			<span style="color: black; font-weight: bold">베스트순</span>
+			&nbsp;&nbsp;|&nbsp;&nbsp;
+			<a href="alignBestLowPrice.do">낮은 가격순</a> 
+			&nbsp;&nbsp;|&nbsp;&nbsp; 
+			<a href="alignBestHighPrice.do">높은 가격순</a>
+		</c:if>
+		<c:if test="${alignCategory eq '낮은 가격순'}">
+			<a href="bestProduct.do">베스트순</a>
+			&nbsp;&nbsp;|&nbsp;&nbsp;
+			<span style="color: black; font-weight: bold">낮은 가격순</span>
+			&nbsp;&nbsp;|&nbsp;&nbsp;
+			<a href="alignBestHighPrice.do">높은 가격순</a>
+		</c:if>
+		<c:if test="${alignCategory eq '높은 가격순'}">
+			<a href="bestProduct.do">베스트순</a>
+			&nbsp;&nbsp;|&nbsp;&nbsp;
+			<a href="alignBestLowPrice.do">낮은 가격순</a>
+			&nbsp;&nbsp;|&nbsp;&nbsp;
+			<span style="color: black; font-weight: bold">높은 가격순</span>
+		</c:if>
+	</div>
+	<!-- Align End -->
 	
-
-	<h2 align="center">설 선물특가 실시간 랭킹🔥🔥</h2>
-	<p class="css-149yh9z ej3ms6t1" align="center">지금 주목해야할 인기 상품 최대
-		79% 할인</p>
-
 
 	<!-- Products Start -->
-	<!-- 왜 에러가 뜨는지 모르겠따 낼 수정 해야함 -->
-	<!-- 왜 에러가 뜨는지 모르겠따 낼 수정 해야함 -->
-	<!-- 왜 에러가 뜨는지 모르겠따 낼 수정 해야함 -->
-	<!-- 왜 에러가 뜨는지 모르겠따 낼 수정 해야함 -->
-	<!-- 왜 에러가 뜨는지 모르겠따 낼 수정 해야함 -->
-	<!-- 왜 에러가 뜨는지 모르겠따 낼 수정 해야함 -->
-	<!-- 왜 에러가 뜨는지 모르겠따 낼 수정 해야함 -->
-	<!-- 왜 에러가 뜨는지 모르겠따 낼 수정 해야함 -->
 	
 	<div class="container-fluid pt-5 pb-3">
 		<div class="row px-xl-5 justify-content-center"
 			style="margin-left: 90px; margin-right: 30px;">
-			<c:if test="${not empty newProducts}">
-				<c:forEach items="${newProducts}" var="dto">
+			<c:if test="${not empty bestProducts}">
+				<c:forEach items="${bestProducts}" var="dto">
 					<div class="col-lg-4 col-md-4 col-sm-6 pb-10 mx-auto">
 						<div class="product-item bg-light mb-4"
 							style="width: 300px; height: 350px; display: flex; flex-direction: column; justify-content: center;">
 							<div class="product-img position-relative overflow-hidden">
 								<a href="#"> <img class="img-fluid w-100"
 									src="${pageContext.request.contextPath}/image/product/${dto.pimage}"
-									alt="Product Image">
+									alt="Product Image"
+									 style="object-fit: cover; width: 100%; height: 100%;">
 								</a>
 							</div>
 							<div
@@ -145,7 +153,7 @@
 									class="d-flex align-items-center justify-content-center mb-1">
 									<img
 										src="https://cdn-icons-png.flaticon.com/128/535/535234.png"
-										style="width: 12px; height: 12px;">&nbsp; <small>${dto.plikecount)}</small>
+										style="width: 12px; height: 12px;">&nbsp; <small>${dto.plikecount}</small>
 								</div>
 							</div>
 						</div>
@@ -154,38 +162,92 @@
 			</c:if>
 		</div>
 	</div>
-	<!-- 왜 에러가 뜨는지 모르겠따 낼 수정 해야함 -->
-	<!-- 왜 에러가 뜨는지 모르겠따 낼 수정 해야함 -->
-	<!-- 왜 에러가 뜨는지 모르겠따 낼 수정 해야함 -->
-	<!-- 왜 에러가 뜨는지 모르겠따 낼 수정 해야함 -->
-	<!-- 왜 에러가 뜨는지 모르겠따 낼 수정 해야함 -->
-	<!-- 왜 에러가 뜨는지 모르겠따 낼 수정 해야함 -->
-	
 	<!-- Products End -->
+
 
 	<!-- Paging Start -->
 	<%
 		int i = 1;
-		int current = (int) request.getAttribute("curPage");
 	%>
-	<!-- 블록과 페이지 가져오기 -->
-	<div
-		style="display: flex; justify-content: center; font-size: 20px; gap: 0 10px;">
-		<a href="mainPage.do?curPage=<%= current - 1 %>" class="prev"
-			onclick="prev()"> << </a>
-
-		<c:forEach begin="${blockStart}" end="${endPage}">
-			<%
-				out.print("<a href='mainPage.do?curPage=" + i + "'>" + i + "</a>");
-				request.setAttribute("curPage", i);
-				i++;
-			%>
-		</c:forEach>
-		<a href="mainPage.do?curPage=<%= current + 1 %>" class="next"> >>
-		</a>
-	</div>
+	<c:if test="${alignCategory eq '베스트순'}">
+		<div style="display: flex; justify-content: center; font-size: 20px; gap: 0 10px;">
+			<!-- 뒤로 가기 -->
+			<c:if test="${curPage > 1}">
+				<a href="bestProduct.do?curPage=${curPage - 1}" class="prev"> << </a>
+			</c:if>
+			
+			<!-- 페이지 블록 수 만큼 숫자 찍기 -->
+			<c:forEach begin="${blockStart}" end="${endPage}">
+				<%
+					out.print("<a href='bestProduct.do?curPage=" + i + "'>" + i + "</a>");
+					request.setAttribute("curPage", i);
+					i++;
+				%>
+			</c:forEach>
+			
+			<!-- 수정 필요 -->
+			<!-- 수정 필요 -->
+			<!-- 수정 필요 -->
+			<!-- 수정 필요 -->
+			<!-- 앞으로 가기 -->
+			<c:if test="${curPage < endPage}">
+				<a href="bestProduct.do?curPage=${curPage + 1} " class="next"> >></a>
+			</c:if>
+			<!-- 수정 필요 -->
+			<!-- 수정 필요 -->
+			<!-- 수정 필요 -->
+			<!-- 수정 필요 -->
+			<!-- 수정 필요 -->
+			
+			
+		</div>
+	</c:if>
+	
+	
+	<c:if test="${alignCategory eq '낮은 가격순'}">
+		<div style="display: flex; justify-content: center; font-size: 20px; gap: 0 10px;">
+			<!-- 뒤로 가기 -->
+			<c:if test="${curPage > 1}">
+				<a href="alignBestLowPrice.do?curPage=${curPage - 1}" class="prev"> << </a>
+			</c:if>
+			
+			<!-- 페이지 블록 수 만큼 숫자 찍기 -->
+			<c:forEach begin="${blockStart}" end="${endPage}">
+				<%
+					out.print("<a href='alignBestLowPrice.do?curPage=" + i + "'>" + i + "</a>");
+					request.setAttribute("curPage", i);
+					i++;
+				%>
+			</c:forEach>
+			
+			<!-- 앞으로 가기 -->
+			<a href="alignBestLowPrice.do?curPage=${curPage + 1}" class="next"> >></a>
+		</div>
+	</c:if>
+	
+	
+	<c:if test="${alignCategory eq '높은 가격순'}">
+		<div style="display: flex; justify-content: center; font-size: 20px; gap: 0 10px;">
+			<!-- 뒤로 가기 -->
+			<c:if test="${curPage > 1}">
+				<a href="alignBestHighPrice.do?curPage=${curPage - 1}" class="prev"> << </a>
+			</c:if>
+			
+			<!-- 페이지 블록 수 만큼 숫자 찍기 -->
+			<c:forEach begin="${blockStart}" end="${endPage}">
+				<%
+					out.print("<a href='alignBestHighPrice.do?curPage=" + i + "'>" + i + "</a>");
+					request.setAttribute("curPage", i);
+					i++;
+				%>
+			</c:forEach>
+			
+			<!-- 앞으로 가기 -->
+			<a href="alignBestHighPrice.do?curPage=${curPage + 1}" class="next"> >></a>
+		</div>
+	</c:if>
 	<!-- Paging End -->
-
+	
 
 	<!-- Footer Start -->
 	<jsp:include page="footer.html"></jsp:include>

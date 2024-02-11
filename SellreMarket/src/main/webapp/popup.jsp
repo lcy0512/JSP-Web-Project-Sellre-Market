@@ -97,10 +97,13 @@
 	<!-- 버튼 섹션 -->
 	<div style="display: flex; justify-content: center; align-items: center; margin: auto;">
         <button type="button" style="margin-right: 10px;" onclick="window.close()">취소</button>
-        <form id="myForm" method="post">
-        	<button id="addCart" type="button" style="background-color: green; color: white;" onclick="addCart(document.getElementById('selectedNumber').textContent)">장바구니 담기</button>
-        	<!-- <input type="hidden" id="hiddenNum"> -->
-        </form>
+        <!-- <form id="myForm" method="post" action="getCart.do"> -->
+        	<!-- <button id="addCart" type="button" style="background-color: green; color: white;" onclick="addCart(document.getElementById('selectedNumber').textContent)">장바구니 담기</button> -->
+    <form action="getCart.do" id="addCart">
+       	<button onclick="cart()" id="addCart" type="button" style="background-color: green; color: white;">장바구니 담기</button>
+       	<input type="hidden" id="qty">
+    </form>
+        <!-- </form> -->
     </div>
     
 </body>

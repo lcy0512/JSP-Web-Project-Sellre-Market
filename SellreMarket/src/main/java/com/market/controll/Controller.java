@@ -23,7 +23,13 @@ import com.market.command.MAdminGetPackType;
 import com.market.command.MAdminGetSubCategory;
 import com.market.command.MAdminProductCount;
 import com.market.command.MAdminProductInsert;
+import com.market.command.MCalignBestHighPrice;
+import com.market.command.MCalignBestLowPrice;
+import com.market.command.MCalignNewHighPrice;
+import com.market.command.MCalignNewLowPrice;
+import com.market.command.MCbestProduct;
 import com.market.command.MClogin;
+import com.market.command.MCnewProductPaging;
 import com.market.command.MCommand;
 import com.market.command.MInquiryDetail;
 import com.market.command.MInsertInquiry;
@@ -36,6 +42,7 @@ import com.market.dto.AdminGetPackTypeDto;
 import com.market.dto.AdminProductDto;
 import com.market.dto.PageInfo;
 import com.market.command.Paging;
+import com.market.command.getCart;
 
 /**
  * Servlet implementation class Controller
@@ -79,6 +86,12 @@ public class Controller extends HttpServlet {
 		String com = uri.substring(conPath.length());
 		
 		String id = null;
+		// 페이징 처리를 위한
+		int curPage = 0;
+		// 페이지 클릭 시 신제품, 가격순으로 정렬하기 위한 변수
+		String alignCategory = null;
+		// 장바구니 클릭 시 가져 올 productid
+		int productid = 0;
 		
 		response.setContentType("applicaton/json");
 		response.setCharacterEncoding("UTF-8");
@@ -309,8 +322,41 @@ public class Controller extends HttpServlet {
 				
 			// 메인 페이지 
 			case "/mainPage.do" :
+				
+				// 수정 필요
+				if (request.getParameter("customerid") != null) {
+					id = request.getParameter("customerid");
+				}
+				// 수정 필요
+				
+				try {
+					curPage = Integer.parseInt(request.getParameter("curPage"));
+				}
+				catch (Exception e) {
+					curPage = 1;
+				}
+				
+				request.setAttribute("curPage", curPage);
+				request.setAttribute("customerid", id);
+				
 				// 페이징 처리를 위한
-				int curPage = 0;
+				command = new Paging();
+				command.execute(request, response);
+				
+				viewPage = "mainViewPage.jsp";
+				
+				break;
+				
+			// 신제품 정보 불러오는 작업
+			case "/newProduct.do" :
+				
+				alignCategory = "신상품순";
+				
+				// 수정 필요
+				if (request.getParameter("customerid") != null) {
+					id = request.getParameter("customerid");
+				}
+				// 수정 필요
 				
 				try {
 					curPage = Integer.parseInt(request.getParameter("curPage"));
@@ -321,66 +367,249 @@ public class Controller extends HttpServlet {
 				
 				request.setAttribute("curPage", curPage);
 				
-				// 페이징 처리를 위한
-				command = new Paging();
+				command = new MCnewProductPaging();
 				command.execute(request, response);
 				
-				viewPage = "mainViewPage.jsp";
+				session.setAttribute("alignCategory", alignCategory);
 				
+				viewPage = "newProduct.jsp";
+				break;
+				
+			case "/alignNewLowPrice.do" :
+				
+				alignCategory = "낮은 가격순";
+				
+				// 수정 필요
+				if (request.getParameter("customerid") != null) {
+					id = request.getParameter("customerid");
+				}
+				// 수정 필요
+				
+				try {
+					curPage = Integer.parseInt(request.getParameter("curPage"));
+				}
+				catch (Exception e) {
+					curPage = 1;
+				}
+				
+				request.setAttribute("curPage", curPage);
+				
+				command = new MCalignNewLowPrice();
+				command.execute(request, response);
+				
+				session.setAttribute("alignCategory", alignCategory);
+				
+				viewPage = "newProduct.jsp";
+				break;
+				
+			case "/alignNewHighPrice.do" :
+				
+				alignCategory = "높은 가격순";
+				
+				// 수정 필요
+				if (request.getParameter("customerid") != null) {
+					id = request.getParameter("customerid");
+				}
+				// 수정 필요
+				
+				try {
+					curPage = Integer.parseInt(request.getParameter("curPage"));
+				}
+				catch (Exception e) {
+					curPage = 1;
+				}
+				
+				request.setAttribute("curPage", curPage);
+				
+				command = new MCalignNewHighPrice();
+				command.execute(request, response);
+				
+				session.setAttribute("alignCategory", alignCategory);
+				
+				viewPage = "newProduct.jsp";
+				break;
+				
+			// 베스트순 정보 불러오는 작업
+			case "/bestProduct.do" :
+				
+				alignCategory = "베스트순";
+				
+				// 수정 필요
+				if (request.getParameter("customerid") != null) {
+					id = request.getParameter("customerid");
+				}
+				// 수정 필요
+				
+				try {
+					curPage = Integer.parseInt(request.getParameter("curPage"));
+				}
+				catch (Exception e) {
+					curPage = 1;
+				}
+				
+				request.setAttribute("curPage", curPage);
+				
+				command = new MCbestProduct();
+				command.execute(request, response);
+				
+				session.setAttribute("alignCategory", alignCategory);
+				
+				viewPage = "bestProduct.jsp";
+				break;
+				
+				
+			case "/alignBestLowPrice.do" :
+				
+				alignCategory = "낮은 가격순";
+				
+				// 수정 필요
+				if (request.getParameter("customerid") != null) {
+					id = request.getParameter("customerid");
+				}
+				// 수정 필요
+				
+				try {
+					curPage = Integer.parseInt(request.getParameter("curPage"));
+				}
+				catch (Exception e) {
+					curPage = 1;
+				}
+				
+				request.setAttribute("curPage", curPage);
+				
+				command = new MCalignBestLowPrice();
+				command.execute(request, response);
+				
+				session.setAttribute("alignCategory", alignCategory);
+				
+				viewPage = "bestProduct.jsp";
+				break;
+				
+			case "/alignBestHighPrice.do" :
+				
+				alignCategory = "높은 가격순";
+				
+				// 수정 필요
+				if (request.getParameter("customerid") != null) {
+					id = request.getParameter("customerid");
+				}
+				// 수정 필요
+				
+				try {
+					curPage = Integer.parseInt(request.getParameter("curPage"));
+				}
+				catch (Exception e) {
+					curPage = 1;
+				}
+				
+				request.setAttribute("curPage", curPage);
+				
+				command = new MCalignBestHighPrice();
+				command.execute(request, response);
+				
+				session.setAttribute("alignCategory", alignCategory);
+				
+				viewPage = "bestProduct.jsp";
 				break;
 			
 			// 장바구니 클릭 시 띄우는 팝업
-			case "/popup.do" :
+//			case "/popup.do" :
+//				
+//				String yName = request.getParameter("yName");
+//				String ySrc = request.getParameter("ySrc");
+//				String price =  request.getParameter("price");
+//				String yTitle = request.getParameter("yTitle");
+//				
+//				int recipeid = Integer.parseInt(request.getParameter("recipeid"));
+//				int productid = Integer.parseInt(request.getParameter("productid"));
+//				
+//				System.out.println(recipeid);
+//				System.out.println(productid);
+//				
+//				session.setAttribute("yName", yName);
+//				session.setAttribute("ySrc", ySrc);
+//				session.setAttribute("price", price);
+//				session.setAttribute("yTitle", yTitle);
+//				session.setAttribute("recipeid", recipeid);
+//				session.setAttribute("productid", productid);
+//				
+//				viewPage = "popup.jsp";
+//				
+//				break;
 				
-				String yName = request.getParameter("yName");
-				String ySrc = request.getParameter("ySrc");
-				String price =  request.getParameter("price");
-				String yTitle = request.getParameter("yTitle");
 				
-				int recipeid = Integer.parseInt(request.getParameter("recipeid"));
-				int productid = Integer.parseInt(request.getParameter("productid"));
+			// main페이지 카트 클릭
+			case "/mainPageCart.do" :
 				
-				System.out.println(recipeid);
-				System.out.println(productid);
+				if (request.getParameter("customerid") != null) {
+					id = request.getParameter("customerid");
+				}
 				
-				session.setAttribute("yName", yName);
-				session.setAttribute("ySrc", ySrc);
-				session.setAttribute("price", price);
-				session.setAttribute("yTitle", yTitle);
-				session.setAttribute("recipeid", recipeid);
+				int ri = Integer.parseInt(request.getParameter("recipeid"));
+				
+				System.out.println(ri + " ?????????");
+				
+				session.setAttribute("customerid", id);
+				session.setAttribute("recipeid", ri);
+				command = new getCart();
+				command.execute(request, response);
+				
+				viewPage = "mainPage.do";
+				break;
+				
+			// 신제품 페이지 카트 클릭
+			case "/newPageCart.do" :
+				
+				if (request.getParameter("customerid") != null) {
+					id = request.getParameter("customerid");
+				}
+				
+				productid = Integer.parseInt(request.getParameter("productid"));
+				
+				System.out.println(productid + " ?????????");
+				
+				session.setAttribute("customerid", id);
 				session.setAttribute("productid", productid);
+				command = new getCart();
+				command.execute(request, response);
 				
-				viewPage = "popup.jsp";
-				
+				viewPage = "newProductList.do";
 				break;
+				// 신제품 페이지 카트 클릭
 				
+			// 수정필요
+				// 수정필요
+				// 수정필요
+				// 수정필요
+				// 수정필요
 				
-				// 카트 수정 해야함
-			case "/getCart.do" :
-				int selectedNumber = Integer.parseInt(request.getParameter("selectedNumber"));
-				System.out.println(selectedNumber);
-//				int ri = (int) session.getAttribute("recipeid");
-//				int pi = (int) session.getAttribute("productid");
-				
-//				System.out.println(ri + " ?????????");
-//				System.out.println(pi + " ?????????");
-				
-				viewPage = "mainViewPage.do";
-				
-				break;
+//			case "/bestPageCart.do" :
+//				
+//				if (request.getParameter("customerid") != null) {
+//					id = request.getParameter("customerid");
+//				}
+//				
+//				productid = Integer.parseInt(request.getParameter("productid"));
+//				
+//				System.out.println(productid + " ?????????");
+//				
+//				session.setAttribute("customerid", id);
+//				session.setAttribute("productid", productid);
+//				command = new getCart();
+//				command.execute(request, response);
+//				
+//				viewPage = "newProductList.do";
+//				return;
+				// 수정필요
+				// 수정필요
+				// 수정필요
+				// 수정필요
+				// 수정필요
 				
 			case "/logout.do" :
 				session.invalidate();
 				viewPage = "mainPage.do";
 				
-				break;
-				
-			case "/newProductList.do" :
-				
-				command = new Paging();
-				command.execute(request, response);
-				
-				viewPage = "newProductPage.jsp";
 				break;
 				
 			default :

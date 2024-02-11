@@ -120,10 +120,13 @@
 			</a> <a href="#imgslider" class="carousel-control-next" data-slide="next">
 				<span class="carousel-control-next-icon"></span>
 			</a>
+			
+			
 		</div>
 	</div>
 	<br>
 	<!-- Carousel End -->
+
 
 	<h2 align="center">설 선물특가 실시간 랭킹🔥🔥</h2>
 	<p class="css-149yh9z ej3ms6t1" align="center">지금 주목해야할 인기 상품 최대
@@ -142,17 +145,18 @@
 							<div class="product-img position-relative overflow-hidden">
 								<a href="#"> <img class="img-fluid w-100"
 									src="${pageContext.request.contextPath}/image/product/${dto.ysrc}"
-									alt="Product Image">
+									alt="Product Image"
+									style="object-fit: cover; width: 100%; height: 100%;">
 								</a>
 							</div>
 							<div
 								style="margin-top: 7px; margin-left: 1%; border: 1px solid lightgray; border-radius: 5px; width: 98%;">
 								<button
-									onclick="sendProductInfo(${dto.recipeid}, ${dto.productid}); return false;"
+									onclick="sendProductInfo(${dto.recipeid}); return false;"
 									class="btn btn-primary btn-light align-items-center"
 									style="width: 100%;">장바구니</button>
+								<input type="hidden" id="userid" value="${customerid}">
 							</div>
-							
 							<div class="text-center py-4"
 								style="display: flex; flex-direction: column; justify-content: center;">
 								<a class="h6 text-decoration-none text-truncate" href="">[${dto.yname}]</a>
@@ -183,14 +187,14 @@
 	<!-- Paging Start -->
 	<%
 		int i = 1;
-		int current = (int) request.getAttribute("curPage");
 	%>
-	<!-- 블록과 페이지 가져오기 -->
-	<div
-		style="display: flex; justify-content: center; font-size: 20px; gap: 0 10px;">
-		<a href="mainPage.do?curPage=<%= current - 1 %>" class="prev"
-			onclick="prev()"> << </a>
-
+	<div style="display: flex; justify-content: center; font-size: 20px; gap: 0 10px;">
+		<!-- 뒤로 가기 -->
+		<c:if test="${curPage > 1}">
+			<a href="mainPage.do?curPage=${curPage - 1}" class="prev"> << </a>
+		</c:if>
+		
+		<!-- 페이지 블록 수 만큼 숫자 찍기 -->
 		<c:forEach begin="${blockStart}" end="${endPage}">
 			<%
 				out.print("<a href='mainPage.do?curPage=" + i + "'>" + i + "</a>");
@@ -198,8 +202,17 @@
 				i++;
 			%>
 		</c:forEach>
-		<a href="mainPage.do?curPage=<%= current + 1 %>" class="next"> >>
-		</a>
+	
+		<!-- 수정 필요 -->
+		<!-- 수정 필요 -->
+		<!-- 수정 필요 -->
+		<!-- 앞으로 가기 -->
+		<c:if test="${curPage < endPage}">
+			<a href="mainPage.do?curPage=${curPage + 1}" class="next">>></a>
+		</c:if>
+		<!-- 수정 필요 -->
+		<!-- 수정 필요 -->
+		
 	</div>
 	<!-- Paging End -->
 

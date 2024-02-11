@@ -113,9 +113,9 @@
 				</div>
 				<ul class="css-1887xqd e17w4cfr5">
 					<li class="css-59mmhh e17w4cfr4"><span
-						class="css-1xyu7j9 e17w4cfr2"><a href="newProductList.do">신상품</a></span></li>
+						class="css-1xyu7j9 e17w4cfr2"><a href="newProduct.do">신상품</a></span></li>
 					<li class="css-59mmhh e17w4cfr4"><span
-						class="css-1xyu7j9 e17w4cfr2">베스트</span></li>
+						class="css-1xyu7j9 e17w4cfr2"><a href="bestProduct.do">베스트</a></span></li>
 					<li class="css-59mmhh e17w4cfr4"><span
 						class="css-1xyu7j9 e17w4cfr2">알뜰쇼핑</span></li>
 					<li class="css-59mmhh e17w4cfr4"><span

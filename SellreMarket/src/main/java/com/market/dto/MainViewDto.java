@@ -53,7 +53,7 @@ public class MainViewDto {
 		this.productid = productid;
 	}
 
-	public MainViewDto(String yname, String ysrc, String ytitle, String price, int like, int recipeid, int productid) {
+	public MainViewDto(String yname, String ysrc, String ytitle, String price, int like, int recipeid) {
 		super();
 		this.yname = yname;
 		this.ysrc = ysrc;
@@ -61,7 +61,6 @@ public class MainViewDto {
 		this.price = price;
 		this.like = like;
 		this.recipeid = recipeid;
-		this.productid = productid;
 	}
 
 	public int getYid() {

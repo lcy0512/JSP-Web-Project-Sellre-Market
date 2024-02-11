@@ -37,18 +37,10 @@ function sendProductInfo(productid) {
 */
 
 function sendProductInfo(productid) {
-    console.log('sendProductInfo function called with productid:', productid);
-    // ... rest of your code
-}
-
-/*
-function sendProductInfo(productid) {
 	var productContainer = event.target.closest('.product-item');
 	var pname = productContainer.querySelector('.text-truncate').innerText;
     
     var customerid = document.getElementById('userid').value;
-	
-	
 	
 	if (customerid == null || customerid == "") {
 		alert("로그인 후 장바구니 버튼을 클릭 하세요.");
@@ -62,7 +54,7 @@ function sendProductInfo(productid) {
 	    	alert("상품이 장바구니에 담겼습니다.");
 	    	$.ajax({
 		    	type: 'POST',
-		    	url: 'newPageCart.do',
+		    	url: 'bestPageCart.do',
 		    	data: {
 		    		/* yName:yName,
 		    		ySrc:ySrc,
@@ -79,4 +71,3 @@ function sendProductInfo(productid) {
 		}
 	}
 }
-*/
