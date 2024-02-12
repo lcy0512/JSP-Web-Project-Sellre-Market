@@ -1,5 +1,7 @@
 package com.market.dao.projection;
 
+import java.text.NumberFormat;
+
 /**
  * 장바구니 목록 조회용 모델 (DB 연결 쪽 DTO 역할)
  */
@@ -21,6 +23,12 @@ public record CartListViewProjection(
 	public static CartListViewProjectionBuilder builder() {
 		return new CartListViewProjectionBuilder();
 	}
+	
+	public String priceLocale() {
+		NumberFormat format = NumberFormat.getNumberInstance();
+		return format.format(price);
+	}
+	
 	public static class CartListViewProjectionBuilder {
 		private Long cartId;
 		private Long productId;

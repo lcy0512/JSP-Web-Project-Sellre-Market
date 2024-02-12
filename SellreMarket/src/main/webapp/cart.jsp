@@ -1,83 +1,82 @@
+<%--
+		(1) Desc : 장바구니 page 제작하기.
+		(2) Date
+			1) 2024.02.06. (Ver 0.0.0)
+			2) 2024.02.08. (Ver 0.0.1)
+			2) 2024.02.12. (Ver 1.0.0)
+		(3) Author : Gwangyeong Kim
+		(4) History
+			1) 최초 작성
+			2) jstl 및 'c' tag를 이용하여 장바구니 데이터 불러오기.
+			3) 
+--%>
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="ko">
+<html>
     <head>
         <meta charSet="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover"/>
         <title>Sellre - 셀리마켓</title>
-        <meta name="description" content="Better Life for All. 건강한 식재료부터 믿을 수 있는 뷰티, 라이프스타일 상품까지. 나와 내 가족이 사고 싶은 상품을 판매합니다. 내일 아침 문 앞에서 만나요!"/>
-        <meta name="keywords" content="다이어트, 식단, 닭가슴살, 요리, 치아바타, 레시피, 상차림, 다이어트음식, 이유식, 건강이유식, 뷰티, 화장품"/>
-        <meta property="og:type" content="website"/>
-        <meta property="og:site_name" content="Sellre - 셀리마켓"/>
-        <meta property="og:title" content="Sellre - 셀리마켓"/>
-        <meta property="og:description" content="Better Life for All. 건강한 식재료부터 믿을 수 있는 뷰티, 라이프스타일 상품까지. 나와 내 가족이 사고 싶은 상품을 판매합니다. 내일 아침 문 앞에서 만나요!"/>
-        <meta property="og:image" content="https://res.kurly.com/images/marketkurly/logo/logo_sns_marketkurly.jpg"/>
-        <meta property="og:url" content="https://www.kurly.com/cart"/>
-        <meta property="twitter:card" content="summary"/>
-        <meta property="twitter:title" content="Sellre - 셀리마켓"/>
-        <meta property="twitter:description" content="Better Life for All. 건강한 식재료부터 믿을 수 있는 뷰티, 라이프스타일 상품까지. 나와 내 가족이 사고 싶은 상품을 판매합니다. 내일 아침 문 앞에서 만나요!"/>
-        <meta property="twitter:image" content="https://res.kurly.com/images/marketkurly/logo/logo_sns_marketkurly.jpg"/>
-        <meta property="twitter:url" content="https://www.kurly.com/cart"/>
-        <link rel="canonical" href="https://www.kurly.com/cart"/>
-        <meta name="next-head-count" content="17"/>
-        <meta charSet="utf-8"/>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <meta name="application-name" content="컬리"/>
-        <meta name="referrer" content="no-referrer-when-downgrade"/>
-        <meta name="format-detection" content="telephone=no"/>
-        <link rel="shortcut icon" href="https://res.kurly.com/favicon.ico"/>
-        <link rel="icon" href="https://res.kurly.com/favicon.ico"/>
-        <link rel="icon" type="image/png" sizes="16x16" href="https://res.kurly.com/icons/favicon-16x16.png"/>
-        <link rel="icon" type="image/png" sizes="32x32" href="https://res.kurly.com/icons/favicon-32x32.png"/>
-        <link rel="apple-touch-icon" sizes="128x128" href="https://res.kurly.com/icons/favicon-128x128.png"/>
-        <link rel="apple-touch-icon" sizes="144x144" href="https://res.kurly.com/icons/favicon-144x144.png"/>
-        <link rel="apple-touch-icon" sizes="152x152" href="https://res.kurly.com/icons/favicon-152x152.png"/>
-        <link rel="apple-touch-icon" sizes="167x167" href="https://res.kurly.com/icons/favicon-167x167.png"/>
-        <link rel="apple-touch-icon" sizes="180x180" href="https://res.kurly.com/icons/favicon-180x180.png"/>
-        <link rel="apple-touch-icon" sizes="192x192" href="https://res.kurly.com/icons/favicon-192x192.png"/>
-        <link rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" href="https://res.kurly.com/images/splashs/iphone5_splash.png"/>
-        <link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" href="https://res.kurly.com/images/splashs/iphone6_splash.png"/>
-        <link rel="apple-touch-startup-image" media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)" href="https://res.kurly.com/images/splashs/iphoneplus_splash.png"/>
-        <link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" href="https://res.kurly.com/images/splashs/iphonex_splash.png"/>
-        <link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)" href="https://res.kurly.com/images/splashs/iphonexr_splash.png"/>
-        <link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)" href="https://res.kurly.com/images/splashs/iphonexsmax_splash.png"/>
-        <link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)" href="https://res.kurly.com/images/splashs/ipad_splash.png"/>
-        <link rel="apple-touch-startup-image" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)" href="https://res.kurly.com/images/splashs/ipadpro1_splash.png"/>
-        <link rel="apple-touch-startup-image" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)" href="https://res.kurly.com/images/splashs/ipadpro3_splash.png"/>
-        <link rel="apple-touch-startup-image" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)" href="https://res.kurly.com/images/splashs/ipadpro2_splash.png"/>
-        <meta name="mobile-web-app-capable" content="yes"/>
-        <meta name="apple-mobile-web-app-capable" content="yes"/>
-        <meta name="apple-mobile-web-app-title" content="컬리"/>
-        <meta name="msapplication-TileColor" content="#ffffff"/>
-        <meta name="msapplication-tap-highlight" content="no"/>
-        <link rel="manifest" href="/manifest.json"/>
-        <link rel="preload" href="https://res.kurly.com/_next/static/css/d59287ec5b86dc49.css" as="style"/>
-        <link rel="stylesheet" href="https://res.kurly.com/_next/static/css/d59287ec5b86dc49.css" data-n-g/>
-        <noscript data-n-css></noscript>
-        <script defer nomodule src="https://res.kurly.com/_next/static/chunks/polyfills-5cd94c89d3acac5f.js"></script>
-        <script src="https://res.kurly.com/_next/static/chunks/webpack-9a046e6028963528.js" defer></script>
-        <script src="https://res.kurly.com/_next/static/chunks/framework-f8115f7fae64930e.js" defer></script>
-        <script src="https://res.kurly.com/_next/static/chunks/main-849da2e2e3898e8b.js" defer></script>
-        <script src="https://res.kurly.com/_next/static/chunks/pages/_app-bdbb52cff774c251.js" defer></script>
-        <script src="https://res.kurly.com/_next/static/chunks/49089-9b005c12d23d9836.js" defer></script>
-        <script src="https://res.kurly.com/_next/static/chunks/78359-54f29aae1d7b3216.js" defer></script>
-        <script src="https://res.kurly.com/_next/static/chunks/59192-23c01ad8f182b115.js" defer></script>
-        <script src="https://res.kurly.com/_next/static/chunks/70777-ab1352eaa486e162.js" defer></script>
-        <script src="https://res.kurly.com/_next/static/chunks/46353-bb0445be35c19acf.js" defer></script>
-        <script src="https://res.kurly.com/_next/static/chunks/68455-4e7fac1251dff4f9.js" defer></script>
-        <script src="https://res.kurly.com/_next/static/chunks/56269-42c32452ccee5939.js" defer></script>
-        <script src="https://res.kurly.com/_next/static/chunks/59812-abd8e2f0d977eef7.js" defer></script>
-        <script src="https://res.kurly.com/_next/static/chunks/70316-2c0b9aa796bb6b1c.js" defer></script>
-        <script src="https://res.kurly.com/_next/static/chunks/61486-a99a949a0117e724.js" defer></script>
-        <script src="https://res.kurly.com/_next/static/chunks/27480-7ff27a8adfce6190.js" defer></script>
-        <script src="https://res.kurly.com/_next/static/chunks/55260-14372e7254ab98fe.js" defer></script>
-        <script src="https://res.kurly.com/_next/static/chunks/4151-5964f6cb2516c4a1.js" defer></script>
-        <script src="https://res.kurly.com/_next/static/chunks/54753-774ef131756e3b3b.js" defer></script>
-        <script src="https://res.kurly.com/_next/static/chunks/pages/cart-118bb6a7378b7f53.js" defer></script>
-        <script src="https://res.kurly.com/_next/static/68L4oDF5CxrH0qdDqMtse/_buildManifest.js" defer></script>
-        <script src="https://res.kurly.com/_next/static/68L4oDF5CxrH0qdDqMtse/_ssgManifest.js" defer></script>
-        <script src="https://res.kurly.com/_next/static/68L4oDF5CxrH0qdDqMtse/_middlewareManifest.js" defer></script>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+				<meta content="Free HTML Templates" name="keywords">
+				<meta content="Free HTML Templates" name="description">
+				
+				<%-- Favicon --%>
+				<link href="img/favicon.ico" rel="icon">
+				
+				<%-- Google Web Fonts --%>
+				<link rel="preconnect" href="https://fonts.gstatic.com">
+				<link
+					href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+					rel="stylesheet">
+				
+				<%-- Font Awesome --%>
+				<link
+					href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+					rel="stylesheet">
+				
+				<%-- Libraries Stylesheet --%>
+				<link href="lib/animate/animate.min.css" rel="stylesheet">
+				<link href="lib/owlcarousel/assets/owl.carousel.min.css"
+					rel="stylesheet">
+				
+				<%-- Customized Bootstrap Stylesheet --%>
+				<link href="css/style.css" rel="stylesheet">
+				
+				<%-- JavaScript Libraries --%>
+				<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+				<script
+					src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+				<script src="lib/easing/easing.min.js"></script>
+				<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+				
+				<%-- Contact Javascript File --%>
+				<script src="mail/jqBootstrapValidation.min.js"></script>
+				<script src="mail/contact.js"></script>
+				
+				<%-- Template Javascript --%>
+				<script src="js/main.js"></script>
+				
+				<%-- Bootstrap CSS --%>
+				<link
+					href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+					rel="stylesheet"
+					integrity="sha384-GLhlTQ8iK7t1TIq0IYzcqL/tnuU6J1bYWFIVXutUPnN0PBKpZQUMuXAfmgt5L9a1"
+					crossorigin="anonymous">
+				
+				<%-- Bootstrap JavaScript (requires Popper.js) --%>
+				<script
+					src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+					integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofNol/wwZQqjW9M4aPskD5S/R1HD87Hjr"
+					crossorigin="anonymous">
+				</script>
+				
+				<%-- TailwindCSS --%>
+				<script src="https://cdn.tailwindcss.com"></script>
     </head>
     <body>
         <div id="__next" data-reactroot>
@@ -798,23 +797,52 @@
                                 <button disabled class="css-0 e149z640">선택삭제</button>
                             </div>
                         </div>
-                        <style data-emotion="css 2lvxh7">
-                            .css-2lvxh7 {
-                                border-bottom: 1px solid #f4f4f4;
-                            }
-                        </style>
-                        <div class="css-2lvxh7 ej77nku0">
-                            <style data-emotion="css l1lu2l">
-                                .css-l1lu2l {
-                                    padding: 115px 0;
-                                    border-top: 1px solid #333;
-                                    font-size: 16px;
-                                    line-height: 24px;
-                                    text-align: center;
-                                    color: #b5b5b5;
-                                }
-                            </style>
-                            <p class="css-l1lu2l eqymnpn0">장바구니에 담긴 상품이 없습니다</p>
+                        <div class="ej77nku0 flex flex-col border-t-2 border-t-black ${not empty carts ? "justify-start" : "justify-center py-32"} items-center border-b">
+                          <style data-emotion="css l1lu2l">
+                              .css-l1lu2l {
+                                  font-size: 16px;
+                                  line-height: 24px;
+                                  text-align: center;
+                                  color: #b5b5b5;
+                              }
+                          </style>
+	                    		<c:if test="${empty carts}">
+	                          	<p class="css-l1lu2l eqymnpn0">장바구니에 담긴 상품이 없습니다</p>
+	                    		</c:if>
+	                    		<c:if test="${not empty carts}">
+		                    		<ul class="w-full flex flex-col divide-y">
+		                    			<c:forEach var="cart" items="${carts}">
+		                    				<li>
+		                    					<section class="grid grid-cols-10 py-4 items-center">
+		                    						<div class="col-span-1 flex justify-center items-center">
+		                    							<label class="">
+		                    								<input type="checkbox" class="peer sr-only">
+		                    								<div class="relative w-4 h-4 bg-white border-2 border-[#444444] rounded-lg ring-black ring-offset-2 peer-focus:ring-2 peer-checked:!bg-black">
+		                    									<svg class="scale-[0.8] -translate-x-[0.0625rem]" stroke="#000000" fill="#ffffff" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path></svg>
+		                    								</div>
+	                    								</label>
+																		</div>
+		                    						<div class="col-span-6 flex justify-start items-center gap-4">
+		                    							<img
+		                    							  src="${cart.imagePath()}"
+		                    							  alt="${cart.productName()} 이미지"
+		                    							  class="w-32 h-32 border rounded-lg"
+		                    							>
+		                    							${cart.productName()}
+	                    							</div>
+		                    						<div class="col-span-2 flex justify-center items-center border-2 border-black rounded-md h-8 w-24">
+		                    							<div class="grid grid-cols-3 items-center gap-2">
+			                    							<button class="px-2 font-bold duration-150 active:scale-95">-</button>
+			                    							<p class="flex justify-center items-center">${cart.amount()}</p>
+			                    							<button class="px-2 font-bold duration-150 active:scale-95">+</button>
+		                    							</div>
+	                    							</div>
+		                    						<div class="col-span-1 flex justify-center items-center">${cart.priceLocale()}원</div>
+		                    					</section>
+																</li>
+		                    			</c:forEach>
+		                    		</ul>
+	                    		</c:if>
                         </div>
                         <div class="css-20o6z0 e149z643">
                             <div class="css-zbxehx e149z642">
