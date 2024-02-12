@@ -1,3 +1,28 @@
+window.onload=function(){
+	init();
+}	
+	
+function init() {
+	productNum(); //header[제품현황] 알림표시
+	
+}
+
+//header-제품현황 알림표시
+function productNum() {
+	
+	$.ajax({
+		type : "POST",
+		url : "adminProductNum.do",
+		success : function(response){
+			document.getElementById('productNum').innerText = response
+		},
+		 error:function(request, status, error){
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+	});
+}
+
+
 /************************************************************************************************
 	 * Function : 정규식 체크 
 	 * @param 	: null
@@ -44,27 +69,24 @@
 					 
 		let type = $("#type").val();
 		let subtype = $("#subtype").val();
-
-		if(infoCheck() == 0) {
+		
+		$.ajax({
 			
-			$.ajax({
-				
-				type : "POST",
-				url : "insertCategory.do",
-				data : {
-					type: type,
-					subtype : subtype
-				},
-				success : function(response){
-					 if (response === "1") {
-						 	alert(type+"["+subtype+"]이 등록되었습니다.")
-			                window.location.replace("/SellreMarket/admin_product.jsp");
-			            }
-			        },
-				 error:function(request, status, error){
-					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-				}
-				
-			});
-		}	
+			type : "POST",
+			url : "insertCategory.do",
+			data : {
+				type: type,
+				subtype : subtype
+			},
+			success : function(response){
+				 if (response === "1") {
+					 	alert(type+"["+subtype+"]이 등록되었습니다.")
+					 	window.location.replace("/SellreMarket/adminCategory.jsp");
+		            }
+		        },
+			 error:function(request, status, error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+			
+		});
 	}
