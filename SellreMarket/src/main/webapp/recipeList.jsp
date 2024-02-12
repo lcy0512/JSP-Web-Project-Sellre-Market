@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <!--
-	1. Date : 2024.02.02
+	1. Date : 2024.02.12
 	2. Author : Woody Jo
 	3. Version : v1.0.0
 	4. Description : 메인 body 페이지 Dto 
@@ -67,7 +67,7 @@
 </script>
 
 <!-- // js 따로 관리한다. -->
-<script src="js/mainViewPage.js"></script>
+<script src="js/recipePage.js"></script>
 
 
 </head>
@@ -125,12 +125,35 @@
 		</div>
 	</div>
 	<br>
+	<br>
 	<!-- Carousel End -->
 
 
 	<h2 align="center">설 선물특가 실시간 랭킹🔥🔥</h2>
-	<p class="css-149yh9z ej3ms6t1" align="center">지금 주목해야할 인기 상품 최대
-		79% 할인</p>
+	<p class="css-149yh9z ej3ms6t1" align="center">지금 주목해야할 인기 상품 최대 79% 할인</p>
+	<br>
+	<br>
+	
+	<!-- Align by Category Start -->
+	<div class="setAlign" style="margin-left: 76%; color: #919492;">
+		<c:if test="${alignCategory eq ''}">
+			<a href="alignRecipeLowPrice.do">낮은 가격순</a>
+			&nbsp;&nbsp;|&nbsp;&nbsp;
+			<a href="alignRecipeHighPrice.do">높은 가격순</a>
+		</c:if>
+		<c:if test="${alignCategory eq '낮은 가격순'}">
+			<span style="color: black; font-weight: bold">낮은 가격순</span>
+			&nbsp;&nbsp;|&nbsp;&nbsp;
+			<a href="alignRecipeHighPrice.do">높은 가격순</a>
+		</c:if>
+		<c:if test="${alignCategory eq '높은 가격순'}">
+			<a href="alignRecipeLowPrice.do">낮은 가격순</a>
+			&nbsp;&nbsp;|&nbsp;&nbsp;
+			<span style="color: black; font-weight: bold">높은 가격순</span>
+		</c:if>
+	</div>	
+	<!-- Align by Category End -->
+		
 
 
 	<!-- Products Start -->
@@ -149,6 +172,15 @@
 									style="object-fit: cover; width: 100%; height: 100%;">
 								</a>
 							</div>
+							
+							
+							<!-- 장바구니 폰트 사이즈 수정 필요 -->
+							<!-- 장바구니 폰트 사이즈 수정 필요 -->
+							<!-- 장바구니 폰트 사이즈 수정 필요 -->
+							<!-- 장바구니 폰트 사이즈 수정 필요 -->
+							<!-- 장바구니 폰트 사이즈 수정 필요 -->
+							<!-- 장바구니 폰트 사이즈 수정 필요 -->
+							<!-- 장바구니 폰트 사이즈 수정 필요 -->
 							<div
 								style="margin-top: 7px; margin-left: 1%; border: 1px solid lightgray; border-radius: 5px; width: 98%;">
 								<button
@@ -157,23 +189,40 @@
 									style="width: 100%;">장바구니</button>
 								<input type="hidden" id="userid" value="${customerid}">
 							</div>
+							<!-- 장바구니 폰트 사이즈 수정 필요 -->
+							<!-- 장바구니 폰트 사이즈 수정 필요 -->
+							<!-- 장바구니 폰트 사이즈 수정 필요 -->
+							<!-- 장바구니 폰트 사이즈 수정 필요 -->
+							<!-- 장바구니 폰트 사이즈 수정 필요 -->
+							<!-- 장바구니 폰트 사이즈 수정 필요 -->
+							
 							<div class="text-center py-4"
 								style="display: flex; flex-direction: column; justify-content: center;">
-								<a class="h6 text-decoration-none text-truncate" href="">[${dto.yname}]</a>
-									<a class="ytitle" href="">${dto.ytitle}</a>
-
+								<a class="h7 text-decoration-none text-truncate" href="" style="color: #808080;">[${dto.yname}]</a>
+									<a class="ytitle" href="" style="font-weight: bold;">${dto.ytitle}</a>
 								<div class="d-flex align-items-center justify-content-center mt-2">
-									<h5>${dto.price}</h5>
+									<h7 class="text-muted ml-2">
+										<c:if test="${dto.price ne dto.dPrice}">
+											<del>${dto.price}</del>
+											<h7>원</h7>
+										</c:if>
+									</h7>
+								</div>
+								<div class="d-flex align-items-center justify-content-center mt-2">
+									<span class="h6" style="color: red;">
+										<c:if test="${dto.price ne dto.dPrice}">
+											${dto.salerate}%
+										</c:if>
+									</span>
+									&nbsp;&nbsp;
+									<h6>${dto.dPrice}</h6>
 									<h6>원</h6>
-									<h6 class="text-muted ml-2">
-										<del>$123.00</del>
-									</h6>
 								</div>
 								<div
 									class="d-flex align-items-center justify-content-center mb-1">
 									<img
 										src="https://cdn-icons-png.flaticon.com/128/535/535234.png"
-										style="width: 12px; height: 12px;">&nbsp; <small>${dto.like}</small>
+										style="width: 12px; height: 12px;">&nbsp; <small>${dto.recipelike}</small>
 								</div>
 							</div>
 						</div>

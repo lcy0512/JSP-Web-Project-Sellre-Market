@@ -15,7 +15,7 @@ public class Paging implements MCommand {
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		
 /*
-	1. Date : 2024.02.07
+	1. Date : 2024.02.12
 	2. Author : Woody Jo
 	3. Version : v1.0.0
 	4. Description : 메인 body 페이지 데이터 가져오기 및 페이징 처리 

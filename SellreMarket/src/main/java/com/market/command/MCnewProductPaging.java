@@ -46,7 +46,6 @@ public class MCnewProductPaging implements MCommand{
 		System.out.println(limitFrom + " limit from new product dao");
 		
 		List<MainViewDto> newProducts = dao.newProductList(limitFrom, countPerPage);
-		
 		// 블록 페이지 1~5, 6~10
 		// ex) 1~5까지 = 1, 6~10 = 2
 		int blockPage = ((curPage-1) / countPerBlock) + 1;

@@ -37,12 +37,6 @@ function sendProductInfo(productid) {
 */
 
 function sendProductInfo(productid) {
-    console.log('sendProductInfo function called with productid:', productid);
-    // ... rest of your code
-}
-
-/*
-function sendProductInfo(productid) {
 	var productContainer = event.target.closest('.product-item');
 	var pname = productContainer.querySelector('.text-truncate').innerText;
     
@@ -64,11 +58,6 @@ function sendProductInfo(productid) {
 		    	type: 'POST',
 		    	url: 'newPageCart.do',
 		    	data: {
-		    		/* yName:yName,
-		    		ySrc:ySrc,
-		    		yTitle:yTitle,
-		    		price:price,
-		    		*/
 		    		productid:productid
 	    		}
 	    	});
@@ -79,4 +68,3 @@ function sendProductInfo(productid) {
 		}
 	}
 }
-*/

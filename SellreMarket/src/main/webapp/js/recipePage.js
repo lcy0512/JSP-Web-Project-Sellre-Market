@@ -55,7 +55,7 @@ function sendProductInfo(recipeid) {
 	    	alert("상품이 장바구니에 담겼습니다.");
 	    	$.ajax({
 		    	type: 'POST',
-		    	url: 'mainPageCart.do',
+		    	url: 'recipePageCart.do',
 		    	data: {
 		    		/* yName:yName,
 		    		ySrc:ySrc,

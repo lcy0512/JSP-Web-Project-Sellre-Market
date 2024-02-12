@@ -27,6 +27,8 @@ import com.market.command.MCalignBestHighPrice;
 import com.market.command.MCalignBestLowPrice;
 import com.market.command.MCalignNewHighPrice;
 import com.market.command.MCalignNewLowPrice;
+import com.market.command.MCalignRecipeHighPrice;
+import com.market.command.MCalignRecipeLowPrice;
 import com.market.command.MCbestProduct;
 import com.market.command.MClogin;
 import com.market.command.MCnewProductPaging;
@@ -90,8 +92,11 @@ public class Controller extends HttpServlet {
 		int curPage = 0;
 		// 페이지 클릭 시 신제품, 가격순으로 정렬하기 위한 변수
 		String alignCategory = null;
+		// header 카테고리
+		String headerCategory = null;
 		// 장바구니 클릭 시 가져 올 productid
 		int productid = 0;
+		
 		
 		response.setContentType("applicaton/json");
 		response.setCharacterEncoding("UTF-8");
@@ -320,8 +325,11 @@ public class Controller extends HttpServlet {
 				out.flush();
 				return;
 				
-			// 메인 페이지 
-			case "/mainPage.do" :
+			// 레시피 페이지
+			case "/recipePage.do" :
+				
+				headerCategory = "레시피";
+				alignCategory = "";
 				
 				// 수정 필요
 				if (request.getParameter("customerid") != null) {
@@ -343,13 +351,71 @@ public class Controller extends HttpServlet {
 				command = new Paging();
 				command.execute(request, response);
 				
-				viewPage = "mainViewPage.jsp";
+				session.setAttribute("alignCategory", alignCategory);
+				session.setAttribute("headerCategory", headerCategory);
 				
+				viewPage = "recipeList.jsp";
+				
+				break;
+			case "/alignRecipeLowPrice.do" :
+				headerCategory = "레시피";
+				alignCategory = "낮은 가격순";
+				
+				// 수정 필요
+				if (request.getParameter("customerid") != null) {
+					id = request.getParameter("customerid");
+				}
+				// 수정 필요
+				
+				try {
+					curPage = Integer.parseInt(request.getParameter("curPage"));
+				}
+				catch (Exception e) {
+					curPage = 1;
+				}
+				
+				request.setAttribute("curPage", curPage);
+				
+				command = new MCalignRecipeLowPrice();
+				command.execute(request, response);
+				
+				session.setAttribute("alignCategory", alignCategory);
+				session.setAttribute("headerCategory", headerCategory);
+				
+				viewPage = "recipeList.jsp";
+				break;
+				
+			case "/alignRecipeHighPrice.do" :
+				headerCategory = "레시피";
+				alignCategory = "높은 가격순";
+				
+				// 수정 필요
+				if (request.getParameter("customerid") != null) {
+					id = request.getParameter("customerid");
+				}
+				// 수정 필요
+				
+				try {
+					curPage = Integer.parseInt(request.getParameter("curPage"));
+				}
+				catch (Exception e) {
+					curPage = 1;
+				}
+				
+				request.setAttribute("curPage", curPage);
+				
+				command = new MCalignRecipeHighPrice();
+				command.execute(request, response);
+				
+				session.setAttribute("alignCategory", alignCategory);
+				session.setAttribute("headerCategory", headerCategory);
+				
+				viewPage = "recipeList.jsp";
 				break;
 				
 			// 신제품 정보 불러오는 작업
-			case "/newProduct.do" :
-				
+			case "/mainPage.do" :
+				headerCategory = "신상품";
 				alignCategory = "신상품순";
 				
 				// 수정 필요
@@ -371,12 +437,13 @@ public class Controller extends HttpServlet {
 				command.execute(request, response);
 				
 				session.setAttribute("alignCategory", alignCategory);
+				session.setAttribute("headerCategory", headerCategory);
 				
 				viewPage = "newProduct.jsp";
 				break;
 				
 			case "/alignNewLowPrice.do" :
-				
+				headerCategory = "신상품";
 				alignCategory = "낮은 가격순";
 				
 				// 수정 필요
@@ -398,12 +465,13 @@ public class Controller extends HttpServlet {
 				command.execute(request, response);
 				
 				session.setAttribute("alignCategory", alignCategory);
+				session.setAttribute("headerCategory", headerCategory);
 				
 				viewPage = "newProduct.jsp";
 				break;
 				
 			case "/alignNewHighPrice.do" :
-				
+				headerCategory = "신상품";
 				alignCategory = "높은 가격순";
 				
 				// 수정 필요
@@ -425,13 +493,14 @@ public class Controller extends HttpServlet {
 				command.execute(request, response);
 				
 				session.setAttribute("alignCategory", alignCategory);
+				session.setAttribute("headerCategory", headerCategory);
 				
 				viewPage = "newProduct.jsp";
 				break;
 				
 			// 베스트순 정보 불러오는 작업
 			case "/bestProduct.do" :
-				
+				headerCategory = "베스트";
 				alignCategory = "베스트순";
 				
 				// 수정 필요
@@ -453,13 +522,14 @@ public class Controller extends HttpServlet {
 				command.execute(request, response);
 				
 				session.setAttribute("alignCategory", alignCategory);
+				session.setAttribute("headerCategory", headerCategory);
 				
 				viewPage = "bestProduct.jsp";
 				break;
 				
 				
 			case "/alignBestLowPrice.do" :
-				
+				headerCategory = "베스트";
 				alignCategory = "낮은 가격순";
 				
 				// 수정 필요
@@ -481,12 +551,13 @@ public class Controller extends HttpServlet {
 				command.execute(request, response);
 				
 				session.setAttribute("alignCategory", alignCategory);
+				session.setAttribute("headerCategory", headerCategory);
 				
 				viewPage = "bestProduct.jsp";
 				break;
 				
 			case "/alignBestHighPrice.do" :
-				
+				headerCategory = "베스트";
 				alignCategory = "높은 가격순";
 				
 				// 수정 필요
@@ -508,6 +579,7 @@ public class Controller extends HttpServlet {
 				command.execute(request, response);
 				
 				session.setAttribute("alignCategory", alignCategory);
+				session.setAttribute("headerCategory", headerCategory);
 				
 				viewPage = "bestProduct.jsp";
 				break;
@@ -539,7 +611,7 @@ public class Controller extends HttpServlet {
 				
 				
 			// main페이지 카트 클릭
-			case "/mainPageCart.do" :
+			case "/recipePageCart.do" :
 				
 				if (request.getParameter("customerid") != null) {
 					id = request.getParameter("customerid");
@@ -554,7 +626,7 @@ public class Controller extends HttpServlet {
 				command = new getCart();
 				command.execute(request, response);
 				
-				viewPage = "mainPage.do";
+				viewPage = "recipePage.do";
 				break;
 				
 			// 신제품 페이지 카트 클릭

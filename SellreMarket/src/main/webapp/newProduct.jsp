@@ -95,7 +95,7 @@
 	<h3 align="center">신상품</h3>
 
 	
-	<!-- Align Start -->
+	<!-- Align by Category Start -->
 	<div class="setAlign" style="margin-left: 70%; color: #919492;">
 		<c:if test="${alignCategory eq '신상품순'}">
 			<span style="color: black; font-weight: bold">신상품순</span>
@@ -119,7 +119,7 @@
 			<span style="color: black; font-weight: bold">높은 가격순</span>
 		</c:if>
 	</div>
-	<!-- Align End -->
+	<!-- Align by Category End -->
 	
 	
 	<!-- Products Start -->
@@ -146,13 +146,24 @@
 							<div class="text-center py-4"
 								style="display: flex; flex-direction: column; justify-content: center;">
 								<a class="h6 text-decoration-none text-truncate" href="">${dto.pname}</a>
-
 								<div class="d-flex align-items-center justify-content-center mt-2">
-									<h5>${dto.price}</h5>
+									<h7 class="text-muted ml-2">
+										<c:if test="${dto.price ne dto.dPrice}">
+											<del>${dto.price}</del>
+											<h7>원</h7>
+										</c:if>
+									</h7>
+								</div>
+								<div class="d-flex align-items-center justify-content-center mt-2">
+									<span class="h6" style="color: red;">
+										<c:if test="${dto.price ne dto.dPrice}">
+											${dto.salerate}%
+										</c:if>
+									</span>
+									&nbsp;&nbsp;
+									<h6>${dto.dPrice}</h6>
 									<h6>원</h6>
-									<h6 class="text-muted ml-2">
-										<del>$123.00</del>
-									</h6>
+									
 								</div>
 								<div
 									class="d-flex align-items-center justify-content-center mb-1">

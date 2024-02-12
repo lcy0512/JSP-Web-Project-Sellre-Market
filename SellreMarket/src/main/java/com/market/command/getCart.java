@@ -14,16 +14,16 @@ public class getCart implements MCommand {
 		HttpSession session = request.getSession();
 		
 		MainViewDao dao = new MainViewDao();
+//		int productid;
 		String id = (String) session.getAttribute("customerid");
 		int recipeid = (int) session.getAttribute("recipeid");
-		int productid = (int) session.getAttribute("productid");
 		
 		if (id == null) {
 			// 테스트용
 			id = "admin";		
 		}
 		
-		dao.newPageClickCart(id, productid);
-		dao.mainPageClickCart(id, recipeid);
+//		dao.newPageClickCart(id, productid);
+		dao.recipePageClickCart(id, recipeid);
 	}
 }

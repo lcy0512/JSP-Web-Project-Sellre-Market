@@ -29,38 +29,45 @@ public class MainViewDto {
 	String description;
 	int status;
 	int priceid;
+	String dPrice;
 	String price;
-	int like;
+	String recipelike;
 	String ename;
 	String econtent;
 	String eimg;
 	int recipeid;
 	int productid;
 	String pimage;
-	int plikecount;
+	String plikecount;
+	String salerate;
+	
 	
 	public MainViewDto(String eimg) {
 		super();
 		this.eimg = eimg;
 	}
 	
-	public MainViewDto(String pname, String price, String pimage, int plikecount, int productid) {
+	public MainViewDto(String pname, String price, String dPrice, String pimage, String plikecount, int productid, String salerate) {
 		super();
 		this.pname = pname;
 		this.price = price;
+		this.dPrice = dPrice;
 		this.pimage = pimage;
 		this.plikecount = plikecount;
 		this.productid = productid;
+		this.salerate = salerate;
 	}
 
-	public MainViewDto(String yname, String ysrc, String ytitle, String price, int like, int recipeid) {
+	public MainViewDto(String yname, String ysrc, String ytitle, String price, String dPrice, String recipelike, int recipeid, String salerate) {
 		super();
 		this.yname = yname;
 		this.ysrc = ysrc;
 		this.ytitle = ytitle;
 		this.price = price;
-		this.like = like;
+		this.dPrice = dPrice;
+		this.recipelike = recipelike;
 		this.recipeid = recipeid;
+		this.salerate = salerate;
 	}
 
 	public int getYid() {
@@ -215,12 +222,12 @@ public class MainViewDto {
 		this.price = price;
 	}
 
-	public int getLike() {
-		return like;
+	public String getLike() {
+		return recipelike;
 	}
 
-	public void setLike(int like) {
-		this.like = like;
+	public void setLike(String recipelike) {
+		this.recipelike = recipelike;
 	}
 
 	public String getEname() {
@@ -271,12 +278,35 @@ public class MainViewDto {
 		this.pimage = pimage;
 	}
 
-	public int getPlikecount() {
+	public String getPlikecount() {
 		return plikecount;
 	}
 
-	public void setPlikecount(int plikecount) {
+	public void setPlikecount(String plikecount) {
 		this.plikecount = plikecount;
 	}
-	
+
+	public String getdPrice() {
+		return dPrice;
+	}
+
+	public void setdPrice(String dPrice) {
+		this.dPrice = dPrice;
+	}
+
+	public String getRecipelike() {
+		return recipelike;
+	}
+
+	public void setRecipelike(String recipelike) {
+		this.recipelike = recipelike;
+	}
+
+	public String getSalerate() {
+		return salerate;
+	}
+
+	public void setSalerate(String salerate) {
+		this.salerate = salerate;
+	}
 }

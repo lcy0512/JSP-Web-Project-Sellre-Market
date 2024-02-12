@@ -56,11 +56,6 @@ function sendProductInfo(productid) {
 		    	type: 'POST',
 		    	url: 'bestPageCart.do',
 		    	data: {
-		    		/* yName:yName,
-		    		ySrc:ySrc,
-		    		yTitle:yTitle,
-		    		price:price,
-		    		*/
 		    		productid:productid
 	    		}
 	    	});
