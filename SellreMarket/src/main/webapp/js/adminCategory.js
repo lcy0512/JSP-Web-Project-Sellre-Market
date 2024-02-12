@@ -4,8 +4,24 @@ window.onload=function(){
 	
 function init() {
 	paging();
+	productNum(); //header[제품현황] 알림표시
+	
 }
 
+//header-제품현황 알림표시
+function productNum() {
+	
+	$.ajax({
+		type : "POST",
+		url : "adminProductNum.do",
+		success : function(response){
+			document.getElementById('productNum').innerText = response
+		},
+		 error:function(request, status, error){
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+	});
+}
 
 function paging(pageNum) {
 	
@@ -79,7 +95,7 @@ function createPaging(data) {
 /* .do로 보내기 위해서 form을 만들고, id값도 붙여줌 */
 function detail(id){
 	
-	let url = "adminCategoryDetailPage.do";
+	let url = "/SellreMarket/adminCategoryDetailPage.do";
 	
 	let form = document.createElement("form");
 	form.action = url;

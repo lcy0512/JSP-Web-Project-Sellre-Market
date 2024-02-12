@@ -1,10 +1,34 @@
 
+window.onload=function(){
+	init();
+}	
+	
+function init() {
+	productNum(); 
+}
+
+//header-제품현황 알림표시
+function productNum() {
+	
+	$.ajax({
+		type : "POST",
+		url : "adminProductNum.do",
+		success : function(response){
+			document.getElementById('productNum').innerText = response
+		},
+		 error:function(request, status, error){
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+	});
+}
+
+
+
 /************************************************************************************************
  * Function : 작성한 정보 inset하기
  * @param 	: null
  * @return 	: null
 ************************************************************************************************/
-
 function insertEvent() {
 				 
 	let image = $("#image").val();

@@ -5,8 +5,24 @@ window.onload=function(){
 	
 function init() {
 	select();
+	productNum()
 }
 
+
+//header-제품현황 알림표시
+function productNum() {
+	
+	$.ajax({
+		type : "POST",
+		url : "adminProductNum.do",
+		success : function(response){
+			document.getElementById('productNum').innerText = response
+		},
+		 error:function(request, status, error){
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+	});
+}
 
 function select() {
 	
@@ -70,7 +86,7 @@ function infoCheck(){
 function goToPage() {
 
 	let form = document.createElement("form");
-	form.action = "adminCategory.do";
+	form.action = "/adminCategory.do";
 	form.method = "POST";
 	document.body.appendChild(form);
 	form.submit();
