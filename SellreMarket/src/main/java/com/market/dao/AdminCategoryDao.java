@@ -10,8 +10,6 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import com.market.dto.AdminCategoryDto;
-import com.market.dto.AdminProductDto;	
-import com.market.dto.AdminProductInputDto;
 
 public class AdminCategoryDao {
 
