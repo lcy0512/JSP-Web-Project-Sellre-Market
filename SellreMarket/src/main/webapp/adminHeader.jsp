@@ -16,29 +16,6 @@
 	data-n-g />
 <link rel="stylesheet" href="css/adminHeader.css" />
 
-<script>
-
-	/* function changePage(page) {
-		console.log("page : "+page)
-		$.ajax({
-			type : "POST",
-			url : page,
-			success : function(response){
-				
-			},
-			 error:function(request, status, error){
-				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			}
-		});
-	} */
-
-	
-	function changePage(page) {
-		 document.getElementById('form').action = page;
-		 document.getElementById('form').submit();
-	}
-</script>
-
 <body>
 	<div class="css-16h7nba e1p13h9k3">
 		<div class="css-pqw0uk e1p13h9k52">
@@ -71,14 +48,16 @@
 		</div>
 		<div id="header" class="css-17tqugj e17w4cfr1">
 			<div class="css-mlddcv e17w4cfr6">
-			
+					<div>
+						<span class="stock-num" id="productNum"></span> 
+					</div>
 					<ul class="css-1887xqd e17w4cfr5">
 						<li class="css-59mmhh e17w4cfr4"><a href="#" onclick="changePage('')"><span class="css-1xyu7j9 e17w4cfr2">매출현황</span></a></li>
-						<li class="css-59mmhh e17w4cfr4"><a href="#" onclick="changePage('')"><span class="css-1xyu7j9 e17w4cfr2">제품현황</span></a></li>
-						<li class="css-59mmhh e17w4cfr4"><a href="#" onclick="changePage('')"><span class="css-1xyu7j9 e17w4cfr2">카테고리</span></a></li>
-						<li class="css-59mmhh e17w4cfr4"><a href="#" onclick="changePage('')"><span class="css-1xyu7j9 e17w4cfr2">이벤트현황</span></a></li>
-						<li class="css-59mmhh e17w4cfr4"><a href="#" onclick="changePage('')"><span class="css-1xyu7j9 e17w4cfr2">입고요청</span></a></li>
-						<li class="css-59mmhh e17w4cfr4"><a href="#" onclick="changePage('')"><span class="css-1xyu7j9 e17w4cfr2">재고현황</span></a></li>
+						<li class="css-59mmhh e17w4cfr4"><a href="admin_product.jsp" ><span class="css-1xyu7j9 e17w4cfr2">제품현황</span></a></li>
+						<li class="css-59mmhh e17w4cfr4"><a href="adminCategory.jsp"><span class="css-1xyu7j9 e17w4cfr2">카테고리</span></a></li>
+						<li class="css-59mmhh e17w4cfr4"><a href="adminEvent.jsp"><span class="css-1xyu7j9 e17w4cfr2">이벤트현황</span></a></li>
+						<li class="css-59mmhh e17w4cfr4"><a href="adminOrder.jsp"><span class="css-1xyu7j9 e17w4cfr2">입고요청</span></a></li>
+						<li class="css-59mmhh e17w4cfr4"><a href="#" onclick="changePage('')"><span class="css-1xyu7j9 e17w4cfr2">고객문의</span></a></li>
 					</ul>
 				
 			</div>
