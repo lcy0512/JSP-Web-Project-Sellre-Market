@@ -17,7 +17,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	radioButtons.forEach(function(radioButton) {
 		radioButton.addEventListener('click', function() {
 			// gender값 연결
-			gender = radioButton.value
+			gender = radioButton.value;
+			console.log(gender);
 		});
 	});
 
@@ -45,9 +46,12 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-function checkInput() {
+function checkInput(boolean) {
 	let regExpAddress = /^[가-힣0-9 -]*$/;
-
+	
+	idcheck = boolean;
+	isChecked = boolean;
+	
 	let form = document.signupForm;
 	
 	let address = form.address.value;
@@ -243,6 +247,7 @@ $(document).ready(function() {
 	}); // $("#emailDuplicatedCheck").click
 	
 	 $("#passwordConfirm").on("input", function() {
+		passwordcheck = false;
         // 입력된 비밀번호와 확인용 비밀번호
         let regExpPasswd = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()-=_+])[A-Za-z\d!@#$%^&*()-=_+]{8,}$/;
         let password = $("#password").val();
@@ -266,6 +271,7 @@ $(document).ready(function() {
     }); //  $("#passwordConfirm").on("input"
     
 	$("#name").change(function() {
+		namecheck = false;
 		// 입력된 이름
 		let name = $("#name").val();
 		let regExpName = /^[가-힣]*$/;
@@ -280,6 +286,7 @@ $(document).ready(function() {
 	}); //  $("#name").change
 	
 	$("#mobileNumber").change(function() {
+		phonecheck = false;
 		let phone = $("#mobileNumber").val();
 		let regExpPhone = /^010\d{8}$/;
 
@@ -293,6 +300,7 @@ $(document).ready(function() {
 	}); // $("#mobileNumber").change
 	
 	$("#birthYear, #birthMonth, #birthDay").change(function() {
+		birthdatecheck = false;
 		let regExpBirthDate = /^((19|20)\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))$/;
 
 		let birthYear = $("#birthYear").val();

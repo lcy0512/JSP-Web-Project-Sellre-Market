@@ -22,13 +22,13 @@ public class SignUpDao {
 		}
 	}
 	
-	public void customerSignUp(String userid, String password, String tel, String name, String email, String address, String gender, String birthdate) { 
+	public void customerSignUp(String userid, String password, String tel, String name, String email, String address, String detailAddress, String gender, String birthdate) { 
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
 		String query = "insert into customer (userid, password, tel_no, name, email, address, gender, birthdate, status, insertdate, updatedate) "
-					 + "values (?,?,?,?,?,?,?,?,1,now(),now())";
+					 + "values (?,?,?,?,?,?,?,?,?,1,now(),now())";
 		try {
 			connection = dataSource.getConnection();
 			
@@ -40,8 +40,9 @@ public class SignUpDao {
 			preparedStatement.setString(4, name);
 			preparedStatement.setString(5, email);
 			preparedStatement.setString(6, address);	
-			preparedStatement.setString(7, gender);	
-			preparedStatement.setString(8, birthdate);	
+			preparedStatement.setString(7, detailAddress);	
+			preparedStatement.setString(8, gender);	
+			preparedStatement.setString(9, birthdate);	
 			
 			preparedStatement.executeUpdate();
 			
@@ -59,20 +60,21 @@ public class SignUpDao {
 		} // finally
 } // customerSignUp
 	
-	public void deliveryInfo(String address, int defaultset, String userid) { 
+	public void deliveryInfo(String address, String detailAddress, int defaultset, String userid) { 
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
-		String query = "insert into addresslist (address,defaultset,userid) values (?,?,?)";
+		String query = "insert into addresslist (address,detailaddress,defaultset,userid) values (?,?,?,?)";
 		try {
 			connection = dataSource.getConnection();
 			
 			preparedStatement = connection.prepareStatement(query);
 			
 			preparedStatement.setString(1, address);
-			preparedStatement.setInt(2, defaultset);
-			preparedStatement.setString(3, userid);
+			preparedStatement.setString(2, detailAddress);
+			preparedStatement.setInt(3, defaultset);
+			preparedStatement.setString(4, userid);
 			
 			preparedStatement.executeUpdate();
 			

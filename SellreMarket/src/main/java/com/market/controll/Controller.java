@@ -1,5 +1,7 @@
 package com.market.controll;
 
+import static com.market.common.util.AuthorityUtil.requireSigning;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -16,13 +18,29 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.market.command.MAdminCategory;
+import com.market.command.MAdminCategoryDelete;
+import com.market.command.MAdminCategoryDetail;
 import com.market.command.MAdminCategoryInsert;
+import com.market.command.MAdminCategoryUpdate;
+import com.market.command.MAdminEvent;
+import com.market.command.MAdminEventDelete;
+import com.market.command.MAdminEventDetail;
+import com.market.command.MAdminEventInsert;
+import com.market.command.MAdminEventUpdate;
 import com.market.command.MAdminGetCategory;
 import com.market.command.MAdminGetPackKind;
 import com.market.command.MAdminGetPackType;
 import com.market.command.MAdminGetSubCategory;
+import com.market.command.MAdminOrder;
+import com.market.command.MAdminOrderDetail;
+import com.market.command.MAdminOrderProduct;
 import com.market.command.MAdminProductCount;
 import com.market.command.MAdminProductInsert;
+import com.market.command.MAdminProductNum;
+import com.market.command.MAdminQuest;
+import com.market.command.MAdminQuestDetail;
+import com.market.command.MAdminQuestInsert;
+import com.market.command.MAdminQuestNum;
 import com.market.command.MCalignBestHighPrice;
 import com.market.command.MCalignBestLowPrice;
 import com.market.command.MCalignNewHighPrice;
@@ -35,20 +53,23 @@ import com.market.command.MCbestProduct;
 import com.market.command.MClogin;
 import com.market.command.MCnewProductPaging;
 import com.market.command.MCommand;
+import com.market.command.MCommandReturnInt;
 import com.market.command.MDuplicatedCheck;
 import com.market.command.MInquiryDetail;
 import com.market.command.MInsertInquiry;
 import com.market.command.MLoadInquiryList;
+import com.market.command.MMyPage;
+import com.market.command.MMyPageDetail;
 import com.market.command.MProductDetailPageCommand;
 import com.market.command.MSignUp;
+import com.market.command.Paging;
+import com.market.command.getCart;
 import com.market.dto.AdminCategoryDto;
+import com.market.dto.AdminEventDto;
 import com.market.dto.AdminGetCategoryDto;
 import com.market.dto.AdminGetPackTypeDto;
 import com.market.dto.AdminProductDto;
-import com.market.dto.PageInfo;
-import com.market.command.Paging;
-import com.market.command.getCart;
-import static com.market.common.util.AuthorityUtil.requireSigning;
+import com.market.dto.AdminQuestDto;
 
 /**
  * Servlet implementation class Controller
@@ -90,6 +111,7 @@ public class Controller extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		MCommand command = null;
+		MCommandReturnInt returnCommand = null;
 		String viewPage = null;
 
 		String uri = request.getRequestURI();
@@ -170,10 +192,11 @@ public class Controller extends HttpServlet {
 			break;
 
 		case "/signup.do":
-			command = new MSignUp();
-			command.execute(request, response);
-
-			viewPage = "mainPage.do";
+			returnCommand = new MSignUp();
+			int resultCode = returnCommand.execute(request, response);
+			
+			if(resultCode == 1) viewPage = "mainPage.do";
+			else viewPage = "mypageinfo.jsp";
 			break;
 
 		case "/test.do":
@@ -186,7 +209,20 @@ public class Controller extends HttpServlet {
 			command.execute(request, response);
 			viewPage = "detailPage.jsp";
 			break;
-
+			
+		case "/mypage.do" :
+			System.out.println("mypage.do");
+			command = new MMyPage();
+			command.execute(request, response);
+			return;
+		
+		case "/mypagedetail.do" :
+			command = new MMyPageDetail();
+			command.execute(request, response);
+			
+			viewPage = "mypagedetail.jsp";
+			break;
+		
 		case "/productDetail.do":
 			// 요청에서 선택된 상품 번호를 가져옴
 			String selectProductId = request.getParameter("productId");
