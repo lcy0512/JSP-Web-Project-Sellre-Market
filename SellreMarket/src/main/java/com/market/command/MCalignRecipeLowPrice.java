@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.market.dao.MainViewDao;
 import com.market.dto.MainViewDto;
@@ -18,16 +19,17 @@ public class MCalignRecipeLowPrice implements MCommand{
 		3. Version : v1.0.0
 		4. Description : 레시피 낮은 가격순 정리 
 	*/
+			HttpSession session = request.getSession();
 			
 			MainViewDao dao = new MainViewDao();
 			// get images
-			List<MainViewDto> getMainAdImgs =  dao.getMainAdImgs();
+			List<MainViewDto> getRecipeAdImgs =  dao.getRecipeAdImgs();
 			
 			int curPage = 0;
 			
 			// 처음에 받아오는 페이지가 값이 없는 경우는 1로 설정하기 위한 트라이
 			try {
-				curPage = Integer.parseInt(request.getParameter("curPage"));
+				curPage = (int) (session.getAttribute("curPage"));
 			}
 			catch (Exception e) {
 				curPage = 1;
@@ -64,6 +66,6 @@ public class MCalignRecipeLowPrice implements MCommand{
 			// 신제품 페이지 datas
 			request.setAttribute("productList", alignLowPrice);
 			// 신제품 페이지 ad 이미지
-			request.setAttribute("getNewAdImg", getMainAdImgs);
+			request.setAttribute("getRecipeAdImgs", getRecipeAdImgs);
 		} 
 	}

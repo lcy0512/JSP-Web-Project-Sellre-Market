@@ -44,7 +44,8 @@ import com.market.dto.AdminGetPackTypeDto;
 import com.market.dto.AdminProductDto;
 import com.market.dto.PageInfo;
 import com.market.command.Paging;
-import com.market.command.getCart;
+import com.market.command.getCartByProduct;
+import com.market.command.getCartByRecipe;
 
 /**
  * Servlet implementation class Controller
@@ -96,6 +97,7 @@ public class Controller extends HttpServlet {
 		String headerCategory = null;
 		// 장바구니 클릭 시 가져 올 productid
 		int productid = 0;
+		int cartCount = 0;
 		
 		
 		response.setContentType("applicaton/json");
@@ -337,8 +339,8 @@ public class Controller extends HttpServlet {
 					curPage = 1;
 				}
 				
-				request.setAttribute("curPage", curPage);
-				request.setAttribute("id", id);
+				session.setAttribute("curPage", curPage);
+				session.setAttribute("id", id);
 				
 				// 페이징 처리를 위한
 				command = new Paging();
@@ -365,8 +367,8 @@ public class Controller extends HttpServlet {
 					curPage = 1;
 				}
 				
-				request.setAttribute("curPage", curPage);
-				request.setAttribute("id", id);
+				session.setAttribute("curPage", curPage);
+				session.setAttribute("id", id);
 				
 				command = new MCalignRecipeLowPrice();
 				command.execute(request, response);
@@ -390,8 +392,8 @@ public class Controller extends HttpServlet {
 					curPage = 1;
 				}
 				
-				request.setAttribute("curPage", curPage);
-				request.setAttribute("id", id);
+				session.setAttribute("curPage", curPage);
+				session.setAttribute("id", id);
 				
 				command = new MCalignRecipeHighPrice();
 				command.execute(request, response);
@@ -409,6 +411,8 @@ public class Controller extends HttpServlet {
 				
 				id = (String) session.getAttribute("id");
 				
+				System.out.println(id + " controller");
+				
 				try {
 					curPage = Integer.parseInt(request.getParameter("curPage"));
 				}
@@ -416,16 +420,20 @@ public class Controller extends HttpServlet {
 					curPage = 1;
 				}
 				
-				request.setAttribute("curPage", curPage);
-				request.setAttribute("id", id);
+				session.setAttribute("curPage", curPage);
+				session.setAttribute("id", id);
 				
 				command = new MCnewProductPaging();
 				command.execute(request, response);
 				
+				cartCount = (int) session.getAttribute("cartCount");
+				
+				session.setAttribute("cartCount", cartCount);
 				session.setAttribute("alignCategory", alignCategory);
 				session.setAttribute("headerCategory", headerCategory);
 				
 				viewPage = "newProduct.jsp";
+				
 				break;
 				
 			case "/alignNewLowPrice.do" :
@@ -441,8 +449,8 @@ public class Controller extends HttpServlet {
 					curPage = 1;
 				}
 				
-				request.setAttribute("curPage", curPage);
-				request.setAttribute("id", id);
+				session.setAttribute("curPage", curPage);
+				session.setAttribute("id", id);
 				
 				command = new MCalignNewLowPrice();
 				command.execute(request, response);
@@ -466,8 +474,8 @@ public class Controller extends HttpServlet {
 					curPage = 1;
 				}
 				
-				request.setAttribute("curPage", curPage);
-				request.setAttribute("id", id);
+				session.setAttribute("curPage", curPage);
+				session.setAttribute("id", id);
 				
 				command = new MCalignNewHighPrice();
 				command.execute(request, response);
@@ -492,8 +500,8 @@ public class Controller extends HttpServlet {
 					curPage = 1;
 				}
 				
-				request.setAttribute("curPage", curPage);
-				request.setAttribute("id", id);
+				session.setAttribute("curPage", curPage);
+				session.setAttribute("id", id);
 				
 				command = new MCbestProduct();
 				command.execute(request, response);
@@ -518,8 +526,8 @@ public class Controller extends HttpServlet {
 					curPage = 1;
 				}
 				
-				request.setAttribute("curPage", curPage);
-				request.setAttribute("id", id);
+				session.setAttribute("curPage", curPage);
+				session.setAttribute("id", id);
 				
 				command = new MCalignBestLowPrice();
 				command.execute(request, response);
@@ -543,8 +551,8 @@ public class Controller extends HttpServlet {
 					curPage = 1;
 				}
 				
-				request.setAttribute("curPage", curPage);
-				request.setAttribute("id", id);
+				session.setAttribute("curPage", curPage);
+				session.setAttribute("id", id);
 				
 				command = new MCalignBestHighPrice();
 				command.execute(request, response);
@@ -585,17 +593,20 @@ public class Controller extends HttpServlet {
 			case "/recipePageCart.do" :
 				
 				id = (String) session.getAttribute("id");
-				int ri = Integer.parseInt(request.getParameter("recipeid"));
-				
-				System.out.println(ri + " ?????????");
+				int recipeid = Integer.parseInt(request.getParameter("recipeid"));
 				
 				session.setAttribute("id", id);
-				session.setAttribute("recipeid", ri);
-				command = new getCart();
+				session.setAttribute("recipeid", recipeid);
+				
+				command = new getCartByRecipe();
 				command.execute(request, response);
 				
-				viewPage = "recipePage.do";
-				break;
+				cartCount = (int) session.getAttribute("cartCount");
+				
+				out.print(new Gson().toJson(cartCount));
+				out.flush();
+				
+				return;
 				
 			// 신제품 페이지 카트 클릭
 			case "/newPageCart.do" :
@@ -603,29 +614,35 @@ public class Controller extends HttpServlet {
 				id = (String) session.getAttribute("id");
 				productid = Integer.parseInt(request.getParameter("productid"));
 				
-				System.out.println(productid + " ?????????");
-				
 				session.setAttribute("id", id);
 				session.setAttribute("productid", productid);
-				command = new getCart();
+				
+				command = new getCartByProduct();
 				command.execute(request, response);
 				
-				viewPage = "newProductList.do";
-				break;
+				cartCount = (int) session.getAttribute("cartCount");
+				
+				out.print(new Gson().toJson(cartCount));
+				out.flush();
+				
+				return;
 				
 			case "/bestPageCart.do" :
 				
 				id = (String) session.getAttribute("id");
 				productid = Integer.parseInt(request.getParameter("productid"));
 				
-				System.out.println(productid + " ?????????");
-				
 				session.setAttribute("id", id);
 				session.setAttribute("productid", productid);
-				command = new getCart();
+				
+				command = new getCartByProduct();
 				command.execute(request, response);
 				
-				viewPage = "bestProduct.do";
+				cartCount = (int) session.getAttribute("cartCount");
+				
+				out.print(new Gson().toJson(cartCount));
+				out.flush();
+				
 				return;
 				
 			case "/logout.do" :
@@ -633,6 +650,9 @@ public class Controller extends HttpServlet {
 				viewPage = "mainPage.do";
 				
 				break;
+				
+			 
+				
 				
 			default :
 				break;

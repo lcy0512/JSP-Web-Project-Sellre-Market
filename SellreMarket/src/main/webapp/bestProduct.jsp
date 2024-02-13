@@ -192,26 +192,14 @@
 			<c:forEach begin="${blockStart}" end="${endPage}">
 				<%
 					out.print("<a href='bestProduct.do?curPage=" + i + "'>" + i + "</a>");
-					request.setAttribute("curPage", i);
 					i++;
 				%>
 			</c:forEach>
 			
-			<!-- 수정 필요 -->
-			<!-- 수정 필요 -->
-			<!-- 수정 필요 -->
-			<!-- 수정 필요 -->
 			<!-- 앞으로 가기 -->
 			<c:if test="${curPage < endPage}">
 				<a href="bestProduct.do?curPage=${curPage + 1} " class="next"> >></a>
 			</c:if>
-			<!-- 수정 필요 -->
-			<!-- 수정 필요 -->
-			<!-- 수정 필요 -->
-			<!-- 수정 필요 -->
-			<!-- 수정 필요 -->
-			
-			
 		</div>
 	</c:if>
 	
@@ -227,7 +215,6 @@
 			<c:forEach begin="${blockStart}" end="${endPage}">
 				<%
 					out.print("<a href='alignBestLowPrice.do?curPage=" + i + "'>" + i + "</a>");
-					request.setAttribute("curPage", i);
 					i++;
 				%>
 			</c:forEach>
@@ -249,7 +236,6 @@
 			<c:forEach begin="${blockStart}" end="${endPage}">
 				<%
 					out.print("<a href='alignBestHighPrice.do?curPage=" + i + "'>" + i + "</a>");
-					request.setAttribute("curPage", i);
 					i++;
 				%>
 			</c:forEach>
@@ -265,9 +251,5 @@
 	<jsp:include page="footer.html"></jsp:include>
 	<!-- Footer End -->
 
-
-	<!-- Back to Top -->
-	<a href="#" class="btn btn-primary back-to-top"><i
-		class="fa fa-angle-double-up"></i></a>
 </body>
 </html>

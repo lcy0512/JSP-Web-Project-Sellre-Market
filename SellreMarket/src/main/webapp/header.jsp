@@ -5,6 +5,33 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+<style type="text/css">
+	.parent-container {
+	    position: relative;
+	}
+	
+	#cartCount {
+	    position: absolute;
+	    margin-top: -10px;
+	    left: 75.4%;
+	    font-weight: bold;
+	    background-color: #FFA500;
+        text-align: center; /* 텍스트를 수평으로 중앙 정렬합니다 */
+	    border-radius: 10px; /* 모서리의 반지름 크기를 조정합니다 */
+	    z-index: 9999; /* 다른 요소보다 앞으로 보이도록 z-index 값을 설정합니다 */
+	}
+</style>
+
+
+<script type="text/javascript">
+
+//header.jsp
+function updateCartCount(cartCount) {
+    $("#cartCount").text(cartCount);
+}
+
+</script>
 </head>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="js/category.js" ></script>
@@ -95,8 +122,14 @@
 					<div class="css-c4pbxv e15sbxqa0">
 						<div class=" css-14vnom0 e1n3mt0d1"></div>
 						<button class="css-231fw3 etxxzpc0" aria-label="찜하기" type="button"></button>
-						<div class="css-ff2aah e14oy6dx2">
-							<button class="css-g25h97 e14oy6dx1"></button>
+						<div class="css-ff2aah e14oy6dx2 parent-container">
+							<!-- 장바구니 카운트 시작 -->
+							<c:if test="${cartCount > 0}">
+								<span id="cartCount" style="vertical-align: middle; padding-right: 5px;">${cartCount}</span>
+							</c:if>
+						    <input type="hidden" value="${cartCount}" id="hiddenCount">
+						    <!-- 장바구니 카운트 끝 -->
+						    <button class="css-g25h97 e14oy6dx1" aria-label="장바구니" type="button" id="cartButton"></button>
 						</div>
 					</div>
 				</div>
@@ -115,10 +148,10 @@
 						<li class="css-59mmhh e17w4cfr4">
 							<span class="css-1xyu7j9 e17w4cfr2">
 								<c:if test="${headerCategory eq '신상품'}">
-									<a href="mainPage.do" style="color: #c14a09; font-weight: bold;">신상품</a>
+									<a href="mainPage.do" style="color: #c14a09; font-weight: bold;">신상품&nbsp;&nbsp;&nbsp;&nbsp;</a>
 								</c:if>
 								<c:if test="${headerCategory ne '신상품'}">
-									<a href="mainPage.do">신상품</a>
+									<a href="mainPage.do">신상품&nbsp;&nbsp;&nbsp;&nbsp;</a>
 								</c:if>
 							</span>
 						</li>
@@ -126,16 +159,12 @@
 					<li class="css-59mmhh e17w4cfr4">
 						<span class="css-1xyu7j9 e17w4cfr2">
 							<c:if test="${headerCategory eq '베스트'}">
-								<a href="bestProduct.do" style="color: #c14a09; font-weight: bold;">베스트</a>
+								<a href="bestProduct.do" style="color: #c14a09; font-weight: bold;">베스트&nbsp;&nbsp;&nbsp;&nbsp;</a>
 							</c:if>
 							<c:if test="${headerCategory ne '베스트'}">
-								<a href="bestProduct.do">베스트</a>
+								<a href="bestProduct.do">베스트&nbsp;&nbsp;&nbsp;&nbsp;</a>
 							</c:if>
 						</span>
-					<li class="css-59mmhh e17w4cfr4"><span
-						class="css-1xyu7j9 e17w4cfr2">알뜰쇼핑</span></li>
-					<li class="css-59mmhh e17w4cfr4"><span
-						class="css-1xyu7j9 e17w4cfr2">특가/혜택</span></li>
 					<li class="css-59mmhh e17w4cfr4">
 						<span class="css-1xyu7j9 e17w4cfr2">
 							<span class="css-1xyu7j9 e17w4cfr2">
