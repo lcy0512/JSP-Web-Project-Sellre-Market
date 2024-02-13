@@ -23,6 +23,7 @@ function productNum() {
 	});
 }
 
+
 function paging(pageNum) {
 	
 	//pageNum이 null일 때 처리
@@ -32,7 +33,7 @@ function paging(pageNum) {
 	
 	$.ajax({
 		type : "POST",
-		url : "adminCategory.do",
+		url : "adminProduct.do",
 		data : {pageNum : pageNum},
 		success : function(response){
 			createPaging(response)
@@ -49,27 +50,35 @@ function createPaging(data) {
 	document.getElementById("result").innerHTML = "";
 	//페이지 번호 보여주기 위해 div태그 생성
 	let rownumber = data.total - data.index_no;	//행번호
+	let index_no = data.index_no;	//행번호
 	let lastPage = data.lastPage;
 	let div = "<div>";
 	
 	//데이터 조회하기 위해 테이블 생성
 	let table = "<table id='listTable' class='table-style'>";
-	table += "<tr><th>행번호</th><th>대분류</th><th>중분류</th></tr>"
+	table += "<tr><th>행번호</th><th>상품명</th><th>입고갯수</th><th>재고갯수</th><th>상태</th></tr>"
 	
 	//데이터가 없을 때 처리
 	if(data.length == 0) {
-		table += "<tr><td colspan='3'></td></tr>";
+		table += "<tr><td colspan='6'></td></tr>";
 	}
 	
 	//이중 for문으로 페이징처리와 해당 페이지에 데이터 조회를 동시에 처리
 	for(let j= 1; j <= lastPage; j++){
 		
-		for(let i=0; i < data.categoryList.length; i++){ //=> 범위를 0~9까지 계속 10개씩 가져오는 것이 아니라, data 길이만큼씩 보여주게 해야된다잇!!
-			table += "<tr onclick='detail(" + data.categoryList[i].catetoryid + ")'>" +
+		for(let i=0; i < data.productList.length; i++){ //=> 범위를 0~9까지 계속 10개씩 가져오는 것이 아니라, data 길이만큼씩 보여주게 해야된다잇!!
+			
+			calc = data.productList[i].pstock - data.productList[i].stock;
+			let backgroundColor = calc <=100 ? "pink" : "";
+			
+			table += "<tr style='background-color : "+backgroundColor+"' onclick='detail(" + data.productList[i].productid + ")'>" +
 						"<td style='text-align:center'>" + rownumber +"</td>" +
-						"<td style='text-align:center'>" +data.categoryList[i].type +"</td>" +
-					    "<td style='text-align:center'>" + data.categoryList[i].subtype +"</td>" +
-				    "</tr>";
+						"<td style='text-align:left'>" + data.productList[i].pname +"</td>" +
+						"<td style='text-align:center'>" + data.productList[i].pstock +"</td>" +
+						"<td style='text-align:center'>" + calc +"</td>" +
+						"<td style='text-align:center'>" + data.productList[i].status +"</td>" +
+						"<td hidden style='width:0px;'>" + data.productList[i].productid +"</td>" +
+					"</tr>" 
 					rownumber--;
 					
 			
@@ -89,13 +98,12 @@ function createPaging(data) {
         nextSibling.parentNode.removeChild(nextSibling);
         nextSibling = nextElement;
     }
-    
 }	
 
 /* .do로 보내기 위해서 form을 만들고, id값도 붙여줌 */
 function detail(id){
 	
-	let url = "/SellreMarket/adminCategoryDetailPage.do";
+	let url = "/SellreMarket/adminOrderDetailPage.do";
 	
 	let form = document.createElement("form");
 	form.action = url;
