@@ -84,8 +84,8 @@
 	<%-- Font Awesome Kit CDN --%>
 	<script src="https://kit.fontawesome.com/498f840871.js" crossorigin="anonymous"></script>
 	
-	<%-- JS 별도로 관리하는 부분 --%>
-	<script src="js/cart.js"></script>
+	<%-- jquery --%>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 	</head>
 	<body>
 		<%-- Carts Start --%>
@@ -214,7 +214,7 @@
 							<button disabled class="css-0 e149z640">선택삭제</button>
 						</div>
 					</div>
-					<div class="ej77nku0 flex flex-col border-t-2 border-t-black ${not empty carts ? "justify-start" : "justify-center py-32"} items-center border-b">
+					<div id="cart_container" class="ej77nku0 flex flex-col border-t-2 border-t-black ${not empty carts ? "justify-start" : "justify-center py-32"} items-center border-b">
 						<style data-emotion="css l1lu2l">
 							.css-l1lu2l {
 								font-size: 16px;
@@ -227,9 +227,9 @@
 							<p class="css-l1lu2l eqymnpn0">장바구니에 담긴 상품이 없습니다</p>
 						</c:if>
 						<c:if test="${not empty carts}">
-							<ul class="w-full flex flex-col divide-y">
+							<ul id="cart_list" class="w-full flex flex-col divide-y">
 								<c:forEach var="cart" items="${carts}">
-									<li>
+									<li id="cart_item_${cart.cartId()}" class="cart-item">
 										<section class="grid grid-cols-10 py-4 items-center">
 											<div class="col-span-1 flex justify-center items-center">
 												<label class="">
@@ -247,11 +247,21 @@
 												>
 												${cart.productName()}
 											</div>
-											<div class="col-span-2 flex justify-center items-center border-2 border-black rounded-md h-8 w-24">
+											<div
+												class="amount-box col-span-2 flex justify-center items-center border-2 border-black rounded-md h-8 w-24"
+											>
 												<div class="grid grid-cols-3 items-center gap-2">
-													<button class="px-2 font-bold duration-150 active:scale-95">-</button>
-													<span class="flex justify-center items-center">${cart.amount()}</span>
-													<button class="px-2 font-bold duration-150 active:scale-95">+</button>
+													<button
+													  class="px-2 font-bold duration-150 active:scale-95"
+													  onclick="decreaseAmount(${cart.cartId()})"
+													>-</button>
+													<span
+														class="amount-value flex justify-center items-center"
+													>${cart.amount()}</span>
+													<button
+													  class="px-2 font-bold duration-150 active:scale-95"
+													  onclick="increaseAmount(${cart.cartId()})"
+													>+</button>
 												</div>
 											</div>
 											<%-- <div class="col-span-1 flex justify-center items-center">${cart.priceLocale()}원</div> --%>
@@ -342,11 +352,9 @@
 									}
 								</style>
 								<span class="css-iinokh ea1mry74">
-									${
-										empty carts ?
-											0 :
-											carts.stream().reduce(0, (acc, cur) -> acc + cur.price())
-									}
+									<span id="total_price">
+										${priceSummary.totalPrice()}
+									</span>
 									<style data-emotion="css hfgifi">
 										.css-hfgifi {
 											padding-left: 2px;
@@ -378,7 +386,7 @@
 								</style>
 									<div class="css-t4mc5m ea1mry77">
 										<span class="css-vmo0an ea1mry76">상품할인금액</span>
-										<span class="css-iinokh ea1mry74">${priceSummary.discountPrice()}<span class="css-hfgifi ea1mry72">원</span>
+										<span id="discount_price" class="css-iinokh ea1mry74">${priceSummary.discountPrice()}<span class="css-hfgifi ea1mry72">원</span>
 										</span>
 									</div>
 									<div class="css-t4mc5m ea1mry77">
@@ -419,7 +427,7 @@
 													line-height: 28px;
 												}
 											</style>
-											<strong class="css-xmbce4 eepcpbj0">${priceSummary.paymentPrice()}</strong>
+											<strong id="payment_price" class="css-xmbce4 eepcpbj0">${priceSummary.paymentPrice()}</strong>
 											<style data-emotion="css aro4zf">
 												.css-aro4zf {
 													padding-left: 4px;
@@ -545,11 +553,127 @@
 									<li class="css-1741abm ejr204i0">[주문완료] 상태일 경우에만 주문 취소 가능합니다.</li>
 									<li class="css-1741abm ejr204i0">[마이셀리 &gt;주문내역 상세페이지] 에서 직접 취소하실 수 있습니다.</li>
 							</ul>
+							<button class="border rounded px-4 py-2" onclick="tempLogin()">임시 로그인</button>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<%-- Carts Start --%>
+		<script>
+		const decreaseAmount = (cartId) => {
+			const amountElement = document.querySelector('#cart_item_'+ cartId +' .amount-box .amount-value');
+			const currentAmount = Number(amountElement.innerHTML);
+			
+			if (currentAmount <= 0) {
+				// TODO remove item from cart list
+				return;
+			}
+			
+			const newAmount = currentAmount - 1;
+			const dto = {cartId: cartId, amount: newAmount};
+			updateCartAmount(dto);
+		};
+		
+		const increaseAmount = (cartId) => {
+			const amountElement = document.querySelector('#cart_item_'+ cartId +' .amount-box .amount-value');
+			const currentAmount = Number(amountElement.innerHTML);
+			const newAmount = currentAmount + 1;
+			
+			const dto = {cartId: cartId, amount: newAmount};
+			updateCartAmount(dto);
+		};
+		
+		/**
+		 * @typedef {Object} CartAmountUpdateDto
+		 * @property {number} cartId - 카트 번호
+		 * @property {number} amount - 수량
+		 */
+		
+		/**
+		 * @param {CartAmountUpdateDto} dto
+		 */
+		const updateCartAmount = (dto) => {
+			const amountElement = document.querySelector('#cart_item_'+ dto.cartId +' .amount-box .amount-value');
+			
+			 $.ajax({
+					// 요청:
+					type: "POST",
+					url: "cart/amount/increase.do",
+					data: dto,
+					
+					// 성공 시 실행할 함수:
+					success: function(response) {
+						updateCartsAndPriceSummary();
+					},
+					
+					error: function(e) {
+						console.error(e);
+					}
+				});
+		}
+		
+		const updateCartsAndPriceSummary = () => {
+			$.ajax({
+				// 요청:
+				type: "GET",
+				url: "api/cart/query.do",
+				
+				success: function(response) {
+					console.log('response: ', response);
+					const carts = response.carts;
+					const priceSummary = response.priceSummary;
+
+					total_price.innerHTML = priceSummary.totalPrice;
+					discount_price.innerHTML = priceSummary.discountPrice;
+					payment_price.innerHTML = priceSummary.paymentPrice;
+					
+					for (const item of carts) {
+						const amountElement = document.querySelector('#cart_list #cart_item_' + item.cartId + ' .amount-box .amount-value');
+						amountElement.innerHTML = item.amount;
+					}
+					
+					// rm removed cart li
+					const enableIds = carts.map((item) => 'cart_item_' + item.cartId);
+					
+					const disabledLi = Array.from(cart_list.children).filter((li) => !enableIds.includes(li.id));
+					console.log('disabled: ', disabledLi);
+					disabledLi.forEach((item, index, arr) => cart_list.removeChild(item));
+					
+					// when carts empty
+					if (carts.length === 0) {
+						cart_container.classList.remove('justify-start');
+						cart_container.classList.add('justify-center');
+						cart_container.classList.add('py-32');
+						
+						const emptyCartElement = document.createElement('p');
+						emptyCartElement.classList.add('css-l1lu2l');
+						emptyCartElement.classList.add('eqymnpn0');
+						emptyCartElement.innerHTML = '장바구니에 담긴 상품이 없습니다';
+						
+						cart_container.appendChild(emptyCartElement);
+					}
+				},
+				
+				error: function(e) {
+					console.error(e);
+				}
+			});
+		}
+		
+		// TODO rm later
+		const tempLogin = () => $.ajax({
+			// 요청:
+			type: "POST",
+			url: "fake/login.do",
+			
+			success: function(response) {
+				console.log('response: ', response);
+			},
+			
+			error: function(e) {
+				console.error(e);
+			}
+		});
+		</script>
 	</body>
 </html>

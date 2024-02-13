@@ -27,8 +27,31 @@ public class CartDao {
 		}
 	}
 	
-	public int save(Long productId, Integer amount) {
-		return 0;
+	public int save(String userId, Long productId, Integer amount) {
+		String query = """
+				INSERT INTO cart (
+					userid,
+					productid,
+					qty
+				) VALUES (
+					?,
+					?,
+					?
+				)
+				""";
+		
+		try (
+				Connection connection = dataSource.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(query);
+		) {
+			preparedStatement.setString(1, userId);
+			preparedStatement.setLong(2, productId);
+			preparedStatement.setInt(3, amount);
+			return preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
 	}
 	
 	/**
@@ -59,10 +82,10 @@ public class CartDao {
 				FROM cart c
 					INNER JOIN product prod
 						ON c.productid = prod.productid
-					LEFT JOIN event
-						ON c.productid = event.productid
 					INNER JOIN price
 				        ON c.productid = price.productid
+					LEFT JOIN event
+						ON c.productid = event.productid
 					LEFT JOIN product_image img
 						on c.productid = img.productid
 				WHERE c.userid = ?
@@ -96,5 +119,54 @@ public class CartDao {
 		}
 		
 		return list;
+	}
+
+	public int updateAmountByCartId(Long cartId, Integer amount) {
+		String query = """
+				UPDATE cart
+				SET qty = ?
+				WHERE cartid = ?
+				""";
+		
+		try (
+				Connection connection = dataSource.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(query);
+		) {
+			preparedStatement.setInt(1, amount);
+			preparedStatement.setLong(2, cartId);
+			return preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	public boolean existsByUserIdAndCartId(String userId, Long cartId) {
+		String query = """
+				SELECT count(cartid) as result
+				FROM sellremarket.cart
+				WHERE cartid = ?
+					AND userid = ?
+				""";
+		
+		try (
+				Connection connection = dataSource.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(query);
+		) {
+			preparedStatement.setLong(1, cartId);
+			preparedStatement.setString(2, userId);
+			
+			// (AutoCloseable용 try 구문)
+			try (ResultSet rs = preparedStatement.executeQuery()) {
+				int result = 0;
+				while (rs.next()) {
+					result = rs.getInt("result");
+				}
+				return result > 0;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 }

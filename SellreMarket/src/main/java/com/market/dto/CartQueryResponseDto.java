@@ -1,5 +1,9 @@
 package com.market.dto;
 
+import java.util.List;
+
+import com.market.dao.projection.CartListViewProjection;
+
 public final class CartQueryResponseDto {
 	private CartQueryResponseDto() {}
 	
@@ -14,4 +18,9 @@ public final class CartQueryResponseDto {
 			if (paymentPrice == null) paymentPrice = 0;
 		}
 	}
+	
+	public record CartListAndPriceQueryResponseDto(
+			List<CartListViewProjection> carts,
+			CartPriceSummaryQueryResponseDto priceSummary
+	) {}
 }

@@ -1,5 +1,7 @@
 package com.market.command;
 
+import static com.market.common.support.Constants.LOGIN_USER_SESSION_NAME;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Objects;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.market.auth.domain.User;
 import com.market.dao.CartDao;
 import com.market.dto.CartRegistryRequestDto;
 import com.market.dto.CartRegistryResponseDto;
@@ -20,7 +23,7 @@ public class MCartRegistry implements MCommand {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
-		session.getAttribute("");
+		User user = (User) session.getAttribute(LOGIN_USER_SESSION_NAME);
 		try (PrintWriter out = response.getWriter()) {
 			// req
 			CartRegistryRequestDto requestBody = parseRequestDto(request);
@@ -28,7 +31,7 @@ public class MCartRegistry implements MCommand {
 			// handle
 			Long productId = requestBody.productId();
 			Integer amount = requestBody.amount();
-			dao.save(productId, amount);
+			dao.save(user.getId(), productId, amount);
 
 			// res
 			CartRegistryResponseDto responseBody = new CartRegistryResponseDto(true);
