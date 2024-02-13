@@ -85,7 +85,7 @@ window.onload=function(){
 				calc = data.productList[i].pstock - data.productList[i].stock;
 				let backgroundColor = calc <=100 ? "pink" : "";
 				
-				table += "<tr style='background-color : "+backgroundColor+"'>" +
+				table += "<tr style='background-color : "+backgroundColor+"' onclick='detail(" + data.productList[i].productid + ")'>" +
 							"<td style='text-align:center'>" + rownumber +"</td>" +
 							"<td style='text-align:left'>" + data.productList[i].pname +"</td>" +
 							"<td style='text-align:center'>" + data.productList[i].pstock +"</td>" +
@@ -113,4 +113,24 @@ window.onload=function(){
 	        nextSibling = nextElement;
 	    }
 	}	
-
+	
+/* .do로 보내기 위해서 form을 만들고, id값도 붙여줌 */
+function detail(id){
+	
+	let url = "/SellreMarket/adminProductDetailPage.do";
+	
+	let form = document.createElement("form");
+	form.action = url;
+	form.method = "POST";
+	
+	let idField = document.createElement("input");
+	idField.type = "hidden";
+	idField.name = "id";
+	idField.value = id;
+	
+	form.appendChild(idField);
+	
+	document.body.appendChild(form)
+	form.submit();
+	
+}

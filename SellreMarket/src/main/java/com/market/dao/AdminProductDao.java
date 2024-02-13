@@ -9,6 +9,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.market.dto.AdminCategoryDto;
 import com.market.dto.AdminProductDto;
 import com.market.dto.PageInfo;
 public class AdminProductDao {
@@ -104,9 +105,7 @@ public class AdminProductDao {
 			ps = conn.prepareStatement(query);
 			
 			ps.setInt(1, index_no);
-			//ps.setInt(2, endRow);
 			
-			System.out.println("AdminProductDao[selectList] : "+index_no);
 			
 			rs = ps.executeQuery();
 			
@@ -230,4 +229,127 @@ public class AdminProductDao {
 		}
 		return list;
 	}
+	
+	
+	/************************************************************************************************
+	 * Function : 제품 상세
+	 * @param 	: 제품 id  
+	 * @return 	: ArrayList
+	************************************************************************************************/
+	public ArrayList<AdminProductDto> productDetail(int id) {
+		
+		ArrayList<AdminProductDto> list = new ArrayList<AdminProductDto>();
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			conn = dataSource.getConnection();
+			String query = 
+							"""
+							select productid, pname, pEngname, allery, nutrition, pstock, origin, description
+					        from product where productid = ?
+					"""; 
+			
+			ps = conn.prepareStatement(query);
+			
+			ps.setInt(1, id);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				AdminProductDto product = new AdminProductDto();
+				product.setProductid(rs.getInt(1));
+				product.setPname(rs.getString(2));
+				product.setpEngname(rs.getString(3));
+				product.setAllery(rs.getString(4));
+				product.setNutrition(rs.getString(5));
+				product.setPstock(rs.getInt(6));
+				product.setOrigin(rs.getString(7));
+				product.setDescription(rs.getString(8));
+				
+				list.add(product);
+			}
+			
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}	
+	
+	/************************************************************************************************
+	 * Function : 카테고리 수정
+	 * @param 	: 입력한 대분류, 중분류 
+	 * @return 	: int
+	************************************************************************************************/
+	public int updateProduct(String pEngname, String allery, String nutrition, String origin, String description, int productid) {
+		
+		int num = 0;
+		Connection conn = null;
+		PreparedStatement ps = null;
+		
+		try {
+			conn = dataSource.getConnection();	
+			String query = """
+							update product set 
+							pEngname = ?, allery =?, nutrition = ?,  origin = ?,  description = ?
+							where productid = ?
+
+						   """;
+			ps = conn.prepareStatement(query);
+			ps.setString(1, pEngname);
+			ps.setString(2, allery);
+			ps.setString(3, nutrition);
+			ps.setString(4, origin);
+			ps.setString(5, description);
+			ps.setInt(6, productid);
+			
+			ps.executeUpdate();
+			num++;
+			conn.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return num;
+		}
+		return num;
+	}
+
+	/************************************************************************************************
+	 * Function : 제품 삭제
+	 * @param 	: productid
+	 * @return 	: int
+	************************************************************************************************/
+	public int deleteProduct(int productid) {
+		
+		int num = 0;
+		Connection conn = null;
+		PreparedStatement ps = null;
+		
+		try {
+			conn = dataSource.getConnection();	
+			String query = """
+							update product set 
+							status = 0
+							where productid = ?
+							
+							""";
+			ps = conn.prepareStatement(query);
+			ps.setInt(1, productid);
+			
+			ps.executeUpdate();
+			num++;
+			conn.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return num;
+		}
+		return num;
+	}	
+	
+	
 }

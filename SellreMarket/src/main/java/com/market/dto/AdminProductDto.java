@@ -10,6 +10,8 @@ public class AdminProductDto {
 	String pinsertdate;
 	String expirationdate;
 	String status;
+	String allery;
+	String description;
 	int pstock;
 	int stock;
 	
@@ -17,20 +19,6 @@ public class AdminProductDto {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public AdminProductDto(int productid, String pname, String pEngname, String origin, String nutrition,
-			String pinsertdate, String expirationdate, String status, int pstock, int stock) {
-		super();
-		this.productid = productid;
-		this.pname = pname;
-		this.pEngname = pEngname;
-		this.origin = origin;
-		this.nutrition = nutrition;
-		this.pinsertdate = pinsertdate;
-		this.expirationdate = expirationdate;
-		this.status = status;
-		this.pstock = pstock;
-		this.stock = stock;
-	}
 
 	public int getProductid() {
 		return productid;
@@ -110,6 +98,26 @@ public class AdminProductDto {
 
 	public void setStock(int stock) {
 		this.stock = stock;
+	}
+
+
+	public String getAllery() {
+		return allery;
+	}
+
+
+	public void setAllery(String allery) {
+		this.allery = allery;
+	}
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 }

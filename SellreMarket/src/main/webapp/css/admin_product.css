@@ -123,3 +123,10 @@ table tr:hover {
     background-color: #ddd;
     cursor: not-allowed;
 }  
+
+.alarm {
+	font-size : 10px;
+	color : red;
+	margin-left : 20px;
+}
+
