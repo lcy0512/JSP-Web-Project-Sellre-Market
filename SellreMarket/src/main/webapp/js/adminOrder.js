@@ -4,6 +4,7 @@ window.onload=function(){
 	
 function init() {
 	paging();
+	questNum();
 	productNum(); //header[제품현황] 알림표시
 	
 }
@@ -23,6 +24,19 @@ function productNum() {
 	});
 }
 
+function questNum() {
+	
+	$.ajax({
+		type : "POST",
+		url : "adminQuestNum.do",
+		success : function(response){
+			document.getElementById('questNum').innerText = response
+		},
+		 error:function(request, status, error){
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+	});
+}
 
 function paging(pageNum) {
 	
