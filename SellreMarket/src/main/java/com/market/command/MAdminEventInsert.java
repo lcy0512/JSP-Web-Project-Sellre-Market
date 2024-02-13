@@ -12,8 +12,15 @@ public class MAdminEventInsert implements MCommand {
 
 		response.setCharacterEncoding("UTF-8");
 		
+		String image = request.getParameter("image");
+		String ename = request.getParameter("ename");
+		String econtent = request.getParameter("econtent");
+		String startdate = request.getParameter("startdate");
+		String enddate = request.getParameter("enddate");
+		int salerate = Integer.parseInt(request.getParameter("salerate"));
+		
 		AdminEventDao dao = new AdminEventDao();
-		int num = dao.insertEvent(request, response);
+		int num = dao.insertEvent(image, ename, econtent, startdate, enddate, salerate, request, response);
 		
 		request.setAttribute("eventNum", num);
 		

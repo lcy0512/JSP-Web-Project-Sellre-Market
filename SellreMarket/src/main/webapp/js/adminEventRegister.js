@@ -57,6 +57,7 @@ function insertEvent() {
 		
 		type : "POST",
 		url : "insertEvent.do",
+		enctype: 'multipart/form-data',  
 		data : {
 			image: image,
 			ename : ename,
