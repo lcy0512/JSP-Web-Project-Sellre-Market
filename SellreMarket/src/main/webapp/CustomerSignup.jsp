@@ -11,6 +11,7 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
 <script src="js/signup.js"></script>
 <script src="js/address.js"></script>
+<script src="js/signUpCondition.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <body>
 	<jsp:include page="header.jsp" />
@@ -235,6 +236,7 @@
 								</div><span>이용약관 동의</span></label><span class="css-64z8en e1sjmfnv5">(필수)</span>
 							</div>
 							<a class="css-7chi73 e1sjmfnv3" style="margin-top: 3px;" href="header.jsp" target="_blank">약관보기</a>
+							<button class="css-7chi73 e1sjmfnv3" style="margin-top: 3px;" onclick="signUpCondition(1)">약관보기</button>
 						</div>
 					<%-- 2 --%>
 						<div class="css-ov2xfu e1sjmfnv7">
@@ -247,7 +249,7 @@
 											<path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
 									</div><span>개인정보 수집∙이용 동의</span></label><span class="css-64z8en e1sjmfnv5">(필수)</span>
 							</div>
-							<a class="css-7chi73 e1sjmfnv3">약관보기</a>
+							<button class="css-7chi73 e1sjmfnv3" style="margin-top: 3px;" onclick="signUpCondition(2)">약관보기</button>
 						</div>
 					<%-- 3 --%>
 						<div class="css-ov2xfu e1sjmfnv7">
