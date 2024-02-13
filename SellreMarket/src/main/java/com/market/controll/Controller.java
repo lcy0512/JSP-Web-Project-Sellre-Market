@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.market.auth.domain.User;
 import com.market.command.MAdminBrand;
 import com.market.command.MAdminBrandDetail;
 import com.market.command.MAdminBrandInsert;
@@ -55,7 +56,9 @@ import com.market.command.MCalignNewLowPrice;
 import com.market.command.MCalignRecipeHighPrice;
 import com.market.command.MCalignRecipeLowPrice;
 import com.market.command.MCartListView;
+import com.market.command.MCartListViewApi;
 import com.market.command.MCartRegistry;
+import com.market.command.MCartUpdateAmount;
 import com.market.command.MCbestProduct;
 import com.market.command.MClogin;
 import com.market.command.MCnewProductPaging;
@@ -71,6 +74,7 @@ import com.market.command.MLoadInquiryList;
 import com.market.command.MMyPage;
 import com.market.command.MMyPageDetail;
 import com.market.command.MProductDetailPageCommand;
+import com.market.command.MRecipeDetailPageCommand;
 import com.market.command.MSignUp;
 import com.market.command.Paging;
 import com.market.command.getCartByProduct;
@@ -82,9 +86,6 @@ import com.market.dto.AdminGetCategoryDto;
 import com.market.dto.AdminGetPackTypeDto;
 import com.market.dto.AdminProductDto;
 import com.market.dto.AdminQuestDto;
-import com.market.dto.PageInfo;
-import com.market.command.Paging;
-import static com.market.common.util.AuthorityUtil.requireSigning;
 
 /**
  * Servlet implementation class Controller
@@ -272,6 +273,19 @@ public class Controller extends HttpServlet {
 			command = new MProductDetailPageCommand();
 			command.execute(request, response);
 			viewPage = "ProductDetailPage.jsp";
+			break;
+		
+		case "/recipeDetail.do" :
+	        // 요청에서 선택된 상품 번호를 가져옴
+			String selectRecipeId = request.getParameter("recipeId");				
+	        // 선택된 상품 번호를 세션에 저장
+	        session.setAttribute("recipeID", selectRecipeId);
+	      
+			System.out.println("보낼 아이디 : " + selectRecipeId);
+	      
+			command = new MRecipeDetailPageCommand();
+			command.execute(request, response);
+			viewPage = "DetailPageTest.jsp";
 			break;
 
 		// 관리자 제품 조회 + 페이징처리
@@ -965,19 +979,40 @@ public class Controller extends HttpServlet {
 		// 수정필요
 		// 수정필요
 
+			// TODO HTTP Method 구분할 수 있는 구조로 리팩토링 하면 URL에서 행위 제외
 		case "/api/cart.do":
 			requireSigning(request, response);
 
 			command = new MCartRegistry();
 			command.execute(request, response);
 			return;
-
+			
 		case "/cart.do":
 			command = new MCartListView();
 			command.execute(request, response);
-
-			viewPage = "cart.jsp";
+			
+			request.setAttribute("router", "cart");
+			viewPage = "gwangyeong.jsp";
 			break;
+			
+		case "/cart/amount/increase.do":
+			// response.setStatus(200);
+			// response.setContentType("application/json");
+			command = new MCartUpdateAmount();
+			command.execute(request, response);
+			return;
+
+		case "/api/cart/query.do":
+			command = new MCartListViewApi();
+			command.execute(request, response);
+			return;
+		
+		case "/fake/login.do":
+			User user = new User("admin", "1234");
+			session.setAttribute("loginUser", user);
+			out.print("{\"success\": true}");
+			out.flush();
+			return;
 
 		case "/logout.do":
 			session.invalidate();
