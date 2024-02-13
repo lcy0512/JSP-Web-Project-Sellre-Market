@@ -29,6 +29,8 @@ import com.market.command.MCalignNewHighPrice;
 import com.market.command.MCalignNewLowPrice;
 import com.market.command.MCalignRecipeHighPrice;
 import com.market.command.MCalignRecipeLowPrice;
+import com.market.command.MCartListView;
+import com.market.command.MCartRegistry;
 import com.market.command.MCbestProduct;
 import com.market.command.MClogin;
 import com.market.command.MCnewProductPaging;
