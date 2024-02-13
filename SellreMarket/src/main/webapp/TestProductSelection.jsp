@@ -15,7 +15,7 @@
     <form action="productDetail.do" method="post">
         <button type="submit" name="productId" value="3">상품 3</button>
     </form>
-    <form action="productDetail.do" method="post">
+    <form action="productDetail.do"" method="post">
         <button type="submit" name="productId" value="4">상품 4</button>
     </form>
     <form action="productDetail.do" method="post">
