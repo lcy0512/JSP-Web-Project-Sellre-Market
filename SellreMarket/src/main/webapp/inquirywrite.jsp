@@ -19,7 +19,7 @@
 				</div>
 			</div>
 			<form id="inquiryForm" action="inquiryInsert.do" method="post" enctype="multipart/form-data">
-				<div class="css-inputr	ow">
+				<div class="css-inputrow">
 					<div class="css-titlename">유형</div>
 					<select name="questid" style="height: 44px; width: 320px; font-size: 50px; margin-top:10px;">
 						<option value="none" selected="selected">문의 유형을 선택해주세요.</option>

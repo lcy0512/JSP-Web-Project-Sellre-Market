@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,46 +27,28 @@
 				<div width="100" class="css-16tcewl e16adls20">작성일</div>
 			</div>
 			<ul class="css-1fttcpj e1cfowvj5">
+			<c:forEach items="${EventList}" var="eventlist">
 				<li>
-					<a href="#">
 					<div class="css-14yglsw e1cfowvj4">
-						<div class="css-3o6rrk e1cfowvj2">공지</div>
-						<div class="css-fzefrb e1cfowvj2">[안내] 샛별 배송완료 알림톡의 앱푸시 알림 전환 안내</div>
-						<div class="css-3d2kks e1cfowvj2">컬리</div>
-						<div class="css-b1hszl e1cfowvj2">2024.02.12</div>
+				<!-- <form method="post" action="noticedetail.do"> -->
+					<%-- <input type="hidden" value="${eventlist.eventid}" id="selecteventid" name="selecteventid"> --%>
+					<!-- <button type="submit"> -->
+						<div class="css-3o6rrk e1cfowvj2">${eventlist.eventid}</div>
+			<c:choose>
+				<c:when test="${eventlist.category eq 2}">
+					<div class="css-fzefrb e1cfowvj2">[공지] ${eventlist.ename}</div>
+				</c:when>
+				<c:otherwise>
+					<div class="css-fzefrb e1cfowvj2">[안내] ${eventlist.ename}</div>
+				</c:otherwise>
+			</c:choose>
+						<div class="css-3d2kks eß1cfowvj2">셀리마켓</div>
+						<div class="css-b1hszl e1cfowvj2">${eventlist.inputdate}</div>
+					<!-- </button>
+				</form> -->
 					</div>
-					</a>
 				</li>
-				<li>
-					<a href="#">
-					<div class="css-14yglsw e1cfowvj4">
-						<div class="css-3o6rrk e1cfowvj2">공지</div>
-						<div class="css-fzefrb e1cfowvj2">[이벤트] 오픈 기념 이벤트!</div>
-						<div class="css-3d2kks e1cfowvj2">관리자</div>
-						<div class="css-b1hszl e1cfowvj2">2024.02.09</div>
-					</div>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-					<div class="css-14yglsw e1cfowvj4">
-						<div class="css-3o6rrk e1cfowvj2">공지</div>
-						<div class="css-fzefrb e1cfowvj2">[이벤트] 오픈 기념 이벤트!</div>
-						<div class="css-3d2kks e1cfowvj2">관리자</div>
-						<div class="css-b1hszl e1cfowvj2">2024.02.09</div>
-					</div>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-					<div class="css-14yglsw e1cfowvj4">
-						<div class="css-3o6rrk e1cfowvj2">공지</div>
-						<div class="css-fzefrb e1cfowvj2">[이벤트] 오픈 기념 이벤트!</div>
-						<div class="css-3d2kks e1cfowvj2">관리자</div>
-						<div class="css-b1hszl e1cfowvj2">2024.02.09</div>
-					</div>
-					</a>
-				</li>
+				</c:forEach>
 			</ul>
 			<div class="css-1kbzkwh e14yho7m0">
 				<div class="css-sxxs1g eytury60">

@@ -54,9 +54,12 @@ import com.market.command.MClogin;
 import com.market.command.MCnewProductPaging;
 import com.market.command.MCommand;
 import com.market.command.MCommandReturnInt;
+import com.market.command.MDeleteUserInfo;
 import com.market.command.MDuplicatedCheck;
+import com.market.command.MEventDetail;
 import com.market.command.MInquiryDetail;
 import com.market.command.MInsertInquiry;
+import com.market.command.MLoadEventList;
 import com.market.command.MLoadInquiryList;
 import com.market.command.MMyPage;
 import com.market.command.MMyPageDetail;
@@ -118,6 +121,10 @@ public class Controller extends HttpServlet {
 		String uri = request.getRequestURI();
 		String conPath = request.getContextPath();
 		String com = uri.substring(conPath.length());
+		
+		System.out.println(uri);
+		System.out.println(conPath);
+		System.out.println(com);
 
 		String id = null;
 		// 페이징 처리를 위한
@@ -220,6 +227,27 @@ public class Controller extends HttpServlet {
 			command.execute(request, response);
 			
 			viewPage = "mypagedetail.jsp";
+			break;
+		
+		case "/deleteuserinfo.do" :
+			command = new MDeleteUserInfo();
+			command.execute(request, response);
+			
+			viewPage = "logout.do";
+			break;
+		
+		case "/noticelist.do" :
+			command = new MLoadEventList();
+			command.execute(request, response);
+			
+			viewPage = "notice.jsp";
+			break;
+		
+		case "/noticedetail.do" :
+			command = new MEventDetail();
+			command.execute(request, response);
+			
+			viewPage = "noticedetail.jsp";
 			break;
 		
 		case "/productDetail.do":

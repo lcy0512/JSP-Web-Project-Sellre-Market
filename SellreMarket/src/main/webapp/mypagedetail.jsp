@@ -259,7 +259,11 @@
 								</div>
 								<div class="css-ud3rkg e1utgeno0">
 									<button class="css-18m884r e4nu7ef3" type="button" width="240" id="updatebtn"
-										height="56" radius="3" onclick='checkInput(true)' value="1">
+										height="56" radius="3"  onclick='deleteuserinfo()' style="margin-right: 60px; width: 200px;">
+										<span class="css-nytqmg e4nu7ef1">탈퇴하기</span>
+									</button>
+									<button class="css-18m884r e4nu7ef3" type="button" width="240" id="updatebtn"
+										height="56" radius="3" onclick='checkInput(true)' style="width: 200px;">
 										<span class="css-nytqmg e4nu7ef1">수정하기</span>
 									</button>
 								</div>

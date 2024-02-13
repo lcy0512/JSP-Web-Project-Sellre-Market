@@ -37,14 +37,15 @@ public class MClogin implements MCommand {
 			alertMessage = "success";
 			session.setAttribute("userName", userName);
 			session.setAttribute("id", id);
+			
+			User loginUser = new User(id, userName);
+			session.setAttribute(LOGIN_USER_SESSION_NAME, loginUser);
 		}
 		else {
 			session.removeAttribute("id");
 			session.removeAttribute("userName");
 			alertMessage = "아이디와 비밀번호를 확인 해주세요.";
 			
-			User loginUser = new User(id, userName);
-			session.setAttribute(LOGIN_USER_SESSION_NAME, loginUser);
 		}
 		
 		session.setAttribute("alertMessage", alertMessage);

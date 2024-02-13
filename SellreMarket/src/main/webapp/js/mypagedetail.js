@@ -87,3 +87,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+function deleteuserinfo() {
+	var result = window.confirm("정말로 탈퇴를 진행하시겠습니까? 탈퇴하면 셀리마켓 이용이 제한될 수 있습니다.")
+	if (result === true) {
+		alert("탈퇴 되었습니다.")
+		window.location.href = 'deleteuserinfo.do';
+	}
+}

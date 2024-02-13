@@ -39,7 +39,7 @@ public class LoginDao {
 		try {
 			con = dataSource.getConnection();
 			
-			String query = "select name from customer where userid = ? and password = ?";
+			String query = "select name,status from customer where userid = ? and password = ?";
 			
 			ps = con.prepareStatement(query);
 			ps.setString(1, id);
@@ -47,11 +47,18 @@ public class LoginDao {
 			rs = ps.executeQuery();
 			
 			if (rs.next()) {
-				check = true;
-				name = rs.getString("name");
+				String status = rs.getString("status");
 				
-				data.put("name", name);
-				data.put("check", check);
+				if(status.equals("1")) {
+					check = true;
+					name = rs.getString("name");
+					
+					data.put("name", name);
+					data.put("check", check);
+				}
+				else {
+					data.put("check", false);
+				}
 			}
 			else {
 				// If no data is found, you can still put default values in the map

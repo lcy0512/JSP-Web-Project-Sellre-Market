@@ -30,6 +30,19 @@ function updateCartCount(cartCount) {
     $("#cartCount").text(cartCount);
 }
 
+var id = '<%=(String)session.getAttribute("id")%>';
+function inquirywrite() {
+	// 로그인 여부 확인
+	if (id !== "null") {
+		window.location.href = 'inquiry.do';
+	}
+	else {
+		var result = window.confirm("로그인 후 이용 가능합니다. 로그인 하시겠습니까?")
+		if (result === true) {
+			window.location.href = 'Login.jsp';
+		}
+	}
+}
 </script>
 </head>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -93,8 +106,8 @@ function updateCartCount(cartCount) {
 				<div class="css-1qolcqm eo7pjfk3">
 					<a class="css-oyffzd eo7pjfk2">고객센터<span class="css-1lrerrk eo4j3y50"></span></a>
 					<div class="menu css-1ho29iy ecncdj41">
-						<div class="css-12olpw6 ecncdj40"><a href="notice.jsp">공지사항</a></div>
-						<div class="css-12olpw6 ecncdj40"><a href="inquiry.do">1:1 문의</a></div>
+						<div class="css-12olpw6 ecncdj40"><a href="noticelist.do">공지사항</a></div>
+						<div class="css-12olpw6 ecncdj40"><a onclick='inquirywrite()'>1:1 문의</a></div>
 						<div class="css-12olpw6 ecncdj40"><a href="user_guide.jsp">이용안내</a></div>
 					</div>
 				</div>

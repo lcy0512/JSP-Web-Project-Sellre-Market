@@ -155,5 +155,31 @@ public void updateUserInfo(String userid, String password, String tel, String na
 		} // finally
 	} // deliveryInfo
 	
+	public void deleteUserInfo(String userid) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		String query = "update customer set status = 0 where userid = ?";
+		try {
+			connection = dataSource.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			
+			preparedStatement.setString(1, userid);
+			
+			preparedStatement.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally { 
+			// 메모리정리
+			try {
+				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		} // finally
+	}
 	
 }// End
