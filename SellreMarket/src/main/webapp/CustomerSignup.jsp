@@ -234,7 +234,7 @@
 										<path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
 								</div><span>이용약관 동의</span></label><span class="css-64z8en e1sjmfnv5">(필수)</span>
 							</div>
-							<a class="css-7chi73 e1sjmfnv3" style="margin-top: 3px;">약관보기</a>
+							<a class="css-7chi73 e1sjmfnv3" style="margin-top: 3px;" href="header.jsp" target="_blank">약관보기</a>
 						</div>
 					<%-- 2 --%>
 						<div class="css-ov2xfu e1sjmfnv7">

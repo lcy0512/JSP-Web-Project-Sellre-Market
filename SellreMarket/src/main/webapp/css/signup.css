@@ -1,11 +1,7 @@
 @charset "UTF-8";
 
-html,
-button,
-input,
-select,
-textarea {
-	font-family: "Noto Sans", "malgun gothic", AppleGothic, dotum, sans-serif;
+html, button, input, select, textarea {
+    font-family: "Noto Sans", "malgun gothic", AppleGothic, dotum, sans-serif;
 }
 
 .css-pculus {
@@ -27,8 +23,9 @@ textarea {
 
 .css-mhmtvt {
 	width: 640px;
-	margin-top: 0px;
-	margin-right: 100px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 120px;
 }
 
 .css-rb0i47 {
@@ -118,20 +115,28 @@ textarea {
 }
 
 .css-nytqmg {
+	text-align: center;
+	display: inline-block;
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.css-nytqmgq {
+	margin-top: 7px;
+	text-align: center;
 	display: inline-block;
 	font-size: 16px;
 	font-weight: 500;
 }
 
 .css-ufulao:disabled {
-	border-color: rgb(221, 221, 221);
+	border-top-color: rgb(221, 221, 221);
 	color: rgb(221, 221, 221);
 }
 
 .css-ufulao {
 	display: block;
 	padding-top: 0px;
-	padding-right: 10px;
 	text-align: center;
 	overflow-x: hidden;
 	overflow-y: hidden;
@@ -141,7 +146,7 @@ textarea {
 	border-top-right-radius: 3px;
 	border-bottom-right-radius: 3px;
 	border-bottom-left-radius: 3px;
-	color: rgb(95, 0, 128);
+	color: rgb(0, 0, 0);
 	background-color: rgb(255, 255, 255);
 	border-top-width: 1px;
 	border-right-width: 1px;
@@ -151,10 +156,7 @@ textarea {
 	border-right-style: solid;
 	border-bottom-style: solid;
 	border-left-style: solid;
-	border-top-color: rgb(95, 0, 128);
-	border-right-color: rgb(95, 0, 128);
-	border-bottom-color: rgb(95, 0, 128);
-	border-left-color: rgb(95, 0, 128);
+	border-color: rgb(186,190,0);
 }
 
 .css-1schgvv {
@@ -170,7 +172,6 @@ textarea {
 	border-top-right-radius: 4px;
 	border-bottom-right-radius: 4px;
 	border-bottom-left-radius: 4px;
-	color: rgb(95, 0, 128);
 	background-color: rgb(255, 255, 255);
 	border-top-width: 1px;
 	border-right-width: 1px;
@@ -180,10 +181,7 @@ textarea {
 	border-right-style: solid;
 	border-bottom-style: solid;
 	border-left-style: solid;
-	border-top-color: rgb(95, 0, 128);
-	border-right-color: rgb(95, 0, 128);
-	border-bottom-color: rgb(95, 0, 128);
-	border-left-color: rgb(95, 0, 128);
+	border-color: rgb(186,190,0);
 }
 
 .css-vukl2m {
@@ -270,7 +268,7 @@ textarea {
 	border-top-right-radius: 50%;
 	border-bottom-right-radius: 50%;
 	border-bottom-left-radius: 50%;
-	background-color: rgb(95, 0, 128);
+	background-color: rgb(186,190,0);
 }
 
 .css-1vic0rk {
@@ -390,7 +388,7 @@ textarea {
 
 .css-ov2xfu {
 	display: flex;
-	padding-top: 8px;
+	padding-top: 12px;
 	padding-right: 0px;
 	-webkit-box-pack: justify;
 	justify-content: space-between;
@@ -459,7 +457,7 @@ svg:not(:root) {
 
 .css-7chi73 {
 	padding-right: 22px;
-	color: rgb(95, 0, 128);
+	color: rgb(186,190,0);
 	letter-spacing: 0px;
 }
 
@@ -483,7 +481,6 @@ svg:not(:root) {
 .css-18m884r {
 	display: block;
 	padding-top: 0px;
-	padding-right: 10px;
 	text-align: center;
 	overflow-x: hidden;
 	overflow-y: hidden;
@@ -493,8 +490,8 @@ svg:not(:root) {
 	border-top-right-radius: 3px;
 	border-bottom-right-radius: 3px;
 	border-bottom-left-radius: 3px;
-	color: rgb(255, 255, 255);
-	background-color: rgb(95, 0, 128);
+	color: rgb(0,0,0);
+	background-color: rgb(249,249,228);
 	border-top-width: 0px;
 	border-right-width: 0px;
 	border-bottom-width: 0px;

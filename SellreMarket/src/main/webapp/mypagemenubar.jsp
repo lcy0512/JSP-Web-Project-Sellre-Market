@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="css/individualInquiry.css" />
 <body>
 	<div class="css-833hqy ecbxmj3">
-		<div class="css-1v4whg ecbxmj2">마이컬리</div>
+		<div class="css-1v4whg ecbxmj2">마이 셀리마켓</div>
 		<ul class="css-1x9bshx ecbxmj1">
 			<li>
 				<a class=" css-g4g0eu ecbxmj0" href="mypageinfo.jsp">개인정보 수정

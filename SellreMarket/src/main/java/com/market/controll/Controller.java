@@ -157,8 +157,6 @@ public class Controller extends HttpServlet {
 			// MC login으로 받아온 userName
 			String userName = (String) session.getAttribute("userName");
 
-			session.setAttribute("userName", userName);
-
 			// 확인
 			System.out.println(userName + "  userName in controller");
 			System.out.println(alertMessage + " controller alert message");
