@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <!--
-	1. Date : 2024.02.02
+	1. Date : 2024.02.12
 	2. Author : Woody Jo
 	3. Version : v1.0.0
 	4. Description : 메인 body 페이지 Dto 
@@ -67,7 +67,7 @@
 </script>
 
 <!-- // js 따로 관리한다. -->
-<script src="js/mainViewPage.js"></script>
+<script src="js/recipePage.js"></script>
 
 
 </head>
@@ -90,13 +90,13 @@
 
 			<!-- 슬라이드 쇼 실행 -->
 			<div class="carousel-inner">
-				<c:forEach items="${eventImgs}" var="event">
+				<c:forEach items="${getMainAdImgs}" var="ad">
 					<!-- 첫번째 이미지일 때 active 설정 -->
 					<c:choose>
-						<c:when test="${event.eimg eq '1.jpg'}">
+						<c:when test="${ad.eimg eq '1.jpg'}">
 							<div class="carousel-item active">
 								<img class="d-block w-100"
-									src="${pageContext.request.contextPath}/image/event/${event.eimg}"
+									src="${pageContext.request.contextPath}/image/event/${ad.eimg}"
 									alt="Event Image">
 								<!-- 캡션 없음 -->
 							</div>
@@ -104,7 +104,7 @@
 						<c:otherwise>
 							<div class="carousel-item">
 								<img
-									src="${pageContext.request.contextPath}/image/event/${event.eimg}"
+									src="${pageContext.request.contextPath}/image/event/${ad.eimg}"
 									class="d-block w-100" alt="Event Image">
 								<!-- 캡션 없음 -->
 							</div>
@@ -120,20 +120,46 @@
 			</a> <a href="#imgslider" class="carousel-control-next" data-slide="next">
 				<span class="carousel-control-next-icon"></span>
 			</a>
+			
+			
 		</div>
 	</div>
 	<br>
+	<br>
 	<!-- Carousel End -->
 
+
 	<h2 align="center">설 선물특가 실시간 랭킹🔥🔥</h2>
-	<p class="css-149yh9z ej3ms6t1" align="center">지금 주목해야할 인기 상품 최대
-		79% 할인</p>
+	<p class="css-149yh9z ej3ms6t1" align="center">지금 주목해야할 인기 상품 최대 79% 할인</p>
+	<br>
+	<br>
+	
+	<!-- Align by Category Start -->
+	<div class="setAlign" style="margin-left: 76%; color: #919492;">
+		<c:if test="${alignCategory eq ''}">
+			<a href="alignRecipeLowPrice.do">낮은 가격순</a>
+			&nbsp;&nbsp;|&nbsp;&nbsp;
+			<a href="alignRecipeHighPrice.do">높은 가격순</a>
+		</c:if>
+		<c:if test="${alignCategory eq '낮은 가격순'}">
+			<span style="color: black; font-weight: bold">낮은 가격순</span>
+			&nbsp;&nbsp;|&nbsp;&nbsp;
+			<a href="alignRecipeHighPrice.do">높은 가격순</a>
+		</c:if>
+		<c:if test="${alignCategory eq '높은 가격순'}">
+			<a href="alignRecipeLowPrice.do">낮은 가격순</a>
+			&nbsp;&nbsp;|&nbsp;&nbsp;
+			<span style="color: black; font-weight: bold">높은 가격순</span>
+		</c:if>
+	</div>	
+	<!-- Align by Category End -->
+		
 
 
 	<!-- Products Start -->
 	<div class="container-fluid pt-5 pb-3">
 		<div class="row px-xl-5 justify-content-center"
-			style="margin-left: 240px; margin-right: 110px;">
+			style="margin-left: 90px; margin-right: 30px;">
 			<c:if test="${not empty productList}">
 				<c:forEach items="${productList}" var="dto">
 					<div class="col-lg-4 col-md-4 col-sm-6 pb-10 mx-auto">
@@ -142,34 +168,61 @@
 							<div class="product-img position-relative overflow-hidden">
 								<a href="#"> <img class="img-fluid w-100"
 									src="${pageContext.request.contextPath}/image/product/${dto.ysrc}"
-									alt="Product Image">
+									alt="Product Image"
+									style="object-fit: cover; width: 100%; height: 100%;">
 								</a>
 							</div>
+							
+							
+							<!-- 장바구니 폰트 사이즈 수정 필요 -->
+							<!-- 장바구니 폰트 사이즈 수정 필요 -->
+							<!-- 장바구니 폰트 사이즈 수정 필요 -->
+							<!-- 장바구니 폰트 사이즈 수정 필요 -->
+							<!-- 장바구니 폰트 사이즈 수정 필요 -->
+							<!-- 장바구니 폰트 사이즈 수정 필요 -->
+							<!-- 장바구니 폰트 사이즈 수정 필요 -->
 							<div
 								style="margin-top: 7px; margin-left: 1%; border: 1px solid lightgray; border-radius: 5px; width: 98%;">
 								<button
-									onclick="sendProductInfo(${dto.recipeid}, ${dto.productid}); return false;"
+									onclick="sendProductInfo(${dto.recipeid}); return false;"
 									class="btn btn-primary btn-light align-items-center"
 									style="width: 100%;">장바구니</button>
+								<input type="hidden" id="userid" value="${customerid}">
 							</div>
+							<!-- 장바구니 폰트 사이즈 수정 필요 -->
+							<!-- 장바구니 폰트 사이즈 수정 필요 -->
+							<!-- 장바구니 폰트 사이즈 수정 필요 -->
+							<!-- 장바구니 폰트 사이즈 수정 필요 -->
+							<!-- 장바구니 폰트 사이즈 수정 필요 -->
+							<!-- 장바구니 폰트 사이즈 수정 필요 -->
 							
 							<div class="text-center py-4"
 								style="display: flex; flex-direction: column; justify-content: center;">
-								<a class="h6 text-decoration-none text-truncate" href="">[${dto.yname}]</a>
-									<a class="ytitle" href="">${dto.ytitle}</a>
-
+								<a class="h7 text-decoration-none text-truncate" href="" style="color: #808080;">[${dto.yname}]</a>
+									<a class="ytitle" href="" style="font-weight: bold;">${dto.ytitle}</a>
 								<div class="d-flex align-items-center justify-content-center mt-2">
-									<h5>${dto.price}</h5>
+									<h7 class="text-muted ml-2">
+										<c:if test="${dto.price ne dto.dPrice}">
+											<del>${dto.price}</del>
+											<h7>원</h7>
+										</c:if>
+									</h7>
+								</div>
+								<div class="d-flex align-items-center justify-content-center mt-2">
+									<span class="h6" style="color: red;">
+										<c:if test="${dto.price ne dto.dPrice}">
+											${dto.salerate}%
+										</c:if>
+									</span>
+									&nbsp;&nbsp;
+									<h6>${dto.dPrice}</h6>
 									<h6>원</h6>
-									<h6 class="text-muted ml-2">
-										<del>$123.00</del>
-									</h6>
 								</div>
 								<div
 									class="d-flex align-items-center justify-content-center mb-1">
 									<img
 										src="https://cdn-icons-png.flaticon.com/128/535/535234.png"
-										style="width: 12px; height: 12px;">&nbsp; <small>${dto.like}</small>
+										style="width: 12px; height: 12px;">&nbsp; <small>${dto.recipelike}</small>
 								</div>
 							</div>
 						</div>
@@ -183,14 +236,14 @@
 	<!-- Paging Start -->
 	<%
 		int i = 1;
-		int current = (int) request.getAttribute("curPage");
 	%>
-	<!-- 블록과 페이지 가져오기 -->
-	<div
-		style="display: flex; justify-content: center; font-size: 20px; gap: 0 10px;">
-		<a href="mainPage.do?curPage=<%= current - 1 %>" class="prev"
-			onclick="prev()"> << </a>
-
+	<div style="display: flex; justify-content: center; font-size: 20px; gap: 0 10px;">
+		<!-- 뒤로 가기 -->
+		<c:if test="${curPage > 1}">
+			<a href="mainPage.do?curPage=${curPage - 1}" class="prev"> << </a>
+		</c:if>
+		
+		<!-- 페이지 블록 수 만큼 숫자 찍기 -->
 		<c:forEach begin="${blockStart}" end="${endPage}">
 			<%
 				out.print("<a href='mainPage.do?curPage=" + i + "'>" + i + "</a>");
@@ -198,8 +251,17 @@
 				i++;
 			%>
 		</c:forEach>
-		<a href="mainPage.do?curPage=<%= current + 1 %>" class="next"> >>
-		</a>
+	
+		<!-- 수정 필요 -->
+		<!-- 수정 필요 -->
+		<!-- 수정 필요 -->
+		<!-- 앞으로 가기 -->
+		<c:if test="${curPage < endPage}">
+			<a href="mainPage.do?curPage=${curPage + 1}" class="next">>></a>
+		</c:if>
+		<!-- 수정 필요 -->
+		<!-- 수정 필요 -->
+		
 	</div>
 	<!-- Paging End -->
 

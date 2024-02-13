@@ -110,16 +110,42 @@
 					</div>
 				</div>
 				<ul class="css-1887xqd e17w4cfr5">
-					<li class="css-59mmhh e17w4cfr4"><span
-						class="css-1xyu7j9 e17w4cfr2">신상품</span></li>
-					<li class="css-59mmhh e17w4cfr4"><span
-						class="css-1xyu7j9 e17w4cfr2">베스트</span></li>
+						<li class="css-59mmhh e17w4cfr4">
+							<span class="css-1xyu7j9 e17w4cfr2">
+								<c:if test="${headerCategory eq '신상품'}">
+									<a href="mainPage.do" style="color: #c14a09; font-weight: bold;">신상품</a>
+								</c:if>
+								<c:if test="${headerCategory ne '신상품'}">
+									<a href="mainPage.do">신상품</a>
+								</c:if>
+							</span>
+						</li>
+						
+					<li class="css-59mmhh e17w4cfr4">
+						<span class="css-1xyu7j9 e17w4cfr2">
+							<c:if test="${headerCategory eq '베스트'}">
+								<a href="bestProduct.do" style="color: #c14a09; font-weight: bold;">베스트</a>
+							</c:if>
+							<c:if test="${headerCategory ne '베스트'}">
+								<a href="bestProduct.do">베스트</a>
+							</c:if>
+						</span>
 					<li class="css-59mmhh e17w4cfr4"><span
 						class="css-1xyu7j9 e17w4cfr2">알뜰쇼핑</span></li>
 					<li class="css-59mmhh e17w4cfr4"><span
 						class="css-1xyu7j9 e17w4cfr2">특가/혜택</span></li>
-					<li class="css-59mmhh e17w4cfr4"><span
-						class="css-1xyu7j9 e17w4cfr2">레시피</span></li>
+					<li class="css-59mmhh e17w4cfr4">
+						<span class="css-1xyu7j9 e17w4cfr2">
+							<span class="css-1xyu7j9 e17w4cfr2">
+							<c:if test="${headerCategory eq '레시피'}">
+								<a href="recipePage.do" style="color: #c14a09; font-weight: bold;">레시피</a>
+							</c:if>
+							<c:if test="${headerCategory ne '레시피'}">
+								<a href="recipePage.do">레시피</a>
+							</c:if>
+						</span>						
+						</span>
+					</li>
 				</ul>
 				<div class="css-s5xdrg e17w4cfr0">
 					<div class="css-dnwaeo e1mmzaxa1">
