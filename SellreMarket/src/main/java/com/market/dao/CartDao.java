@@ -169,4 +169,21 @@ public class CartDao {
 			return false;
 		}
 	}
+
+	public void deleteByCartId(Long cartId) {
+		String query = """
+				DELETE FROM cart
+				WHERE cartid = ?
+				""";
+		
+		try (
+				Connection connection = dataSource.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(query);
+		) {
+			preparedStatement.setLong(1, cartId);
+			preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

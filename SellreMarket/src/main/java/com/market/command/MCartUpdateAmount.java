@@ -32,7 +32,11 @@ public class MCartUpdateAmount implements MCommand {
 		}
 		
 		// [2] 맞으면 변경
-		dao.updateAmountByCartId(cartId, amount);
+		if (amount > 0) {			
+			dao.updateAmountByCartId(cartId, amount);
+		} else {
+			dao.deleteByCartId(cartId);
+		}
 		
 		try (PrintWriter out = response.getWriter()) {
 			out.print("{\"success\": true}");
