@@ -40,17 +40,6 @@ form {
   width: 80%;
   max-width: 700px; 
 }
-
-/* 	
-	.main {
-	  display: flex;
-	  justify-content: center;
-	  align-items: center;
-	  flex-direction: column;
-	  overflow-y: auto;
-	  height: 100vh;
-	} */
-	
 	
     
     .form-group {
@@ -71,7 +60,8 @@ form {
       border-radius: 3px;
       font-size: 16px;
       cursor: pointer;
-      width: 100%;
+        width: 80%;
+ 		 max-width: 700px; 
       margin-top: 30px;
       margin-bottom: 200px;
       margin-left : 10px;
