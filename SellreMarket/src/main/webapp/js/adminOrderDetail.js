@@ -64,8 +64,9 @@ function select() {
 ************************************************************************************************/
 
 function order() {
-				 
-	let pname = $("#pname").val();
+				
+	let pname = $("#pname").val();			 
+	let content = $("#content").val();
 	let count = $("#count").val();
 	let productid = $("#productid").val();
 
@@ -80,7 +81,7 @@ function order() {
 			content : content
 		},
 		success : function(response){
-				 if (response === "2") {
+				 if (response == "2") {
 					alert(pname+"["+count+"개 요청되었습니다.")
 	                window.location.replace("/SellreMarket/adminOrder.jsp"); 
 	         	} else {
