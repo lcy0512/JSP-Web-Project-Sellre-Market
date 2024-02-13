@@ -31,12 +31,9 @@ public class MClogin implements MCommand {
 		String userName = (String) data.get("name");
 		boolean check = (boolean) data.get("check");
 		
-		System.out.println(userName);
-		System.out.println(check);
-		
-		
 		if (check) {
 			alertMessage = "success";
+			session.setAttribute("id", id);
 		}
 		else {
 			alertMessage = "아이디와 비밀번호를 확인 해주세요.";

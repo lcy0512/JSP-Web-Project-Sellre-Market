@@ -43,7 +43,6 @@ function sendProductInfo(productid) {
     var customerid = document.getElementById('userid').value;
 	
 	
-	
 	if (customerid == null || customerid == "") {
 		alert("로그인 후 장바구니 버튼을 클릭 하세요.");
 	}	

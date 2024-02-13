@@ -15,15 +15,19 @@ public class getCart implements MCommand {
 		
 		MainViewDao dao = new MainViewDao();
 //		int productid;
-		String id = (String) session.getAttribute("customerid");
-		int recipeid = (int) session.getAttribute("recipeid");
+		String id = (String) session.getAttribute("id");
 		
-		if (id == null) {
-			// 테스트용
-			id = "admin";		
+		
+		int recipeid = (int) session.getAttribute("recipeid");
+		int productid = (int) session.getAttribute("productid");
+		
+		if (recipeid > 0) {
+			dao.recipePageClickCart(id, recipeid);
+		}
+		else if (productid > 0) {
+			dao.newPageClickCart(id, productid);
 		}
 		
-//		dao.newPageClickCart(id, productid);
-		dao.recipePageClickCart(id, recipeid);
+		else System.out.println("?????????? inside getCart dao");
 	}
 }

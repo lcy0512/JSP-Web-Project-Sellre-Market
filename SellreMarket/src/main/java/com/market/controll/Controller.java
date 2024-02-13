@@ -129,11 +129,7 @@ public class Controller extends HttpServlet {
 				
 				
 				session.setAttribute("userName", userName);
-				
-				// 확인
-				System.out.println(userName + "  userName in controller");
-				System.out.println(alertMessage + " controller alert message");
-				
+				session.setAttribute("id", session.getAttribute("id"));
 				
 				// login.js 로 보내기 message 보내기
 				out.print(new Gson().toJson(alertMessage));
@@ -331,11 +327,8 @@ public class Controller extends HttpServlet {
 				headerCategory = "레시피";
 				alignCategory = "";
 				
-				// 수정 필요
-				if (request.getParameter("customerid") != null) {
-					id = request.getParameter("customerid");
-				}
-				// 수정 필요
+				id = (String) session.getAttribute("id");
+				
 				
 				try {
 					curPage = Integer.parseInt(request.getParameter("curPage"));
@@ -345,7 +338,7 @@ public class Controller extends HttpServlet {
 				}
 				
 				request.setAttribute("curPage", curPage);
-				request.setAttribute("customerid", id);
+				request.setAttribute("id", id);
 				
 				// 페이징 처리를 위한
 				command = new Paging();
@@ -357,15 +350,13 @@ public class Controller extends HttpServlet {
 				viewPage = "recipeList.jsp";
 				
 				break;
+				
 			case "/alignRecipeLowPrice.do" :
 				headerCategory = "레시피";
 				alignCategory = "낮은 가격순";
 				
-				// 수정 필요
-				if (request.getParameter("customerid") != null) {
-					id = request.getParameter("customerid");
-				}
-				// 수정 필요
+				id = (String) session.getAttribute("id");
+				
 				
 				try {
 					curPage = Integer.parseInt(request.getParameter("curPage"));
@@ -375,6 +366,7 @@ public class Controller extends HttpServlet {
 				}
 				
 				request.setAttribute("curPage", curPage);
+				request.setAttribute("id", id);
 				
 				command = new MCalignRecipeLowPrice();
 				command.execute(request, response);
@@ -389,11 +381,7 @@ public class Controller extends HttpServlet {
 				headerCategory = "레시피";
 				alignCategory = "높은 가격순";
 				
-				// 수정 필요
-				if (request.getParameter("customerid") != null) {
-					id = request.getParameter("customerid");
-				}
-				// 수정 필요
+				id = (String) session.getAttribute("id");
 				
 				try {
 					curPage = Integer.parseInt(request.getParameter("curPage"));
@@ -403,6 +391,7 @@ public class Controller extends HttpServlet {
 				}
 				
 				request.setAttribute("curPage", curPage);
+				request.setAttribute("id", id);
 				
 				command = new MCalignRecipeHighPrice();
 				command.execute(request, response);
@@ -418,11 +407,7 @@ public class Controller extends HttpServlet {
 				headerCategory = "신상품";
 				alignCategory = "신상품순";
 				
-				// 수정 필요
-				if (request.getParameter("customerid") != null) {
-					id = request.getParameter("customerid");
-				}
-				// 수정 필요
+				id = (String) session.getAttribute("id");
 				
 				try {
 					curPage = Integer.parseInt(request.getParameter("curPage"));
@@ -432,6 +417,7 @@ public class Controller extends HttpServlet {
 				}
 				
 				request.setAttribute("curPage", curPage);
+				request.setAttribute("id", id);
 				
 				command = new MCnewProductPaging();
 				command.execute(request, response);
@@ -446,11 +432,7 @@ public class Controller extends HttpServlet {
 				headerCategory = "신상품";
 				alignCategory = "낮은 가격순";
 				
-				// 수정 필요
-				if (request.getParameter("customerid") != null) {
-					id = request.getParameter("customerid");
-				}
-				// 수정 필요
+				id = (String) session.getAttribute("id");
 				
 				try {
 					curPage = Integer.parseInt(request.getParameter("curPage"));
@@ -460,6 +442,7 @@ public class Controller extends HttpServlet {
 				}
 				
 				request.setAttribute("curPage", curPage);
+				request.setAttribute("id", id);
 				
 				command = new MCalignNewLowPrice();
 				command.execute(request, response);
@@ -474,11 +457,7 @@ public class Controller extends HttpServlet {
 				headerCategory = "신상품";
 				alignCategory = "높은 가격순";
 				
-				// 수정 필요
-				if (request.getParameter("customerid") != null) {
-					id = request.getParameter("customerid");
-				}
-				// 수정 필요
+				id = (String) session.getAttribute("id");
 				
 				try {
 					curPage = Integer.parseInt(request.getParameter("curPage"));
@@ -488,6 +467,7 @@ public class Controller extends HttpServlet {
 				}
 				
 				request.setAttribute("curPage", curPage);
+				request.setAttribute("id", id);
 				
 				command = new MCalignNewHighPrice();
 				command.execute(request, response);
@@ -503,11 +483,7 @@ public class Controller extends HttpServlet {
 				headerCategory = "베스트";
 				alignCategory = "베스트순";
 				
-				// 수정 필요
-				if (request.getParameter("customerid") != null) {
-					id = request.getParameter("customerid");
-				}
-				// 수정 필요
+				id = (String) session.getAttribute("id");
 				
 				try {
 					curPage = Integer.parseInt(request.getParameter("curPage"));
@@ -517,6 +493,7 @@ public class Controller extends HttpServlet {
 				}
 				
 				request.setAttribute("curPage", curPage);
+				request.setAttribute("id", id);
 				
 				command = new MCbestProduct();
 				command.execute(request, response);
@@ -532,11 +509,7 @@ public class Controller extends HttpServlet {
 				headerCategory = "베스트";
 				alignCategory = "낮은 가격순";
 				
-				// 수정 필요
-				if (request.getParameter("customerid") != null) {
-					id = request.getParameter("customerid");
-				}
-				// 수정 필요
+				id = (String) session.getAttribute("id");
 				
 				try {
 					curPage = Integer.parseInt(request.getParameter("curPage"));
@@ -546,6 +519,7 @@ public class Controller extends HttpServlet {
 				}
 				
 				request.setAttribute("curPage", curPage);
+				request.setAttribute("id", id);
 				
 				command = new MCalignBestLowPrice();
 				command.execute(request, response);
@@ -560,11 +534,7 @@ public class Controller extends HttpServlet {
 				headerCategory = "베스트";
 				alignCategory = "높은 가격순";
 				
-				// 수정 필요
-				if (request.getParameter("customerid") != null) {
-					id = request.getParameter("customerid");
-				}
-				// 수정 필요
+				id = (String) session.getAttribute("id");
 				
 				try {
 					curPage = Integer.parseInt(request.getParameter("curPage"));
@@ -574,6 +544,7 @@ public class Controller extends HttpServlet {
 				}
 				
 				request.setAttribute("curPage", curPage);
+				request.setAttribute("id", id);
 				
 				command = new MCalignBestHighPrice();
 				command.execute(request, response);
@@ -613,15 +584,12 @@ public class Controller extends HttpServlet {
 			// main페이지 카트 클릭
 			case "/recipePageCart.do" :
 				
-				if (request.getParameter("customerid") != null) {
-					id = request.getParameter("customerid");
-				}
-				
+				id = (String) session.getAttribute("id");
 				int ri = Integer.parseInt(request.getParameter("recipeid"));
 				
 				System.out.println(ri + " ?????????");
 				
-				session.setAttribute("customerid", id);
+				session.setAttribute("id", id);
 				session.setAttribute("recipeid", ri);
 				command = new getCart();
 				command.execute(request, response);
@@ -632,51 +600,33 @@ public class Controller extends HttpServlet {
 			// 신제품 페이지 카트 클릭
 			case "/newPageCart.do" :
 				
-				if (request.getParameter("customerid") != null) {
-					id = request.getParameter("customerid");
-				}
-				
+				id = (String) session.getAttribute("id");
 				productid = Integer.parseInt(request.getParameter("productid"));
 				
 				System.out.println(productid + " ?????????");
 				
-				session.setAttribute("customerid", id);
+				session.setAttribute("id", id);
 				session.setAttribute("productid", productid);
 				command = new getCart();
 				command.execute(request, response);
 				
 				viewPage = "newProductList.do";
 				break;
-				// 신제품 페이지 카트 클릭
 				
-			// 수정필요
-				// 수정필요
-				// 수정필요
-				// 수정필요
-				// 수정필요
+			case "/bestPageCart.do" :
 				
-//			case "/bestPageCart.do" :
-//				
-//				if (request.getParameter("customerid") != null) {
-//					id = request.getParameter("customerid");
-//				}
-//				
-//				productid = Integer.parseInt(request.getParameter("productid"));
-//				
-//				System.out.println(productid + " ?????????");
-//				
-//				session.setAttribute("customerid", id);
-//				session.setAttribute("productid", productid);
-//				command = new getCart();
-//				command.execute(request, response);
-//				
-//				viewPage = "newProductList.do";
-//				return;
-				// 수정필요
-				// 수정필요
-				// 수정필요
-				// 수정필요
-				// 수정필요
+				id = (String) session.getAttribute("id");
+				productid = Integer.parseInt(request.getParameter("productid"));
+				
+				System.out.println(productid + " ?????????");
+				
+				session.setAttribute("id", id);
+				session.setAttribute("productid", productid);
+				command = new getCart();
+				command.execute(request, response);
+				
+				viewPage = "bestProduct.do";
+				return;
 				
 			case "/logout.do" :
 				session.invalidate();

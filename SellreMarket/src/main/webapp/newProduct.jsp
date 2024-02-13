@@ -126,7 +126,7 @@
 	
 	<div class="container-fluid pt-5 pb-3">
 		<div class="row px-xl-5 justify-content-center"
-			style="margin-left: 90px; margin-right: 30px;">
+			style="margin-left: 10%; margin-right: 0%;">
 			<c:if test="${not empty newProducts}">
 				<c:forEach items="${newProducts}" var="dto">
 					<div class="col-lg-4 col-md-4 col-sm-6 pb-10 mx-auto">
@@ -139,13 +139,18 @@
 									 style="object-fit: cover; width: 100%; height: 100%;">
 								</a>
 							</div>
-							<div style="margin-top: 7px; margin-left: 1%; border: 1px solid lightgray; border-radius: 5px; width: 98%;">
-								<button onclick="sendProductInfo(${dto.productid}); return false;" class="btn btn-primary btn-light align-items-center" style="width: 100%;">장바구니</button>
+							<div
+								style="margin-top: 7px; margin-left: 1%; border: 1px solid lightgray; border-radius: 5px; width: 98%;">
+								<button
+									onclick="sendProductInfo(${dto.productid}); return false;"
+									class="btn btn-primary btn-light align-items-center"
+									style="width: 100%;">장바구니</button>
+								<input type="hidden" id="userid" value="${id}">
 							</div>
 							
 							<div class="text-center py-4"
 								style="display: flex; flex-direction: column; justify-content: center;">
-								<a class="h6 text-decoration-none text-truncate" href="">${dto.pname}</a>
+								<a class="h6 text-decoration-none text-truncate" href="" style="font-weight: bold;">${dto.pname}</a>
 								<div class="d-flex align-items-center justify-content-center mt-2">
 									<h7 class="text-muted ml-2">
 										<c:if test="${dto.price ne dto.dPrice}">
@@ -155,7 +160,7 @@
 									</h7>
 								</div>
 								<div class="d-flex align-items-center justify-content-center mt-2">
-									<span class="h6" style="color: red;">
+									<span class="h6" style="color: red; font-weight: bold;">
 										<c:if test="${dto.price ne dto.dPrice}">
 											${dto.salerate}%
 										</c:if>

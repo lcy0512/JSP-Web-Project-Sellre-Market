@@ -50,9 +50,6 @@ public class LoginDao {
 				check = true;
 				name = rs.getString("name");
 				
-				System.out.println(name + " insdie dao");
-				System.out.println(check + " insdie dao");
-				
 				data.put("name", name);
 				data.put("check", check);
 			}

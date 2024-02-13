@@ -135,7 +135,7 @@
 	<br>
 	
 	<!-- Align by Category Start -->
-	<div class="setAlign" style="margin-left: 76%; color: #919492;">
+	<div class="setAlign" style="margin-left: 75%; color: #919492;">
 		<c:if test="${alignCategory eq ''}">
 			<a href="alignRecipeLowPrice.do">낮은 가격순</a>
 			&nbsp;&nbsp;|&nbsp;&nbsp;
@@ -159,7 +159,7 @@
 	<!-- Products Start -->
 	<div class="container-fluid pt-5 pb-3">
 		<div class="row px-xl-5 justify-content-center"
-			style="margin-left: 90px; margin-right: 30px;">
+			style="margin-left: 10%; margin-right: 0%;">
 			<c:if test="${not empty productList}">
 				<c:forEach items="${productList}" var="dto">
 					<div class="col-lg-4 col-md-4 col-sm-6 pb-10 mx-auto">
@@ -187,7 +187,7 @@
 									onclick="sendProductInfo(${dto.recipeid}); return false;"
 									class="btn btn-primary btn-light align-items-center"
 									style="width: 100%;">장바구니</button>
-								<input type="hidden" id="userid" value="${customerid}">
+								<input type="hidden" id="userid" value="${id}">
 							</div>
 							<!-- 장바구니 폰트 사이즈 수정 필요 -->
 							<!-- 장바구니 폰트 사이즈 수정 필요 -->
@@ -209,7 +209,7 @@
 									</h7>
 								</div>
 								<div class="d-flex align-items-center justify-content-center mt-2">
-									<span class="h6" style="color: red;">
+									<span class="h6" style="color: red; font-weight: bold;">
 										<c:if test="${dto.price ne dto.dPrice}">
 											${dto.salerate}%
 										</c:if>
@@ -252,9 +252,6 @@
 			%>
 		</c:forEach>
 	
-		<!-- 수정 필요 -->
-		<!-- 수정 필요 -->
-		<!-- 수정 필요 -->
 		<!-- 앞으로 가기 -->
 		<c:if test="${curPage < endPage}">
 			<a href="mainPage.do?curPage=${curPage + 1}" class="next">>></a>
