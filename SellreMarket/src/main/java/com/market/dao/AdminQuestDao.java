@@ -196,4 +196,39 @@ public class AdminQuestDao {
 		return num;
 	}
 	
+	/************************************************************************************************
+	 * Function : 진행중인 문의 갯수
+	 * @param 	: null
+	 * @return 	: int
+	************************************************************************************************/	
+	
+	public int questNum() {
+		int questNum = 0;
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			conn = dataSource.getConnection();
+			String query = """
+							select count(inquiryid) from  personal_inquiry where status ="진행중";
+							
+					       """;
+		
+			ps = conn.prepareStatement(query);
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				questNum = rs.getInt(1);
+			}
+			
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return questNum;
+	}
+	
 }

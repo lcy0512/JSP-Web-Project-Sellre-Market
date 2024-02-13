@@ -7,14 +7,11 @@
 <title>Insert title here</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script src="js/category.js" ></script>
-<link rel="preload"
-	href="https://res.kurly.com/_next/static/css/d59287ec5b86dc49.css"
-	as="style" />
-<link rel="stylesheet"
-	href="https://res.kurly.com/_next/static/css/d59287ec5b86dc49.css"
-	data-n-g />
+<!-- <script src="js/category.js" ></script> -->
+<link rel="preload" href="https://res.kurly.com/_next/static/css/d59287ec5b86dc49.css" as="style" />
+<link rel="stylesheet" href="https://res.kurly.com/_next/static/css/d59287ec5b86dc49.css" data-n-g />
 <link rel="stylesheet" href="css/adminHeader.css" />
+<script src="js/adminHeader.js" ></script>
 
 <body>
 	<div class="css-16h7nba e1p13h9k3">
@@ -50,6 +47,9 @@
 			<div class="css-mlddcv e17w4cfr6">
 					<div>
 						<span class="stock-num" id="productNum"></span> 
+					</div>
+					<div>
+						<span class="quest-num" id="questNum"></span> 
 					</div>
 					<ul class="css-1887xqd e17w4cfr5">
 						<li class="css-59mmhh e17w4cfr4"><a href="#" onclick="changePage('')"><span class="css-1xyu7j9 e17w4cfr2">매출현황</span></a></li>
