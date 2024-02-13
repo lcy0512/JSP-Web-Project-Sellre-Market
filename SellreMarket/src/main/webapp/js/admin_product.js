@@ -4,22 +4,6 @@ window.onload=function(){
 		
 	function init() {
 		paging();
-		productNum();
-	}
-	
-	//제품현황 Header 알림표시
-	function productNum() {
-		
-		$.ajax({
-			type : "POST",
-			url : "adminProductNum.do",
-			success : function(response){
-				document.getElementById('productNum').innerText = response
-			},
-			 error:function(request, status, error){
-				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			}
-		});
 	}
 	
 	function paging(pageNum) {
