@@ -70,7 +70,7 @@ window.onload=function(){
 		
 		//데이터 조회하기 위해 테이블 생성
 		let table = "<table id='listTable' class='table-style'>";
-		table += "<tr><th>행번호</th><th>상품명</th><th>입고갯수</th><th>재고갯수</th><th>상태</th></tr>"
+		table += "<tr><th>행번호</th><th>상품명</th><th>입고개수</th><th>재고개수</th><th>상태</th></tr>"
 		
 		//데이터가 없을 때 처리
 		if(data.length == 0) {
