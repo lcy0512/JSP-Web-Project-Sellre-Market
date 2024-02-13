@@ -216,15 +216,15 @@ public class Controller extends HttpServlet {
 			else viewPage = "mypageinfo.jsp";
 			break;
 
-		case "/test.do":
+		case "/test.do" :
 			viewPage = "TestProductSelection.jsp";
 			System.out.println(viewPage);
 			break;
 
-		case "/detail.do":
+		case "/detail.do" :
 			command = new MProductDetailPageCommand();
 			command.execute(request, response);
-			viewPage = "detailPage.jsp";
+			viewPage = "ProductDetailPage.jsp";
 			break;
 			
 		case "/mypage.do" :
@@ -261,14 +261,14 @@ public class Controller extends HttpServlet {
 			viewPage = "noticedetail.jsp";
 			break;
 		
-		case "/productDetail.do":
-			// 요청에서 선택된 상품 번호를 가져옴
-			String selectProductId = request.getParameter("productId");
-			// 선택된 상품 번호를 세션에 저장
-			session.setAttribute("productID", selectProductId);
-
+		case "/productDetail.do" :
+	        // 요청에서 선택된 상품 번호를 가져옴
+			String selectProductId = request.getParameter("productId");				
+	        // 선택된 상품 번호를 세션에 저장
+	        session.setAttribute("productID", selectProductId);
+	      
 			System.out.println("보낼 아이디 : " + selectProductId);
-
+	      
 			command = new MProductDetailPageCommand();
 			command.execute(request, response);
 			viewPage = "ProductDetailPage.jsp";
@@ -984,7 +984,8 @@ public class Controller extends HttpServlet {
 			viewPage = "mainPage.do";
 
 			break;
-			
+		
+		
 			
 		//---------------- 2024.02.13 snr : controller 추가
 		//관리자 제품현황 상세 페이지 이동	
