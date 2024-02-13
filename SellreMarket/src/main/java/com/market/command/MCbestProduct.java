@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.market.dao.MainViewDao;
 import com.market.dto.MainViewDto;
@@ -19,14 +20,16 @@ public class MCbestProduct implements MCommand{
 	3. Version : v1.0.0
 	4. Description : best제품 body 페이지 데이터 가져오기 및 페이징 처리 
 */
-			
+		
+		HttpSession session = request.getSession();
+		
 		MainViewDao dao = new MainViewDao();
 		
 		int curPage = 0;
 		
 		// 처음에 받아오는 페이지가 값이 없는 경우는 1로 설정하기 위한 트라이
 		try {
-			curPage = Integer.parseInt(request.getParameter("curPage"));
+			curPage = (int) (session.getAttribute("curPage"));
 		}
 		catch (Exception e) {
 			curPage = 1;

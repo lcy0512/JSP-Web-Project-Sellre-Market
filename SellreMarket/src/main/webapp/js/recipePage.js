@@ -38,33 +38,39 @@ function sendProductInfo(recipeid, productid) {
 	    
 	}
 	*/
-function sendProductInfo(recipeid) {
+function sendProductInfo(productid) {
 	var productContainer = event.target.closest('.product-item');
-	var yName = productContainer.querySelector('.text-truncate').innerText;
-    
-    var customerid = document.getElementById('userid').value;
+	var pname = productContainer.querySelector('.text-truncate').innerText;
+    /* var form = document.myForm; */
+    var customerid = document.getElementById('id').value;
 	
-	if (customerid == null) {
+	
+	if (customerid == null || customerid == "") {
 		alert("로그인 후 장바구니 버튼을 클릭 하세요.");
 	}	
 	else {
-		var confirmationMessage =  "장바구니에 " + yName + "의 상품을 담으시겠습니까?";
+		var confirmationMessage =  "장바구니에 " + pname + "을(를) 상품을 담으시겠습니까?";
 		var result = confirm(confirmationMessage);
+		
 		if (result) {
 		    // 장바구니에 상품을 담는 로직
 	    	alert("상품이 장바구니에 담겼습니다.");
+		   
 	    	$.ajax({
-		    	type: 'POST',
-		    	url: 'recipePageCart.do',
-		    	data: {
-		    		/* yName:yName,
-		    		ySrc:ySrc,
-		    		yTitle:yTitle,
-		    		price:price,
-		    		*/
-		    		recipeid:recipeid
-	    		}
-	    	});
+	            type: 'POST',
+	            url: 'recipePageCart.do',
+	            data: {
+	                productid: productid
+	            },
+	            success: function(response) {
+	                // 서버로부터 장바구니 개수를 가져옵니다.
+	                var cartCount = response;
+	
+	                // header.jsp의 cartCount를 업데이트합니다.
+	                updateCartCount(cartCount);
+	            }
+	        });
+	    	
 		} else {
 		    // 취소 버튼을 눌렀을 때의 로직
 			alert("장바구니에 상품 담기가 취소되었습니다.");

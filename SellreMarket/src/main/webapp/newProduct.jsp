@@ -71,6 +71,7 @@
 
 </head>
 <body>
+    
 	<!-- Topbar Start -->
 	<jsp:include page="header.jsp"></jsp:include>
 	<!-- Topbar End -->
@@ -90,6 +91,7 @@
 	</div>
 	<br>
 	<br>
+	<br>
 	<!-- Ad End -->
 
 	<h3 align="center">신상품</h3>
@@ -105,14 +107,14 @@
 			<a href="alignNewHighPrice.do">높은 가격순</a>
 		</c:if>
 		<c:if test="${alignCategory eq '낮은 가격순'}">
-			<a href="newProduct.do">신상품순</a>
+			<a href="mainPage.do">신상품순</a>
 			&nbsp;&nbsp;|&nbsp;&nbsp;
 			<span style="color: black; font-weight: bold">낮은 가격순</span>
 			&nbsp;&nbsp;|&nbsp;&nbsp;
 			<a href="alignNewHighPrice.do">높은 가격순</a>
 		</c:if>
 		<c:if test="${alignCategory eq '높은 가격순'}">
-			<a href="newProduct.do">신상품순</a>
+			<a href="mainPage.do">신상품순</a>
 			&nbsp;&nbsp;|&nbsp;&nbsp;
 			<a href="alignNewLowPrice.do">낮은 가격순</a>
 			&nbsp;&nbsp;|&nbsp;&nbsp;
@@ -126,7 +128,7 @@
 	
 	<div class="container-fluid pt-5 pb-3">
 		<div class="row px-xl-5 justify-content-center"
-			style="margin-left: 90px; margin-right: 30px;">
+			style="margin-left: 10%; margin-right: 0%;">
 			<c:if test="${not empty newProducts}">
 				<c:forEach items="${newProducts}" var="dto">
 					<div class="col-lg-4 col-md-4 col-sm-6 pb-10 mx-auto">
@@ -139,13 +141,21 @@
 									 style="object-fit: cover; width: 100%; height: 100%;">
 								</a>
 							</div>
-							<div style="margin-top: 7px; margin-left: 1%; border: 1px solid lightgray; border-radius: 5px; width: 98%;">
-								<button onclick="sendProductInfo(${dto.productid}); return false;" class="btn btn-primary btn-light align-items-center" style="width: 100%;">장바구니</button>
+							<div
+								style="margin-top: 7px; margin-left: 1%; border: 1px solid lightgray; border-radius: 5px; width: 98%;">
+								<!-- <form action="newPageCart.do" method="get" id="myForm"> -->
+									<button
+										onclick="sendProductInfo(${dto.productid}); return false;"
+										class="btn btn-primary btn-light align-items-center"
+										style="width: 100%;">장바구니</button>
+									<input type="hidden" id="productid" value="${dto.productid}">
+									<input type="hidden" id="id" value="${id}">
+								<!-- </form> -->
 							</div>
 							
 							<div class="text-center py-4"
 								style="display: flex; flex-direction: column; justify-content: center;">
-								<a class="h6 text-decoration-none text-truncate" href="">${dto.pname}</a>
+								<a class="h6 text-decoration-none text-truncate" href="" style="font-weight: bold;">${dto.pname}</a>
 								<div class="d-flex align-items-center justify-content-center mt-2">
 									<h7 class="text-muted ml-2">
 										<c:if test="${dto.price ne dto.dPrice}">
@@ -155,7 +165,7 @@
 									</h7>
 								</div>
 								<div class="d-flex align-items-center justify-content-center mt-2">
-									<span class="h6" style="color: red;">
+									<span class="h6" style="color: red; font-weight: bold;">
 										<c:if test="${dto.price ne dto.dPrice}">
 											${dto.salerate}%
 										</c:if>
@@ -181,56 +191,33 @@
 	<!-- Products End -->
 
 
-<!-- 페이지 오류 수정 필요 -->
-<!-- 페이지 오류 수정 필요 -->
-<!-- 페이지 오류 수정 필요 -->
-<!-- 페이지 오류 수정 필요 -->
-<!-- 페이지 오류 수정 필요 -->
-<!-- 페이지 오류 수정 필요 -->
-
-<!-- 페이지 오류 수정 필요 -->
 	<!-- Paging Start -->
 	<%
 		int i = 1;
 	%>
-	
-	<c:if test="${alignCategory eq '신상품순'}">
-		<div style="display: flex; justify-content: center; font-size: 20px; gap: 0 10px;">
+	<div style="display: flex; justify-content: center; font-size: 20px; gap: 0 10px;">
+		<c:if test="${alignCategory eq '신상품순'}">
 			<!-- 뒤로 가기 -->
 			<c:if test="${curPage > 1}">
-				<a href="newProduct.do?curPage=${curPage - 1}" class="prev"> << </a>
+				<a href="mainPage.do?curPage=${curPage - 1}" class="prev"> << </a>
 			</c:if>
 			
 			<!-- 페이지 블록 수 만큼 숫자 찍기 -->
 			<c:forEach begin="${blockStart}" end="${endPage}">
 				<%
-					out.print("<a href='newProduct.do?curPage=" + i + "'>" + i + "</a>");
-					request.setAttribute("curPage", i);
+					out.print("<a href='mainPage.do?curPage=" + i + "'>" + i + "</a>");
 					i++;
 				%>
 			</c:forEach>
-			
-			<!-- 수정 필요 -->
-			<!-- 수정 필요 -->
-			<!-- 수정 필요 -->
-			<!-- 수정 필요 -->
+		
 			<!-- 앞으로 가기 -->
-			<%-- <c:if test="${curPage < endPage}"> --%>
-				<a href="newProduct.do?curPage=${curPage + 1} " class="next"> >></a>
-			<%-- </c:if> --%>
-			<!-- 수정 필요 -->
-			<!-- 수정 필요 -->
-			<!-- 수정 필요 -->
-			<!-- 수정 필요 -->
-			<!-- 수정 필요 -->
-			
-			
-		</div>
-	</c:if>
-	
-	
-	<c:if test="${alignCategory eq '낮은 가격순'}">
-		<div style="display: flex; justify-content: center; font-size: 20px; gap: 0 10px;">
+			<c:if test="${curPage < endPage}">
+				<a href="mainPage.do?curPage=${curPage + 1}" class="next">>></a>
+			</c:if>
+		</c:if>
+		
+		
+		<c:if test="${alignCategory eq '낮은 가격순'}">
 			<!-- 뒤로 가기 -->
 			<c:if test="${curPage > 1}">
 				<a href="alignNewLowPrice.do?curPage=${curPage - 1}" class="prev"> << </a>
@@ -240,19 +227,18 @@
 			<c:forEach begin="${blockStart}" end="${endPage}">
 				<%
 					out.print("<a href='alignNewLowPrice.do?curPage=" + i + "'>" + i + "</a>");
-					request.setAttribute("curPage", i);
 					i++;
 				%>
 			</c:forEach>
-			
+		
 			<!-- 앞으로 가기 -->
-			<a href="alignNewLowPrice.do?curPage=${curPage + 1}" class="next"> >></a>
-		</div>
-	</c:if>
-	
-	
-	<c:if test="${alignCategory eq '높은 가격순'}">
-		<div style="display: flex; justify-content: center; font-size: 20px; gap: 0 10px;">
+			<c:if test="${curPage < endPage}">
+				<a href="alignNewLowPrice.do?curPage=${curPage + 1}" class="next">>></a>
+			</c:if>
+		</c:if>
+		
+		
+		<c:if test="${alignCategory eq '높은 가격순'}">
 			<!-- 뒤로 가기 -->
 			<c:if test="${curPage > 1}">
 				<a href="alignNewHighPrice.do?curPage=${curPage - 1}" class="prev"> << </a>
@@ -262,26 +248,18 @@
 			<c:forEach begin="${blockStart}" end="${endPage}">
 				<%
 					out.print("<a href='alignNewHighPrice.do?curPage=" + i + "'>" + i + "</a>");
-					request.setAttribute("curPage", i);
 					i++;
 				%>
 			</c:forEach>
-			
+		
 			<!-- 앞으로 가기 -->
-			<a href="alignNewHighPrice.do?curPage=${curPage + 1}" class="next"> >></a>
-		</div>
-	</c:if>
+			<c:if test="${curPage < endPage}">
+				<a href="alignNewHighPrice.do?curPage=${curPage + 1}" class="next">>></a>
+			</c:if>
+		</c:if>
+	</div>
 	<!-- Paging End -->
-	
-	<!-- Paging End -->
-	<!-- 페이지 오류 수정 필요 -->
-	<!-- 페이지 오류 수정 필요 -->
-	<!-- 페이지 오류 수정 필요 -->
-	<!-- 페이지 오류 수정 필요 -->
-	<!-- 페이지 오류 수정 필요 -->
-	<!-- 페이지 오류 수정 필요 -->
-	<!-- 페이지 오류 수정 필요 -->
-	<!-- 페이지 오류 수정 필요 --><!-- 페이지 오류 수정 필요 -->
+
 	
 
 
@@ -290,8 +268,5 @@
 	<!-- Footer End -->
 
 
-	<!-- Back to Top -->
-	<a href="#" class="btn btn-primary back-to-top"><i
-		class="fa fa-angle-double-up"></i></a>
 </body>
 </html>

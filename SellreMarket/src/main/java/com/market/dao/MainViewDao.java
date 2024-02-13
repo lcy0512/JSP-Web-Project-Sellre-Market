@@ -38,7 +38,7 @@ public class MainViewDao {
 	// Create
 	
 	// 장바구니 담기 클릭 시 
-	public void recipePageClickCart(String id, int recipeid) {
+	public void clickCartByrecipe(String id, int recipeid) {
 		
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -73,7 +73,7 @@ public class MainViewDao {
 	}
 	
 	// 신제품 페이지 카트 클릭 시 insert 
-	public void newPageClickCart(String id, int productid) {
+	public void clickCartByproduct(String id, int productid) {
 		
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -108,7 +108,7 @@ public class MainViewDao {
 	}
 	
 	
-	// 제품 정보 불러오기 for 메인 화면 출력
+	// 제품 정보 불러오기 for recipe 화면 출력
 	public List<MainViewDto> productView(int limitFrom, int countPerPage) {
 		List<MainViewDto> dtos = new ArrayList<MainViewDto>();
 		
@@ -120,22 +120,22 @@ public class MainViewDao {
 			con = dataSource.getConnection();
 			
 			String query = "select y.yname, y.ysrc, y.ytitle, "
-					+ "( "
-					+ "CASE WHEN p.eventid = e.eventid THEN FORMAT(price - (price * salerate), 0) "
-					+ "       ELSE FORMAT(price, 0) "
-					+ "  END "
-					+ ") as dPrice, "
-					+ "format(i.price, 0) price, sum(likecount) as likecount, ry.recipeid, format((e.salerate * 100), 0) as salerate "
-					+ "from youtuber y "
-					+ "join recipeofYoutuber ry on y.youtubeid = ry.youtubeid "
-					+ "left join recipelike rl on ry.recipeid = rl.recipeid "
-					+ "join productOfRecipe pr on ry.recipeid = pr.recipeid "
-					+ "join product p on p.productid = pr.productid "
-					+ "left join event e on e.eventid = p.eventid "
-					+ "join price i on i.productid = p.productid "
-					+ "group by y.yname, y.ysrc, y.ytitle, dPrice, price, ry.recipeid "
-					+ "order by y.youtubeid desc "
-					+ "limit ?, ?";
+					+ "					( "
+					+ "					CASE WHEN p.eventid = e.eventid THEN FORMAT(price - (price * salerate), 0) "
+					+ "					ELSE FORMAT(price, 0) "
+					+ "					END "
+					+ "					) as dPrice, "
+					+ "					format(i.price, 0) price, sum(likecount) as likecount, ry.recipeid, format((e.salerate * 100), 0) as salerate "
+					+ "					from youtuber y "
+					+ "					join recipeofYoutuber ry on y.youtubeid = ry.youtubeid "
+					+ "					left join recipelike rl on ry.recipeid = rl.recipeid "
+					+ "					join productOfRecipe pr on ry.recipeid = pr.recipeid "
+					+ "					join product p on p.productid = pr.productid "
+					+ "					left join event e on e.eventid = p.eventid "
+					+ "					join price i on i.productid = p.productid "
+					+ "					group by y.yname, y.ysrc, y.ytitle, dPrice, price, ry.recipeid, salerate "
+					+ "					order by y.youtubeid desc "
+					+ "					limit ?, ?";
 			
 			ps = con.prepareStatement(query);
 			ps.setInt(1, limitFrom);
@@ -673,8 +673,8 @@ public class MainViewDao {
 		return dtos;
 	}
 	
-	// 할인 이벤트 이미지들 저장
-	public List<MainViewDto> getMainAdImgs() {
+	// 레시피 할인 이벤트 이미지들 저장
+	public List<MainViewDto> getRecipeAdImgs() {
 		List<MainViewDto> dtos = new ArrayList<MainViewDto>();
 		
 		Connection con = null;
@@ -857,6 +857,45 @@ public class MainViewDao {
 					+ "order by likecount desc) as subquery";
 			
 			ps = con.prepareStatement(query);
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				amount = rs.getInt(1);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if (rs != null) rs.close();
+				if (ps != null) ps.close();
+				if (con != null) con.close();
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return amount;
+	}
+	
+	// 카트의 count 세기
+	public int cartCount(String id) {
+		int amount = 0;
+		
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			con = dataSource.getConnection();
+			
+			String query = "select count(*) from cart where userid = ?";
+			
+			ps = con.prepareStatement(query);
+			
+			ps.setString(1, id);
+			
 			rs = ps.executeQuery();
 			
 			if(rs.next()) {

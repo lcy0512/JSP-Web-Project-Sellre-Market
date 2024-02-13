@@ -90,7 +90,7 @@
 
 			<!-- 슬라이드 쇼 실행 -->
 			<div class="carousel-inner">
-				<c:forEach items="${getMainAdImgs}" var="ad">
+				<c:forEach items="${getRecipeAdImgs}" var="ad">
 					<!-- 첫번째 이미지일 때 active 설정 -->
 					<c:choose>
 						<c:when test="${ad.eimg eq '1.jpg'}">
@@ -126,16 +126,17 @@
 	</div>
 	<br>
 	<br>
+	<br>
 	<!-- Carousel End -->
 
 
-	<h2 align="center">설 선물특가 실시간 랭킹🔥🔥</h2>
-	<p class="css-149yh9z ej3ms6t1" align="center">지금 주목해야할 인기 상품 최대 79% 할인</p>
+	<h2 align="center">유튜버들의 레시피🔥🔥</h2>
+	<p class="css-149yh9z ej3ms6t1" align="center">한 눈에 보기 쉬운 레시피와 식재료를 한 번에 구매한다</p>
 	<br>
 	<br>
 	
 	<!-- Align by Category Start -->
-	<div class="setAlign" style="margin-left: 76%; color: #919492;">
+	<div class="setAlign" style="margin-left: 75%; color: #919492;">
 		<c:if test="${alignCategory eq ''}">
 			<a href="alignRecipeLowPrice.do">낮은 가격순</a>
 			&nbsp;&nbsp;|&nbsp;&nbsp;
@@ -159,7 +160,7 @@
 	<!-- Products Start -->
 	<div class="container-fluid pt-5 pb-3">
 		<div class="row px-xl-5 justify-content-center"
-			style="margin-left: 90px; margin-right: 30px;">
+			style="margin-left: 10%; margin-right: 0%;">
 			<c:if test="${not empty productList}">
 				<c:forEach items="${productList}" var="dto">
 					<div class="col-lg-4 col-md-4 col-sm-6 pb-10 mx-auto">
@@ -174,27 +175,14 @@
 							</div>
 							
 							
-							<!-- 장바구니 폰트 사이즈 수정 필요 -->
-							<!-- 장바구니 폰트 사이즈 수정 필요 -->
-							<!-- 장바구니 폰트 사이즈 수정 필요 -->
-							<!-- 장바구니 폰트 사이즈 수정 필요 -->
-							<!-- 장바구니 폰트 사이즈 수정 필요 -->
-							<!-- 장바구니 폰트 사이즈 수정 필요 -->
-							<!-- 장바구니 폰트 사이즈 수정 필요 -->
 							<div
 								style="margin-top: 7px; margin-left: 1%; border: 1px solid lightgray; border-radius: 5px; width: 98%;">
 								<button
 									onclick="sendProductInfo(${dto.recipeid}); return false;"
 									class="btn btn-primary btn-light align-items-center"
 									style="width: 100%;">장바구니</button>
-								<input type="hidden" id="userid" value="${customerid}">
+								<input type="hidden" id="userid" value="${id}">
 							</div>
-							<!-- 장바구니 폰트 사이즈 수정 필요 -->
-							<!-- 장바구니 폰트 사이즈 수정 필요 -->
-							<!-- 장바구니 폰트 사이즈 수정 필요 -->
-							<!-- 장바구니 폰트 사이즈 수정 필요 -->
-							<!-- 장바구니 폰트 사이즈 수정 필요 -->
-							<!-- 장바구니 폰트 사이즈 수정 필요 -->
 							
 							<div class="text-center py-4"
 								style="display: flex; flex-direction: column; justify-content: center;">
@@ -209,7 +197,7 @@
 									</h7>
 								</div>
 								<div class="d-flex align-items-center justify-content-center mt-2">
-									<span class="h6" style="color: red;">
+									<span class="h6" style="color: red; font-weight: bold;">
 										<c:if test="${dto.price ne dto.dPrice}">
 											${dto.salerate}%
 										</c:if>
@@ -237,32 +225,69 @@
 	<%
 		int i = 1;
 	%>
-	<div style="display: flex; justify-content: center; font-size: 20px; gap: 0 10px;">
-		<!-- 뒤로 가기 -->
-		<c:if test="${curPage > 1}">
-			<a href="mainPage.do?curPage=${curPage - 1}" class="prev"> << </a>
-		</c:if>
-		
-		<!-- 페이지 블록 수 만큼 숫자 찍기 -->
-		<c:forEach begin="${blockStart}" end="${endPage}">
-			<%
-				out.print("<a href='mainPage.do?curPage=" + i + "'>" + i + "</a>");
-				request.setAttribute("curPage", i);
-				i++;
-			%>
-		</c:forEach>
+	<c:if test="${alignCategory eq ''}">
+		<div style="display: flex; justify-content: center; font-size: 20px; gap: 0 10px;">
+			<!-- 뒤로 가기 -->
+			<c:if test="${curPage > 1}">
+				<a href="recipePage.do?curPage=${curPage - 1}" class="prev"> << </a>
+			</c:if>
+			
+			<!-- 페이지 블록 수 만큼 숫자 찍기 -->
+			<c:forEach begin="${blockStart}" end="${endPage}">
+				<%
+					out.print("<a href='recipePage.do?curPage=" + i + "'>" + i + "</a>");
+					i++;
+				%>
+			</c:forEach>
+			
+			<!-- 앞으로 가기 -->
+			<c:if test="${curPage < endPage}">
+				<a href="recipePage.do?curPage=${curPage + 1} " class="next"> >></a>
+			</c:if>
+		</div>
+	</c:if>
 	
-		<!-- 수정 필요 -->
-		<!-- 수정 필요 -->
-		<!-- 수정 필요 -->
-		<!-- 앞으로 가기 -->
-		<c:if test="${curPage < endPage}">
-			<a href="mainPage.do?curPage=${curPage + 1}" class="next">>></a>
-		</c:if>
-		<!-- 수정 필요 -->
-		<!-- 수정 필요 -->
-		
-	</div>
+	
+	<c:if test="${alignCategory eq '낮은 가격순'}">
+		<div style="display: flex; justify-content: center; font-size: 20px; gap: 0 10px;">
+			<!-- 뒤로 가기 -->
+			<c:if test="${curPage > 1}">
+				<a href="alignRecipeLowPrice.do?curPage=${curPage - 1}" class="prev"> << </a>
+			</c:if>
+			
+			<!-- 페이지 블록 수 만큼 숫자 찍기 -->
+			<c:forEach begin="${blockStart}" end="${endPage}">
+				<%
+					out.print("<a href='alignRecipeLowPrice.do?curPage=" + i + "'>" + i + "</a>");
+					i++;
+				%>
+			</c:forEach>
+			
+			<!-- 앞으로 가기 -->
+			<a href="alignRecipeLowPrice.do?curPage=${curPage + 1}" class="next"> >></a>
+		</div>
+	</c:if>
+	
+	
+	<c:if test="${alignCategory eq '높은 가격순'}">
+		<div style="display: flex; justify-content: center; font-size: 20px; gap: 0 10px;">
+			<!-- 뒤로 가기 -->
+			<c:if test="${curPage > 1}">
+				<a href="alignRecipeHighPrice.do?curPage=${curPage - 1}" class="prev"> << </a>
+			</c:if>
+			
+			<!-- 페이지 블록 수 만큼 숫자 찍기 -->
+			<c:forEach begin="${blockStart}" end="${endPage}">
+				<%
+					out.print("<a href='alignRecipeHighPrice.do?curPage=" + i + "'>" + i + "</a>");
+					i++;
+				%>
+			</c:forEach>
+			
+			<!-- 앞으로 가기 -->
+			<a href="alignRecipeHighPrice.do?curPage=${curPage + 1}" class="next"> >></a>
+		</div>
+	</c:if>
 	<!-- Paging End -->
 
 
@@ -270,9 +295,5 @@
 	<jsp:include page="footer.html"></jsp:include>
 	<!-- Footer End -->
 
-
-	<!-- Back to Top -->
-	<a href="#" class="btn btn-primary back-to-top"><i
-		class="fa fa-angle-double-up"></i></a>
 </body>
 </html>

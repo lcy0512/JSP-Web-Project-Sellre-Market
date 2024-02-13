@@ -63,7 +63,8 @@ import com.market.command.MMyPageDetail;
 import com.market.command.MProductDetailPageCommand;
 import com.market.command.MSignUp;
 import com.market.command.Paging;
-import com.market.command.getCart;
+import com.market.command.getCartByProduct;
+import com.market.command.getCartByRecipe;
 import com.market.dto.AdminCategoryDto;
 import com.market.dto.AdminEventDto;
 import com.market.dto.AdminGetCategoryDto;
@@ -851,7 +852,7 @@ public class Controller extends HttpServlet {
 
 			session.setAttribute("customerid", id);
 			session.setAttribute("recipeid", ri);
-			command = new getCart();
+			command = new getCartByRecipe();
 			command.execute(request, response);
 
 			viewPage = "recipePage.do";
@@ -870,7 +871,7 @@ public class Controller extends HttpServlet {
 
 			session.setAttribute("customerid", id);
 			session.setAttribute("productid", productid);
-			command = new getCart();
+			command = new getCartByProduct();
 			command.execute(request, response);
 
 			viewPage = "newProductList.do";

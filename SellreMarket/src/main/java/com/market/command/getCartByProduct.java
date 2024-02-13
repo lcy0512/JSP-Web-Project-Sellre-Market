@@ -6,7 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import com.market.dao.MainViewDao;
 
-public class getCart implements MCommand {
+public class getCartByProduct implements MCommand {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
@@ -14,16 +14,14 @@ public class getCart implements MCommand {
 		HttpSession session = request.getSession();
 		
 		MainViewDao dao = new MainViewDao();
-//		int productid;
-		String id = (String) session.getAttribute("customerid");
-		int recipeid = (int) session.getAttribute("recipeid");
 		
-		if (id == null) {
-			// 테스트용
-			id = "admin";		
-		}
+		String id = (String) session.getAttribute("id");
+		int productid = (int) session.getAttribute("productid");
 		
-//		dao.newPageClickCart(id, productid);
-		dao.recipePageClickCart(id, recipeid);
+		dao.clickCartByproduct(id, productid);
+		int cartCount = dao.cartCount(id);
+		
+		session.setAttribute("cartCount", cartCount);
+		
 	}
 }

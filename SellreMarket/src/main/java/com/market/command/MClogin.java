@@ -33,14 +33,10 @@ public class MClogin implements MCommand {
 		String userName = (String) data.get("name");
 		boolean check = (boolean) data.get("check");
 		
-		System.out.println(userName);
-		System.out.println(check);
-		
-		
 		if (check) {
 			alertMessage = "success";
 			session.setAttribute("userName", userName);
-			
+			session.setAttribute("id", id);
 		}
 		else {
 			session.removeAttribute("id");
