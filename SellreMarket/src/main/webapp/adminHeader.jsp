@@ -7,11 +7,9 @@
 <title>Insert title here</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<!-- <script src="js/category.js" ></script> -->
 <link rel="preload" href="https://res.kurly.com/_next/static/css/d59287ec5b86dc49.css" as="style" />
 <link rel="stylesheet" href="https://res.kurly.com/_next/static/css/d59287ec5b86dc49.css" data-n-g />
 <link rel="stylesheet" href="css/adminHeader.css" />
-<script src="js/adminHeader.js" ></script>
 
 <body>
 	<div class="css-16h7nba e1p13h9k3">
@@ -57,7 +55,7 @@
 						<li class="css-59mmhh e17w4cfr4"><a href="adminCategory.jsp"><span class="css-1xyu7j9 e17w4cfr2">카테고리</span></a></li>
 						<li class="css-59mmhh e17w4cfr4"><a href="adminEvent.jsp"><span class="css-1xyu7j9 e17w4cfr2">이벤트현황</span></a></li>
 						<li class="css-59mmhh e17w4cfr4"><a href="adminOrder.jsp"><span class="css-1xyu7j9 e17w4cfr2">입고요청</span></a></li>
-						<li class="css-59mmhh e17w4cfr4"><a href="#" onclick="changePage('')"><span class="css-1xyu7j9 e17w4cfr2">고객문의</span></a></li>
+						<li class="css-59mmhh e17w4cfr4"><a href="adminQuest.jsp"><span class="css-1xyu7j9 e17w4cfr2">고객문의</span></a></li>
 					</ul>
 				
 			</div>
