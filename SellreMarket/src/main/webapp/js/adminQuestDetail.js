@@ -82,9 +82,9 @@ function registerEvent() {
 			inquiryid : inquiryid
 		},
 		success : function(response){
-			 if (response == "1") {
+			 if (response == "1" || response == 1) {
 				alert("답변이 등록되었습니다.")
-                window.location.replace("/SellreMarket/adminQuest.jsp"); 
+				window.location.replace("/SellreMarket/adminQuest.jsp"); 
          	} else {
          		alert('답변 등록에 실패했습니다.')
          	}

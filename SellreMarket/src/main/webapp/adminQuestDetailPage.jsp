@@ -45,8 +45,9 @@
 				</div>
 				
 				<input type="text" id="inquiryid" name="inquiryid" hidden="true">	
-				<input type="submit" class="registerBtn" onclick="registerEvent()" value="등록">
+				
 			</form>
+				<input type="submit" class="registerBtn" onclick="registerEvent()" value="등록">
 	</div>
 </body>
 </html>

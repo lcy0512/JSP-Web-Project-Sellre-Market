@@ -38,6 +38,7 @@ function questNum() {
 		}
 	});
 }
+
 /************************************************************************************************
 	 * Function : 정규식 체크 
 	 * @param 	: null
@@ -80,23 +81,21 @@ function questNum() {
 	 * @return 	: null
 	************************************************************************************************/
 	
-	function insertCategory() {
+	function insertBrand() {
 					 
-		let type = $("#type").val();
-		let subtype = $("#subtype").val();
+		let bname = $("#bname").val();
 		
 		$.ajax({
 			
 			type : "POST",
-			url : "insertCategory.do",
+			url : "insertBrand.do",
 			data : {
-				type: type,
-				subtype : subtype
+				bname: bname
 			},
 			success : function(response){
-				 if (response === "1") {
-					 	alert(type+"["+subtype+"]이 등록되었습니다.")
-					 	window.location.replace("/SellreMarket/adminCategory.jsp");
+				 if (response == "1") {
+					 	alert("브랜드 ["+bname+"]이/가 등록되었습니다.")
+					 	window.location.replace("/SellreMarket/adminBrand.jsp");
 		            }
 		        },
 			 error:function(request, status, error){

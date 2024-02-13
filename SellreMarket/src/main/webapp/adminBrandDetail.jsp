@@ -4,36 +4,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>카테고리 상세 - 셀리</title>
+<title>브랜드 상세 - 셀리</title>
 <link rel="shortcut icon" href="http://localhost:8080/SellreMarket/image/logo.png" />
 <link rel="icon" href="http://localhost:8080/SellreMarket/image/logo.png" />
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:8080/SellreMarket/image/logo.png" />
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:8080/SellreMarket/image/logo.png" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet" href="css/adminCategoryDetail.css" />
-<script src="js/adminCategoryDetail.js"></script>
+<link rel="stylesheet" href="css/adminBrandDetail.css" />
+<script src="js/adminBrandDetail.js"></script>
 </head>
 <body id="body">
 	<jsp:include page="adminHeader.jsp" flush="false" />
 		<div class="main">
-			<div class="title">카테고리 상세</div>
+			<div class="title">브랜드 상세</div>
 		
 			<form name="categoryForm">
 					
 				<div class="form-group">
-					<label for="type">대분류 *</label>
-					<input type="text" id="type" name="type">
+					<label for="bname">브랜드명</label>
+					<input type="text" id="bname" name="bname">
 				</div>
 				
-				<div class="form-group">
-					<label for="subtype">중분류 *</label>
-					<input type="text" id="subtype" name="subtype">
-				</div>
-				
-				<input type="text" id="catetoryid" name="catetoryid" hidden="true">
+				<input type="text" id="brandid" name="brandid" hidden="true">
 			</form>
-			<input type="submit" class="updateBtn" onclick="updateCategory()" value="수정">
-			<input type="submit" class="deleteBtn" onclick="deleteCategory()" value="삭제">
+			<input type="submit" class="updateBtn" onclick="updateBrand()" value="수정">
+			<input type="submit" class="deleteBtn" onclick="deleteBrand()" value="삭제">
 	</div>
 </body>
 </html>

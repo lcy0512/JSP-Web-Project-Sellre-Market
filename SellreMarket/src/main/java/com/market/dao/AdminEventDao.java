@@ -123,7 +123,7 @@ DataSource dataSource;
 	 * @param 	: 입력한 데이터 
 	 * @return 	: int
 	************************************************************************************************/
-	public int insertEvent(HttpServletRequest request, HttpServletResponse response) {
+	public int insertEvent(String image, String ename, String econtent, String startdate, String enddate, int salerate, HttpServletRequest request, HttpServletResponse response) {
 		int num = 0;
 		String originalFileName = "";
 		
@@ -145,13 +145,6 @@ DataSource dataSource;
 				originalFileName = multi.getOriginalFileName(name);  //사용자가 업로드한 file dlfma
 				System.out.println("mul  : "+originalFileName);
 			}
-			
-			String ename1 = multi.getParameter("ename");
-			String econtent1 = multi.getParameter("econtent");
-			String startdate1 = multi.getParameter("startdate");
-			String enddate1 = multi.getParameter("enddate");
-			String salerate1 = multi.getParameter("salerate");
-			
 			Connection conn = null;
 			PreparedStatement ps = null;
 			
@@ -165,11 +158,11 @@ DataSource dataSource;
 				conn = dataSource.getConnection();
 				ps = conn.prepareStatement(query);
 				
-				ps.setString(1, ename1);
-				ps.setString(2, econtent1);
-				ps.setString(3, startdate1);
-				ps.setString(4, enddate1);
-				ps.setInt(5, Integer.parseInt(salerate1));
+				ps.setString(1, ename);
+				ps.setString(2, econtent);
+				ps.setString(3, startdate);
+				ps.setString(4, enddate);
+				ps.setInt(5, salerate);
 				ps.setString(6, originalFileName);
 				
 				ps.executeUpdate();

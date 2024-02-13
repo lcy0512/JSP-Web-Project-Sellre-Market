@@ -9,10 +9,11 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.market.dto.AdminBrandDto;
 import com.market.dto.AdminCategoryDto;
 
-public class AdminCategoryDao {
-
+public class AdminBrandDao {
+	
 	DataSource dataSource;
 	
 	/************************************************************************************************
@@ -20,7 +21,7 @@ public class AdminCategoryDao {
 	 * @param 	: null
 	 * @return 	: null
 	************************************************************************************************/
-	public AdminCategoryDao() {
+	public AdminBrandDao() {
 		try {
 			
 			Context context = new InitialContext();
@@ -45,7 +46,7 @@ public class AdminCategoryDao {
 		try {
 			
 			conn = dataSource.getConnection();
-			String query = "select count(catetoryid) from catetory where status = 1";
+			String query = "select count(brandid) from brand;";
 		
 			ps = conn.prepareStatement(query);
 			rs = ps.executeQuery();
@@ -60,15 +61,15 @@ public class AdminCategoryDao {
 		}
 		return productCnt;
 	}
-	
+
 	/************************************************************************************************
 	 * Function : 현재페이지에 해당하는 리스트 조회
 	 * @param 	: PageInfo에 있는 페이징 정보
 	 * @return 	: ArrayList
 	************************************************************************************************/
-	public ArrayList<AdminCategoryDto> selectList(int index_no) {
+	public ArrayList<AdminBrandDto> selectList(int index_no) {
 		
-		ArrayList<AdminCategoryDto> list = new ArrayList<AdminCategoryDto>();
+		ArrayList<AdminBrandDto> list = new ArrayList<AdminBrandDto>();
 		
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -79,9 +80,8 @@ public class AdminCategoryDao {
 			conn = dataSource.getConnection();
 			String query = 
 							"""
-							select catetoryid, type, subtype from catetory 
-							where status = 1
-							order by catetoryid desc
+							select brandid, bname from brand 
+							order by brandid desc
 							limit ?, 15
 				
 					"""; //limit 시작번호, 출력갯수
@@ -91,15 +91,15 @@ public class AdminCategoryDao {
 			
 			ps.setInt(1, index_no);
 			
+			
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				AdminCategoryDto cate = new AdminCategoryDto();
-				cate.setCatetoryid(rs.getInt(1));
-				cate.setType(rs.getString(2));
-				cate.setSubtype(rs.getString(3));
+				AdminBrandDto brand = new AdminBrandDto();
+				brand.setBrandid(rs.getInt(1));
+				brand.setBname(rs.getString(2));
 				
-				list.add(cate);
+				list.add(brand);
 			}
 			
 			conn.close();
@@ -108,14 +108,13 @@ public class AdminCategoryDao {
 		}
 		return list;
 	}
-	
-	
+
 	/************************************************************************************************
-	 * Function : 카테고리 등록
-	 * @param 	: 입력한 대분류, 중분류 
+	 * Function : 브랜드 등록
+	 * @param 	: 입력한 브랜드명 
 	 * @return 	: int
 	************************************************************************************************/
-	public int insertCategory(String type, String subtype) {
+	public int insertBrand(String bname) {
 		
 		int num = 0;
 		Connection conn = null;
@@ -124,16 +123,13 @@ public class AdminCategoryDao {
 		try {
 			conn = dataSource.getConnection();	
 			String query = """
-						insert into catetory (
-							   type,
-							   subtype,
-							   status
-							) values (?,?,'1')
+						insert into brand (
+								bname
+							) values (?)
 
 							""";
 			ps = conn.prepareStatement(query);
-			ps.setString(1, type);
-			ps.setString(2, subtype);
+			ps.setString(1, bname);
 			
 			ps.executeUpdate();
 			num++;
@@ -145,16 +141,15 @@ public class AdminCategoryDao {
 		}
 		return num;
 	}
-	
-	
+
 	/************************************************************************************************
-	 * Function : 카테고리 상세
-	 * @param 	: 카테고리 id  
+	 * Function : 브랜드 상세
+	 * @param 	: 브랜드 id  
 	 * @return 	: ArrayList
 	************************************************************************************************/
-	public ArrayList<AdminCategoryDto> categoryDetail(int id) {
+	public ArrayList<AdminBrandDto> brandDetail(int id) {
 		
-		ArrayList<AdminCategoryDto> list = new ArrayList<AdminCategoryDto>();
+		ArrayList<AdminBrandDto> list = new ArrayList<AdminBrandDto>();
 		
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -165,8 +160,9 @@ public class AdminCategoryDao {
 			conn = dataSource.getConnection();
 			String query = 
 							"""
-							select catetoryid, type, subtype from catetory where catetoryid = ? and status = 1
-					"""; 
+							select brandid, bname from brand where brandid = ?
+							
+							"""; 
 			
 
 			ps = conn.prepareStatement(query);
@@ -176,12 +172,11 @@ public class AdminCategoryDao {
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				AdminCategoryDto cate = new AdminCategoryDto();
-				cate.setCatetoryid(rs.getInt(1));
-				cate.setType(rs.getString(2));
-				cate.setSubtype(rs.getString(3));
+				AdminBrandDto brand = new AdminBrandDto();
+				brand.setBrandid(rs.getInt(1));
+				brand.setBname(rs.getString(2));
 				
-				list.add(cate);
+				list.add(brand);
 			}
 			
 			conn.close();
@@ -191,12 +186,13 @@ public class AdminCategoryDao {
 		return list;
 	}
 	
+	
 	/************************************************************************************************
-	 * Function : 카테고리 수정
-	 * @param 	: 입력한 대분류, 중분류 
+	 * Function : 브랜드 수정
+	 * @param 	: 입력한 브랜드명 
 	 * @return 	: int
 	************************************************************************************************/
-	public int updateCategory(String type, String subtype, int catetoryid) {
+	public int updateBrand(String bname, int brandid) {
 		
 		int num = 0;
 		Connection conn = null;
@@ -205,15 +201,14 @@ public class AdminCategoryDao {
 		try {
 			conn = dataSource.getConnection();	
 			String query = """
-							update catetory set 
-							type = ?, subtype =?
-							where catetoryid = ?
+							update brand set 
+							bname = ?
+							where brandid = ?
 
 							""";
 			ps = conn.prepareStatement(query);
-			ps.setString(1, type);
-			ps.setString(2, subtype);
-			ps.setInt(3, catetoryid);
+			ps.setString(1, bname);
+			ps.setInt(2, brandid);
 			
 			ps.executeUpdate();
 			num++;
@@ -225,38 +220,7 @@ public class AdminCategoryDao {
 		}
 		return num;
 	}
+		
 	
-	/************************************************************************************************
-	 * Function : 카테고리 삭제
-	 * @param 	: categoryid 
-	 * @return 	: int
-	************************************************************************************************/
-	public int deleteCategory(int catetoryid) {
-		
-		int num = 0;
-		Connection conn = null;
-		PreparedStatement ps = null;
-		
-		try {
-			conn = dataSource.getConnection();	
-			String query = """
-							update catetory set 
-							status = 0
-							where catetoryid = ?
-							
-							""";
-			ps = conn.prepareStatement(query);
-			ps.setInt(1, catetoryid);
-			
-			ps.executeUpdate();
-			num++;
-			conn.close();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			return num;
-		}
-		return num;
-	}
 	
 }

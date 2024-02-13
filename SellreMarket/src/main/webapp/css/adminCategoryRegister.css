@@ -31,7 +31,7 @@ body {
   background-color: #fff;
   padding: 20px;
   border-radius: 5px;
-  margin-top : 100px;
+  margin-top : 200px;
   margin-bottom : 50px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -40,17 +40,6 @@ form {
   width: 80%;
   max-width: 700px; 
 }
-
-/* 	
-	.main {
-	  display: flex;
-	  justify-content: center;
-	  align-items: center;
-	  flex-direction: column;
-	  overflow-y: auto;
-	  height: 100vh;
-	} */
-	
 	
     
     .form-group {
@@ -71,7 +60,8 @@ form {
       border-radius: 3px;
       font-size: 16px;
       cursor: pointer;
-      width: 100%;
+        width: 80%;
+ 		 max-width: 700px; 
       margin-top: 30px;
       margin-bottom: 200px;
       margin-left : 10px;

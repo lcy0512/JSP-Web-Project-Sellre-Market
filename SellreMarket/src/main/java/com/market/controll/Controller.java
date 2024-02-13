@@ -17,6 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.market.command.MAdminBrand;
+import com.market.command.MAdminBrandDetail;
+import com.market.command.MAdminBrandInsert;
+import com.market.command.MAdminBrandUpdate;
 import com.market.command.MAdminCategory;
 import com.market.command.MAdminCategoryDelete;
 import com.market.command.MAdminCategoryDetail;
@@ -35,8 +39,11 @@ import com.market.command.MAdminOrder;
 import com.market.command.MAdminOrderDetail;
 import com.market.command.MAdminOrderProduct;
 import com.market.command.MAdminProductCount;
+import com.market.command.MAdminProductDelete;
+import com.market.command.MAdminProductDetail;
 import com.market.command.MAdminProductInsert;
 import com.market.command.MAdminProductNum;
+import com.market.command.MAdminProductUpdate;
 import com.market.command.MAdminQuest;
 import com.market.command.MAdminQuestDetail;
 import com.market.command.MAdminQuestInsert;
@@ -68,6 +75,7 @@ import com.market.command.MSignUp;
 import com.market.command.Paging;
 import com.market.command.getCartByProduct;
 import com.market.command.getCartByRecipe;
+import com.market.dto.AdminBrandDto;
 import com.market.dto.AdminCategoryDto;
 import com.market.dto.AdminEventDto;
 import com.market.dto.AdminGetCategoryDto;
@@ -976,7 +984,112 @@ public class Controller extends HttpServlet {
 			viewPage = "mainPage.do";
 
 			break;
+			
+			
+		//---------------- 2024.02.13 snr : controller 추가
+		//관리자 제품현황 상세 페이지 이동	
+		case "/adminProductDetailPage.do" :
+			session.setAttribute("productidToDetail", request.getParameter("id"));
+			viewPage = "adminProductDetail.jsp";
+			break;
+			
+			
+		//관리자 제품현황 상세 페이지 조회	
+		case "/selectAdminProductDetail.do" :	
+			command = new MAdminProductDetail();
+			command.execute(request, response);
+			
+			ArrayList<AdminProductDto> productDetailList = (ArrayList) request.getAttribute("list");
+			out.print(new Gson().toJson(productDetailList));
+			out.flush();
+			return;
+			
+			
+		//관리자 제품현황 수정	
+		case "/adminUpdateProduct.do" : 	
+			command = new MAdminProductUpdate();
+			command.execute(request, response);
+			int updatePNum = (int) request.getAttribute("num");
+			out.print(new Gson().toJson(updatePNum));
+			out.flush();
+			return;
+			
+			
+		//관리자 제품 삭제
+		case "/deleteProduct.do" :
+			command = new MAdminProductDelete();
+			command.execute(request, response);
+			int deletePNum = (int) request.getAttribute("num");
+			out.print(new Gson().toJson(deletePNum));
+			out.flush();
+			return;
+			
+			
+		//관리자 브랜드 조회	
+		case "/adminBrand.do" :
+			command = new MAdminBrand();
+			command.execute(request, response);
 
+			int brandTotal = (int) request.getAttribute("total");
+			int brandLastPage = (int) request.getAttribute("lastPage");
+			int brandIndex_no = (int) request.getAttribute("index_no");
+			ArrayList<AdminCategoryDto> brandList = (ArrayList) request.getAttribute("list");
+
+			// ajax로 데이터를 한번에 보내기 위해 키-값 형태의 Map 이용.
+			Map<String, Object> dataBrand = new HashMap<>();
+			dataBrand.put("total", brandTotal);
+			dataBrand.put("lastPage", brandLastPage);
+			dataBrand.put("index_no", brandIndex_no);
+			dataBrand.put("brandList", brandList);
+
+			out.print(new Gson().toJson(dataBrand));
+			out.flush();
+			return;
+			
+			
+		//관리자 브랜드 등록 페이지 이동
+		case "/adminBrandRegister.do" :
+			viewPage = "adminBrandRegister.jsp";
+			break;
+		
+			
+		//관리자 브랜드 등록하기
+		case "/insertBrand.do" : 
+			command = new MAdminBrandInsert();
+			command.execute(request, response);
+
+			int InsertBNum = (int) request.getAttribute("num");
+			out.print(new Gson().toJson(InsertBNum));
+			out.flush();
+			return;
+			
+			
+		//관리자 브랜드 상세페이지 이동
+		case "/adminBrandDetailPage.do" :
+			session.setAttribute("brandid", request.getParameter("id"));
+			viewPage = "adminBrandDetail.jsp";
+			break;
+			
+			
+		//관리자 상세페이지 조회
+		case "/selectAdminBrandDetail.do" :
+			command = new MAdminBrandDetail();
+			command.execute(request, response);
+			
+			ArrayList<AdminBrandDto> brandDetailList = (ArrayList) request.getAttribute("list");
+			out.print(new Gson().toJson(brandDetailList));
+			out.flush();
+			return;
+			
+		//관리자 브랜드명 수정
+		case "/updateBrand.do" :
+			command = new MAdminBrandUpdate();
+			command.execute(request, response);
+			int updateBNum = (int) request.getAttribute("num");
+			out.print(new Gson().toJson(updateBNum));
+			out.flush();
+			return; 
+			
 		default:
 			break;
 
