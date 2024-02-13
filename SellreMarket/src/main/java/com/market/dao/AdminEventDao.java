@@ -4,23 +4,28 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Enumeration;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import com.market.dto.AdminCategoryDto;
+import com.market.dto.AdminEventDto;
+import com.oreilly.servlet.MultipartRequest;
 
-public class AdminCategoryDao {
+public class AdminEventDao {
 
-	DataSource dataSource;
+DataSource dataSource;
 	
 	/************************************************************************************************
 	 * Function : context.xml에 설정한 db이름을 가져온다. 
 	 * @param 	: null
 	 * @return 	: null
 	************************************************************************************************/
-	public AdminCategoryDao() {
+	public AdminEventDao() {
 		try {
 			
 			Context context = new InitialContext();
@@ -35,8 +40,8 @@ public class AdminCategoryDao {
 	 * @param 	: null
 	 * @return 	: int
 	************************************************************************************************/
-	public int getProductCnt() {
-		int productCnt = 0;
+	public int getEventCnt() {
+		int eventCnt = 0;
 		
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -45,30 +50,31 @@ public class AdminCategoryDao {
 		try {
 			
 			conn = dataSource.getConnection();
-			String query = "select count(catetoryid) from catetory where status = 1";
+			String query = "select count(eventid) from event where status = 1";
 		
 			ps = conn.prepareStatement(query);
 			rs = ps.executeQuery();
 			
 			if(rs.next()) {
-				productCnt = rs.getInt(1);
+				eventCnt = rs.getInt(1);
 			}
 			
 			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return productCnt;
+		return eventCnt;
 	}
+	
 	
 	/************************************************************************************************
 	 * Function : 현재페이지에 해당하는 리스트 조회
 	 * @param 	: PageInfo에 있는 페이징 정보
 	 * @return 	: ArrayList
 	************************************************************************************************/
-	public ArrayList<AdminCategoryDto> selectList(int index_no) {
+	public ArrayList<AdminEventDto> selectList(int index_no) {
 		
-		ArrayList<AdminCategoryDto> list = new ArrayList<AdminCategoryDto>();
+		ArrayList<AdminEventDto> list = new ArrayList<AdminEventDto>();
 		
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -79,10 +85,9 @@ public class AdminCategoryDao {
 			conn = dataSource.getConnection();
 			String query = 
 							"""
-							select catetoryid, type, subtype from catetory 
-							where status = 1
-							order by catetoryid desc
-							limit ?, 15
+							select eventid, ename, econtent, date(startdate), date(enddate), salerate, img
+						    from event where status = 1
+						    order by eventid desc limit ?, 15;
 				
 					"""; //limit 시작번호, 출력갯수
 			
@@ -91,17 +96,18 @@ public class AdminCategoryDao {
 			
 			ps.setInt(1, index_no);
 			
-			System.out.println("admincategorydao[selectList] : "+index_no);
-			
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				AdminCategoryDto cate = new AdminCategoryDto();
-				cate.setCatetoryid(rs.getInt(1));
-				cate.setType(rs.getString(2));
-				cate.setSubtype(rs.getString(3));
-				
-				list.add(cate);
+				AdminEventDto event = new AdminEventDto();
+				event.setEventid(rs.getInt(1));
+				event.setEname(rs.getString(2));
+				event.setEcontent(rs.getString(3));
+				event.setStartdate(rs.getString(4));
+				event.setEnddate(rs.getString(5));
+				event.setSalerate(rs.getInt(6));
+				event.setImg(rs.getString(7));
+				list.add(event);
 			}
 			
 			conn.close();
@@ -113,50 +119,89 @@ public class AdminCategoryDao {
 	
 	
 	/************************************************************************************************
-	 * Function : 카테고리 등록
-	 * @param 	: 입력한 대분류, 중분류 
+	 * Function : 이벤트 등록
+	 * @param 	: 입력한 데이터 
 	 * @return 	: int
 	************************************************************************************************/
-	public int insertCategory(String type, String subtype) {
-		
+	public int insertEvent(HttpServletRequest request, HttpServletResponse response) {
 		int num = 0;
-		Connection conn = null;
-		PreparedStatement ps = null;
+		String originalFileName = "";
+		
 		
 		try {
-			conn = dataSource.getConnection();	
-			String query = """
-						insert into catetory (
-							   type,
-							   subtype,
-							   status
-							) values (?,?,'1')
+			
+			String path = request.getServletContext().getRealPath("/image");
 
+			int maxSize = 1024 * 1024 * 1;
+			
+			MultipartRequest multi = new MultipartRequest(request, path, maxSize, "UTF-8");
+			
+			Enumeration<String> files = multi.getFileNames();
+			
+			//넘어온 form에서 file 태그가 있는지 확인
+			if(files.hasMoreElements()) {
+				String name = (String) files.nextElement(); //file 태그 이름
+				System.out.println("name : "+name);
+				originalFileName = multi.getOriginalFileName(name);  //사용자가 업로드한 file dlfma
+				System.out.println("mul  : "+originalFileName);
+			}
+			
+			String ename1 = multi.getParameter("ename");
+			String econtent1 = multi.getParameter("econtent");
+			String startdate1 = multi.getParameter("startdate");
+			String enddate1 = multi.getParameter("enddate");
+			String salerate1 = multi.getParameter("salerate");
+			
+			Connection conn = null;
+			PreparedStatement ps = null;
+			
+			String query = """
+							insert into event (
+								ename, econtent, startdate, enddate, salerate, img, status
+							) values (?,?,?,?,?,?,'1')
 							""";
-			ps = conn.prepareStatement(query);
-			ps.setString(1, type);
-			ps.setString(2, subtype);
+			try {
+				
+				conn = dataSource.getConnection();
+				ps = conn.prepareStatement(query);
+				
+				ps.setString(1, ename1);
+				ps.setString(2, econtent1);
+				ps.setString(3, startdate1);
+				ps.setString(4, enddate1);
+				ps.setInt(5, Integer.parseInt(salerate1));
+				ps.setString(6, originalFileName);
+				
+				ps.executeUpdate();
+				
+			} catch(Exception e) {
+				e.printStackTrace();
+			}finally { 
+				// 메모리정리
+				try {
+					if(ps != null) ps.close();
+					if(conn != null) conn.close();
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
 			
-			ps.executeUpdate();
-			num++;
-			conn.close();
-			
-		} catch (Exception e) {
+		}catch(Exception e) {
 			e.printStackTrace();
-			return num;
 		}
+		
 		return num;
 	}
 	
 	
 	/************************************************************************************************
-	 * Function : 카테고리 상세
-	 * @param 	: 카테고리 id  
+	 * Function : event 상세
+	 * @param 	: eventid  
 	 * @return 	: ArrayList
 	************************************************************************************************/
-	public ArrayList<AdminCategoryDto> categoryDetail(int id) {
+	public ArrayList<AdminEventDto> eventDetail(int id) {
 		
-		ArrayList<AdminCategoryDto> list = new ArrayList<AdminCategoryDto>();
+		ArrayList<AdminEventDto> list = new ArrayList<AdminEventDto>();
 		
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -167,8 +212,10 @@ public class AdminCategoryDao {
 			conn = dataSource.getConnection();
 			String query = 
 							"""
-							select catetoryid, type, subtype from catetory where catetoryid = ? and status = 1
-					"""; 
+							select eventid, ename, econtent, date(startdate), date(enddate), salerate, img
+						    from event where status = 1 and eventid = ?
+							
+							"""; 
 			
 
 			ps = conn.prepareStatement(query);
@@ -178,12 +225,16 @@ public class AdminCategoryDao {
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				AdminCategoryDto cate = new AdminCategoryDto();
-				cate.setCatetoryid(rs.getInt(1));
-				cate.setType(rs.getString(2));
-				cate.setSubtype(rs.getString(3));
+				AdminEventDto event = new AdminEventDto();
+				event.setEventid(rs.getInt(1));
+				event.setEname(rs.getString(2));
+				event.setEcontent(rs.getString(3));
+				event.setStartdate(rs.getString(4));
+				event.setEnddate(rs.getString(5));
+				event.setSalerate(rs.getInt(6));
+				event.setImg(rs.getString(7));
 				
-				list.add(cate);
+				list.add(event);
 			}
 			
 			conn.close();
@@ -194,12 +245,11 @@ public class AdminCategoryDao {
 	}
 	
 	/************************************************************************************************
-	 * Function : 카테고리 수정
+	 * Function : 이벤트 수정
 	 * @param 	: 입력한 대분류, 중분류 
 	 * @return 	: int
 	************************************************************************************************/
-	public int updateCategory(String type, String subtype, int catetoryid) {
-		
+	public int updateEvent(String ename, String econtent, String startdate, String enddate, int salerate, int eventid) {
 		int num = 0;
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -207,15 +257,23 @@ public class AdminCategoryDao {
 		try {
 			conn = dataSource.getConnection();	
 			String query = """
-							update catetory set 
-							type = ?, subtype =?
-							where catetoryid = ?
+							update event set
+							ename =?,
+							econtent =?,
+							startdate =?,
+							enddate =?,
+							salerate =?
+							where eventid = ?
 
 							""";
 			ps = conn.prepareStatement(query);
-			ps.setString(1, type);
-			ps.setString(2, subtype);
-			ps.setInt(3, catetoryid);
+			//ps.setString(1, image);
+			ps.setString(1, ename);
+			ps.setString(2, econtent);
+			ps.setString(3, startdate);
+			ps.setString(4, enddate);
+			ps.setInt(5, salerate);
+			ps.setInt(6, eventid);
 			
 			ps.executeUpdate();
 			num++;
@@ -229,11 +287,11 @@ public class AdminCategoryDao {
 	}
 	
 	/************************************************************************************************
-	 * Function : 카테고리 삭제
-	 * @param 	: categoryid 
+	 * Function : 이벤트 삭제
+	 * @param 	: eventid
 	 * @return 	: int
 	************************************************************************************************/
-	public int deleteCategory(int catetoryid) {
+	public int deleteEvent(int eventid) {
 		
 		int num = 0;
 		Connection conn = null;
@@ -242,13 +300,13 @@ public class AdminCategoryDao {
 		try {
 			conn = dataSource.getConnection();	
 			String query = """
-							update catetory set 
+							update event set 
 							status = 0
-							where catetoryid = ?
+							where eventid = ?
 							
 							""";
 			ps = conn.prepareStatement(query);
-			ps.setInt(1, catetoryid);
+			ps.setInt(1, eventid);
 			
 			ps.executeUpdate();
 			num++;
@@ -260,5 +318,7 @@ public class AdminCategoryDao {
 		}
 		return num;
 	}
+
 	
 }
+

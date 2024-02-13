@@ -10,23 +10,27 @@ public class AdminProductDto {
 	String pinsertdate;
 	String expirationdate;
 	String status;
+	int pstock;
+	int stock;
 	
 	public AdminProductDto() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public AdminProductDto(int productid, String pname, String pEngname, String nutrition, String pinsertdate,
-			String expirationdate, String status) {
+	public AdminProductDto(int productid, String pname, String pEngname, String origin, String nutrition,
+			String pinsertdate, String expirationdate, String status, int pstock, int stock) {
 		super();
 		this.productid = productid;
 		this.pname = pname;
 		this.pEngname = pEngname;
+		this.origin = origin;
 		this.nutrition = nutrition;
 		this.pinsertdate = pinsertdate;
 		this.expirationdate = expirationdate;
 		this.status = status;
+		this.pstock = pstock;
+		this.stock = stock;
 	}
-
 
 	public int getProductid() {
 		return productid;
@@ -92,5 +96,20 @@ public class AdminProductDto {
 		this.origin = origin;
 	}
 
+	public int getPstock() {
+		return pstock;
+	}
+
+	public void setPstock(int pstock) {
+		this.pstock = pstock;
+	}
+
+	public int getStock() {
+		return stock;
+	}
+
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
 	
 }

@@ -45,7 +45,7 @@ button {
 .css-1xfyvd1 {
     position: absolute;
     right: 0px;
-    top: 10px;
+    top: 50px;
     z-index: 320;
     display: flex;
     -webkit-box-align: center;
@@ -478,4 +478,41 @@ button {
     animation: 0.2s linear 0s 1 normal none running animation-tb0mmg;
 }
 
+.stock-num {
+	position :absolute;
+	top : 100;
+	left : 100;
+	z-index : 10;
+	height: 15px;
+	width: 15px;
+	font-size : 10px;
+	color : white;
+	line-height: 15px;
+	text-align: center;
+	background-color: red;
+	border-radius: 15px;
+	display : flex;
+	align-items : center;
+	justify-content : center;
+	margin-left: 400px;
+	
+}
 
+.quest-num {
+	position :absolute;
+	top : 100;
+	left : 500;
+	z-index : 10;
+	height: 15px;
+	width: 15px;
+	font-size : 10px;
+	color : white;
+	line-height: 15px;
+	text-align: center;
+	background-color: red;
+	border-radius: 15px;
+	display : flex;
+	align-items : center;
+	justify-content : center;
+	margin-left: 940px;
+} 
