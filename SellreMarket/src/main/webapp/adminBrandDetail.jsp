@@ -26,10 +26,9 @@
 				</div>
 				
 				<input type="text" id="brandid" name="brandid" hidden="true">
-					
-				<input type="submit" class="updateBtn" onclick="updateBrand()" value="수정">
-				<input type="submit" class="deleteBtn" onclick="deleteBrand()" value="삭제">
 			</form>
+			<input type="submit" class="updateBtn" onclick="updateBrand()" value="수정">
+			<input type="submit" class="deleteBtn" onclick="deleteBrand()" value="삭제">
 	</div>
 </body>
 </html>

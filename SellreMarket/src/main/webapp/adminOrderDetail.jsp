@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>입고요청 - 셀리</title>
-<link rel="shortcut icon" href="http://localhost:8080/SellreMarket/image/logo.png" />
 <link rel="icon" href="http://localhost:8080/SellreMarket/image/logo.png" />
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:8080/SellreMarket/image/logo.png" />
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:8080/SellreMarket/image/logo.png" />
@@ -35,9 +34,9 @@
 				</div>
 				
 				<input type="text" id="productid" name="productid" hidden="true">
-					
-				<input type="submit" class="orderBtn" onclick="order()" value="요청">
+				<button type="button" class="orderBtn" onclick="order()">요청</button>	
 			</form>
+			
 	</div>
 </body>
 </html>

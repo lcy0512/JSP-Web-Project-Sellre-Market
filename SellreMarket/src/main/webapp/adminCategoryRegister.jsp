@@ -29,9 +29,8 @@
 					<label for="subtype">중분류 *</label>
 					<input type="text" id="subtype" name="subtype">
 				</div>
-					
-				<input type="submit" class="registerBtn" onclick="insertCategory()" value="등록">
 			</form>
+				<input type="submit" class="registerBtn" onclick="insertCategory()" value="등록">
 	</div>
 </body>
 </html>

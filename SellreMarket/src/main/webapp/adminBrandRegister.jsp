@@ -31,9 +31,8 @@
 					<label for="bname">브랜드명 * </label>
 					<input type="text" id="bname" name="bname">
 				</div>
-					
-				<input type="submit" class="registerBtn" onclick="insertBrand()" value="등록">
 			</form>
+			<input type="submit" class="registerBtn" onclick="insertBrand()" value="등록">
 	</div>
 </body>
 </html>
