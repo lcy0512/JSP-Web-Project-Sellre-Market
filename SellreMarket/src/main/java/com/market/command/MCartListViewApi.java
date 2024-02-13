@@ -2,18 +2,24 @@ package com.market.command;
 
 import static com.market.common.support.Constants.LOGIN_USER_SESSION_NAME;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
 import com.market.auth.domain.User;
 import com.market.dao.CartDao;
 import com.market.dao.projection.CartListViewProjection;
+import com.market.dto.CartQueryResponseDto.CartListAndPriceQueryResponseDto;
 import com.market.dto.CartQueryResponseDto.CartPriceSummaryQueryResponseDto;
 
-public class MCartListView implements MCommand {
+public class MCartListViewApi implements MCommand {
+	
+	private final Gson gson = new Gson();
 	private final CartDao dao = new CartDao();
 
 	@Override
@@ -42,6 +48,15 @@ public class MCartListView implements MCommand {
 				discountPrice,
 				paymentPrice
 		);
+		
+		try (PrintWriter out = response.getWriter()) {
+			CartListAndPriceQueryResponseDto resData
+					= new CartListAndPriceQueryResponseDto(list, priceSummary);
+			
+			out.print(gson.toJson(resData));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		request.setAttribute("carts", list);
 		request.setAttribute("priceSummary", priceSummary);
