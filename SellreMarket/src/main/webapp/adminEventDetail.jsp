@@ -55,9 +55,9 @@
 					<input type="text" id="salerate" name="salerate" style="text-align:right">
 				</div>
 				<input type="text" id="eventid" name="eventid" hidden="true">	
+			</form>
 				<input type="submit" class="updateBtn" onclick="updateEvent()" value="수정">
 				<input type="submit" class="deleteBtn" onclick="deleteEvent()" value="삭제">
-			</form>
 	</div>
 </body>
 </html>

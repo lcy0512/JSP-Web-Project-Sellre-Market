@@ -19,7 +19,7 @@ public class ProductDetailPageDao {
     public ProductDetailPageDao() {
         try {
             Context context = new InitialContext();
-            dataSource = (DataSource) context.lookup("java:comp/env/jdbc/2jo");
+            dataSource = (DataSource) context.lookup("java:comp/env/jdbc/myDB");
         } catch (Exception e) {
             e.printStackTrace();
         }

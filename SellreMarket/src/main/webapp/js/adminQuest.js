@@ -10,35 +10,44 @@ function init() {
 
 //제품현황 Header 알림표시
 function productNum() {
+		
+		$.ajax({
+			type : "POST",
+			url : "adminProductNum.do",
+			success : function(response){
+				if(response == "0"){
+					document.getElementById('productNum').style.display = 'none';
+				} else {
+					document.getElementById('productNum').style.display = 'block';
+					document.getElementById('productNum').innerText = response	
+				}
+				
+			},
+			 error:function(request, status, error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	}
 	
-	$.ajax({
-		type : "POST",
-		url : "adminProductNum.do",
-		success : function(response){
-			document.getElementById('productNum').innerText = response
-		},
-		 error:function(request, status, error){
-			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		}
-	});
-}
-
-	
-//문의 진행중 갯수 Header 알림표시
-function questNum() {
-	
-	$.ajax({
-		type : "POST",
-		url : "adminQuestNum.do",
-		success : function(response){
-			document.getElementById('questNum').innerText = response
-		},
-		 error:function(request, status, error){
-			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		}
-	});
-}
-
+	//문의 진행중 갯수 Header 알림표시
+	function questNum() {
+		
+		$.ajax({
+			type : "POST",
+			url : "adminQuestNum.do",
+			success : function(response){
+				if(response == "0"){
+					document.getElementById('questNum').style.display = 'none';
+				} else {
+					document.getElementById('questNum').style.display = 'block';
+					document.getElementById('questNum').innerText = response
+				}
+			},
+			 error:function(request, status, error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	}
 function paging(pageNum) {
 	
 	//pageNum이 null일 때 처리

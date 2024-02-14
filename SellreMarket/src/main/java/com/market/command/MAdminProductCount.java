@@ -35,7 +35,7 @@ public class MAdminProductCount implements MCommand{
 		
 		/*
 		 * index_no : 인덱스번호? 르스트의 번호를가져와서 10개씩 가져오기 위해 사용
-		 * (1 -> 0), (2 -> 10), (3 ->20)
+		 * (1 -> 0), (2 -> 15), (3 ->30)
 		 */
 		int index_no = ( currentPage - 1 ) * 15;
 		
@@ -43,7 +43,7 @@ public class MAdminProductCount implements MCommand{
 		 * lastPage : 10개씩 보여주겠다고 했을 때, 마지막 있을  
 		 * 19-> 2, 29-> 3, 39 -> 4
 		 * 19/10 -> 1.9 -> ceil(1.9) -> 2.0
-		 * 29/10 -> 2.9 -> ceil(2.9) -> 3.0
+		 * 29/10 -> 2.9 -> ceil(2.9) -> 3.0 
 		 */
 		int lastPage = (int) (Math.ceil((double)total/15));
 

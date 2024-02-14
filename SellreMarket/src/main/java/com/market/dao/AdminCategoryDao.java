@@ -91,8 +91,6 @@ public class AdminCategoryDao {
 			
 			ps.setInt(1, index_no);
 			
-			System.out.println("admincategorydao[selectList] : "+index_no);
-			
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {

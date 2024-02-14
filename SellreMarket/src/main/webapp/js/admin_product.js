@@ -15,7 +15,13 @@ window.onload=function(){
 			type : "POST",
 			url : "adminProductNum.do",
 			success : function(response){
-				document.getElementById('productNum').innerText = response
+				if(response == "0"){
+					document.getElementById('productNum').style.display = 'none';
+				} else {
+					document.getElementById('productNum').style.display = 'block';
+					document.getElementById('productNum').innerText = response	
+				}
+				
 			},
 			 error:function(request, status, error){
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -30,7 +36,12 @@ window.onload=function(){
 			type : "POST",
 			url : "adminQuestNum.do",
 			success : function(response){
-				document.getElementById('questNum').innerText = response
+				if(response == "0"){
+					document.getElementById('questNum').style.display = 'none';
+				} else {
+					document.getElementById('questNum').style.display = 'block';
+					document.getElementById('questNum').innerText = response
+				}
 			},
 			 error:function(request, status, error){
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -70,7 +81,7 @@ window.onload=function(){
 		
 		//데이터 조회하기 위해 테이블 생성
 		let table = "<table id='listTable' class='table-style'>";
-		table += "<tr><th>행번호</th><th>상품명</th><th>입고갯수</th><th>재고갯수</th><th>상태</th></tr>"
+		table += "<tr><th>행번호</th><th>상품명</th><th>입고개수</th><th>재고개수</th><th>상태</th></tr>"
 		
 		//데이터가 없을 때 처리
 		if(data.length == 0) {
@@ -85,7 +96,7 @@ window.onload=function(){
 				calc = data.productList[i].pstock - data.productList[i].stock;
 				let backgroundColor = calc <=100 ? "pink" : "";
 				
-				table += "<tr style='background-color : "+backgroundColor+"'>" +
+				table += "<tr style='background-color : "+backgroundColor+"' onclick='detail(" + data.productList[i].productid + ")'>" +
 							"<td style='text-align:center'>" + rownumber +"</td>" +
 							"<td style='text-align:left'>" + data.productList[i].pname +"</td>" +
 							"<td style='text-align:center'>" + data.productList[i].pstock +"</td>" +
@@ -113,4 +124,24 @@ window.onload=function(){
 	        nextSibling = nextElement;
 	    }
 	}	
-
+	
+/* .do로 보내기 위해서 form을 만들고, id값도 붙여줌 */
+function detail(id){
+	
+	let url = "/SellreMarket/adminProductDetailPage.do";
+	
+	let form = document.createElement("form");
+	form.action = url;
+	form.method = "POST";
+	
+	let idField = document.createElement("input");
+	idField.type = "hidden";
+	idField.name = "id";
+	idField.value = id;
+	
+	form.appendChild(idField);
+	
+	document.body.appendChild(form)
+	form.submit();
+	
+}
