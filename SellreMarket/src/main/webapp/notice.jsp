@@ -8,6 +8,8 @@
 <title>공지사항 - 셀리마켓</title>
 </head>
 <link rel="stylesheet" href="css/notice.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="js/noticelist.js"></script>
 <body>
 	<jsp:include page="header.jsp" />
 	<div class="css-luwwab eug5r8l1">
@@ -26,13 +28,11 @@
 				<div width="100" class="css-16tcewl e16adls20">작성자</div>
 				<div width="100" class="css-16tcewl e16adls20">작성일</div>
 			</div>
-			<ul class="css-1fttcpj e1cfowvj5">
+		<%--	<ul class="css-1fttcpj e1cfowvj5">
 			<c:forEach items="${EventList}" var="eventlist">
 				<li>
+				<a href="#" onclick="eventdetail('${eventlist}')">
 					<div class="css-14yglsw e1cfowvj4">
-				<!-- <form method="post" action="noticedetail.do"> -->
-					<%-- <input type="hidden" value="${eventlist.eventid}" id="selecteventid" name="selecteventid"> --%>
-					<!-- <button type="submit"> -->
 						<div class="css-3o6rrk e1cfowvj2">${eventlist.eventid}</div>
 			<c:choose>
 				<c:when test="${eventlist.category eq 2}">
@@ -44,22 +44,15 @@
 			</c:choose>
 						<div class="css-3d2kks eß1cfowvj2">셀리마켓</div>
 						<div class="css-b1hszl e1cfowvj2">${eventlist.inputdate}</div>
-					<!-- </button>
-				</form> -->
 					</div>
+				</a>
 				</li>
 				</c:forEach>
+			</ul> --%>
+			<ul class='css-1fttcpj e1cfowvj5' id="ulinput">
 			</ul>
-			<div class="css-1kbzkwh e14yho7m0">
-				<div class="css-sxxs1g eytury60">
-					<button disabled="" type="button" class="css-rzcdhr e1hbwyso0">
-						<div class="css-7qb0sc e1ilyb3p0">이전</div>
-					</button>
-					<button type="button" class="css-1jwilit e1pk9060">
-						<div class="css-7qb0sc e1ilyb3p0">다음</div>
-					</button>
-				</div>
-			</div>
+			<br><br><br>
+			<div id="block" style="text-align: center;"></div>
 		</div>
 		<br><br><br>
 	</div>

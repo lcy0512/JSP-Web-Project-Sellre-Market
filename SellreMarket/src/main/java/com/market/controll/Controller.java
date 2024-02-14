@@ -74,6 +74,7 @@ import com.market.dto.AdminGetCategoryDto;
 import com.market.dto.AdminGetPackTypeDto;
 import com.market.dto.AdminProductDto;
 import com.market.dto.AdminQuestDto;
+import com.market.dto.EventDto;
 
 /**
  * Servlet implementation class Controller
@@ -240,9 +241,8 @@ public class Controller extends HttpServlet {
 			command = new MLoadEventList();
 			command.execute(request, response);
 			
-			viewPage = "notice.jsp";
-			break;
-		
+			return;
+			
 		case "/noticedetail.do" :
 			command = new MEventDetail();
 			command.execute(request, response);

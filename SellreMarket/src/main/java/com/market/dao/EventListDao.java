@@ -26,18 +26,19 @@ DataSource dataSource;
 		}
 	}
 	
-	public ArrayList<EventDto> eventList() {
+	public ArrayList<EventDto> eventList(int startIndex) {
 		ArrayList<EventDto> dtos = new ArrayList<EventDto>();
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultset = null;
 		
-		String query = "select eventid,ename,inputdate,category,status from event";
+		String query = "select eventid,ename,inputdate,category,status from event order by inputdate desc limit ?,10";
 		 
 		try {
 			connection = dataSource.getConnection();
 			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, startIndex);
 			
 			resultset = preparedStatement.executeQuery();
 			
@@ -131,7 +132,42 @@ DataSource dataSource;
 		return dto;
 	}
 	
-	
+	public int totalRowCount() {
+		int result = 0;
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultset = null;
+		
+		String query = "select COUNT(eventid) as count from event";
+		 
+		try {
+			connection = dataSource.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			
+			resultset = preparedStatement.executeQuery();
+			
+			if(resultset.next()) {
+				result = resultset.getInt("count");
+			}
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally { 
+			// 메모리정리
+			try {
+				if(resultset != null) resultset.close();
+				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		} // finally
+		
+		return result;
+	}
 	
 	
 } // End

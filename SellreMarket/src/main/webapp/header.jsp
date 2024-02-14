@@ -106,7 +106,7 @@ function inquirywrite() {
 				<div class="css-1qolcqm eo7pjfk3">
 					<a class="css-oyffzd eo7pjfk2">고객센터<span class="css-1lrerrk eo4j3y50"></span></a>
 					<div class="menu css-1ho29iy ecncdj41">
-						<div class="css-12olpw6 ecncdj40"><a href="noticelist.do">공지사항</a></div>
+						<div class="css-12olpw6 ecncdj40"><a href="notice.jsp">공지사항</a></div>
 						<div class="css-12olpw6 ecncdj40"><a onclick='inquirywrite()'>1:1 문의</a></div>
 						<div class="css-12olpw6 ecncdj40"><a href="user_guide.jsp">이용안내</a></div>
 					</div>
