@@ -4,14 +4,14 @@
 <!DOCTYPE html>
 <html>
 <!--
-	1. Date : 2024.02.02
+	1. Date : 2024.02.11
 	2. Author : Woody Jo
 	3. Version : v1.0.0
-	4. Description : 메인 body 페이지 Dto 
+	4. Description : best 제품들 가져오는 jsp 
 -->
 <head>
 <meta charset="UTF-8">
-<title>Sellre Market</title>
+<title>Sellre Market Best</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="Free HTML Templates" name="keywords">
 <meta content="Free HTML Templates" name="description">
@@ -67,8 +67,7 @@
 </script>
 
 <!-- // js 따로 관리한다. -->
-<script src="js/mainViewPage.js"></script>
-
+<script src="js/bestProductPage.js"></script>
 
 </head>
 <body>
@@ -80,96 +79,93 @@
 	<!-- Navbar Start -->
 
 	<!-- Navbar End -->
-
-
-	<!-- Carousel Start -->
-	<div class="container" style="width: 100%">
-		<div id="imgslider" class="carousel slide" data-ride="carousel"
-			style="width: 100%;">
-			<!-- indicator 없음 -->
-
-			<!-- 슬라이드 쇼 실행 -->
-			<div class="carousel-inner">
-				<c:forEach items="${eventImgs}" var="event">
-					<!-- 첫번째 이미지일 때 active 설정 -->
-					<c:choose>
-						<c:when test="${event.eimg eq '1.jpg'}">
-							<div class="carousel-item active">
-								<img class="d-block w-100"
-									src="${pageContext.request.contextPath}/image/event/${event.eimg}"
-									alt="Event Image">
-								<!-- 캡션 없음 -->
-							</div>
-						</c:when>
-						<c:otherwise>
-							<div class="carousel-item">
-								<img
-									src="${pageContext.request.contextPath}/image/event/${event.eimg}"
-									class="d-block w-100" alt="Event Image">
-								<!-- 캡션 없음 -->
-							</div>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
-			</div>
-
-
-			<!-- 컨트롤 -->
-			<a href="#imgslider" class="carousel-control-prev" data-slide="prev">
-				<span class="carousel-control-prev-icon"></span>
-			</a> <a href="#imgslider" class="carousel-control-next" data-slide="next">
-				<span class="carousel-control-next-icon"></span>
-			</a>
-		</div>
-	</div>
+	
 	<br>
-	<!-- Carousel End -->
+	<br>
+	<br>
+	<h3 align="center">베스트</h3>
+	<br>
 
-	<h2 align="center">설 선물특가 실시간 랭킹🔥🔥</h2>
-	<p class="css-149yh9z ej3ms6t1" align="center">지금 주목해야할 인기 상품 최대
-		79% 할인</p>
-
+	<!-- Align Start -->
+	<div class="setAlign" style="margin-left: 70%; color: #919492;">
+		<c:if test="${alignCategory eq '베스트순'}">
+			<span style="color: black; font-weight: bold">베스트순</span>
+			&nbsp;&nbsp;|&nbsp;&nbsp;
+			<a href="alignBestLowPrice.do">낮은 가격순</a> 
+			&nbsp;&nbsp;|&nbsp;&nbsp; 
+			<a href="alignBestHighPrice.do">높은 가격순</a>
+		</c:if>
+		<c:if test="${alignCategory eq '낮은 가격순'}">
+			<a href="bestProduct.do">베스트순</a>
+			&nbsp;&nbsp;|&nbsp;&nbsp;
+			<span style="color: black; font-weight: bold">낮은 가격순</span>
+			&nbsp;&nbsp;|&nbsp;&nbsp;
+			<a href="alignBestHighPrice.do">높은 가격순</a>
+		</c:if>
+		<c:if test="${alignCategory eq '높은 가격순'}">
+			<a href="bestProduct.do">베스트순</a>
+			&nbsp;&nbsp;|&nbsp;&nbsp;
+			<a href="alignBestLowPrice.do">낮은 가격순</a>
+			&nbsp;&nbsp;|&nbsp;&nbsp;
+			<span style="color: black; font-weight: bold">높은 가격순</span>
+		</c:if>
+	</div>
+	<!-- Align End -->
+	
 
 	<!-- Products Start -->
+	
 	<div class="container-fluid pt-5 pb-3">
 		<div class="row px-xl-5 justify-content-center"
-			style="margin-left: 240px; margin-right: 110px;">
-			<c:if test="${not empty productList}">
-				<c:forEach items="${productList}" var="dto">
+			style="margin-left: 10%; margin-right: 0%;">
+			<c:if test="${not empty bestProducts}">
+				<c:forEach items="${bestProducts}" var="dto">
 					<div class="col-lg-4 col-md-4 col-sm-6 pb-10 mx-auto">
 						<div class="product-item bg-light mb-4"
 							style="width: 300px; height: 350px; display: flex; flex-direction: column; justify-content: center;">
 							<div class="product-img position-relative overflow-hidden">
 								<a href="#"> <img class="img-fluid w-100"
-									src="${pageContext.request.contextPath}/image/product/${dto.ysrc}"
-									alt="Product Image">
+									src="${pageContext.request.contextPath}/image/product/${dto.pimage}"
+									alt="Product Image"
+									 style="object-fit: cover; width: 100%; height: 100%;">
 								</a>
 							</div>
 							<div
 								style="margin-top: 7px; margin-left: 1%; border: 1px solid lightgray; border-radius: 5px; width: 98%;">
 								<button
-									onclick="sendProductInfo(${dto.recipeid}, ${dto.productid}); return false;"
+									onclick="sendProductInfo(${dto.productid}); return false;"
 									class="btn btn-primary btn-light align-items-center"
 									style="width: 100%;">장바구니</button>
+								<input type="hidden" id="userid" value="${id}">
 							</div>
 							
 							<div class="text-center py-4"
 								style="display: flex; flex-direction: column; justify-content: center;">
-								<a class="h6 text-decoration-none text-truncate" href="">[${dto.yname}]</a>
-									<a class="ytitle" href="">${dto.ytitle}</a>
-
+								<a class="h6 text-decoration-none text-truncate" href="" style="font-weight: bold;">${dto.pname}</a>
 								<div class="d-flex align-items-center justify-content-center mt-2">
-									<h5>${dto.price}</h5>
+									<h7 class="text-muted ml-2">
+										<c:if test="${dto.price ne dto.dPrice}">
+											<del>${dto.price}</del>
+											<h7>원</h7>
+										</c:if>
+									</h7>
+								</div>
+								<div class="d-flex align-items-center justify-content-center mt-2">
+									<span class="h6" style="color: red; font-weight: bold;">
+										<c:if test="${dto.price ne dto.dPrice}">
+											${dto.salerate}%
+										</c:if>
+									</span>
+									&nbsp;&nbsp;
+									<h6>${dto.dPrice}</h6>
 									<h6>원</h6>
-									<h6 class="text-muted ml-2">
-										<del>$123.00</del>
-									</h6>
+									
 								</div>
 								<div
 									class="d-flex align-items-center justify-content-center mb-1">
 									<img
 										src="https://cdn-icons-png.flaticon.com/128/535/535234.png"
-										style="width: 12px; height: 12px;">&nbsp; <small>${dto.like}</small>
+										style="width: 12px; height: 12px;">&nbsp; <small>${dto.plikecount}</small>
 								</div>
 							</div>
 						</div>
@@ -180,37 +176,17 @@
 	</div>
 	<!-- Products End -->
 
+
 	<!-- Paging Start -->
-	<%
-		int i = 1;
-		int current = (int) request.getAttribute("curPage");
-	%>
-	<!-- 블록과 페이지 가져오기 -->
-	<div
-		style="display: flex; justify-content: center; font-size: 20px; gap: 0 10px;">
-		<a href="mainPage.do?curPage=<%= current - 1 %>" class="prev"
-			onclick="prev()"> << </a>
-
-		<c:forEach begin="${blockStart}" end="${endPage}">
-			<%
-				out.print("<a href='mainPage.do?curPage=" + i + "'>" + i + "</a>");
-				request.setAttribute("curPage", i);
-				i++;
-			%>
-		</c:forEach>
-		<a href="mainPage.do?curPage=<%= current + 1 %>" class="next"> >>
-		</a>
-	</div>
+	<div id="paging"></div>
+	<script src="js/paging.js"></script>
+	<input type="hidden" id="curPage" value="${curPage}">
 	<!-- Paging End -->
-
+	
 
 	<!-- Footer Start -->
 	<jsp:include page="footer.html"></jsp:include>
 	<!-- Footer End -->
 
-
-	<!-- Back to Top -->
-	<a href="#" class="btn btn-primary back-to-top"><i
-		class="fa fa-angle-double-up"></i></a>
 </body>
 </html>

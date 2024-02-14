@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import static com.market.common.support.Constants.LOGIN_USER_SESSION_NAME;
+import com.market.auth.domain.User;
 import com.market.dao.LoginDao;
 import com.market.dto.LoginDto;
 
@@ -31,17 +33,22 @@ public class MClogin implements MCommand {
 		String userName = (String) data.get("name");
 		boolean check = (boolean) data.get("check");
 		
-		System.out.println(userName);
-		System.out.println(check);
-		
-		
 		if (check) {
 			alertMessage = "success";
+			session.setAttribute("userName", userName);
+			session.setAttribute("id", id);
+			
+			User loginUser = new User(id, userName);
+			session.setAttribute(LOGIN_USER_SESSION_NAME, loginUser);
 		}
 		else {
+			session.removeAttribute("id");
+			session.removeAttribute("userName");
 			alertMessage = "아이디와 비밀번호를 확인 해주세요.";
+			
 		}
-		session.setAttribute("userName", userName);
+		
 		session.setAttribute("alertMessage", alertMessage);
+		
 	}
 }

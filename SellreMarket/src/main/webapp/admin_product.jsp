@@ -21,7 +21,7 @@
 	<main>
 	<jsp:include page="adminHeader.jsp" flush="false" />
 		<div class="main">
-			<div class="title" style="display : inline-block">제품현황</div>
+			<div class="title" style="display : inline-block">제품현황 <span class="alarm">* 재고개수 100이하면 분홍배경으로 나타납니다.</span></div>
 			<div class="btnGroup" style="display : inline-block">
 				<a href="adminProductRegister.do"><button class="registerBtn">등록</button></a>
 			</div>

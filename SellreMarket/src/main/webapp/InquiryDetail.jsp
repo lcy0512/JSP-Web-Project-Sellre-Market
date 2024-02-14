@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>1:1 문의 상세내역 - 셀리마켓</title>
 </head>
 <link rel="stylesheet" href="css/inquirywrite.css" />
 <body>

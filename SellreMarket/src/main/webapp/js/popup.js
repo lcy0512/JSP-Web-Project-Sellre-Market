@@ -15,6 +15,8 @@ function updateNumber(change) {
 	updateTotalPrice(selectedNumber);
 }
 
+
+
 // total price sum을 위한 함수
 function updateTotalPrice(selectedNumber) {
 	const hiddenPrice = document.getElementById('hiddenPrice');
@@ -31,23 +33,60 @@ function updateTotalPrice(selectedNumber) {
 }
 
 
-function addCart(selectedNumber) {
-	/* var selectedNumber = document.getElementById('selectedNumber').textContent; */
-	/* var form = document.myForm;
-	document.getElementById("hiddenNum") = selectedNumber;
+// 장바구니 담기 클릭 시 수량을 넘기며 종료
+function cart() {
 	
-	form.submit(); */
+	
+	/* window.close();
+	var selectedNumber = document.getElementById('selectedNumber').textContent; 
+	document.getElementById('qty').value =  selectedNumber;
+	console.log(qty + " add cart");
 	$.ajax({
 		type: 'POST',
 		url: 'getCart.do',
-		data: { selectedNumber: selectedNumber}
+		data: {qty:qty}
 		/* success: function(response) {
-			window.location.href('getCart.do');
-		} */
-	}); 
-
-        /* document.getElementById('addCart').value = selectedNumber;
+			console.log(response);
+			window.close();
+		} 
+	});
+	
+	
+	
+		
+        document.getElementById('addCart').value = selectedNumber;
         document.getElementById('myForm').action = 'getCart.do';
-        document.getElementById('myForm').submit(); */
+        document.getElementById('myForm').submit();
+        */
+       	
         
+} 
+
+
+/* function setCookie(cname, cvalue, exdays)
+{
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
 }
+function getCookie(cname)
+{
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i=0; i<ca.length; i++)
+    {
+        var c = ca[i];
+        while(c.charAt(0) == ' ')
+        {
+            c = c.substring(1);
+        }
+        if(c.indexOf(name) == 0)
+        {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+*/

@@ -1,10 +1,49 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" errorPage="errorPage.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+
+<style type="text/css">
+	.parent-container {
+	    position: relative;
+	}
+	
+	#cartCount {
+	    position: absolute;
+	    margin-top: -10px;
+	    left: 75.4%;
+	    font-weight: bold;
+	    background-color: #FFA500;
+        text-align: center; /* 텍스트를 수평으로 중앙 정렬합니다 */
+	    border-radius: 10px; /* 모서리의 반지름 크기를 조정합니다 */
+	    z-index: 9999; /* 다른 요소보다 앞으로 보이도록 z-index 값을 설정합니다 */
+	}
+</style>
+
+
+<script type="text/javascript">
+
+//header.jsp
+function updateCartCount(cartCount) {
+    $("#cartCount").text(cartCount);
+}
+
+var id = '<%=(String)session.getAttribute("id")%>';
+function inquirywrite() {
+	// 로그인 여부 확인
+	if (id !== "null") {
+		window.location.href = 'inquiry.do';
+	}
+	else {
+		var result = window.confirm("로그인 후 이용 가능합니다. 로그인 하시겠습니까?")
+		if (result === true) {
+			window.location.href = 'Login.jsp';
+		}
+	}
+}
+</script>
 </head>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="js/category.js" ></script>
@@ -41,7 +80,6 @@
 	<div>
 		<div class="css-t79vuj e15sbxqa2">
 			<div class="css-1xfyvd1 eo7pjfk4">
-			<%-- --%>
 			<c:choose>
 				<c:when test="${empty sessionScope.id}">
 				<a class="css-xygizb eo7pjfk2" href="CustomerSignup.jsp">회원가입</a>
@@ -53,7 +91,7 @@
 				<div class="css-1qolcqm eo7pjfk3">
 					<a class="css-oyffzd eo7pjfk2">${sessionScope.userName} 님<span class="css-1lrerrk eo4j3y50"></span></a>
 					<div class="menu css-1ho29iy ecncdj41">
-						<div class="css-12olpw6 ecncdj40"><a href="#">개인정보 수정</a></div>
+						<div class="css-12olpw6 ecncdj40"><a href="mypageinfo.jsp">개인정보 수정</a></div>
 						<div class="css-12olpw6 ecncdj40"><a href="#">장바구니</a></div>
 						<div class="css-12olpw6 ecncdj40"><a href="#">주문내역</a></div>
 						<div class="css-12olpw6 ecncdj40"><a href="#">찜한 상품</a></div>
@@ -68,8 +106,8 @@
 				<div class="css-1qolcqm eo7pjfk3">
 					<a class="css-oyffzd eo7pjfk2">고객센터<span class="css-1lrerrk eo4j3y50"></span></a>
 					<div class="menu css-1ho29iy ecncdj41">
-						<div class="css-12olpw6 ecncdj40"><a href="#">공지사항</a></div>
-						<div class="css-12olpw6 ecncdj40"><a href="inquiry.do">1:1 문의</a></div>
+						<div class="css-12olpw6 ecncdj40"><a href="notice.jsp">공지사항</a></div>
+						<div class="css-12olpw6 ecncdj40"><a onclick='inquirywrite()'>1:1 문의</a></div>
 						<div class="css-12olpw6 ecncdj40"><a href="user_guide.jsp">이용안내</a></div>
 					</div>
 				</div>
@@ -95,8 +133,14 @@
 					<div class="css-c4pbxv e15sbxqa0">
 						<div class=" css-14vnom0 e1n3mt0d1"></div>
 						<button class="css-231fw3 etxxzpc0" aria-label="찜하기" type="button"></button>
-						<div class="css-ff2aah e14oy6dx2">
-							<button class="css-g25h97 e14oy6dx1"></button>
+						<div class="css-ff2aah e14oy6dx2 parent-container">
+							<!-- 장바구니 카운트 시작 -->
+							<c:if test="${cartCount > 0}">
+								<span id="cartCount" style="vertical-align: middle; padding-right: 5px;">${cartCount}</span>
+							</c:if>
+						    <input type="hidden" value="${cartCount}" id="hiddenCount">
+						    <!-- 장바구니 카운트 끝 -->
+						    <button class="css-g25h97 e14oy6dx1" aria-label="장바구니" type="button" id="cartButton"></button>
 						</div>
 					</div>
 				</div>
@@ -112,16 +156,38 @@
 					</div>
 				</div>
 				<ul class="css-1887xqd e17w4cfr5">
-					<li class="css-59mmhh e17w4cfr4"><span
-						class="css-1xyu7j9 e17w4cfr2">신상품</span></li>
-					<li class="css-59mmhh e17w4cfr4"><span
-						class="css-1xyu7j9 e17w4cfr2">베스트</span></li>
-					<li class="css-59mmhh e17w4cfr4"><span
-						class="css-1xyu7j9 e17w4cfr2">알뜰쇼핑</span></li>
-					<li class="css-59mmhh e17w4cfr4"><span
-						class="css-1xyu7j9 e17w4cfr2">특가/혜택</span></li>
-					<li class="css-59mmhh e17w4cfr4"><span
-						class="css-1xyu7j9 e17w4cfr2">레시피</span></li>
+						<li class="css-59mmhh e17w4cfr4">
+							<span class="css-1xyu7j9 e17w4cfr2">
+								<c:if test="${headerCategory eq '신상품'}">
+									<a href="mainPage.do" style="color: #c14a09; font-weight: bold;">신상품&nbsp;&nbsp;&nbsp;&nbsp;</a>
+								</c:if>
+								<c:if test="${headerCategory ne '신상품'}">
+									<a href="mainPage.do">신상품&nbsp;&nbsp;&nbsp;&nbsp;</a>
+								</c:if>
+							</span>
+						</li>
+						
+					<li class="css-59mmhh e17w4cfr4">
+						<span class="css-1xyu7j9 e17w4cfr2">
+							<c:if test="${headerCategory eq '베스트'}">
+								<a href="bestProduct.do" style="color: #c14a09; font-weight: bold;">베스트&nbsp;&nbsp;&nbsp;&nbsp;</a>
+							</c:if>
+							<c:if test="${headerCategory ne '베스트'}">
+								<a href="bestProduct.do">베스트&nbsp;&nbsp;&nbsp;&nbsp;</a>
+							</c:if>
+						</span>
+					<li class="css-59mmhh e17w4cfr4">
+						<span class="css-1xyu7j9 e17w4cfr2">
+							<span class="css-1xyu7j9 e17w4cfr2">
+							<c:if test="${headerCategory eq '레시피'}">
+								<a href="recipePage.do" style="color: #c14a09; font-weight: bold;">레시피</a>
+							</c:if>
+							<c:if test="${headerCategory ne '레시피'}">
+								<a href="recipePage.do">레시피</a>
+							</c:if>
+						</span>						
+						</span>
+					</li>
 				</ul>
 				<div class="css-s5xdrg e17w4cfr0">
 					<div class="css-dnwaeo e1mmzaxa1">

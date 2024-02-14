@@ -10,8 +10,6 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import com.market.dto.AdminCategoryDto;
-import com.market.dto.AdminProductDto;
-import com.market.dto.AdminProductInputDto;
 
 public class AdminCategoryDao {
 
@@ -47,7 +45,7 @@ public class AdminCategoryDao {
 		try {
 			
 			conn = dataSource.getConnection();
-			String query = "select count(catetoryid) from catetory;";
+			String query = "select count(catetoryid) from catetory where status = 1";
 		
 			ps = conn.prepareStatement(query);
 			rs = ps.executeQuery();
@@ -81,7 +79,9 @@ public class AdminCategoryDao {
 			conn = dataSource.getConnection();
 			String query = 
 							"""
-							select type, subtype from catetory order by catetoryid desc
+							select catetoryid, type, subtype from catetory 
+							where status = 1
+							order by catetoryid desc
 							limit ?, 15
 				
 					"""; //limit 시작번호, 출력갯수
@@ -91,14 +91,13 @@ public class AdminCategoryDao {
 			
 			ps.setInt(1, index_no);
 			
-			System.out.println("admincategorydao[selectList] : "+index_no);
-			
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
 				AdminCategoryDto cate = new AdminCategoryDto();
-				cate.setType(rs.getString(1));
-				cate.setSubtype(rs.getString(2));
+				cate.setCatetoryid(rs.getInt(1));
+				cate.setType(rs.getString(2));
+				cate.setSubtype(rs.getString(3));
 				
 				list.add(cate);
 			}
@@ -117,8 +116,6 @@ public class AdminCategoryDao {
 	 * @return 	: int
 	************************************************************************************************/
 	public int insertCategory(String type, String subtype) {
-		System.out.println("ddd : "+type);
-		System.out.println("eee : "+subtype);
 		
 		int num = 0;
 		Connection conn = null;
@@ -147,7 +144,119 @@ public class AdminCategoryDao {
 			return num;
 		}
 		return num;
+	}
+	
+	
+	/************************************************************************************************
+	 * Function : 카테고리 상세
+	 * @param 	: 카테고리 id  
+	 * @return 	: ArrayList
+	************************************************************************************************/
+	public ArrayList<AdminCategoryDto> categoryDetail(int id) {
 		
+		ArrayList<AdminCategoryDto> list = new ArrayList<AdminCategoryDto>();
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			conn = dataSource.getConnection();
+			String query = 
+							"""
+							select catetoryid, type, subtype from catetory where catetoryid = ? and status = 1
+					"""; 
+			
+
+			ps = conn.prepareStatement(query);
+			
+			ps.setInt(1, id);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				AdminCategoryDto cate = new AdminCategoryDto();
+				cate.setCatetoryid(rs.getInt(1));
+				cate.setType(rs.getString(2));
+				cate.setSubtype(rs.getString(3));
+				
+				list.add(cate);
+			}
+			
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	/************************************************************************************************
+	 * Function : 카테고리 수정
+	 * @param 	: 입력한 대분류, 중분류 
+	 * @return 	: int
+	************************************************************************************************/
+	public int updateCategory(String type, String subtype, int catetoryid) {
+		
+		int num = 0;
+		Connection conn = null;
+		PreparedStatement ps = null;
+		
+		try {
+			conn = dataSource.getConnection();	
+			String query = """
+							update catetory set 
+							type = ?, subtype =?
+							where catetoryid = ?
+
+							""";
+			ps = conn.prepareStatement(query);
+			ps.setString(1, type);
+			ps.setString(2, subtype);
+			ps.setInt(3, catetoryid);
+			
+			ps.executeUpdate();
+			num++;
+			conn.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return num;
+		}
+		return num;
+	}
+	
+	/************************************************************************************************
+	 * Function : 카테고리 삭제
+	 * @param 	: categoryid 
+	 * @return 	: int
+	************************************************************************************************/
+	public int deleteCategory(int catetoryid) {
+		
+		int num = 0;
+		Connection conn = null;
+		PreparedStatement ps = null;
+		
+		try {
+			conn = dataSource.getConnection();	
+			String query = """
+							update catetory set 
+							status = 0
+							where catetoryid = ?
+							
+							""";
+			ps = conn.prepareStatement(query);
+			ps.setInt(1, catetoryid);
+			
+			ps.executeUpdate();
+			num++;
+			conn.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return num;
+		}
+		return num;
 	}
 	
 }

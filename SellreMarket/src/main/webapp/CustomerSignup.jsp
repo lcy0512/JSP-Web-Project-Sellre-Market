@@ -1,3 +1,4 @@
+<%@page import="com.market.util.SHA256"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,6 +12,7 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
 <script src="js/signup.js"></script>
 <script src="js/address.js"></script>
+<script src="js/signUpCondition.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <body>
 	<jsp:include page="header.jsp" />
@@ -34,9 +36,10 @@
 									class="css-u52dqk e1uzxhvi2" value="">
 							</div>
 						</div>
+						<span id="idcheckmessage"></span>
 					</div>
 					<div class="css-1w0ksfz e744wfw2">
-						<button class="css-ufulao e4nu7ef3" type="button">
+						<button class="css-ufulao e4nu7ef3" type="button" id="idDuplicatedCheck">
 							<span class="css-nytqmg e4nu7ef1">중복확인</span>
 						</button>
 					</div>
@@ -54,6 +57,7 @@
 									class="css-u52dqk e1uzxhvi2" value="">
 							</div>
 						</div>
+						
 					</div>
 					<div class="css-1w0ksfz e744wfw2"></div>
 				</div>
@@ -70,6 +74,7 @@
 									value="">
 							</div>
 						</div>
+						<span id="passwordcheck"></span>
 					</div>
 					<div class="css-1w0ksfz e744wfw2"></div>
 				</div>
@@ -86,6 +91,7 @@
 									class="css-u52dqk e1uzxhvi2" value="">
 							</div>
 						</div>
+						<span id="namemessage"></span>
 					</div>
 					<div class="css-1w0ksfz e744wfw2"></div>
 				</div>
@@ -102,11 +108,14 @@
 									class="css-u52dqk e1uzxhvi2" value="">
 							</div>
 						</div>
+						<span id="emailcheckmessage"></span>
 					</div>
 					<div class="css-1w0ksfz e744wfw2">
-						<button class="css-ufulao e4nu7ef3" type="button">
+						<button class="css-ufulao e4nu7ef3" type="button" id="emailDuplicatedCheck">
 							<span class="css-nytqmg e4nu7ef1">중복확인</span>
 						</button>
+						<div class="checkedEmail" value="">
+						</div>
 					</div>
 				</div>
 				<div class="css-1pjgd36 e744wfw6">
@@ -118,9 +127,10 @@
 						<div class="css-jmalg e1uzxhvi6">
 							<div class="css-176lya2 e1uzxhvi3">
 								<input data-testid="input-box" id="mobileNumber" name="mobileNumber" placeholder="숫자만 입력해주세요." type="tel"
-									required="" class="css-u52dqk e1uzxhvi2" value="">
+									required="" class="css-u52dqk e1uzxhvi2" value="" maxlength="11">
 							</div>
 						</div>
+						<span id="phonemessage"></span>
 					</div>
 					<div class="css-1w0ksfz e744wfw2">
 					</div>
@@ -184,22 +194,23 @@
 						<div class="css-18n8lnw e1ke3ehm1">
 							<div class="css-1dkwuq4 e1uzxhvi6">
 								<div height="40" class="css-xsmgyi e1uzxhvi3">
-									<input data-testid="input-box" name="birthYear" placeholder="YYYY" type="text" height="40" class="css-151eme7 e1uzxhvi2" value="">
+									<input data-testid="input-box" id="birthYear" name="birthYear" placeholder="YYYY" type="text" height="40" class="css-151eme7 e1uzxhvi2" value="" maxlength="4">
 								</div>
 							</div>
 							<span class="css-5lnvt6 e1ke3ehm0"></span>
 							<div class="css-1dkwuq4 e1uzxhvi6">
 								<div height="40" class="css-xsmgyi e1uzxhvi3">
-									<input data-testid="input-box" name="birthMonth" placeholder="MM" type="text" height="40" class="css-151eme7 e1uzxhvi2" value="">
+									<input data-testid="input-box"  id="birthMonth" name="birthMonth" placeholder="MM" type="text" height="40" class="css-151eme7 e1uzxhvi2" value="" maxlength="2">
 								</div>
 							</div>
 							<span class="css-5lnvt6 e1ke3ehm0"></span>
 							<div class="css-1dkwuq4 e1uzxhvi6">
 								<div height="40" class="css-xsmgyi e1uzxhvi3">
-									<input data-testid="input-box" name="birthDay" placeholder="DD" type="text" height="40" class="css-151eme7 e1uzxhvi2" value="">
+									<input data-testid="input-box"  id="birthDay" name="birthDay" placeholder="DD" type="text" height="40" class="css-151eme7 e1uzxhvi2" value="" maxlength="2">
 								</div>
 							</div>
 						</div>
+						<span id="birthdatemessage"></span>
 					</div>
 					<div class="css-1w0ksfz e744wfw2"></div>
 				</div>
@@ -227,7 +238,8 @@
 										<path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
 								</div><span>이용약관 동의</span></label><span class="css-64z8en e1sjmfnv5">(필수)</span>
 							</div>
-							<a class="css-7chi73 e1sjmfnv3" style="margin-top: 3px;">약관보기</a>
+							<a class="css-7chi73 e1sjmfnv3" style="margin-top: 3px;" href="header.jsp" target="_blank">약관보기</a>
+							<button class="css-7chi73 e1sjmfnv3" style="margin-top: 3px;" onclick="signUpCondition(1)">약관보기</button>
 						</div>
 					<%-- 2 --%>
 						<div class="css-ov2xfu e1sjmfnv7">
@@ -240,7 +252,7 @@
 											<path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
 									</div><span>개인정보 수집∙이용 동의</span></label><span class="css-64z8en e1sjmfnv5">(필수)</span>
 							</div>
-							<a class="css-7chi73 e1sjmfnv3">약관보기</a>
+							<button class="css-7chi73 e1sjmfnv3" style="margin-top: 3px;" onclick="signUpCondition(2)">약관보기</button>
 						</div>
 					<%-- 3 --%>
 						<div class="css-ov2xfu e1sjmfnv7">

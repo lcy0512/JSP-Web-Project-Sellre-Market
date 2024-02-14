@@ -1,0 +1,124 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+
+.main {
+  display: flex;
+  /* justify-content: center; */
+  height: 1000px;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  margin-top : 100px;
+  margin-bottom : 50px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+	/* display: flex; */
+	width:80%;
+	margin-left:20px;
+	align-items: left;
+	font-size: 27px; /* 제목의 글꼴 크기 조정 */
+	font-weight: 700; /* 제목의 글꼴 굵기 조정 */
+	color: #333333; /* 제목의 글꼴 색상 조정 */
+	margin-top: 0px; /* 제목의 상단 여백 조정 */
+	padding-left: 20px; /* 제목의 왼쪽 여백 조정 */
+	border-left: 2px solid #333333; /* 왼쪽 테두리 설정 */
+	margin-bottom: 80px;
+}
+	
+.btnGroup {
+    text-align: right;
+    width: 80%;
+    margin-right: 5px;
+    margin-bottom: 10px;
+} 
+
+.registerBtn {
+  background-color: #f2f2f2;
+  color: #6F6F67;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.tableContainer {
+  margin: 0 auto;
+  width: 80%;
+}
+
+
+.registerBtn:hover {
+  background-color: #E5E5D1;
+  color : black;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+table th, table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+table td {
+	border: none;
+}
+
+table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  text-align:center;
+}
+
+
+table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+table tr:hover {
+  background-color: #ddd;
+}
+
+ /* 페이징 스타일 */
+#paging {
+       display: flex;
+       justify-content: center;
+       margin-top: 20px;
+       margin-bottom: 150px;
+   } 
+   
+#paging button {
+    background-color: #f2f2f2;
+    border: none;
+    color: #333;
+    padding: 8px 16px;
+    margin: 4px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#paging button:hover {
+    background-color: #f9f9f9;
+}
+
+#paging button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+} 

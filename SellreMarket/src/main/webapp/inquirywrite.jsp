@@ -4,45 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>1:1 문의하기 - 셀리마켓</title>
 </head>
-<script type="text/javascript">
-	function submitinquiry() {
-		let form = document.getElementById("inquiryForm")
-		
-		let questid = form.questid.value;
-		let intitle = form.elements.intitle.value;
-		let incontent = form.elements.incontent.value;
-		
-		if(questid == "none") {
-			alert("문의 유형을 선택해 주세요.")
-			return;
-		}
-		
-		if(intitle == "") {
-			alert("제목을 입력해 주세요.")
-			form.intitle.select();
-			return;
-		}
-		
-		if(incontent == "") {
-			alert("내용을 입력해 주세요.")
-			form.incontent.select();
-			return;
-		}
-		
-		form.submit();
-	}
-</script>
-<%-- 
-<script>
-    document.getElementById('fileInput').addEventListener('change', function() {
-        var fileName = document.getElementById('fileInput').files[0].name;
-        var encodedFileName = encodeURIComponent(fileName);
-        document.getElementById('inputfilename').value = encodedFileName;
-    });
-</script>
---%>
+<script src="js/inquirywrite.js"></script>
 <link rel="stylesheet" href="css/inquirywrite.css" />
 <body>
 	<jsp:include page="header.jsp" />
@@ -74,14 +38,18 @@
 					<div class="css-width"><textarea name="incontent" class="css-textarea" placeholder="내용을 입력해 주세요."></textarea></div>
 				</div>
 				<div class="css-line12"></div>
+				
 				<div class="css-inputrow">
-				<label for="fileInput" style="margin-left: 138px;">사진 업로드</label>
-				<input type="file" name="image" class="form-control" id="fileInput" accept="image/*" value="tlqkf"
-				style="width: 500px; height: 60px; margin-bottom: 25px; margin-left: auto;">
-				<%-- 
-				<input type="button" id="inputfilename" value="사진" onclick="document.getElementById('fileInput').click();">
-				--%>
+					<img id="preview" >
 				</div>
+				
+				<div class="css-inputrow" style="margin-bottom: 0px;">
+					<label for="fileInput" style="margin-left: 138px; margin-top: 10px;">사진 업로드</label>
+					<input type="file" name="image" class="form-control" id="fileInput" accept="image/*"
+				style="width: 500px; height: 60px; margin-bottom: 25px; margin-left: auto; display: none;" onchange="readURL(this)">
+				<input class="css-submitbtn" type="button" id="inputfilename" value="사진 첨부" onclick="document.getElementById('fileInput').click();" style="margin-left: 50px; width: 80px; height: 40px; margin-top: 0px;">
+				</div>
+				
 				<button class="css-submitbtn" type="button" width="120" radius="3"
 				onclick="submitinquiry()">
 					작성완료
