@@ -17,7 +17,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Sellre - Cart from 셀리마켓</title>
 </head>
 <body>
 	<%-- Topbar --%>
