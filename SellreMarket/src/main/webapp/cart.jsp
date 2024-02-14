@@ -354,7 +354,8 @@
 								</style>
 								<span class="css-iinokh ea1mry74">
 									<span id="total_price">
-										${priceSummary.totalPrice()}
+										<fmt:setLocale value="ko_kr"/>
+										<fmt:formatNumber value="${priceSummary.totalPrice()}" type="number" pattern="###,###" />
 									</span>
 									<style data-emotion="css hfgifi">
 										.css-hfgifi {
@@ -387,13 +388,18 @@
 								</style>
 									<div class="css-t4mc5m ea1mry77">
 										<span class="css-vmo0an ea1mry76">상품할인금액</span>
-										<span id="discount_price" class="css-iinokh ea1mry74">${priceSummary.discountPrice()}<span class="css-hfgifi ea1mry72">원</span>
+										<span id="discount_price" class="css-iinokh ea1mry74">
+											<fmt:setLocale value="ko_kr"/>
+											<fmt:formatNumber value="${priceSummary.discountPrice()}" type="number" pattern="- ###,###" />
+											<span class="css-hfgifi ea1mry72">원</span>
 										</span>
 									</div>
 									<div class="css-t4mc5m ea1mry77">
 										<span class="css-vmo0an ea1mry76">배송비</span>
 										<span class="css-iinokh ea1mry74">
-											0<span class="css-hfgifi ea1mry72">원</span>
+											<fmt:setLocale value="ko_kr"/>
+											<fmt:formatNumber value="0" type="number" pattern="+ ###,###" />
+											<span class="css-hfgifi ea1mry72">원</span>
 										</span>
 									</div>
 										<style data-emotion="css 7ygxxm">
@@ -428,7 +434,10 @@
 													line-height: 28px;
 												}
 											</style>
-											<strong id="payment_price" class="css-xmbce4 eepcpbj0">${priceSummary.paymentPrice()}</strong>
+											<strong id="payment_price" class="css-xmbce4 eepcpbj0">
+												<fmt:setLocale value="ko_kr"/>
+												<fmt:formatNumber value="${priceSummary.paymentPrice()}" type="number" pattern="###,###" />
+											</strong>
 											<style data-emotion="css aro4zf">
 												.css-aro4zf {
 													padding-left: 4px;
@@ -512,7 +521,9 @@
 									</style>
 									<div class="css-17j3ye5 euwlw0z0">
 										<span>
-											<div style="width:100%;height:100%"></div>
+											<div style="width:100%;height:100%">
+												주문하기
+											</div>
 										</span>
 									</div>
 								</div>
