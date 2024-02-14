@@ -1,5 +1,5 @@
 <%--
-		(1) Desc : 장바구니 page 제작하기.
+		(1) Desc : 장바구니 page Main Contents 제작하기.
 		(2) Date
 			1) 2024.02.06. (Ver 0.0.0)
 			2) 2024.02.08. (Ver 0.0.1)
@@ -11,7 +11,8 @@
 			2) JTSL 이용하여 장바구니 데이터 불러오기.
 					1. <c> tag 이용하여 데이터 불러오기.
 					2. <fmt> tag 이용하여 원화 표시하기.
-			3) 
+			3) 장바구니 제품 수량 변경 기능 구현하기.
+			4) 장바구니 제품들의 각종 가격 부분 구현하기.
 --%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -23,7 +24,7 @@
 	<head>
 	<meta charSet="utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover"/>
-	<title>Sellre - Cart from 셀리마켓</title>
+	<title>Sellre - Cart from 셀리마켓 Main Contents 제작 page</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport">
 	<meta content="Free HTML Templates" name="keywords">
 	<meta content="Free HTML Templates" name="description">
@@ -353,7 +354,8 @@
 								</style>
 								<span class="css-iinokh ea1mry74">
 									<span id="total_price">
-										${priceSummary.totalPrice()}
+										<fmt:setLocale value="ko_kr"/>
+										<fmt:formatNumber value="${priceSummary.totalPrice()}" type="number" pattern="###,###" />
 									</span>
 									<style data-emotion="css hfgifi">
 										.css-hfgifi {
@@ -386,13 +388,18 @@
 								</style>
 									<div class="css-t4mc5m ea1mry77">
 										<span class="css-vmo0an ea1mry76">상품할인금액</span>
-										<span id="discount_price" class="css-iinokh ea1mry74">${priceSummary.discountPrice()}<span class="css-hfgifi ea1mry72">원</span>
+										<span id="discount_price" class="css-iinokh ea1mry74">
+											<fmt:setLocale value="ko_kr"/>
+											<fmt:formatNumber value="${priceSummary.discountPrice()}" type="number" pattern="- ###,###" />
+											<span class="css-hfgifi ea1mry72">원</span>
 										</span>
 									</div>
 									<div class="css-t4mc5m ea1mry77">
 										<span class="css-vmo0an ea1mry76">배송비</span>
 										<span class="css-iinokh ea1mry74">
-											0<span class="css-hfgifi ea1mry72">원</span>
+											<fmt:setLocale value="ko_kr"/>
+											<fmt:formatNumber value="0" type="number" pattern="+ ###,###" />
+											<span class="css-hfgifi ea1mry72">원</span>
 										</span>
 									</div>
 										<style data-emotion="css 7ygxxm">
@@ -427,7 +434,10 @@
 													line-height: 28px;
 												}
 											</style>
-											<strong id="payment_price" class="css-xmbce4 eepcpbj0">${priceSummary.paymentPrice()}</strong>
+											<strong id="payment_price" class="css-xmbce4 eepcpbj0">
+												<fmt:setLocale value="ko_kr"/>
+												<fmt:formatNumber value="${priceSummary.paymentPrice()}" type="number" pattern="###,###" />
+											</strong>
 											<style data-emotion="css aro4zf">
 												.css-aro4zf {
 													padding-left: 4px;
@@ -511,7 +521,9 @@
 									</style>
 									<div class="css-17j3ye5 euwlw0z0">
 										<span>
-											<div style="width:100%;height:100%"></div>
+											<div style="width:100%;height:100%">
+												주문하기
+											</div>
 										</span>
 									</div>
 								</div>
