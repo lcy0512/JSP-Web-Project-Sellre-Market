@@ -50,7 +50,7 @@
 						<span class="quest-num" id="questNum"></span> 
 					</div>
 					<ul class="css-1887xqd e17w4cfr5">
-						<li class="css-59mmhh e17w4cfr4"><a href="#" onclick="changePage('')"><span class="css-1xyu7j9 e17w4cfr2">매출현황</span></a></li>
+						<li class="css-59mmhh e17w4cfr4"><a href="adminSales.jsp"><span class="css-1xyu7j9 e17w4cfr2">현황차트</span></a></li>
 						<li class="css-59mmhh e17w4cfr4"><a href="admin_product.jsp" ><span class="css-1xyu7j9 e17w4cfr2">제품현황</span></a></li>
 						<li class="css-59mmhh e17w4cfr4"><a href="adminCategory.jsp"><span class="css-1xyu7j9 e17w4cfr2">카테고리</span></a></li>
 						<li class="css-59mmhh e17w4cfr4"><a href="adminBrand.jsp"><span class="css-1xyu7j9 e17w4cfr2">브랜드관리</span></a></li>
