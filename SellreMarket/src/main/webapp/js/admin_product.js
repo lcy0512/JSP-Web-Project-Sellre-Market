@@ -15,7 +15,13 @@ window.onload=function(){
 			type : "POST",
 			url : "adminProductNum.do",
 			success : function(response){
-				document.getElementById('productNum').innerText = response
+				if(response == "0"){
+					document.getElementById('productNum').style.display = 'none';
+				} else {
+					document.getElementById('productNum').style.display = 'block';
+					document.getElementById('productNum').innerText = response	
+				}
+				
 			},
 			 error:function(request, status, error){
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -30,7 +36,12 @@ window.onload=function(){
 			type : "POST",
 			url : "adminQuestNum.do",
 			success : function(response){
-				document.getElementById('questNum').innerText = response
+				if(response == "0"){
+					document.getElementById('questNum').style.display = 'none';
+				} else {
+					document.getElementById('questNum').style.display = 'block';
+					document.getElementById('questNum').innerText = response
+				}
 			},
 			 error:function(request, status, error){
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
