@@ -1,5 +1,5 @@
 <%--
-		(1) Desc : 장바구니 page 제작하기.
+		(1) Desc : 장바구니 page Main Contents 제작하기.
 		(2) Date
 			1) 2024.02.06. (Ver 0.0.0)
 			2) 2024.02.08. (Ver 0.0.1)
@@ -11,7 +11,8 @@
 			2) JTSL 이용하여 장바구니 데이터 불러오기.
 					1. <c> tag 이용하여 데이터 불러오기.
 					2. <fmt> tag 이용하여 원화 표시하기.
-			3) 
+			3) 장바구니 제품 수량 변경 기능 구현하기.
+			4) 장바구니 제품들의 각종 가격 부분 구현하기.
 --%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -23,7 +24,7 @@
 	<head>
 	<meta charSet="utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover"/>
-	<title>Sellre - Cart from 셀리마켓</title>
+	<title>Sellre - Cart from 셀리마켓 Main Contents 제작 page</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport">
 	<meta content="Free HTML Templates" name="keywords">
 	<meta content="Free HTML Templates" name="description">
