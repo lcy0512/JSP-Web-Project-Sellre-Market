@@ -12,12 +12,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="css/adminProductDetail.css" />
 <script src="js/adminProductDetail.js"></script>
-<style>
-
-</style>
-<script>
-
-</script>
 </head>
 <body id="body">
 	<jsp:include page="adminHeader.jsp" flush="false" />
