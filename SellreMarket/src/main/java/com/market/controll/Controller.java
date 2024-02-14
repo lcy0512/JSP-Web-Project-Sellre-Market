@@ -33,6 +33,8 @@ import com.market.command.MCbestProduct;
 import com.market.command.MClogin;
 import com.market.command.MCnewProductPaging;
 import com.market.command.MCommand;
+import com.market.command.MCpaging;
+import com.market.command.MDuplicatedCheck;
 import com.market.command.MInquiryDetail;
 import com.market.command.MInsertInquiry;
 import com.market.command.MLoadInquiryList;
@@ -89,8 +91,6 @@ public class Controller extends HttpServlet {
 		String com = uri.substring(conPath.length());
 		
 		String id = null;
-		// 페이징 처리를 위한
-		int curPage = 0;
 		// 페이지 클릭 시 신제품, 가격순으로 정렬하기 위한 변수
 		String alignCategory = null;
 		// header 카테고리
@@ -331,15 +331,6 @@ public class Controller extends HttpServlet {
 				
 				id = (String) session.getAttribute("id");
 				
-				
-				try {
-					curPage = Integer.parseInt(request.getParameter("curPage"));
-				}
-				catch (Exception e) {
-					curPage = 1;
-				}
-				
-				session.setAttribute("curPage", curPage);
 				session.setAttribute("id", id);
 				
 				// 페이징 처리를 위한
@@ -359,15 +350,6 @@ public class Controller extends HttpServlet {
 				
 				id = (String) session.getAttribute("id");
 				
-				
-				try {
-					curPage = Integer.parseInt(request.getParameter("curPage"));
-				}
-				catch (Exception e) {
-					curPage = 1;
-				}
-				
-				session.setAttribute("curPage", curPage);
 				session.setAttribute("id", id);
 				
 				command = new MCalignRecipeLowPrice();
@@ -385,14 +367,6 @@ public class Controller extends HttpServlet {
 				
 				id = (String) session.getAttribute("id");
 				
-				try {
-					curPage = Integer.parseInt(request.getParameter("curPage"));
-				}
-				catch (Exception e) {
-					curPage = 1;
-				}
-				
-				session.setAttribute("curPage", curPage);
 				session.setAttribute("id", id);
 				
 				command = new MCalignRecipeHighPrice();
@@ -413,14 +387,6 @@ public class Controller extends HttpServlet {
 				
 				System.out.println(id + " controller");
 				
-				try {
-					curPage = Integer.parseInt(request.getParameter("curPage"));
-				}
-				catch (Exception e) {
-					curPage = 1;
-				}
-				
-				session.setAttribute("curPage", curPage);
 				session.setAttribute("id", id);
 				
 				command = new MCnewProductPaging();
@@ -442,14 +408,6 @@ public class Controller extends HttpServlet {
 				
 				id = (String) session.getAttribute("id");
 				
-				try {
-					curPage = Integer.parseInt(request.getParameter("curPage"));
-				}
-				catch (Exception e) {
-					curPage = 1;
-				}
-				
-				session.setAttribute("curPage", curPage);
 				session.setAttribute("id", id);
 				
 				command = new MCalignNewLowPrice();
@@ -467,14 +425,7 @@ public class Controller extends HttpServlet {
 				
 				id = (String) session.getAttribute("id");
 				
-				try {
-					curPage = Integer.parseInt(request.getParameter("curPage"));
-				}
-				catch (Exception e) {
-					curPage = 1;
-				}
 				
-				session.setAttribute("curPage", curPage);
 				session.setAttribute("id", id);
 				
 				command = new MCalignNewHighPrice();
@@ -493,14 +444,6 @@ public class Controller extends HttpServlet {
 				
 				id = (String) session.getAttribute("id");
 				
-				try {
-					curPage = Integer.parseInt(request.getParameter("curPage"));
-				}
-				catch (Exception e) {
-					curPage = 1;
-				}
-				
-				session.setAttribute("curPage", curPage);
 				session.setAttribute("id", id);
 				
 				command = new MCbestProduct();
@@ -519,14 +462,6 @@ public class Controller extends HttpServlet {
 				
 				id = (String) session.getAttribute("id");
 				
-				try {
-					curPage = Integer.parseInt(request.getParameter("curPage"));
-				}
-				catch (Exception e) {
-					curPage = 1;
-				}
-				
-				session.setAttribute("curPage", curPage);
 				session.setAttribute("id", id);
 				
 				command = new MCalignBestLowPrice();
@@ -544,14 +479,6 @@ public class Controller extends HttpServlet {
 				
 				id = (String) session.getAttribute("id");
 				
-				try {
-					curPage = Integer.parseInt(request.getParameter("curPage"));
-				}
-				catch (Exception e) {
-					curPage = 1;
-				}
-				
-				session.setAttribute("curPage", curPage);
 				session.setAttribute("id", id);
 				
 				command = new MCalignBestHighPrice();
@@ -587,6 +514,14 @@ public class Controller extends HttpServlet {
 //				viewPage = "popup.jsp";
 //				
 //				break;
+				
+			
+			case "/paging.do" :
+				System.out.println(request.getAttribute("curPage") + "  ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇ컨트롤ㄹ러");
+				command = new MCpaging();
+				command.execute(request, response);
+				
+				return;
 				
 				
 			// main페이지 카트 클릭
@@ -650,7 +585,12 @@ public class Controller extends HttpServlet {
 				viewPage = "mainPage.do";
 				
 				break;
+			
+			case "/duplicatedCheck.do":
+				command = new MDuplicatedCheck();
+				command.execute(request, response);
 				
+				return;
 			 
 				
 				

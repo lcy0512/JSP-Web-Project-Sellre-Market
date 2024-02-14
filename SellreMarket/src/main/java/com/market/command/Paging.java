@@ -36,10 +36,6 @@ public class Paging implements MCommand {
 			curPage = 1;
 		}
 		
-		System.out.println("Paging curPage dafndsfa    "  + curPage);
-		
-		// 전체 페이지 수를 카운트하여 가져옴
-		int totalProductCount = dao.mainPageCount();
 		// 한 페이지에 몇개를 보여줄 것인가?
 		int countPerPage = 12;
 		// 한 블럭에 몇개의 블럭을 보여줄 것인가?
@@ -49,23 +45,7 @@ public class Paging implements MCommand {
 		// ex) (1-1) * 5 = 0, (2-1) * 5 = 5, 
 		int limitFrom = (curPage - 1) * countPerBlock;
 		
-		System.out.println(limitFrom + "  l mi mit ferom");
-		System.out.println(countPerPage + "  count per page");
 		List<MainViewDto> productDtos = dao.productView(limitFrom, countPerPage);
-		
-		// 블록 페이지 1~5, 6~10
-		// ex) 1~5까지 = 1, 6~10 = 2
-		int blockPage = ((curPage-1) / countPerBlock) + 1;
-		
-		// bloackPage가 1이면 시작 페이지가 '1 2 3 4 5'  2이면 '6 7 8 9 10'
-		int blockStart = (blockPage-1) * countPerBlock + 1;
-		
-		// 마지막 페이지 정하기
-		int endPage = (totalProductCount / countPerPage) == 0 ? totalProductCount / countPerPage : ((totalProductCount / countPerPage) + 1);
-		
-		request.setAttribute("curPage", curPage);
-		request.setAttribute("endPage", endPage);
-		request.setAttribute("blockStart", blockStart);
 		
 		// dao에서 db 불러온 데이터들
 		request.setAttribute("productList", productDtos);

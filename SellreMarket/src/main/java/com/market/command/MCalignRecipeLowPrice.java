@@ -36,7 +36,7 @@ public class MCalignRecipeLowPrice implements MCommand{
 			}
 			
 			// 전체 페이지 수를 카운트하여 가져옴
-			int totalProductCount = dao.newPageCount();
+			int totalProductCount = dao.recipePageCount();
 			// 한 페이지에 몇개를 보여줄 것인가?
 			int countPerPage = 12;
 			// 한 블럭에 몇개의 블럭을 보여줄 것인가?
@@ -58,7 +58,7 @@ public class MCalignRecipeLowPrice implements MCommand{
 			
 			// 수정필요 @@@@@@@@@@@@@@@@@@@@@@@@@@
 			// 마지막 페이지 정하기
-			int endPage = (totalProductCount / countPerPage) == 0 ? totalProductCount / countPerPage : ((totalProductCount / countPerPage) + 1);
+			int endPage = (totalProductCount % countPerPage) == 0 ? totalProductCount / countPerPage : ((totalProductCount / countPerPage) + 1);
 			// 수정필요 @@@@@@@@@@@@@@@@@@@@@@@@@@		
 			request.setAttribute("curPage", curPage);
 			request.setAttribute("endPage", endPage);

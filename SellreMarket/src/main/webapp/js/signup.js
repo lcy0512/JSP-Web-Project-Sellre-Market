@@ -1,5 +1,12 @@
 var isChecked = false;
 let gender;
+// validation
+let idcheck = false;
+let emailcheck = false;
+let passwordcheck = false;
+let namecheck = false;
+let phonecheck = false;
+let birthdatecheck = false;
 
 // HTML 문서의 모든 요소가 사용 가능한 상태가 되었을 때
 document.addEventListener('DOMContentLoaded', function() {
@@ -10,7 +17,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	radioButtons.forEach(function(radioButton) {
 		radioButton.addEventListener('click', function() {
 			// gender값 연결
-			gender = radioButton.value
+			gender = radioButton.value;
+			console.log(gender);
 		});
 	});
 
@@ -38,91 +46,45 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-function checkInput() {
-	let regExpId = /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{6,}$/;
-	let regExpPasswd = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()-=_+])[A-Za-z\d!@#$%^&*()-=_+]{8,}$/;
-	let regExpName = /^[가-힣]*$/;
-	let regExpEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
-	let regExpPhone = /^010\d{8}$/;
+function checkInput(boolean) {
 	let regExpAddress = /^[가-힣0-9 -]*$/;
-	let regExpBirthDate = /^((19|20)\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))$/;
-
+	
+	idcheck = boolean;
+	isChecked = boolean;
+	
 	let form = document.signupForm;
-
-	let id = form.memberId.value;
-	let password = form.password.value;
-	let name = form.name.value;
-	let email = form.email.value;
-	let mobileNumber = form.mobileNumber.value;
+	
 	let address = form.address.value;
 	let detailAddress = form.detailAddress.value;
-	let birthYear = form.birthYear.value;
-	let birthMonth = form.birthMonth.value;
-	let birthDay = form.birthDay.value;
-	let birthdate = birthYear + "-" + birthMonth + "-" + birthDay
-
-	// id
-	if (id === "") {
-		alert("아이디를 입력해주세요.")
-		form.memberId.select()
-		return
+	
+	if(idcheck === false) {
+		alert("아이디 중복 확인을 해주세요.")
+		document.signupForm.memberId.select();
+		return;
 	}
-	if (!regExpId.test(id)) {
-		alert("아이디는 소문자와 숫자로 6자 이상 입력해주세요.")
-		form.memberId.select()
-		return
+	if (passwordcheck === false) {
+		alert("비밀번호가 올바르지 않습니다.")
+		document.signupForm.password.select();
+		return;
 	}
-
-	// password
-	if (password === "") {
-		alert("비밀번호를 입력해주세요.")
-		form.password.select()
-		return
+	if (namecheck === false) {
+		alert("이름이 올바르지 않습니다.")
+		document.signupForm.name.select();
+		return;
 	}
-	if (password.length < 8) {
-		alert("비밀번호는 8자리 이상 입력해주세요.")
-		form.password.select()
-		return
+	if(emailcheck === false) {
+		alert("이메일 중복 확인을 해주세요.")
+		document.signupForm.email.select();
+		return;
 	}
-	if (!regExpPasswd.test(password)) {
-		alert("비밀번호는 적어도 하나의 특수문자와 대문자를 포함해야 합니다.")
-		form.password.select()
-		return
+	if (phonecheck === false) {
+		alert("전화번호가 올바르지 않습니다.")
+		document.signupForm.mobileNumber.select();
+		return;
 	}
-
-	// name
-	if (name === "") {
-		alert("이름을 입력해주세요.")
-		form.name.select()
-		return
-	}
-	if (!regExpName.test(name)) {
-		alert("이름은 한글만 입력해주세요.")
-		form.name.select()
-		return
-	}
-
-	// email
-	if (email === "") {
-		alert("이메일을 입력해주세요.")
-		form.email.select()
-		return
-	}
-	if (!regExpEmail.test(email)) {
-		alert("이메일 형식을 확인해주세요. (예시 : example123@example.com")
-		form.email.select()
-		return
-	}
-
-	// mobileNumber
-	if (mobileNumber === "") {
-		alert("전화번호를 입력해주세요.")
-		form.mobileNumber.select()
-		return
-	}
-	if (!regExpPhone.test(mobileNumber)) {
-		alert("전화번호는 숫자만, 11자리를 입력해주세요.")
-		return
+	if (birthdatecheck === false) {
+		alert("생년월일이 올바르지 않습니다.")
+		return;
 	}
 
 	// address
@@ -140,38 +102,26 @@ function checkInput() {
 		alert("상세주소는 한글과 숫자만 입력해주세요.")
 		return
 	}
-
-	// birthdate
-	if (birthdate === "") {
-		alert("생년월일을 입력해주세요.")
-		return
-	}
-	if (!regExpBirthDate.test(birthdate)) {
-		alert("생년월일은 숫자만 입력해야 하고, 형식을 확인해주세요.")
-		return
-	}
-	if (validateDate(birthdate) === false) {
-		return
-	}
-
+	
+	
 	checkAllCheckboxes();
-
+	
 	if (!isChecked) {
 		alert("이용약관에 동의해야 합니다.");
 		return
 	}
-
+	
 	form.submit();
 }
 
 
 
 function clickCheckBox(checkboxId) {
-	// 체크박스 요소와 해당 아이콘의 path 요소를 가져옵니다.
+	// 체크박스 요소와 해당 아이콘의 path 요소
 	var checkbox = document.getElementById(checkboxId);
 	var path = document.querySelector("#" + checkboxId + " + .css-79hxr7 path");
 
-	// 체크박스가 체크되었는지 확인하고, 그에 따라 아이콘의 색상을 변경합니다.
+	// 체크되었는지 확인, 그에 따라 아이콘의 색상을 변경
 	if (checkbox.checked) {
 		path.setAttribute("fill", "#BABE00"); // 체크되었을 때 아이콘 색상 변경
 		console.log("check!")
@@ -186,21 +136,245 @@ function validateDate(input) {
 	let valiResult = true;
 	// 입력된 날짜와 현재 날짜 비교
 	if (new Date(input) > currentDate) {
-		alert("생년월일이 올바르지 않습니다.")
 		valiResult = false;
 	}
 
 	return valiResult;
 }
 
+// 이용약관 선택 확인
 function checkAllCheckboxes() {
 	var checkboxes = document.querySelectorAll("#checkboxContainer input[type='checkbox']");
 
 	isChecked = true;
 
 	checkboxes.forEach(function(checkbox) {
-		if (!checkbox.checked) { // 만약 체크되지 않은 체크박스가 있다면
+		if (!checkbox.checked) { // 만약 이용약관이 선택이 안됐다면,
 			isChecked = false; // isChecked 변수를 false로 설정
 		}
 	});
 }
+
+$(document).ready(function() {
+	
+	$("#idDuplicatedCheck").click(function() {
+		
+		let wrongword = /^(?!.*\badmin\b).*$/;
+		let regExpId = /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{6,}$/;
+		let userid = $("#memberId").val();
+		
+		if (userid.match(wrongword)) {
+		    let message = "사용할 수 없는 아이디 입니다.";
+		    $("#idcheckmessage").text(message);
+		    $("#idcheckmessage").css("color", "red");
+		    return;
+		}
+		
+		if (!regExpId.test(userid)) {
+			let message = "아이디는 소문자와 숫자로 6자 이상 입력해주세요."
+			$("#idcheckmessage").text(message);
+			$("#idcheckmessage").css("color", "red");
+			return;
+		}
+		
+		$.ajax({
+			method : "POST",
+			url : "duplicatedCheck.do",
+			data : {
+				userid : userid
+			},
+			success : function(response) {
+				if(response === false){
+					let message = "사용 불가능한 아이디 입니다."
+					 $("#idcheckmessage").text(message);
+					 $("#idcheckmessage").css("color", "red");
+				}
+				else {
+					let message = "사용 가능한 아이디 입니다."
+					 $("#idcheckmessage").text(message);
+					 $("#idcheckmessage").css("color", "green");
+					 $("#idDuplicatedCheck").prop("disabled", true); // idDuplicatedCheck 버튼을 비활성화
+					 $("#memberId").prop("readonly", true); // memberId 입력란을 읽기 전용으로 설정
+					idcheck = true;
+				}
+			},
+		})
+		
+	}); // $("#idDuplicatedCheck").click
+	
+	$("#emailDuplicatedCheck").click(function() {
+		
+		let regExpEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+		let wrongword = /\badmin\b/;
+		let email = $("#email").val();
+		
+		if (email.match(wrongword)) {
+		    let message = "사용할 수 없습니다.";
+		    $("#emailcheckmessage").text(message);
+		    $("#emailcheckmessage").css("color", "red");
+		    return;
+		}
+		
+		if (!regExpEmail.test(email)) {
+			let message = "이메일 형식을 확인해주세요."
+			$("#emailcheckmessage").text(message);
+			$("#emailcheckmessage").css("color", "red");
+		}
+		else {
+			$.ajax({
+				method : "POST",
+				url : "duplicatedCheck.do",
+				data : {
+					email : email
+				},
+				success : function(response) {
+					if(response === false){
+						let message = "사용 불가능한 이메일입니다."
+						 $("#emailcheckmessage").text(message);
+						 $("#emailcheckmessage").css("color", "red");
+					}
+					else {
+						let message = "사용 가능한 이메일입니다."
+						 $("#emailcheckmessage").text(message);
+						 $("#emailcheckmessage").css("color", "green");
+						 $("#emailDuplicatedCheck").prop("disabled", true); // idDuplicatedCheck 버튼을 비활성화
+						 $("#email").prop("readonly", true); // memberId 입력란을 읽기 전용으로 설정
+						 $("#checkedEmail").context = "인증 메일을 확인 해주세요.";
+						emailcheck = true;
+						
+						
+					}
+				},
+			})
+		}
+	/*	
+	$("#emailDuplicatedCheck").click(function() {
+		
+		let regExpEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+		let wrongword = /\badmin\b/;
+		let email = $("#email").val();
+		
+		if (email.match(wrongword)) {
+		    let message = "사용할 수 없습니다.";
+		    $("#emailcheckmessage").text(message);
+		    $("#emailcheckmessage").css("color", "red");
+		    return;
+		}
+		
+		if (!regExpEmail.test(email)) {
+			let message = "이메일 형식을 확인해주세요."
+			$("#emailcheckmessage").text(message);
+			$("#emailcheckmessage").css("color", "red");
+		}
+		else {
+			$.ajax({
+				method : "POST",
+				url : "duplicatedCheck.do",
+				data : {
+					email : email
+				},
+				success : function(response) {
+					if(response === false){
+						let message = "사용 불가능한 이메일입니다."
+						 $("#emailcheckmessage").text(message);
+						 $("#emailcheckmessage").css("color", "red");
+					}
+					else {
+						let message = "사용 가능한 이메일입니다."
+						 $("#emailcheckmessage").text(message);
+						 $("#emailcheckmessage").css("color", "green");
+						 $("#emailDuplicatedCheck").prop("disabled", true); // idDuplicatedCheck 버튼을 비활성화
+						 $("#email").prop("readonly", true); // memberId 입력란을 읽기 전용으로 설정
+						emailcheck = true;
+						
+						
+					}
+				},
+			})
+		}
+		*/
+		
+		
+	}); // $("#emailDuplicatedCheck").click
+	
+	 $("#passwordConfirm").on("input", function() {
+		passwordcheck = false;
+        // 입력된 비밀번호와 확인용 비밀번호
+        let regExpPasswd = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()-=_+])[A-Za-z\d!@#$%^&*()-=_+]{8,}$/;
+        let password = $("#password").val();
+        let checkPassword = $("#passwordConfirm").val();
+        
+        if(!regExpPasswd.test(password)){
+			let message = "하나의 특수문자와 대문자를 포함해야 합니다.";
+			$("#passwordcheck").text(message).css("color", "red");
+		}
+		else {
+	        // 비밀번호와 확인용 비밀번호 비교
+	        if(password === checkPassword) {
+				let message = "비밀번호가 일치합니다.";
+	            $("#passwordcheck").text(message).css("color", "green");
+	            passwordcheck = true;
+	        } else {
+				let message = "비밀번호가 일치하지 않습니다.";
+	            $("#passwordcheck").text(message).css("color", "red");
+	        }
+		}
+    }); //  $("#passwordConfirm").on("input"
+    
+	$("#name").change(function() {
+		namecheck = false;
+		// 입력된 이름
+		let name = $("#name").val();
+		let regExpName = /^[가-힣]*$/;
+
+		if (!regExpName.test(name)) {
+			let message = "이름은 한글만 입력해주세요.";
+			$("#namemessage").text(message).css("color", "red");
+		} else {
+			$("#namemessage").text(""); // 메시지 지우기
+			namecheck = true;
+		}
+	}); //  $("#name").change
+	
+	$("#mobileNumber").change(function() {
+		phonecheck = false;
+		let phone = $("#mobileNumber").val();
+		let regExpPhone = /^010\d{8}$/;
+
+		if (!regExpPhone.test(phone)) {
+			let message = "전화번호는 숫자만, 11자리를 입력해주세요.";
+			$("#phonemessage").text(message).css("color", "red");
+		} else {
+			$("#phonemessage").text(""); // 메시지 지우기
+			phonecheck = true;
+		}
+	}); // $("#mobileNumber").change
+	
+	$("#birthYear, #birthMonth, #birthDay").change(function() {
+		birthdatecheck = false;
+		let regExpBirthDate = /^((19|20)\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))$/;
+
+		let birthYear = $("#birthYear").val();
+		let birthMonth = $("#birthMonth").val();
+		let birthDay = $("#birthDay").val();
+		let birthdate = birthYear + "-" + birthMonth + "-" + birthDay;
+
+		if (!regExpBirthDate.test(birthdate)) {
+			let message = "숫자만 입력해야 하고, 형식을 확인해주세요.";
+			$("#birthdatemessage").text(message).css("color", "red");
+		} 
+		else {
+			if(validateDate(birthdate) === false) {
+				let message = "미래의 날짜입니다.";
+				$("#birthdatemessage").text(message).css("color", "red");
+			}
+			else {
+				$("#birthdatemessage").text(""); // 메시지 지우기
+				birthdatecheck = true;
+			}
+		}
+	}); // $("#mobileNumber").change
+    
+})
+
+

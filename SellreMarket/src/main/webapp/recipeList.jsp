@@ -222,72 +222,8 @@
 	<!-- Products End -->
 
 	<!-- Paging Start -->
-	<%
-		int i = 1;
-	%>
-	<c:if test="${alignCategory eq ''}">
-		<div style="display: flex; justify-content: center; font-size: 20px; gap: 0 10px;">
-			<!-- 뒤로 가기 -->
-			<c:if test="${curPage > 1}">
-				<a href="recipePage.do?curPage=${curPage - 1}" class="prev"> << </a>
-			</c:if>
-			
-			<!-- 페이지 블록 수 만큼 숫자 찍기 -->
-			<c:forEach begin="${blockStart}" end="${endPage}">
-				<%
-					out.print("<a href='recipePage.do?curPage=" + i + "'>" + i + "</a>");
-					i++;
-				%>
-			</c:forEach>
-			
-			<!-- 앞으로 가기 -->
-			<c:if test="${curPage < endPage}">
-				<a href="recipePage.do?curPage=${curPage + 1} " class="next"> >></a>
-			</c:if>
-		</div>
-	</c:if>
-	
-	
-	<c:if test="${alignCategory eq '낮은 가격순'}">
-		<div style="display: flex; justify-content: center; font-size: 20px; gap: 0 10px;">
-			<!-- 뒤로 가기 -->
-			<c:if test="${curPage > 1}">
-				<a href="alignRecipeLowPrice.do?curPage=${curPage - 1}" class="prev"> << </a>
-			</c:if>
-			
-			<!-- 페이지 블록 수 만큼 숫자 찍기 -->
-			<c:forEach begin="${blockStart}" end="${endPage}">
-				<%
-					out.print("<a href='alignRecipeLowPrice.do?curPage=" + i + "'>" + i + "</a>");
-					i++;
-				%>
-			</c:forEach>
-			
-			<!-- 앞으로 가기 -->
-			<a href="alignRecipeLowPrice.do?curPage=${curPage + 1}" class="next"> >></a>
-		</div>
-	</c:if>
-	
-	
-	<c:if test="${alignCategory eq '높은 가격순'}">
-		<div style="display: flex; justify-content: center; font-size: 20px; gap: 0 10px;">
-			<!-- 뒤로 가기 -->
-			<c:if test="${curPage > 1}">
-				<a href="alignRecipeHighPrice.do?curPage=${curPage - 1}" class="prev"> << </a>
-			</c:if>
-			
-			<!-- 페이지 블록 수 만큼 숫자 찍기 -->
-			<c:forEach begin="${blockStart}" end="${endPage}">
-				<%
-					out.print("<a href='alignRecipeHighPrice.do?curPage=" + i + "'>" + i + "</a>");
-					i++;
-				%>
-			</c:forEach>
-			
-			<!-- 앞으로 가기 -->
-			<a href="alignRecipeHighPrice.do?curPage=${curPage + 1}" class="next"> >></a>
-		</div>
-	</c:if>
+	<div id="paging"></div>
+	<script src="js/paging.js"></script>
 	<!-- Paging End -->
 
 

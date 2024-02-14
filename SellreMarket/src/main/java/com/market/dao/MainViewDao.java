@@ -198,7 +198,7 @@ public class MainViewDao {
 					+ "join product p on p.productid = pr.productid "
 					+ "left join event e on e.eventid = p.eventid "
 					+ "join price i on i.productid = p.productid "
-					+ "group by y.yname, y.ysrc, y.ytitle, dPrice, price, ry.recipeid "
+					+ "group by y.yname, y.ysrc, y.ytitle, dPrice, price, ry.recipeid, salerate "
 					+ "order by dPrice desc "
 					+ "limit ?, ?";
 			
@@ -263,7 +263,7 @@ public class MainViewDao {
 					+ "join product p on p.productid = pr.productid "
 					+ "left join event e on e.eventid = p.eventid "
 					+ "join price i on i.productid = p.productid "
-					+ "group by y.yname, y.ysrc, y.ytitle, dPrice, price, ry.recipeid "
+					+ "group by y.yname, y.ysrc, y.ytitle, dPrice, price, ry.recipeid, salerate "
 					+ "order by dPrice "
 					+ "limit ?, ?";
 			
@@ -750,7 +750,7 @@ public class MainViewDao {
 	}
 	
 	// 메인 paging을 위한 count 세기
-	public int mainPageCount() {
+	public int recipePageCount() {
 		int amount = 0;
 		
 		Connection con = null;
@@ -803,15 +803,21 @@ public class MainViewDao {
 		try {
 			con = dataSource.getConnection();
 			
-			String query = "SELECT COUNT(*) AS count "
-					+ "FROM ( "
-					+ "    SELECT DISTINCT pr.price, p.pname, pi.image, pl.likecount "
-					+ "    FROM price pr "
-					+ "    JOIN product p ON p.productid = pr.productid "
-					+ "    JOIN product_image pi ON pi.productid = p.productid "
-					+ "    LEFT JOIN productlike pl ON pl.productid = p.productid "
-					+ "    ORDER BY p.pname DESC "
-					+ ") AS subquery";
+			String query = "select count(*) from("
+					+ "select distinct ( "
+					+ "					CASE WHEN p.eventid = e.eventid THEN FORMAT(price - (price * salerate), 0) "
+					+ "					       ELSE FORMAT(price, 0) "
+					+ "					  END "
+					+ "					) as dPrice, format(price, 0) as price, p.pname, pi.image, sum(pl.likecount) as likecount, "
+					+ "					p.productid, format((e.salerate * 100), 0) as salerate "
+					+ "					from product p "
+					+ "					left join price pr on pr.productid = p.productid "
+					+ "					left join product_image pi on pi.productid = p.productid "
+					+ "					left join productlike pl on pl.productid = p.productid "
+					+ "					left join event e on e.eventid = p.eventid "
+					+ "					where pinsertdate >= now() - interval 2 week and pinsertdate <= now() "
+					+ "					group by dPrice, price, p.pname, pi.image, p.productid "
+					+ "					order by p.productid desc ) as subquery";
 			
 			ps = con.prepareStatement(query);
 			rs = ps.executeQuery();
