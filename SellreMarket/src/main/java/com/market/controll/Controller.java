@@ -32,6 +32,7 @@ import com.market.command.MAdminEventDelete;
 import com.market.command.MAdminEventDetail;
 import com.market.command.MAdminEventInsert;
 import com.market.command.MAdminEventUpdate;
+import com.market.command.MAdminGenderChart;
 import com.market.command.MAdminGetCategory;
 import com.market.command.MAdminGetPackKind;
 import com.market.command.MAdminGetPackType;
@@ -39,6 +40,7 @@ import com.market.command.MAdminGetSubCategory;
 import com.market.command.MAdminOrder;
 import com.market.command.MAdminOrderDetail;
 import com.market.command.MAdminOrderProduct;
+import com.market.command.MAdminPopularChart;
 import com.market.command.MAdminProductCount;
 import com.market.command.MAdminProductDelete;
 import com.market.command.MAdminProductDetail;
@@ -49,6 +51,8 @@ import com.market.command.MAdminQuest;
 import com.market.command.MAdminQuestDetail;
 import com.market.command.MAdminQuestInsert;
 import com.market.command.MAdminQuestNum;
+import com.market.command.MAdminSaleChart;
+import com.market.command.MAdminUserChart;
 import com.market.command.MCalignBestHighPrice;
 import com.market.command.MCalignBestLowPrice;
 import com.market.command.MCalignNewHighPrice;
@@ -86,7 +90,7 @@ import com.market.dto.AdminGetCategoryDto;
 import com.market.dto.AdminGetPackTypeDto;
 import com.market.dto.AdminProductDto;
 import com.market.dto.AdminQuestDto;
-import com.market.dto.EventDto;
+import com.market.dto.AdminSaleDto;
 
 /**
  * Servlet implementation class Controller
@@ -1125,6 +1129,42 @@ public class Controller extends HttpServlet {
 			out.print(new Gson().toJson(updateBNum));
 			out.flush();
 			return; 
+			
+		// 관리자 매출차트
+		case "/showSaleChart.do":
+			command = new MAdminSaleChart();
+			command.execute(request, response);
+			ArrayList<AdminSaleDto> saleList = (ArrayList) request.getAttribute("list");
+			out.print(new Gson().toJson(saleList));
+			out.flush();
+			return;
+
+		// 관리자 인기 차트 top5
+		case "/showPopular.do":
+			command = new MAdminPopularChart();
+			command.execute(request, response);
+			ArrayList<AdminSaleDto> popList = (ArrayList) request.getAttribute("list");
+			out.print(new Gson().toJson(popList));
+			out.flush();
+			return;
+
+		// 관리자 가입 성비 조회
+		case "/showGender.do":
+			command = new MAdminGenderChart();
+			command.execute(request, response);
+			ArrayList<AdminSaleDto> genderList = (ArrayList) request.getAttribute("list");
+			out.print(new Gson().toJson(genderList));
+			out.flush();
+			return;
+
+		// 관리자 가입 성비 조회
+		case "/showUser.do":
+			command = new MAdminUserChart();
+			command.execute(request, response);
+			ArrayList<AdminSaleDto> userList = (ArrayList) request.getAttribute("list");
+			out.print(new Gson().toJson(userList));
+			out.flush();
+			return;
 			
 		default:
 			break;
