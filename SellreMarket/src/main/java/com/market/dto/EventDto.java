@@ -28,8 +28,7 @@ public class EventDto {
 		this.status = status;
 	}
 	
-	
-
+	// EventListDao.eventDetail()
 	public EventDto(String eventid, String ename, String econtent, String inputdate, String startdate, String enddate,
 			String productid, String pname, String img, String category, String status) {
 		super();

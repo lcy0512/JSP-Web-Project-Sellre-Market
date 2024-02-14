@@ -19,11 +19,73 @@
 						<h2 class="css-1268zpe ed9qr671">공지사항</h2>
 					</div>
 				</div>
-				<c:forEach items="${eventDetail}" var="detail">
-					${detail.pname}
-				</c:forEach>
+				
+				<div class="css-inputrow" style="margin-bottom: 10px;">
+					<div class="css-titlename">번호</div>
+						<div class="css-width"><input type="text" value="${detailDto.eventid}" style="height: 30px; width: 80px; padding-left: 10px; margin-left: 57px; margin-top: 6px; margin-bottom: 10px; border: solid; border-color: lightgrey; border-width: 1px;" readonly="readonly"></div>
+						<div class="css-titlename">작성자</div>
+						<div class="css-width"><input type="text" value="셀리마켓" style="height: 30px; width: 250px; padding-left: 10px; margin-top: 6px; margin-left: 30px; border: solid; border-color: lightgrey; border-width: 1px;" readonly="readonly"></div>
+					</div>
+				<div>
+					<div class="css-inputrow" style="margin-bottom: 10px;">
+						<div class="css-titlename">작성일자</div>
+						<div class="css-width"><input type="text" value="${detailDto.inputdate}" style="height: 30px; width: 250px; padding-left: 10px; margin-top: 6px; margin-bottom: 10px; margin-left: 57px; border: solid; border-color: lightgrey; border-width: 1px;" readonly="readonly"></div>
+						<div class="css-titlename">진행여부</div>
+						<div class="css-width"><input type="text" value="${detailDto.status}" style="height: 30px; width: 250px; padding-left: 10px; margin-top: 6px; margin-left: 30px; border: solid; border-color: lightgrey; border-width: 1px;" readonly="readonly"></div>
+					</div>
+					</div>
+					<c:choose>
+						<c:when test="${detailDto.startdate eq ''}"></c:when>
+						<c:otherwise>
+							<div class="css-inputrow" style="margin-bottom: 10px;">
+								<div class="css-titlename">시작날짜</div>
+								<div class="css-width"><input type="text" value="${detailDto.startdate}" style="height: 30px; width: 250px; padding-left: 10px; margin-top: 6px; margin-left: 57px; border: solid; border-color: lightgrey; border-width: 1px;" readonly="readonly"></div>
+								<span style="margin-top : 15px;">~</span>
+								<div class="css-titlename">종료날짜</div>
+								<div class="css-width"><input type="text" value="${detailDto.enddate}" style="height: 30px; width: 250px; padding-left: 10px; margin-top: 6px; margin-left: 30px; border: solid; border-color: lightgrey; border-width: 1px;" readonly="readonly"></div>
+							</div>
+						</c:otherwise>
+					</c:choose>
+					<c:choose>
+						<c:when test="${detailDto.category eq 2}">
+							<div class="css-inputrow">
+								<div class="css-titlename">제목</div>
+								<div class="css-width"><input type="text" value="[공지]  ${detailDto.ename}" style="height: 30px; width: 634px; padding-left: 10px; margin-top: 6px; border: solid; border-color: lightgrey; border-width: 1px;" readonly="readonly"></div>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div class="css-inputrow">
+								<div class="css-titlename">제목</div>
+								<div class="css-width"><input type="text" value="[이벤트]  ${detailDto.ename}" style="height: 30px; width: 634px; padding-left: 10px; margin-top: 6px; border: solid; border-color: lightgrey; border-width: 1px;" readonly="readonly"></div>
+							</div>
+						</c:otherwise>
+					</c:choose>
+					<c:choose>
+						<c:when test="${detailDto.pname eq null}"></c:when>
+						<c:otherwise>
+							<div class="css-inputrow">
+								<div class="css-titlename">적용 상품</div>
+								<div class="css-width">
+									<input type="text" style="height: 30px; width: 250px; padding-left: 10px; margin-top: 6px; border: solid; border-color: lightgrey; border-width: 1px;" readonly="readonly" value="${detailDto.pname}">
+									<a href="#" style="margin-left: 30px; text-decoration: underline; font-weight: bold; color: blue;">상품 보러가기</a>
+									</div>
+							</div>
+						</c:otherwise>
+					</c:choose>
+					<div class="css-inputrow">
+						<div class="css-titlename">내용</div>
+						<div class="css-width"><textarea id="contentarea" class="css-textarea" style="border: solid; border-color: lightgrey; border-width: 1px; padding-left: 10px;" rows="" cols="" readonly="readonly">${detailDto.econtent}</textarea>
+						</div>
+					</div>
+					<div class="css-inputrow">
+						<div class="css-titlename">첨부파일</div>
+						<img class="css-width" src="${pageContext.request.contextPath}/image/event/new/${detailDto.img}" alt="첨부파일">
+					</div>
+					<div class="css-inputrow" style="border-bottom: solid; border-bottom-width: 2px;"></div>
+					<div class="css-inputrow" style="justify-content: right;">감사합니다.</div>
+				</div>
 			</div>
 		</div>
-	</div>
+	<jsp:include page="footer.html" />
 </body>
 </html>

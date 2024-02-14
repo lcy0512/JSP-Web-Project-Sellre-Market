@@ -31,7 +31,7 @@ function createEventList(data) {
 			ul += "<div class='css-fzefrb e1cfowvj2'>[공지] " + data.eventList[i].ename + "</div>"
 		}
 		else {
-			ul += "<div class='css-fzefrb e1cfowvj2c'>[안내] " + data.eventList[i].ename + "</div>"
+			ul += "<div class='css-fzefrb e1cfowvj2c'>[이벤트] " + data.eventList[i].ename + "</div>"
 		}		
 		
 		ul += "<div class='css-3d2kks eß1cfowvj2'>셀리마켓</div>"

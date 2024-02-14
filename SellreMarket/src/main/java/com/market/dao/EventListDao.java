@@ -85,8 +85,9 @@ DataSource dataSource;
 		ResultSet resultset = null;
 		
 		String query = "select e.eventid,e.ename,e.econtent,e.inputdate,e.startdate,e.enddate,e.salerate,e.productid,p.pname,e.img,e.category,e.status "
-					 + "from event e, product p "
-					 + "where e.productid = p.productid and e.eventid = ?";
+					 + "from event e "
+				 	 + "left join product p on e.productid = p.productid "
+					 + "where e.eventid = ?";
 		
 		try {
 			connection = dataSource.getConnection();
@@ -105,13 +106,23 @@ DataSource dataSource;
 				String enddate = resultset.getString("e.enddate");
 				String productid = resultset.getString("e.productid");
 				String pname = resultset.getString("p.pname");
-				String img = resultset.getString("p.img");
+				String img = resultset.getString("e.img");
 				String category = resultset.getString("e.category");
 				String status = resultset.getString("status");
 				
 				inputdate = inputdate.substring(0, 10);
-				startdate = inputdate.substring(0, 10);
-				enddate = inputdate.substring(0, 10);
+				try {
+					startdate = startdate.substring(0, 10);
+					enddate = enddate.substring(0, 10);
+				}catch(Exception i) {
+					startdate = "";
+					enddate = "";
+					//i.printStackTrace();
+				}
+				
+				status = status.equals("1") ? "진행중" : "종료";
+				
+				System.out.println("eventid : " + event_id);
 				
 				dto = new EventDto(event_id, ename, econtent, inputdate, startdate, enddate, productid, pname, img, category, status);
 				
