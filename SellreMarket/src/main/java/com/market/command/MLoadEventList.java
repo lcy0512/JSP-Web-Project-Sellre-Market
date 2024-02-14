@@ -19,6 +19,9 @@ public class MLoadEventList implements MCommand {
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		EventListDao dao = new EventListDao();
 		
+		// 검색 할 키워드
+		String keyword = request.getParameter("keyword");
+		
 		// 한 페이지에 몇 개의 ROW를 보여줄 것인지
 		int pagePerCount = 10;
 		
@@ -30,10 +33,10 @@ public class MLoadEventList implements MCommand {
 		}catch(Exception e) {
 			curPage = 1;
 		}
-		System.out.println("curPage : " + curPage);
+		
 		// 총 데이터의 갯수
 		int totalRowCount = 0;
-		totalRowCount = dao.totalRowCount();
+		totalRowCount = dao.totalRowCount(keyword);
 		
 		// 전체 페이지 수
 		// 85개의 데이터 수 / 10 + 1 = 총 9p
@@ -55,20 +58,17 @@ public class MLoadEventList implements MCommand {
 		// curPage < 5 이면, (n / 5) + 1 = 1임.
 		// 따라서 1 <= curPage <= 5 이면, curBlockNo = 1
 		int curBlockNo = curPage % (pagePerCount/2) == 0 ? (curPage / (pagePerCount/2)) : ((curPage / (pagePerCount/2)) + 1); 
-		System.out.println("curBlockNo : " + curBlockNo);
 		
 		// 한 블럭의 시작 페이지와 끝 페이지
 		// << [1,2,3,4,5] >> , curBlockNo = 1 이면, 1p 부터 시작, 5p까지
 		// << [6,7,8,9,10] >> ,curBlockNo = 2 이면, 6p 부터 시작
 		int blockStartPage = 1 + (curBlockNo - 1) * (pagePerCount/2);
 		int blockEndPage = blockStartPage + (pagePerCount/2) - 1;
-		System.out.println("block Start : " + blockStartPage);
-		System.out.println("block End : " + blockEndPage);
 		
-		ArrayList<EventDto> eventList = dao.eventList(startIndex);
+		
+		ArrayList<EventDto> eventList = dao.eventList(startIndex,keyword);
 		
 		Map<String, Object> data = new HashMap<String, Object>();
-		
 		
 		data.put("eventList", eventList);
 		data.put("totalPage", totalPage);

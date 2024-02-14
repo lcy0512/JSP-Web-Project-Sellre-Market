@@ -26,19 +26,22 @@ DataSource dataSource;
 		}
 	}
 	
-	public ArrayList<EventDto> eventList(int startIndex) {
+	public ArrayList<EventDto> eventList(int startIndex, String keyword) {
 		ArrayList<EventDto> dtos = new ArrayList<EventDto>();
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultset = null;
 		
-		String query = "select eventid,ename,inputdate,category,status from event order by inputdate desc limit ?,10";
+		String query = "select eventid,ename,inputdate,category,status from event where ename like ? or eventid like ? or inputdate like ? order by inputdate desc limit ?,10";
 		 
 		try {
 			connection = dataSource.getConnection();
 			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setInt(1, startIndex);
+			preparedStatement.setString(1, "%" + keyword + "%");
+			preparedStatement.setString(2, "%" + keyword + "%");
+			preparedStatement.setString(3, "%" + keyword + "%");
+			preparedStatement.setInt(4, startIndex);
 			
 			resultset = preparedStatement.executeQuery();
 			
@@ -132,18 +135,24 @@ DataSource dataSource;
 		return dto;
 	}
 	
-	public int totalRowCount() {
+	public int totalRowCount(String keyword) {
 		int result = 0;
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultset = null;
 		
-		String query = "select COUNT(eventid) as count from event";
+		String query = "select COUNT(eventid) as count from event "
+					 + "where ename like ? or eventid like ? or inputdate like ?";
+		
 		 
 		try {
 			connection = dataSource.getConnection();
 			preparedStatement = connection.prepareStatement(query);
+			
+			preparedStatement.setString(1, "%" + keyword + "%");
+			preparedStatement.setString(2, "%" + keyword + "%");
+			preparedStatement.setString(3, "%" + keyword + "%");
 			
 			resultset = preparedStatement.executeQuery();
 			

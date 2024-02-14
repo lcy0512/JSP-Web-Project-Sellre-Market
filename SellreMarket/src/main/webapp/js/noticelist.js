@@ -22,7 +22,8 @@ function createEventList(data) {
 	console.log("category : " + data.eventList[i].category)
 		
 		ul += "<li>" 
-			+ "<a href='#' onclick='eventdetail(\"" + data.eventList[i].eventid + "\")'>" 
+//			+ "<a href='#' onclick='eventdetail(\"" + data.eventList[i].eventid + "\")'>" 
+			+ "<a href='noticedetail.do?eventid=" + data.eventList[i].eventid + "'>" 
 			+ "<div class='css-14yglsw e1cfowvj4'>"
 			+ "<div class='css-3o6rrk e1cfowvj2'>" + data.eventList[i].eventid +"</div>";
 
@@ -95,13 +96,15 @@ function createEventList(data) {
 function pageNum(page) {
 	
 	let curPage = page;
+	let keyword = $("#searchkeyword").val();
 	
 	// AJAX 요청
 	$.ajax({
 		type : "POST",
 		url : "noticelist.do",
 		data : {
-			curPage : curPage
+			curPage : curPage,
+			keyword : keyword
 			},
 		success : function(response) {
 			createEventList(response);
@@ -111,4 +114,3 @@ function pageNum(page) {
 		}
 	}) // $.ajax
 }
-

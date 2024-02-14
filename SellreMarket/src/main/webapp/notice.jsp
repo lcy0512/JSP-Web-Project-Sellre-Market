@@ -8,6 +8,8 @@
 <title>공지사항 - 셀리마켓</title>
 </head>
 <link rel="stylesheet" href="css/notice.css" />
+<link rel="stylesheet" href="css/individualInquiry.css" />
+<link rel="stylesheet" href="css/inquirywrite.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="js/noticelist.js"></script>
 <body>
@@ -28,30 +30,16 @@
 				<div width="100" class="css-16tcewl e16adls20">작성자</div>
 				<div width="100" class="css-16tcewl e16adls20">작성일</div>
 			</div>
-		<%--	<ul class="css-1fttcpj e1cfowvj5">
-			<c:forEach items="${EventList}" var="eventlist">
-				<li>
-				<a href="#" onclick="eventdetail('${eventlist}')">
-					<div class="css-14yglsw e1cfowvj4">
-						<div class="css-3o6rrk e1cfowvj2">${eventlist.eventid}</div>
-			<c:choose>
-				<c:when test="${eventlist.category eq 2}">
-					<div class="css-fzefrb e1cfowvj2">[공지] ${eventlist.ename}</div>
-				</c:when>
-				<c:otherwise>
-					<div class="css-fzefrb e1cfowvj2">[안내] ${eventlist.ename}</div>
-				</c:otherwise>
-			</c:choose>
-						<div class="css-3d2kks eß1cfowvj2">셀리마켓</div>
-						<div class="css-b1hszl e1cfowvj2">${eventlist.inputdate}</div>
-					</div>
-				</a>
-				</li>
-				</c:forEach>
-			</ul> --%>
 			<ul class='css-1fttcpj e1cfowvj5' id="ulinput">
 			</ul>
 			<br><br><br>
+			<div class="css-inputrow">
+				<input type="text" id="searchkeyword" name="searchkeyword" placeholder="검색할 단어를 입력해주세요." style="width: 350px; height: 44px; margin-left: 150px; padding-left: 10px;" value="">
+				<button type="button" class="css-1ibxj4m" style="margin-left: 30px;" onclick="pageNum(1)">
+					<span>검색하기</span>
+				</button>
+			</div>
+			<br><br>
 			<div id="block" style="text-align: center;"></div>
 		</div>
 		<br><br><br>
