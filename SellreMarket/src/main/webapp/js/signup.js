@@ -239,11 +239,61 @@ $(document).ready(function() {
 						 $("#emailcheckmessage").css("color", "green");
 						 $("#emailDuplicatedCheck").prop("disabled", true); // idDuplicatedCheck 버튼을 비활성화
 						 $("#email").prop("readonly", true); // memberId 입력란을 읽기 전용으로 설정
+						 $("#checkedEmail").context = "인증 메일을 확인 해주세요.";
 						emailcheck = true;
+						
 					}
 				},
 			})
 		}
+		
+	/*	
+	$("#emailDuplicatedCheck").click(function() {
+		
+		let regExpEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+		let wrongword = /\badmin\b/;
+		let email = $("#email").val();
+		
+		if (email.match(wrongword)) {
+		    let message = "사용할 수 없습니다.";
+		    $("#emailcheckmessage").text(message);
+		    $("#emailcheckmessage").css("color", "red");
+		    return;
+		}
+		
+		if (!regExpEmail.test(email)) {
+			let message = "이메일 형식을 확인해주세요."
+			$("#emailcheckmessage").text(message);
+			$("#emailcheckmessage").css("color", "red");
+		}
+		else {
+			$.ajax({
+				method : "POST",
+				url : "duplicatedCheck.do",
+				data : {
+					email : email
+				},
+				success : function(response) {
+					if(response === false){
+						let message = "사용 불가능한 이메일입니다."
+						 $("#emailcheckmessage").text(message);
+						 $("#emailcheckmessage").css("color", "red");
+					}
+					else {
+						let message = "사용 가능한 이메일입니다."
+						 $("#emailcheckmessage").text(message);
+						 $("#emailcheckmessage").css("color", "green");
+						 $("#emailDuplicatedCheck").prop("disabled", true); // idDuplicatedCheck 버튼을 비활성화
+						 $("#email").prop("readonly", true); // memberId 입력란을 읽기 전용으로 설정
+						emailcheck = true;
+						
+						
+					}
+				},
+			})
+		}
+		*/
+		
 	}); // $("#emailDuplicatedCheck").click
 	
 	 $("#passwordConfirm").on("input", function() {

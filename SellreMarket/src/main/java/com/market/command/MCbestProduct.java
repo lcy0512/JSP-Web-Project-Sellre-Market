@@ -21,20 +21,21 @@ public class MCbestProduct implements MCommand{
 	4. Description : best제품 body 페이지 데이터 가져오기 및 페이징 처리 
 */
 		
-		HttpSession session = request.getSession();
 		
 		MainViewDao dao = new MainViewDao();
 		
 		int curPage = 0;
 		
+		System.out.println(request.getAttribute("curPage") + " curPage adsfkalsdfnlasnfadnsfnal");
 		// 처음에 받아오는 페이지가 값이 없는 경우는 1로 설정하기 위한 트라이
 		try {
-			curPage = (int) (session.getAttribute("curPage"));
+			curPage = (int) (request.getAttribute("curPage"));
 		}
 		catch (Exception e) {
 			curPage = 1;
 		}
 		
+		System.out.println("bestProduct command curPage : "  + curPage);
 		// 전체 페이지 수를 카운트하여 가져옴
 		int totalProductCount = dao.bestPageCount();
 		// 한 페이지에 몇개를 보여줄 것인가?
@@ -56,14 +57,13 @@ public class MCbestProduct implements MCommand{
 		int blockStart = (blockPage-1) * countPerBlock + 1;
 		
 		
-		// 수정필요 @@@@@@@@@@@@@@@@@@@@@@@@@@
 		// 마지막 페이지 정하기
-		int endPage = (totalProductCount / countPerPage) == 0 ? totalProductCount / countPerPage : ((totalProductCount / countPerPage) + 1);
-		// 수정필요 @@@@@@@@@@@@@@@@@@@@@@@@@@
+		int endPage = (totalProductCount % countPerPage) == 0 ? totalProductCount / countPerPage : ((totalProductCount / countPerPage) + 1);
 		
 		request.setAttribute("curPage", curPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("blockStart", blockStart);
+		
 		// 신제품 페이지 datas
 		request.setAttribute("bestProducts", bestProducts);
 	} 

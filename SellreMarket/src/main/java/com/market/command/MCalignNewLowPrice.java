@@ -55,10 +55,8 @@ public class MCalignNewLowPrice implements MCommand{
 		// 그래서 시작 페이지가 1, 6, 11 이렇게 나온다.
 		int blockStart = (blockPage-1) * countPerBlock + 1;
 		
-		// 수정필요 @@@@@@@@@@@@@@@@@@@@@@@@@@
 		// 마지막 페이지 정하기
-		int endPage = (totalProductCount / countPerPage) == 0 ? totalProductCount / countPerPage : ((totalProductCount / countPerPage) + 1);
-		// 수정필요 @@@@@@@@@@@@@@@@@@@@@@@@@@		
+		int endPage = (totalProductCount % countPerPage) == 0 ? totalProductCount / countPerPage : ((totalProductCount / countPerPage) + 1);
 		request.setAttribute("curPage", curPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("blockStart", blockStart);

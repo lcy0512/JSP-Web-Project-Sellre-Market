@@ -171,5 +171,9 @@ public class SignUpDao {
 	} // checkDuplicatedId
 	
 	
+//	getUserEmail 아이디를 받아 이메일을 체크한다.
+//	emailChecked
+//	setUserEmail 이메일 인증을 했는지 안했는지 체크
+	
 	
 } // END

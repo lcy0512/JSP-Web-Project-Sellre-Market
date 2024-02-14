@@ -1,3 +1,4 @@
+<%@page import="com.market.util.SHA256"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -113,6 +114,8 @@
 						<button class="css-ufulao e4nu7ef3" type="button" id="emailDuplicatedCheck">
 							<span class="css-nytqmg e4nu7ef1">중복확인</span>
 						</button>
+						<div class="checkedEmail" value="">
+						</div>
 					</div>
 				</div>
 				<div class="css-1pjgd36 e744wfw6">
