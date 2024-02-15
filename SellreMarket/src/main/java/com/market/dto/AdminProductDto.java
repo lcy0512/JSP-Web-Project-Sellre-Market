@@ -14,6 +14,7 @@ public class AdminProductDto {
 	String description;
 	int pstock;
 	int stock;
+	String image;
 	
 	public AdminProductDto() {
 		// TODO Auto-generated constructor stub
@@ -118,6 +119,16 @@ public class AdminProductDto {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+
+	public String getImage() {
+		return image;
+	}
+
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 	
 }
