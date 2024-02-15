@@ -30,6 +30,7 @@ import com.market.command.MCalignNewLowPrice;
 import com.market.command.MCalignRecipeHighPrice;
 import com.market.command.MCalignRecipeLowPrice;
 import com.market.command.MCbestProduct;
+import com.market.command.MCheckAuthentic;
 import com.market.command.MClogin;
 import com.market.command.MCnewProductPaging;
 import com.market.command.MCommand;
@@ -591,8 +592,13 @@ public class Controller extends HttpServlet {
 				command.execute(request, response);
 				
 				return;
-			 
+			
+			// 위에 duplicatedCheck.do 와 함께 사용하려 했는데 따로 사용하는게 나음
+			case "/authenticKeyCheck.do":
+				command = new MCheckAuthentic();
+				command.execute(request, response);
 				
+				return;
 				
 			default :
 				break;
