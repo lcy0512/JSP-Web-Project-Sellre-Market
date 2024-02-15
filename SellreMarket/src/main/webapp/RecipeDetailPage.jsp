@@ -114,7 +114,7 @@
 								<div class="css-ixlb9s eebc7rx8">
 									<div class="css-yhijln eebc7rx7">
 										<span class="css-w1is7v eebc7rx6">총 상품금액 :</span>
-										<span class="css-x4cdgl eebc7rx5">49,900</span>
+										<span class="css-x4cdgl eebc7rx5"></span>
 										<span class="css-1jb8hmu eebc7rx4">원</span>
 									</div>
 								</div>
@@ -146,6 +146,6 @@
     <jsp:include page="footer.html" flush="false" />
 
     <!-- 외부 JavaScript 파일 -->
-    <script src="js/recipeDetailPage.js"></script>
+    <script src="js/recipeDetailPage.js"></script>    
 </body>
 </html>

@@ -2,6 +2,14 @@
 window.onload = function() {
     // 시작할 때 "상품을 선택해주세요" 옵션을 선택합니다.
     selectOption('상품을 선택해주세요');
+    
+    // 장바구니 버튼에 클릭 이벤트 리스너 추가
+    var cartButton = document.querySelector('.cart-button');
+    if (cartButton) {
+        // 이벤트 리스너가 아직 등록되지 않았다면 등록합니다.
+        cartButton.removeEventListener('click', updateCartItem); // 이벤트 리스너 제거
+        cartButton.addEventListener('click', updateCartItem);
+    }
 };
 
 // 드롭다운을 토글하는 함수
@@ -73,6 +81,7 @@ function selectOption(option, price, saleprice) {
             `;
 
             cartOptions.appendChild(newCartOption);
+            updateCartItemNames();
         }
         // 장바구니 옵션을 보여줍니다.
         cartOptions.style.display = "block";
@@ -103,6 +112,7 @@ function deleteCartItem(option) {
 
     // 장바구니 옵션의 할인 가격의 합을 다시 계산하여 콘솔에 출력합니다.
     calculateTotalSalePrice();
+    updateCartItemNames();
 }
 
 // 초기 가격을 저장하는 변수
@@ -190,5 +200,53 @@ function calculateTotalSalePrice() {
     var totalPriceElement = document.querySelector('.css-x4cdgl');
     if (totalPriceElement) {
         totalPriceElement.textContent = totalSalePrice.toLocaleString(); // 할인 가격의 합을 총 상품 금액으로 업데이트합니다.
+    }
+}
+
+// 장바구니 옵션의 이름들을 저장하는 함수
+function updateCartItemNames() {
+    cartItemNames = [];
+    var cartOptions = document.getElementById("cartOptions");
+    // 모든 장바구니 옵션의 이름을 순회하며 배열에 추가합니다.
+    for (var i = 0; i < cartOptions.children.length; i++) {
+        var optionElement = cartOptions.children[i];
+        var nameElement = optionElement.querySelector('.css-1yojl0t');
+        if (nameElement) {
+            cartItemNames.push(nameElement.textContent.trim());
+        }
+    }
+    console.log('cartItemNames: ', cartItemNames);
+}
+
+const updateCartItem = () => {
+    // 장바구니에 담긴 상품들의 이름을 업데이트합니다.
+    updateCartItemNames(); // 장바구니에 담긴 상품들의 이름을 업데이트하는 함수 호출
+    
+    // 장바구니에 상품이 있는지 확인합니다.
+    if (cartItemNames && cartItemNames.length > 0) {
+        $.ajax({
+            // 요청:
+            type: "POST", // POST 방식으로 변경
+            url: "recipeAjax.do", // 서버에 요청할 URL
+            data: { cartItemNames: cartItemNames.join(',') }, // cartItemNames 배열을 서버에 전송
+            
+            // 성공 시 실행할 함수:
+            success: function(response) {
+                console.log('response: ', response); // 서버 응답을 콘솔에 출력
+                if (response && response.success) {
+                    console.log('Cart items successfully updated on the server.'); // 장바구니 상품이 서버에 업데이트되었음을 콘솔에 출력
+                } else {
+                    console.log('Failed to update cart items on the server. Error:', response.error); // 서버에서 전달한 오류 메시지를 콘솔에 출력
+                }
+            },
+            
+            error: function(xhr, status, error) {
+                console.error("서버 요청 중 에러가 발생했습니다.", error); // 에러 발생 시 에러를 콘솔에 출력
+                console.log('Failed to update cart items on the server.'); // 장바구니 상품이 서버에 업데이트되지 않았음을 콘솔에 출력
+            }
+        });
+    } else {
+        // 장바구니에 상품이 없는 경우 메시지를 콘솔에 출력합니다.
+        console.log('No items in the cart to update.'); // 장바구니에 업데이트할 상품이 없음을 콘솔에 출력
     }
 }
