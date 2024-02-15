@@ -99,6 +99,7 @@ public class Controller extends HttpServlet {
 		// 장바구니 클릭 시 가져 올 productid
 		int productid = 0;
 		int cartCount = 0;
+		int curPage = 0;
 		
 		
 		response.setContentType("applicaton/json");
@@ -445,6 +446,15 @@ public class Controller extends HttpServlet {
 				
 				id = (String) session.getAttribute("id");
 				
+				// Paging.do에서 href 를 받아서 여기로 오기 때문에 getParameter를 여기서 받고 보내준다.
+				try {
+					curPage = Integer.parseInt(request.getParameter("curPage"));
+				}catch (Exception e) {
+					curPage = 1;
+				}
+				System.out.println(curPage + "  : curPAge");
+				
+				session.setAttribute("curPage", curPage);
 				session.setAttribute("id", id);
 				
 				command = new MCbestProduct();
@@ -518,6 +528,7 @@ public class Controller extends HttpServlet {
 				
 			
 			case "/paging.do" :
+				
 				System.out.println(request.getAttribute("curPage") + "  ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇ컨트롤ㄹ러");
 				command = new MCpaging();
 				command.execute(request, response);
