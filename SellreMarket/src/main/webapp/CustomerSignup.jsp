@@ -128,12 +128,8 @@
 									class="css-u52dqk e1uzxhvi2" value="">
 								<input type="hidden" id="sysAuthentic">
 							</div>
+						<div class="checkedEmail" value="">
 						</div>
-					</div>
-					<div class="css-1w0ksfz e744wfw2">
-						<button class="css-ufulao e4nu7ef3" type="button" id="confirmCheck" onclick="checkAuthentication()">
-							<span class="css-nytqmg e4nu7ef1">인증확인</span>
-						</button>
 					</div>
 				</div>
 				<div class="css-1pjgd36 e744wfw6">
