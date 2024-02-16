@@ -53,6 +53,7 @@ import com.market.command.MAdminQuestInsert;
 import com.market.command.MAdminQuestNum;
 import com.market.command.MAdminSaleChart;
 import com.market.command.MAdminUserChart;
+import com.market.command.MBrandSelect;
 import com.market.command.MCalignBestHighPrice;
 import com.market.command.MCalignBestLowPrice;
 import com.market.command.MCalignNewHighPrice;
@@ -73,6 +74,7 @@ import com.market.command.MDuplicatedCheck;
 import com.market.command.MEventDetail;
 import com.market.command.MInquiryDetail;
 import com.market.command.MInsertInquiry;
+import com.market.command.MInsertPrice;
 import com.market.command.MLoadEventList;
 import com.market.command.MLoadInquiryList;
 import com.market.command.MMyPage;
@@ -80,6 +82,10 @@ import com.market.command.MMyPageDetail;
 import com.market.command.MProductDetailPageCommand;
 import com.market.command.MRecipeDetailPageCommand;
 import com.market.command.MSignUp;
+import com.market.command.MinsertBrandToProduct;
+import com.market.command.MinsertCategoryToProduct;
+import com.market.command.MinsertPackToProduct;
+import com.market.command.MinsertUnitToProduct;
 import com.market.command.Paging;
 import com.market.command.getCartByProduct;
 import com.market.command.getCartByRecipe;
@@ -138,7 +144,7 @@ public class Controller extends HttpServlet {
 		String uri = request.getRequestURI();
 		String conPath = request.getContextPath();
 		String com = uri.substring(conPath.length());
-		
+
 		System.out.println(uri);
 		System.out.println(conPath);
 		System.out.println(com);
@@ -217,76 +223,78 @@ public class Controller extends HttpServlet {
 		case "/signup.do":
 			returnCommand = new MSignUp();
 			int resultCode = returnCommand.execute(request, response);
-			
-			if(resultCode == 1) viewPage = "mainPage.do";
-			else viewPage = "mypageinfo.jsp";
+
+			if (resultCode == 1)
+				viewPage = "mainPage.do";
+			else
+				viewPage = "mypageinfo.jsp";
 			break;
 
-		case "/test.do" :
+		case "/test.do":
 			viewPage = "TestProductSelection.jsp";
 			System.out.println(viewPage);
 			break;
 
-		case "/detail.do" :
+		case "/detail.do":
 			command = new MProductDetailPageCommand();
 			command.execute(request, response);
 			viewPage = "ProductDetailPage.jsp";
 			break;
-			
-		case "/mypage.do" :
+
+		case "/mypage.do":
 			System.out.println("mypage.do");
 			command = new MMyPage();
 			command.execute(request, response);
 			return;
-		
-		case "/mypagedetail.do" :
+
+		case "/mypagedetail.do":
 			command = new MMyPageDetail();
 			command.execute(request, response);
-			
+
 			viewPage = "mypagedetail.jsp";
 			break;
-		
-		case "/deleteuserinfo.do" :
+
+		case "/deleteuserinfo.do":
 			command = new MDeleteUserInfo();
 			command.execute(request, response);
-			
+
 			viewPage = "logout.do";
 			break;
-		
-		case "/noticelist.do" :
+
+		case "/noticelist.do":
 			command = new MLoadEventList();
 			command.execute(request, response);
-			
+
 			return;
-			
-		case "/noticedetail.do" :
+
+		case "/noticedetail.do":
 			command = new MEventDetail();
 			command.execute(request, response);
-			
+
 			viewPage = "noticedetail.jsp";
 			break;
-		
-		case "/productDetail.do" :
-	        // 요청에서 선택된 상품 번호를 가져옴
-			String selectProductId = request.getParameter("productId");				
-	        // 선택된 상품 번호를 세션에 저장
-	        session.setAttribute("productID", selectProductId);
-	      
+
+		case "/productDetail.do":
+			// 요청에서 선택된 상품 번호를 가져옴
+			String selectProductId = request.getParameter("productId");
+			// 선택된 상품 번호를 세션에 저장
+			session.setAttribute("productID", selectProductId);
+
 			System.out.println("보낼 아이디 : " + selectProductId);
-	      
+
 			command = new MProductDetailPageCommand();
 			command.execute(request, response);
 			viewPage = "ProductDetailPage.jsp";
 			break;
-		
-		case "/recipeDetail.do" :
-	        // 요청에서 선택된 상품 번호를 가져옴
-			String selectRecipeId = request.getParameter("recipeId");				
-	        // 선택된 상품 번호를 세션에 저장
-	        session.setAttribute("recipeID", selectRecipeId);
-	      
+
+		case "/recipeDetail.do":
+			// 요청에서 선택된 상품 번호를 가져옴
+			String selectRecipeId = request.getParameter("recipeId");
+			// 선택된 상품 번호를 세션에 저장
+			session.setAttribute("recipeID", selectRecipeId);
+
 			System.out.println("보낼 아이디 : " + selectRecipeId);
-	      
+
 			command = new MRecipeDetailPageCommand();
 			command.execute(request, response);
 			viewPage = "DetailPageTest.jsp";
@@ -369,9 +377,9 @@ public class Controller extends HttpServlet {
 		case "/insertProduct.do":
 			command = new MAdminProductInsert();
 			command.execute(request, response);
-
 			int result = (int) request.getAttribute("result");
-			request.setAttribute("result", result);
+			int pId = (int) request.getAttribute("productid");
+			session.setAttribute("pId", pId); // insert된 제품의 pID
 			out.print(new Gson().toJson(result));
 			out.flush();
 			return;
@@ -423,7 +431,7 @@ public class Controller extends HttpServlet {
 			System.out.println("카테고리 id : " + session.getAttribute("categoryid"));
 			viewPage = "adminCategoryDetail.jsp";
 			break;
-			
+
 		// 관리자 카테고리 상사페이지 조회
 		case "/selectAdminCategoryDetail.do":
 			request.setAttribute("categoryid", session.getAttribute("categoryid"));
@@ -434,7 +442,7 @@ public class Controller extends HttpServlet {
 			out.print(new Gson().toJson(categoryListDetail));
 			out.flush();
 			return;
-			
+
 		// 관리자 카테고리 수정하기
 		case "/updateCategory.do":
 			command = new MAdminCategoryUpdate();
@@ -443,7 +451,7 @@ public class Controller extends HttpServlet {
 			out.print(new Gson().toJson(chkNum));
 			out.flush();
 			return;
-			
+
 		// 관리자 카테고리 삭제하기
 		case "/deleteCategory.do":
 			command = new MAdminCategoryDelete();
@@ -452,7 +460,7 @@ public class Controller extends HttpServlet {
 			out.print(new Gson().toJson(deleteNum));
 			out.flush();
 			return;
-			
+
 		// 관리자 이벤트 현황 조회
 		case "/adminEvent.do":
 			command = new MAdminEvent();
@@ -470,18 +478,18 @@ public class Controller extends HttpServlet {
 			out.print(new Gson().toJson(dataEvent));
 			out.flush();
 			return;
-			
+
 		// 관리자 이벤트 등록 페이지 이동
 		case "/adminEventRegister.do":
 			viewPage = "adminEventRegister.jsp";
 			break;
-			
+
 		// 관리자 이벤트 상세 페이지 이동
 		case "/adminEventDetailPage.do":
 			session.setAttribute("eventid", request.getParameter("id"));
 			viewPage = "adminEventDetail.jsp";
 			break;
-			
+
 		// 관리자 카테고리 상사페이지 조회
 		case "/selectAdminEventDetail.do":
 			request.setAttribute("eventid", session.getAttribute("eventid"));
@@ -491,14 +499,14 @@ public class Controller extends HttpServlet {
 			out.print(new Gson().toJson(eventDetailList));
 			out.flush();
 			return;
-			
+
 		// 관리자 이벤트 입력하기
 		case "/insertEvent.do":
 			command = new MAdminEventInsert();
 			command.execute(request, response);
 			viewPage = "/adminEvent.do";
 			return;
-			
+
 		// 관리자 이벤트 수정하기
 		case "/updateEvent.do":
 			command = new MAdminEventUpdate();
@@ -507,7 +515,7 @@ public class Controller extends HttpServlet {
 			out.print(new Gson().toJson(event));
 			out.flush();
 			return;
-			
+
 		// 관리자 이벤트 삭제하기
 		case "/deleteEvent.do":
 			command = new MAdminEventDelete();
@@ -516,7 +524,7 @@ public class Controller extends HttpServlet {
 			out.print(new Gson().toJson(deleteEventNum));
 			out.flush();
 			return;
-			
+
 		// 관리제 제품현황에 숫자 표시
 		case "/adminProductNum.do":
 			command = new MAdminProductNum();
@@ -525,7 +533,7 @@ public class Controller extends HttpServlet {
 			out.print(new Gson().toJson(productNum));
 			out.flush();
 			return;
-			
+
 		// 관리자 입고요청 조회
 		case "/adminOrder.do":
 			command = new MAdminOrder();
@@ -543,13 +551,13 @@ public class Controller extends HttpServlet {
 			out.print(new Gson().toJson(dataOrder));
 			out.flush();
 			return;
-			
+
 		// 관리자 입고요청 페이지 전환
 		case "/adminOrderDetailPage.do":
 			session.setAttribute("orderProductId", request.getParameter("id"));
 			viewPage = "adminOrderDetail.jsp";
 			break;
-			
+
 		// 관리자 입고요청 페이지 조회
 		case "/selectAdminOrderDetail.do":
 			request.setAttribute("orderProductId", session.getAttribute("orderProductId"));
@@ -559,7 +567,7 @@ public class Controller extends HttpServlet {
 			out.print(new Gson().toJson(listToOrderDetail));
 			out.flush();
 			return;
-			
+
 		// 관리자 입고요청 insert 및 update
 		case "/orderProduct.do":
 			command = new MAdminOrderProduct();
@@ -569,7 +577,7 @@ public class Controller extends HttpServlet {
 			out.print(new Gson().toJson(orderNum));
 			out.flush();
 			return;
-			
+
 		// 관리자 고객문의 조회하기
 		case "/adminQuest.do":
 			command = new MAdminQuest();
@@ -587,13 +595,13 @@ public class Controller extends HttpServlet {
 			out.print(new Gson().toJson(dataQuest));
 			out.flush();
 			return;
-			
+
 		// 관리자 고객문의 답변페이지 이동
 		case "/adminQuestDetailPage.do":
 			session.setAttribute("questId", request.getParameter("id"));
 			viewPage = "adminQuestDetailPage.jsp";
 			break;
-			
+
 		// 관리자 고객문의 내용 조회
 		case "/selectAdminQuestDetail.do":
 			command = new MAdminQuestDetail();
@@ -602,7 +610,7 @@ public class Controller extends HttpServlet {
 			out.print(new Gson().toJson(questDetail));
 			out.flush();
 			return;
-			
+
 		// 관리자 고객문의 답변 등록
 		case "/adminInsertQuest.do":
 			command = new MAdminQuestInsert();
@@ -611,13 +619,62 @@ public class Controller extends HttpServlet {
 			out.print(new Gson().toJson(questNum));
 			out.flush();
 			return;
-			
+
 		// 관리제 고객문의에 숫자 표시
 		case "/adminQuestNum.do":
 			command = new MAdminQuestNum();
 			command.execute(request, response);
 			int selectQuestNum = (int) request.getAttribute("questNum");
 			out.print(new Gson().toJson(selectQuestNum));
+			out.flush();
+			return;
+
+		// 제품현황 - 브랜드 조회
+		case "/selectBrand.do":
+			command = new MBrandSelect();
+			command.execute(request, response);
+			ArrayList<AdminBrandDto> brandSelectList = (ArrayList) request.getAttribute("list");
+			out.print(new Gson().toJson(brandSelectList));
+			out.flush();
+			return;
+		// 제품 가격 insert
+		case "/insertPrice.do":
+			command = new MInsertPrice();
+			command.execute(request, response);
+			int priceResult = (int) request.getAttribute("result");
+			out.print(new Gson().toJson(priceResult));
+			out.flush();
+			return;
+		// 제품 브랜드 연결
+		case "/insertBrandToProduct.do":
+			command = new MinsertBrandToProduct();
+			command.execute(request, response);
+			int brandResult = (int) request.getAttribute("result");
+			out.print(new Gson().toJson(brandResult));
+			out.flush();
+			return;
+		// 제품 카테고리 연결
+		case "/insertCategoryToProduct.do":
+			command = new MinsertCategoryToProduct();
+			command.execute(request, response);
+			int cateResult = (int) request.getAttribute("result");
+			out.print(new Gson().toJson(cateResult));
+			out.flush();
+			return;
+		// 제품 카테고리 연결
+		case "/insertPackToProduct.do":
+			command = new MinsertPackToProduct();
+			command.execute(request, response);
+			int packResult = (int) request.getAttribute("result");
+			out.print(new Gson().toJson(packResult));
+			out.flush();
+			return;
+		// 제품 중량 연결
+		case "/insertUnitToProduct.do":
+			command = new MinsertUnitToProduct();
+			command.execute(request, response);
+			int unitResult = (int) request.getAttribute("result");
+			out.print(new Gson().toJson(unitResult));
 			out.flush();
 			return;
 
@@ -983,22 +1040,22 @@ public class Controller extends HttpServlet {
 		// 수정필요
 		// 수정필요
 
-			// TODO HTTP Method 구분할 수 있는 구조로 리팩토링 하면 URL에서 행위 제외
+		// TODO HTTP Method 구분할 수 있는 구조로 리팩토링 하면 URL에서 행위 제외
 		case "/api/cart.do":
 			requireSigning(request, response);
 
 			command = new MCartRegistry();
 			command.execute(request, response);
 			return;
-			
+
 		case "/cart.do":
 			command = new MCartListView();
 			command.execute(request, response);
-			
+
 			request.setAttribute("router", "cart");
 			viewPage = "gwangyeong.jsp";
 			break;
-			
+
 		case "/cart/amount/increase.do":
 			// response.setStatus(200);
 			// response.setContentType("application/json");
@@ -1010,7 +1067,7 @@ public class Controller extends HttpServlet {
 			command = new MCartListViewApi();
 			command.execute(request, response);
 			return;
-		
+
 		case "/fake/login.do":
 			User user = new User("admin", "1234");
 			session.setAttribute("loginUser", user);
@@ -1023,50 +1080,44 @@ public class Controller extends HttpServlet {
 			viewPage = "mainPage.do";
 
 			break;
-		
-		
-			
-		//---------------- 2024.02.13 snr : controller 추가
-		//관리자 제품현황 상세 페이지 이동	
-		case "/adminProductDetailPage.do" :
+
+		// ---------------- 2024.02.13 snr : controller 추가
+		// 관리자 제품현황 상세 페이지 이동
+		case "/adminProductDetailPage.do":
 			session.setAttribute("productidToDetail", request.getParameter("id"));
 			viewPage = "adminProductDetail.jsp";
 			break;
-			
-			
-		//관리자 제품현황 상세 페이지 조회	
-		case "/selectAdminProductDetail.do" :	
+
+		// 관리자 제품현황 상세 페이지 조회
+		case "/selectAdminProductDetail.do":
 			command = new MAdminProductDetail();
 			command.execute(request, response);
-			
+
 			ArrayList<AdminProductDto> productDetailList = (ArrayList) request.getAttribute("list");
 			out.print(new Gson().toJson(productDetailList));
 			out.flush();
 			return;
-			
-			
-		//관리자 제품현황 수정	
-		case "/adminUpdateProduct.do" : 	
+
+		// 관리자 제품현황 수정
+		case "/adminUpdateProduct.do":
 			command = new MAdminProductUpdate();
 			command.execute(request, response);
 			int updatePNum = (int) request.getAttribute("num");
 			out.print(new Gson().toJson(updatePNum));
 			out.flush();
 			return;
-			
-			
-		//관리자 제품 삭제
-		case "/deleteProduct.do" :
+
+		// 관리자 제품 삭제
+		case "/deleteProduct.do":
 			command = new MAdminProductDelete();
 			command.execute(request, response);
 			int deletePNum = (int) request.getAttribute("num");
 			out.print(new Gson().toJson(deletePNum));
 			out.flush();
 			return;
-			
-			
-		//관리자 브랜드 조회	
-		case "/adminBrand.do" :
+
+		// 관리자 브랜드 조회
+		case "/adminBrand.do":
 			command = new MAdminBrand();
 			command.execute(request, response);
 
@@ -1085,16 +1136,14 @@ public class Controller extends HttpServlet {
 			out.print(new Gson().toJson(dataBrand));
 			out.flush();
 			return;
-			
-			
-		//관리자 브랜드 등록 페이지 이동
-		case "/adminBrandRegister.do" :
+
+		// 관리자 브랜드 등록 페이지 이동
+		case "/adminBrandRegister.do":
 			viewPage = "adminBrandRegister.jsp";
 			break;
-		
-			
-		//관리자 브랜드 등록하기
-		case "/insertBrand.do" : 
+
+		// 관리자 브랜드 등록하기
+		case "/insertBrand.do":
 			command = new MAdminBrandInsert();
 			command.execute(request, response);
 
@@ -1102,34 +1151,32 @@ public class Controller extends HttpServlet {
 			out.print(new Gson().toJson(InsertBNum));
 			out.flush();
 			return;
-			
-			
-		//관리자 브랜드 상세페이지 이동
-		case "/adminBrandDetailPage.do" :
+
+		// 관리자 브랜드 상세페이지 이동
+		case "/adminBrandDetailPage.do":
 			session.setAttribute("brandid", request.getParameter("id"));
 			viewPage = "adminBrandDetail.jsp";
 			break;
-			
-			
-		//관리자 상세페이지 조회
-		case "/selectAdminBrandDetail.do" :
+
+		// 관리자 상세페이지 조회
+		case "/selectAdminBrandDetail.do":
 			command = new MAdminBrandDetail();
 			command.execute(request, response);
-			
+
 			ArrayList<AdminBrandDto> brandDetailList = (ArrayList) request.getAttribute("list");
 			out.print(new Gson().toJson(brandDetailList));
 			out.flush();
 			return;
-			
-		//관리자 브랜드명 수정
-		case "/updateBrand.do" :
+
+		// 관리자 브랜드명 수정
+		case "/updateBrand.do":
 			command = new MAdminBrandUpdate();
 			command.execute(request, response);
 			int updateBNum = (int) request.getAttribute("num");
 			out.print(new Gson().toJson(updateBNum));
 			out.flush();
-			return; 
-			
+			return;
+
 		// 관리자 매출차트
 		case "/showSaleChart.do":
 			command = new MAdminSaleChart();
@@ -1165,7 +1212,7 @@ public class Controller extends HttpServlet {
 			out.print(new Gson().toJson(userList));
 			out.flush();
 			return;
-			
+
 		default:
 			break;
 
