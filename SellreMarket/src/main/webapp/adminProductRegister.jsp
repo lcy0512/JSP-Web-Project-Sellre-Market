@@ -20,7 +20,7 @@
 			<div class="title">제품 등록</div>
 				
 		
-			<form name="productForm">
+			<form name="productForm" method="post" enctype="multipart/form-data">
 				
 				<!-- product_image -->				
 					<div class="form-group">
@@ -113,9 +113,17 @@
 						<input type="text" id="ugram" name="ugram">
 					</div>
 				<!-- saleunit -->
+				
+				<!-- delivertype -->
+					<div class="form-group1">
+						<label for="dname">배송종류</label>
+						<select id="dname" name="dname"></select>
+					</div>
+				<!-- delivertype -->	
 
-				<input type="submit" class="registerBtn" onclick="insertProduct()" value="등록">
+				
 			</form>
+			<input type="submit" class="registerBtn" onclick="insertProduct()" value="등록">
 </div>
 </body>
 </html>
