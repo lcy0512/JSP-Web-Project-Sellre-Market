@@ -365,6 +365,7 @@
 	}
 
 	
+	
 	/************************************************************************************************
 	 * Function : 작성한 정보 inset하기
 	 * @param 	: null
@@ -373,45 +374,61 @@
 	
 	function insertProduct() {
 					 
-		let pname = $("#pname").val();
-		let pEngname = $("#pEngname").val();
-		let allery = $("#allery").val();
-		let nutrition = $("#nutrition").val();
-		let pstock = $("#pstock").val();
-		let origin = $("#origin").val();
-		let description = $("#description").val();
-		
-		$.ajax({
+		try {
+			insertInfo();
+			insertPrice();
+			insertBrand();
+			insertCategory();
+			insertPacking();
+			insertUnit();
 			
-			type : "POST",
-			url : "insertProduct.do",
-			data : {
-					pname : pname,
-					pEngname : pEngname,
-					allery : allery,
-					nutrition : nutrition, 
-					pstock : pstock,
-					origin : origin,
-					description : description
-					
-			},
-			success : function(response){
-				if(response == 1){
-					insertPrice();
-					insertBrand();
-					
-				} else {
-					console.log("error")
-				}
-			},
-			 error:function(request, status, error){
-				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			}
+			alert('등록되었습니다.')
 			
-		});
+			
+		} catch (error) {
+			console.error('error : '+error);
+		}
 			
 	}
 
+	
+function insertInfo() {
+	let pname = $("#pname").val();
+	let pEngname = $("#pEngname").val();
+	let allery = $("#allery").val();
+	let nutrition = $("#nutrition").val();
+	let pstock = $("#pstock").val();
+	let origin = $("#origin").val();
+	let description = $("#description").val();
+	
+	$.ajax({
+		
+		type : "POST",
+		url : "insertProduct.do",
+		data : {
+				pname : pname,
+				pEngname : pEngname,
+				allery : allery,
+				nutrition : nutrition, 
+				pstock : pstock,
+				origin : origin,
+				description : description
+				
+		},
+		success : function(response){
+			if(response == 1){
+				return response;
+			} else {
+				console.log("error")
+			}
+		},
+		 error:function(request, status, error){
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+		
+	});
+}	
+	
 //가격 insert하기	
 function insertPrice() {
 	let price = $("#price").val();
@@ -426,7 +443,7 @@ function insertPrice() {
 		},
 		success : function(response){
 			if(response == 1){
-				return;					
+				return response;					
 			} else {
 				console.log("error")
 			}
@@ -443,9 +460,6 @@ function insertPrice() {
 function insertBrand() { 
 	var selectElement = document.getElementById("bname");
 	var selectedOption = selectElement.options[selectElement.selectedIndex].text;
-	console.log(selectedOption);
-	
-	
 	
 	$.ajax({
 		
@@ -457,7 +471,7 @@ function insertBrand() {
 		},
 		success : function(response){
 			if(response == 1){
-				return;					
+				return response;			
 			} else {
 				console.log("error")
 			}
@@ -468,4 +482,104 @@ function insertBrand() {
 		
 	});
 }	
+
+
+//category insert
+function insertCategory() { 
 	
+	var type = document.getElementById("type");
+	var typeText = selectElement.options[type.selectedIndex].text;
+	
+	var subType = document.getElementById("subType");
+	var subTypeText = selectElement.options[subType.selectedIndex].text;
+	
+	
+	$.ajax({
+		
+		type : "POST",
+		url : "insertCategoryToProduct.do",
+		data : {
+			type : typeText,
+			subtype : subTypeText
+				
+		},
+		success : function(response){
+			if(response == 1){
+				return response;			
+			} else {
+				console.log("error")
+			}
+		},
+		 error:function(request, status, error){
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+		
+	});
+}	
+
+
+//category insert
+function insertPacking() { 
+	
+	var packType = document.getElementById("packType");
+	var packTypeText = selectElement.options[packType.selectedIndex].text;
+	
+	var packKind = document.getElementById("packKind");
+	var packKindText = selectElement.options[packKind.selectedIndex].text;
+	
+	$.ajax({
+		
+		type : "POST",
+		url : "insertPackToProduct.do",
+		data : {
+			packType : packTypeText,
+			packKind : packKindText
+				
+		},
+		success : function(response){
+			if(response == 1){
+				return response;			
+			} else {
+				console.log("error")
+			}
+		},
+		 error:function(request, status, error){
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+		
+	});
+}	
+
+//unit insert
+function insertUnit() { 
+	
+	var utype = document.getElementById("utype");
+	var utypeText = selectElement.options[utype.selectedIndex].text;
+	
+	var ugram = document.getElementById("ugram");
+	var ugramText = selectElement.options[ugram.selectedIndex].text;
+	
+	$.ajax({
+		
+		type : "POST",
+		url : "insertUnitToProduct.do",
+		data : {
+			utype : utypeText,
+			ugram : ugramText
+				
+		},
+		success : function(response){
+			if(response == 1){
+				window.location.replace("/SellreMarket/admin_product.jsp");
+				return response;			
+			} else {
+				console.log("error")
+			}
+		},
+		 error:function(request, status, error){
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+		
+	});
+}	
+
