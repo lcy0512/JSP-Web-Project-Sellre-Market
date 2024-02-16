@@ -2,17 +2,19 @@ package com.market.dto;
 
 public class RecipeDetailPageDto {
 	
-	int id, price, discountedPrice, salerate;
+	int id, productPrice, salerate, discountedPrice;
 	String productName, deliveryName;
 	
 	public RecipeDetailPageDto() {
 		// TODO Auto-generated constructor stub
 	}	
 
-	public RecipeDetailPageDto(int id, String productName) {
+	public RecipeDetailPageDto(int id, String productName, int productPrice, int discountedPrice) {
 		super();
 		this.id = id;
 		this.productName = productName;
+		this.productPrice = productPrice;
+		this.discountedPrice = discountedPrice;
 	}
 
 	public int getId() {
@@ -23,12 +25,12 @@ public class RecipeDetailPageDto {
 		this.id = id;
 	}
 
-	public int getPrice() {
-		return price;
+	public int getProductPrice() {
+		return productPrice;
 	}
 
-	public void setPrice(int price) {
-		this.price = price;
+	public void setProductPrice(int productPrice) {
+		this.productPrice = productPrice;
 	}
 
 	public int getDiscountedPrice() {

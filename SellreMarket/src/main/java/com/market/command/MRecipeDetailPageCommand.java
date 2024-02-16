@@ -41,23 +41,37 @@ public class MRecipeDetailPageCommand implements MCommand {
 
         // pname을 담을 리스트 생성
         List<String> pnameList = new ArrayList<>();
+        List<Integer> priceList = new ArrayList<>();
+        List<Integer> slaepriceList = new ArrayList<>();
 
         for (RecipeDetailPageDto productInfo : resultList) {
             // 각 상품 정보를 사용하여 필요한 작업 수행
             System.out.println("상품명: " + productInfo.getProductName());
+            System.out.println("상품가격: " + productInfo.getProductPrice());
+            System.out.println("할인가격: " + productInfo.getDiscountedPrice());
 
             // 결과 속성 설정
             String pname = productInfo.getProductName();
-            pnameList.add(pname); // pname을 리스트에 추가
+            Integer price =  productInfo.getProductPrice();
+            Integer saleprice =  productInfo.getDiscountedPrice();
+            pnameList.add(pname); // pname 을 리스트에 추가
+            priceList.add(price); // price 를 리스트에 추가
+            slaepriceList.add(saleprice); // saleprice 를 리스트에 추가
 
             // 디버깅을 위해 결과 속성 값을 출력
             System.out.println("속성 pname 설정: " + pname);
+            System.out.println("속성 price 설정: " + price);
+            System.out.println("속성 saleprice 설정: " + saleprice);
         }
 
         // pname 리스트를 request 속성으로 설정
         request.setAttribute("pnameList", pnameList);
+        request.setAttribute("priceList", priceList);
+        request.setAttribute("slaepriceList", slaepriceList);
 
         // 최종 출력
         System.out.println("최종 :  " + request.getAttribute("pnameList"));
+        System.out.println("최종 :  " + request.getAttribute("priceList"));
+        System.out.println("최종 :  " + request.getAttribute("slaepriceList"));
     }
 }
