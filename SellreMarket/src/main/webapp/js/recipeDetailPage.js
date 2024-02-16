@@ -82,6 +82,7 @@ function selectOption(option, price, saleprice) {
 
             cartOptions.appendChild(newCartOption);
             updateCartItemNames();
+            updateCartItemQuantities();
         }
         // 장바구니 옵션을 보여줍니다.
         cartOptions.style.display = "block";
@@ -129,6 +130,7 @@ function increaseQuantity(option) {
 
     // 장바구니 옵션의 할인 가격의 합을 다시 계산하여 콘솔에 출력합니다.
     calculateTotalSalePrice();
+    updateCartItemQuantities();
 }
 
 // 수량을 감소시키는 함수
@@ -143,6 +145,7 @@ function decreaseQuantity(option) {
 
         // 장바구니 옵션의 할인 가격의 합을 다시 계산하여 콘솔에 출력합니다.
         calculateTotalSalePrice();
+        updateCartItemQuantities();
     }
 }
 
@@ -205,7 +208,7 @@ function calculateTotalSalePrice() {
 
 // 장바구니 옵션의 이름들을 저장하는 함수
 function updateCartItemNames() {
-    cartItemNames = [];
+    var cartItemNames = [];
     var cartOptions = document.getElementById("cartOptions");
     // 모든 장바구니 옵션의 이름을 순회하며 배열에 추가합니다.
     for (var i = 0; i < cartOptions.children.length; i++) {
@@ -215,38 +218,64 @@ function updateCartItemNames() {
             cartItemNames.push(nameElement.textContent.trim());
         }
     }
-    console.log('cartItemNames: ', cartItemNames);
+    console.log(cartItemNames);
+    return cartItemNames; // cartItemNames 배열을 반환합니다.
 }
+
+// 옵션 장바구니들의 수량을 반환하는 함수
+function updateCartItemQuantities() {
+    var cartItemQuantities = [];
+    var cartOptions = document.getElementById("cartOptions");
+    // 모든 장바구니 옵션의 수량을 순회하며 수량만을 배열에 추가합니다.
+    for (var i = 0; i < cartOptions.children.length; i++) {
+        var optionElement = cartOptions.children[i];
+        var quantityElement = optionElement.querySelector('.count');
+        if (quantityElement) {
+            var quantity = quantityElement.textContent.trim();
+            cartItemQuantities.push(quantity); // 배열에 수량을 추가합니다.
+        }
+    }
+    console.log(cartItemQuantities);
+    return cartItemQuantities; // cartItemQuantities 배열을 반환합니다.
+}
+
+// 장바구니 옵션의 이름들을 저장하는 전역 변수
+var cartItemNames = [];
+
+// 장바구니 옵션들의 수량을 저장하는 전역 변수
+var cartItemQuantities = [];
 
 const updateCartItem = () => {
     // 장바구니에 담긴 상품들의 이름을 업데이트합니다.
-    updateCartItemNames(); // 장바구니에 담긴 상품들의 이름을 업데이트하는 함수 호출
+    cartItemNames = updateCartItemNames(); // 장바구니에 담긴 상품들의 이름을 업데이트하는 함수 호출
+    console.log('update 이름 : ', cartItemNames); // updateCartItemNames() 함수의 반환 값을 콘솔에 출력
     
-    // 장바구니에 상품이 있는지 확인합니다.
-    if (cartItemNames && cartItemNames.length > 0) {
+    // 장바구니에 담긴 상품들의 수량을 업데이트하고 반환합니다.
+    cartItemQuantities = updateCartItemQuantities(); // updateCartItemQuantities() 함수의 반환 값을 전역 변수에 할당
+    
+    console.log('update 수량 : ', cartItemQuantities); // updateCartItemQuantities() 함수의 반환 값을 콘솔에 출력
+    
+    // 장바구니가 비어 있는지 확인합니다.
+    if (cartItemNames.length > 0 && cartItemQuantities.length > 0) {
         $.ajax({
             // 요청:
             type: "POST", // POST 방식으로 변경
             url: "recipeAjax.do", // 서버에 요청할 URL
-            data: { cartItemNames: cartItemNames.join(',') }, // cartItemNames 배열을 서버에 전송
+            data: { 
+                cartItemNames: cartItemNames.join(','),
+                cartItemQuantities: cartItemQuantities.join(',')
+            },
             
             // 성공 시 실행할 함수:
             success: function(response) {
                 console.log('response: ', response); // 서버 응답을 콘솔에 출력
-                if (response && response.success) {
-                    console.log('Cart items successfully updated on the server.'); // 장바구니 상품이 서버에 업데이트되었음을 콘솔에 출력
-                } else {
-                    console.log('Failed to update cart items on the server. Error:', response.error); // 서버에서 전달한 오류 메시지를 콘솔에 출력
-                }
             },
             
             error: function(xhr, status, error) {
-                console.error("서버 요청 중 에러가 발생했습니다.", error); // 에러 발생 시 에러를 콘솔에 출력
-                console.log('Failed to update cart items on the server.'); // 장바구니 상품이 서버에 업데이트되지 않았음을 콘솔에 출력
+                console.error("전송 실패:", error); // 에러가 있을 경우 콘솔에 출력
             }
         });
     } else {
-        // 장바구니에 상품이 없는 경우 메시지를 콘솔에 출력합니다.
-        console.log('No items in the cart to update.'); // 장바구니에 업데이트할 상품이 없음을 콘솔에 출력
+        console.error("장바구니가 비어 있습니다."); // 장바구니가 비어 있을 경우 콘솔에 출력
     }
 }
