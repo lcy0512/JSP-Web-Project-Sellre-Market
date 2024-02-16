@@ -70,6 +70,8 @@ import com.market.command.MClogin;
 import com.market.command.MCnewProductPaging;
 import com.market.command.MCommand;
 import com.market.command.MCommandReturnInt;
+import com.market.command.MCpaging;
+import com.market.command.MCrecipeProduct;
 import com.market.command.MDeleteUserInfo;
 import com.market.command.MDuplicatedCheck;
 import com.market.command.MEventDetail;
@@ -87,7 +89,6 @@ import com.market.command.MinsertBrandToProduct;
 import com.market.command.MinsertCategoryToProduct;
 import com.market.command.MinsertPackToProduct;
 import com.market.command.MinsertUnitToProduct;
-import com.market.command.Paging;
 import com.market.command.getCartByProduct;
 import com.market.command.getCartByRecipe;
 import com.market.dto.AdminBrandDto;
@@ -153,6 +154,7 @@ public class Controller extends HttpServlet {
 		String id = null;
 		// 페이징 처리를 위한
 		int curPage = 0;
+		int cartCount = 0;
 		// 페이지 클릭 시 신제품, 가격순으로 정렬하기 위한 변수
 		String alignCategory = null;
 		// header 카테고리
@@ -679,253 +681,260 @@ public class Controller extends HttpServlet {
 			out.flush();
 			return;
 
-		// 레시피 페이지
-		case "/recipePage.do":
-
+			// 레시피 페이지
+		case "/recipePage.do" :
+			
 			headerCategory = "레시피";
 			alignCategory = "";
-
-			// 수정 필요
-			if (request.getParameter("customerid") != null) {
-				id = request.getParameter("customerid");
-			}
-			// 수정 필요
-
+			
+			id = (String) session.getAttribute("id");
+			
 			try {
 				curPage = Integer.parseInt(request.getParameter("curPage"));
-			} catch (Exception e) {
+			}catch (Exception e) {
 				curPage = 1;
 			}
-
-			request.setAttribute("curPage", curPage);
-			request.setAttribute("customerid", id);
-
+			
+			session.setAttribute("id", id);
+			session.setAttribute("curPage", curPage);
+			
 			// 페이징 처리를 위한
-			command = new Paging();
+			command = new MCrecipeProduct();
 			command.execute(request, response);
-
+			
+			cartCount = (int) session.getAttribute("cartCount");
+			
+			session.setAttribute("cartCount", cartCount);
 			session.setAttribute("alignCategory", alignCategory);
 			session.setAttribute("headerCategory", headerCategory);
-
+			
 			viewPage = "recipeList.jsp";
-
+			
 			break;
-
-		case "/alignRecipeLowPrice.do":
+			
+		case "/alignRecipeLowPrice.do" :
 			headerCategory = "레시피";
 			alignCategory = "낮은 가격순";
-
-			// 수정 필요
-			if (request.getParameter("customerid") != null) {
-				id = request.getParameter("customerid");
-			}
-			// 수정 필요
-
+			
+			id = (String) session.getAttribute("id");
+			
 			try {
 				curPage = Integer.parseInt(request.getParameter("curPage"));
-			} catch (Exception e) {
+			}catch (Exception e) {
 				curPage = 1;
 			}
-
-			request.setAttribute("curPage", curPage);
-
+			
+			session.setAttribute("id", id);
+			session.setAttribute("curPage", curPage);
+			
 			command = new MCalignRecipeLowPrice();
 			command.execute(request, response);
-
+			
+			cartCount = (int) session.getAttribute("cartCount");
+			
+			session.setAttribute("cartCount", cartCount);
 			session.setAttribute("alignCategory", alignCategory);
 			session.setAttribute("headerCategory", headerCategory);
-
+			
 			viewPage = "recipeList.jsp";
 			break;
-
-		case "/alignRecipeHighPrice.do":
+			
+		case "/alignRecipeHighPrice.do" :
 			headerCategory = "레시피";
 			alignCategory = "높은 가격순";
-
-			// 수정 필요
-			if (request.getParameter("customerid") != null) {
-				id = request.getParameter("customerid");
-			}
-			// 수정 필요
-
+			
+			id = (String) session.getAttribute("id");
+			
 			try {
 				curPage = Integer.parseInt(request.getParameter("curPage"));
-			} catch (Exception e) {
+			}catch (Exception e) {
 				curPage = 1;
 			}
-
-			request.setAttribute("curPage", curPage);
-
+			
+			session.setAttribute("id", id);
+			session.setAttribute("curPage", curPage);
+			
 			command = new MCalignRecipeHighPrice();
 			command.execute(request, response);
-
+			
+			cartCount = (int) session.getAttribute("cartCount");
+			
+			session.setAttribute("cartCount", cartCount);
 			session.setAttribute("alignCategory", alignCategory);
 			session.setAttribute("headerCategory", headerCategory);
-
+			
 			viewPage = "recipeList.jsp";
 			break;
-
+			
 		// 신제품 정보 불러오는 작업
-		case "/mainPage.do":
+		case "/mainPage.do" :
 			headerCategory = "신상품";
 			alignCategory = "신상품순";
-
-			// 수정 필요
-			if (request.getParameter("customerid") != null) {
-				id = request.getParameter("customerid");
-			}
-			// 수정 필요
-
+			
+			id = (String) session.getAttribute("id");
+			
 			try {
 				curPage = Integer.parseInt(request.getParameter("curPage"));
-			} catch (Exception e) {
+			}catch (Exception e) {
 				curPage = 1;
 			}
-
-			request.setAttribute("curPage", curPage);
-
+			
+			session.setAttribute("id", id);
+			session.setAttribute("curPage", curPage);
+			
+			
 			command = new MCnewProductPaging();
 			command.execute(request, response);
-
+			
+			cartCount = (int) session.getAttribute("cartCount");
+			
+			session.setAttribute("cartCount", cartCount);
 			session.setAttribute("alignCategory", alignCategory);
 			session.setAttribute("headerCategory", headerCategory);
-
+			
 			viewPage = "newProduct.jsp";
+			
 			break;
-
-		case "/alignNewLowPrice.do":
+			
+		case "/alignNewLowPrice.do" :
 			headerCategory = "신상품";
 			alignCategory = "낮은 가격순";
-
-			// 수정 필요
-			if (request.getParameter("customerid") != null) {
-				id = request.getParameter("customerid");
-			}
-			// 수정 필요
-
+			
+			id = (String) session.getAttribute("id");
+			
 			try {
 				curPage = Integer.parseInt(request.getParameter("curPage"));
-			} catch (Exception e) {
+			}catch (Exception e) {
 				curPage = 1;
 			}
-
-			request.setAttribute("curPage", curPage);
-
+			
+			session.setAttribute("id", id);
+			session.setAttribute("curPage", curPage);
+			
+			
 			command = new MCalignNewLowPrice();
 			command.execute(request, response);
-
+			
+			cartCount = (int) session.getAttribute("cartCount");
+			
+			session.setAttribute("cartCount", cartCount);
 			session.setAttribute("alignCategory", alignCategory);
 			session.setAttribute("headerCategory", headerCategory);
-
+			
 			viewPage = "newProduct.jsp";
 			break;
-
-		case "/alignNewHighPrice.do":
+			
+		case "/alignNewHighPrice.do" :
 			headerCategory = "신상품";
 			alignCategory = "높은 가격순";
-
-			// 수정 필요
-			if (request.getParameter("customerid") != null) {
-				id = request.getParameter("customerid");
-			}
-			// 수정 필요
-
+			
+			id = (String) session.getAttribute("id");
+			
 			try {
 				curPage = Integer.parseInt(request.getParameter("curPage"));
-			} catch (Exception e) {
+			}catch (Exception e) {
 				curPage = 1;
 			}
 
-			request.setAttribute("curPage", curPage);
-
+			session.setAttribute("id", id);
+			session.setAttribute("curPage", curPage);
+			
+			
 			command = new MCalignNewHighPrice();
 			command.execute(request, response);
-
+			
+			cartCount = (int) session.getAttribute("cartCount");
+			
+			session.setAttribute("cartCount", cartCount);
 			session.setAttribute("alignCategory", alignCategory);
 			session.setAttribute("headerCategory", headerCategory);
-
+			
 			viewPage = "newProduct.jsp";
 			break;
-
+			
 		// 베스트순 정보 불러오는 작업
-		case "/bestProduct.do":
+		case "/bestProduct.do" :
 			headerCategory = "베스트";
 			alignCategory = "베스트순";
-
-			// 수정 필요
-			if (request.getParameter("customerid") != null) {
-				id = request.getParameter("customerid");
-			}
-			// 수정 필요
-
+			
+			id = (String) session.getAttribute("id");
+			
 			try {
 				curPage = Integer.parseInt(request.getParameter("curPage"));
-			} catch (Exception e) {
+			}catch (Exception e) {
 				curPage = 1;
 			}
 
-			request.setAttribute("curPage", curPage);
-
+			session.setAttribute("id", id);
+			session.setAttribute("curPage", curPage);
+			
+			
 			command = new MCbestProduct();
 			command.execute(request, response);
-
+			
+			cartCount = (int) session.getAttribute("cartCount");
+			
+			session.setAttribute("cartCount", cartCount);
 			session.setAttribute("alignCategory", alignCategory);
 			session.setAttribute("headerCategory", headerCategory);
-
+			
 			viewPage = "bestProduct.jsp";
 			break;
-
-		case "/alignBestLowPrice.do":
+			
+			
+		case "/alignBestLowPrice.do" :
 			headerCategory = "베스트";
 			alignCategory = "낮은 가격순";
-
-			// 수정 필요
-			if (request.getParameter("customerid") != null) {
-				id = request.getParameter("customerid");
-			}
-			// 수정 필요
-
+			
+			id = (String) session.getAttribute("id");
+			
 			try {
 				curPage = Integer.parseInt(request.getParameter("curPage"));
-			} catch (Exception e) {
+			}catch (Exception e) {
 				curPage = 1;
 			}
 
-			request.setAttribute("curPage", curPage);
-
+			session.setAttribute("id", id);
+			session.setAttribute("curPage", curPage);
+			
+			
 			command = new MCalignBestLowPrice();
 			command.execute(request, response);
-
+			
+			cartCount = (int) session.getAttribute("cartCount");
+			
+			session.setAttribute("cartCount", cartCount);
 			session.setAttribute("alignCategory", alignCategory);
 			session.setAttribute("headerCategory", headerCategory);
-
+			
 			viewPage = "bestProduct.jsp";
 			break;
-
-		case "/alignBestHighPrice.do":
+			
+		case "/alignBestHighPrice.do" :
 			headerCategory = "베스트";
 			alignCategory = "높은 가격순";
-
-			// 수정 필요
-			if (request.getParameter("customerid") != null) {
-				id = request.getParameter("customerid");
-			}
-			// 수정 필요
-
+			
+			id = (String) session.getAttribute("id");
+			
 			try {
 				curPage = Integer.parseInt(request.getParameter("curPage"));
-			} catch (Exception e) {
+			}catch (Exception e) {
 				curPage = 1;
 			}
 
-			request.setAttribute("curPage", curPage);
-
+			session.setAttribute("id", id);
+			session.setAttribute("curPage", curPage);
+			
+			
 			command = new MCalignBestHighPrice();
 			command.execute(request, response);
-
+			
+			cartCount = (int) session.getAttribute("cartCount");
+			
+			session.setAttribute("cartCount", cartCount);
 			session.setAttribute("alignCategory", alignCategory);
 			session.setAttribute("headerCategory", headerCategory);
-
+			
 			viewPage = "bestProduct.jsp";
 			break;
 
@@ -954,64 +963,68 @@ public class Controller extends HttpServlet {
 //				
 //				break;
 
+		case "/paging.do" :
+			command = new MCpaging();
+			command.execute(request, response);
+			
+			return;
+			
+			
 		// main페이지 카트 클릭
-		case "/recipePageCart.do":
-
-			if (request.getParameter("customerid") != null) {
-				id = request.getParameter("customerid");
-			}
-
-			int ri = Integer.parseInt(request.getParameter("recipeid"));
-
-			System.out.println(ri + " ?????????");
-
-			session.setAttribute("customerid", id);
-			session.setAttribute("recipeid", ri);
+		case "/recipePageCart.do" :
+			
+			id = (String) session.getAttribute("id");
+			int recipeid = Integer.parseInt(request.getParameter("recipeid"));
+			
+			session.setAttribute("id", id);
+			session.setAttribute("recipeid", recipeid);
+			
 			command = new getCartByRecipe();
 			command.execute(request, response);
-
-			viewPage = "recipePage.do";
-			break;
-
+			
+			cartCount = (int) session.getAttribute("cartCount");
+			
+			out.print(new Gson().toJson(cartCount));
+			out.flush();
+			
+			return;
+			
 		// 신제품 페이지 카트 클릭
-		case "/newPageCart.do":
-
-			if (request.getParameter("customerid") != null) {
-				id = request.getParameter("customerid");
-			}
-
+		case "/newPageCart.do" :
+			
+			id = (String) session.getAttribute("id");
 			productid = Integer.parseInt(request.getParameter("productid"));
-
-			System.out.println(productid + " ?????????");
-
-			session.setAttribute("customerid", id);
+			
+			session.setAttribute("id", id);
 			session.setAttribute("productid", productid);
+			
 			command = new getCartByProduct();
 			command.execute(request, response);
-
-			viewPage = "newProductList.do";
-			break;
-		// 신제품 페이지 카트 클릭
-
-		// 수정필요
-		// 수정필요
-		// 수정필요
-		// 수정필요
-		// 수정필요
-
-		// 카트 수정 해야함
-		case "/getCart.do":
-			int selectedNumber = Integer.parseInt(request.getParameter("selectedNumber"));
-			System.out.println(selectedNumber);
-//				int ri = (int) session.getAttribute("recipeid");
-//				int pi = (int) session.getAttribute("productid");
-
-//				System.out.println(ri + " ?????????");
-//				System.out.println(pi + " ?????????");
-
-			viewPage = "mainViewPage.do";
-
-			break;
+			
+			cartCount = (int) session.getAttribute("cartCount");
+			
+			out.print(new Gson().toJson(cartCount));
+			out.flush();
+			
+			return;
+			
+		case "/bestPageCart.do" :
+			
+			id = (String) session.getAttribute("id");
+			productid = Integer.parseInt(request.getParameter("productid"));
+			
+			session.setAttribute("id", id);
+			session.setAttribute("productid", productid);
+			
+			command = new getCartByProduct();
+			command.execute(request, response);
+			
+			cartCount = (int) session.getAttribute("cartCount");
+			
+			out.print(new Gson().toJson(cartCount));
+			out.flush();
+			
+			return;
 
 		case "/duplicatedCheck.do":
 			command = new MDuplicatedCheck();
