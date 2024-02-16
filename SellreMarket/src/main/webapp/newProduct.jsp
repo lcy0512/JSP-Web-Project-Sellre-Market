@@ -135,7 +135,7 @@
 						<div class="product-item bg-light mb-4"
 							style="width: 300px; height: 350px; display: flex; flex-direction: column; justify-content: center;">
 							<div class="product-img position-relative overflow-hidden">
-								<a href="#"> <img class="img-fluid w-100"
+								<a href="" onclick="sendToDeatil(${dto.productid})"> <img class="img-fluid w-100"
 									src="${pageContext.request.contextPath}/image/product/${dto.pimage}"
 									alt="Product Image"
 									 style="object-fit: cover; width: 100%; height: 100%;">
@@ -194,6 +194,7 @@
 	<!-- Paging Start -->
 	<div id="paging"></div>
 	<script src="js/paging.js"></script>
+	<input type="hidden" value="${curPage}" id="curPage">
 	<!-- Paging End -->
 
 	

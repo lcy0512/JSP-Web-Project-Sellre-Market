@@ -1,11 +1,15 @@
 package com.market.command;
 
+import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
 import com.market.dao.MainViewDao;
 import com.market.dto.MainViewDto;
 
@@ -22,15 +26,22 @@ public class MCbestProduct implements MCommand{
 */
 		
 		HttpSession session = request.getSession();
+		
 		MainViewDao dao = new MainViewDao();
 		
+		String id = (String) session.getAttribute("id");
+		
+		int cartCount = 0;
 		int curPage = (int) session.getAttribute("curPage");
 		
-		System.out.println(curPage + " insdie 151515151515");
+		// 장바구니 카운트 세기
+		if (id != null) {
+			cartCount = dao.cartCount(id);
+		}
 		
-		System.out.println("bestProduct command curPage : "  + curPage);
-		// 전체 페이지 수를 카운트하여 가져옴
-		int totalProductCount = dao.bestPageCount();
+		System.out.println(request.getAttribute("curPage") + " : mcnewProductPaging");
+		
+		
 		// 한 페이지에 몇개를 보여줄 것인가?
 		int countPerPage = 12;
 		// 한 블럭에 몇개의 블럭을 보여줄 것인가?
@@ -40,24 +51,13 @@ public class MCbestProduct implements MCommand{
 		// ex) (1-1) * 5 = 0, (2-1) * 5 = 5, 
 		int limitFrom = (curPage - 1) * countPerBlock;
 		
+		
 		List<MainViewDto> bestProducts = dao.bestProductList(limitFrom, countPerPage);
-		// 블록 페이지 1~5, 6~10
-		// ex) 1~5까지 = 1, 6~10 = 2
-		int blockPage = ((curPage-1) / countPerBlock) + 1;
-		
-		// bloackPage가 1이면 시작 페이지가 '1 2 3 4 5'  2이면 '6 7 8 9 10'
-		// 그래서 시작 페이지가 1, 6, 11 이렇게 나온다.
-		int blockStart = (blockPage-1) * countPerBlock + 1;
-		
-		
-		// 마지막 페이지 정하기
-		int endPage = (totalProductCount % countPerPage) == 0 ? totalProductCount / countPerPage : ((totalProductCount / countPerPage) + 1);
-		
-		request.setAttribute("curPage", curPage);
-		request.setAttribute("endPage", endPage);
-		request.setAttribute("blockStart", blockStart);
-		
 		// 신제품 페이지 datas
 		request.setAttribute("bestProducts", bestProducts);
+		// 신제품 페이지 ad 이미지
+		
+		session.setAttribute("curPage", curPage);
+		session.setAttribute("cartCount", cartCount);
 	} 
 }

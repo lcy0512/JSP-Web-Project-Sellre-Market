@@ -170,40 +170,6 @@ public class SignUpDao {
 		return result;
 	} // checkDuplicatedId
 	
-	public boolean confirmAuthentic(String authentication, String email) {
-		boolean result = true;
-		
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet resultset = null;
-		
-		String query = "update customer set authentication = ? where email = ?";
-		try {
-			connection = dataSource.getConnection();
-			
-			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1, authentication);
-			preparedStatement.setString(2, email);
-			
-//			System.out.println(preparedStatement.execute() + "   'preparedStatement.execute()' ");
-			result = false;
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		finally { 
-			// 메모리정리
-			try {
-				if(resultset != null) resultset.close();
-				if(preparedStatement != null) preparedStatement.close();
-				if(connection != null) connection.close();
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
-		} // finally
-		
-		return result;
-	}
-	
 	
 //	getUserEmail 아이디를 받아 이메일을 체크한다.
 //	emailChecked

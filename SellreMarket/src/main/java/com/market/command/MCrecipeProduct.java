@@ -1,15 +1,19 @@
 package com.market.command;
 
+import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
 import com.market.dao.MainViewDao;
 import com.market.dto.MainViewDto;
 
-public class Paging implements MCommand {
+public class MCrecipeProduct implements MCommand {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
@@ -26,15 +30,17 @@ public class Paging implements MCommand {
 		// get images
 		List<MainViewDto> getRecipeAdImgs =  dao.getRecipeAdImgs();
 		
-		int curPage = 0;
+		String id = (String) session.getAttribute("id");
 		
-		// 처음에 받아오는 페이지가 값이 없는 경우는 1로 설정하기 위한 트라이
-		try {
-			curPage = (int) (session.getAttribute("curPage"));
+		int cartCount = 0;
+		int curPage = (int) session.getAttribute("curPage");
+		
+		// 장바구니 카운트 세기
+		if (id != null) {
+			cartCount = dao.cartCount(id);
 		}
-		catch (Exception e) {
-			curPage = 1;
-		}
+		
+		System.out.println(request.getAttribute("curPage") + " : mcnewProductPaging");
 		
 		// 한 페이지에 몇개를 보여줄 것인가?
 		int countPerPage = 12;
@@ -45,11 +51,14 @@ public class Paging implements MCommand {
 		// ex) (1-1) * 5 = 0, (2-1) * 5 = 5, 
 		int limitFrom = (curPage - 1) * countPerBlock;
 		
-		List<MainViewDto> productDtos = dao.productView(limitFrom, countPerPage);
 		
-		// dao에서 db 불러온 데이터들
-		request.setAttribute("productList", productDtos);
-		// 메인페이지 ad 이미지들
+		List<MainViewDto> productList = dao.productView(limitFrom, countPerPage);
+		// 신제품 페이지 datas
+		request.setAttribute("productList", productList);
+		// 신제품 페이지 ad 이미지
 		request.setAttribute("getRecipeAdImgs", getRecipeAdImgs);
+		
+		session.setAttribute("curPage", curPage);
+		session.setAttribute("cartCount", cartCount);
 	} 
 }

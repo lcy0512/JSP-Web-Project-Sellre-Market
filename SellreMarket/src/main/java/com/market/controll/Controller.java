@@ -30,7 +30,6 @@ import com.market.command.MCalignNewLowPrice;
 import com.market.command.MCalignRecipeHighPrice;
 import com.market.command.MCalignRecipeLowPrice;
 import com.market.command.MCbestProduct;
-import com.market.command.MCheckAuthentic;
 import com.market.command.MClogin;
 import com.market.command.MCnewProductPaging;
 import com.market.command.MCommand;
@@ -46,7 +45,7 @@ import com.market.dto.AdminGetCategoryDto;
 import com.market.dto.AdminGetPackTypeDto;
 import com.market.dto.AdminProductDto;
 import com.market.dto.PageInfo;
-import com.market.command.Paging;
+import com.market.command.MCrecipeProduct;
 import com.market.command.getCartByProduct;
 import com.market.command.getCartByRecipe;
 
@@ -96,10 +95,10 @@ public class Controller extends HttpServlet {
 		String alignCategory = null;
 		// header 카테고리
 		String headerCategory = null;
+		int curPage = 0;
 		// 장바구니 클릭 시 가져 올 productid
 		int productid = 0;
-		int cartCount = 0;
-		int curPage = 0;
+		int cartCount = 1;
 		
 		
 		response.setContentType("applicaton/json");
@@ -185,7 +184,7 @@ public class Controller extends HttpServlet {
 				
 			case "/productDetail.do" :
 		        // 요청에서 선택된 상품 번호를 가져옴
-				String selectProductId = request.getParameter("productId");				
+				String selectProductId = request.getParameter("productId");		
 		        // 선택된 상품 번호를 세션에 저장
 		        session.setAttribute("productID", selectProductId);
 		       
@@ -333,10 +332,17 @@ public class Controller extends HttpServlet {
 				
 				id = (String) session.getAttribute("id");
 				
+				try {
+					curPage = Integer.parseInt(request.getParameter("curPage"));
+				}catch (Exception e) {
+					curPage = 1;
+				}
+				
 				session.setAttribute("id", id);
+				session.setAttribute("curPage", curPage);
 				
 				// 페이징 처리를 위한
-				command = new Paging();
+				command = new MCrecipeProduct();
 				command.execute(request, response);
 				
 				session.setAttribute("alignCategory", alignCategory);
@@ -352,7 +358,14 @@ public class Controller extends HttpServlet {
 				
 				id = (String) session.getAttribute("id");
 				
+				try {
+					curPage = Integer.parseInt(request.getParameter("curPage"));
+				}catch (Exception e) {
+					curPage = 1;
+				}
+				
 				session.setAttribute("id", id);
+				session.setAttribute("curPage", curPage);
 				
 				command = new MCalignRecipeLowPrice();
 				command.execute(request, response);
@@ -369,7 +382,14 @@ public class Controller extends HttpServlet {
 				
 				id = (String) session.getAttribute("id");
 				
+				try {
+					curPage = Integer.parseInt(request.getParameter("curPage"));
+				}catch (Exception e) {
+					curPage = 1;
+				}
+				
 				session.setAttribute("id", id);
+				session.setAttribute("curPage", curPage);
 				
 				command = new MCalignRecipeHighPrice();
 				command.execute(request, response);
@@ -387,9 +407,15 @@ public class Controller extends HttpServlet {
 				
 				id = (String) session.getAttribute("id");
 				
-				System.out.println(id + " controller");
+				try {
+					curPage = Integer.parseInt(request.getParameter("curPage"));
+				}catch (Exception e) {
+					curPage = 1;
+				}
 				
 				session.setAttribute("id", id);
+				session.setAttribute("curPage", curPage);
+				
 				
 				command = new MCnewProductPaging();
 				command.execute(request, response);
@@ -410,7 +436,15 @@ public class Controller extends HttpServlet {
 				
 				id = (String) session.getAttribute("id");
 				
+				try {
+					curPage = Integer.parseInt(request.getParameter("curPage"));
+				}catch (Exception e) {
+					curPage = 1;
+				}
+				
 				session.setAttribute("id", id);
+				session.setAttribute("curPage", curPage);
+				
 				
 				command = new MCalignNewLowPrice();
 				command.execute(request, response);
@@ -427,8 +461,15 @@ public class Controller extends HttpServlet {
 				
 				id = (String) session.getAttribute("id");
 				
-				
+				try {
+					curPage = Integer.parseInt(request.getParameter("curPage"));
+				}catch (Exception e) {
+					curPage = 1;
+				}
+
 				session.setAttribute("id", id);
+				session.setAttribute("curPage", curPage);
+				
 				
 				command = new MCalignNewHighPrice();
 				command.execute(request, response);
@@ -446,16 +487,15 @@ public class Controller extends HttpServlet {
 				
 				id = (String) session.getAttribute("id");
 				
-				// Paging.do에서 href 를 받아서 여기로 오기 때문에 getParameter를 여기서 받고 보내준다.
 				try {
 					curPage = Integer.parseInt(request.getParameter("curPage"));
 				}catch (Exception e) {
 					curPage = 1;
 				}
-				System.out.println(curPage + "  : curPAge");
-				
-				session.setAttribute("curPage", curPage);
+
 				session.setAttribute("id", id);
+				session.setAttribute("curPage", curPage);
+				
 				
 				command = new MCbestProduct();
 				command.execute(request, response);
@@ -473,7 +513,15 @@ public class Controller extends HttpServlet {
 				
 				id = (String) session.getAttribute("id");
 				
+				try {
+					curPage = Integer.parseInt(request.getParameter("curPage"));
+				}catch (Exception e) {
+					curPage = 1;
+				}
+
 				session.setAttribute("id", id);
+				session.setAttribute("curPage", curPage);
+				
 				
 				command = new MCalignBestLowPrice();
 				command.execute(request, response);
@@ -490,7 +538,15 @@ public class Controller extends HttpServlet {
 				
 				id = (String) session.getAttribute("id");
 				
+				try {
+					curPage = Integer.parseInt(request.getParameter("curPage"));
+				}catch (Exception e) {
+					curPage = 1;
+				}
+
 				session.setAttribute("id", id);
+				session.setAttribute("curPage", curPage);
+				
 				
 				command = new MCalignBestHighPrice();
 				command.execute(request, response);
@@ -528,8 +584,6 @@ public class Controller extends HttpServlet {
 				
 			
 			case "/paging.do" :
-				
-				System.out.println(request.getAttribute("curPage") + "  ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇ컨트롤ㄹ러");
 				command = new MCpaging();
 				command.execute(request, response);
 				
@@ -603,13 +657,8 @@ public class Controller extends HttpServlet {
 				command.execute(request, response);
 				
 				return;
-			
-			// 위에 duplicatedCheck.do 와 함께 사용하려 했는데 따로 사용하는게 나음
-			case "/authenticKeyCheck.do":
-				command = new MCheckAuthentic();
-				command.execute(request, response);
+			 
 				
-				return;
 				
 			default :
 				break;
