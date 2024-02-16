@@ -6,8 +6,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
 
-import javax.mail.Message;
-import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
@@ -111,8 +109,8 @@ public class MDuplicatedCheck implements MCommand {
 				System.out.println(AuthenticationKey);
 
 				Session session = Session.getInstance(p, new javax.mail.Authenticator() {
-					protected PasswordAuthentication getPasswordAuthentication() {
-						return new PasswordAuthentication(smtpEmail,password);
+					protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+						return new javax.mail.PasswordAuthentication(smtpEmail,password);
 					}
 				});
 				
@@ -120,7 +118,7 @@ public class MDuplicatedCheck implements MCommand {
 				try {
 					MimeMessage msg = new MimeMessage(session);
 			
-					msg.addRecipient(Message.RecipientType.TO, new InternetAddress(to_email));
+					msg.addRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(to_email));
 					
 					System.out.println(msg);
 					//메일 제목

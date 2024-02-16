@@ -115,7 +115,7 @@
 						</button>
 					</div>
 				</div>
-				<div class="css-1pjgd36 e744wfw6">
+				<div class="css-1pjgd36 e744wfw6" id="Emailauthentication" style="display: none;">
 					<div class="css-1y8737n e744wfw5">
 						<input class="css-1obgjqh e744wfw4" type="hidden"><span
 							class="css-qq9ke6 e744wfw0"></span>

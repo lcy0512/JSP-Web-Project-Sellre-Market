@@ -65,6 +65,7 @@ import com.market.command.MCartListViewApi;
 import com.market.command.MCartRegistry;
 import com.market.command.MCartUpdateAmount;
 import com.market.command.MCbestProduct;
+import com.market.command.MCheckAuthentic;
 import com.market.command.MClogin;
 import com.market.command.MCnewProductPaging;
 import com.market.command.MCommand;
@@ -1211,6 +1212,12 @@ public class Controller extends HttpServlet {
 			ArrayList<AdminSaleDto> userList = (ArrayList) request.getAttribute("list");
 			out.print(new Gson().toJson(userList));
 			out.flush();
+			return;
+			
+		case "/authenticKeyCheck.do":
+			command = new MCheckAuthentic();
+			command.execute(request, response);
+			
 			return;
 
 		default:

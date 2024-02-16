@@ -196,7 +196,7 @@ $(document).ready(function() {
 	$("#idDuplicatedCheck").click(function() {
 		
 		let wrongword = /^(?!.*\badmin\b).*$/;
-		let regExpId = /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{6,}$/;
+		let regExpId = /^[a-zA-Z0-9]{6,}$/;
 		let userid = $("#memberId").val();
 		
 		if (userid.match(wrongword)) {
@@ -278,6 +278,10 @@ $(document).ready(function() {
 						 $("#emailDuplicatedCheck").prop("disabled", true); // idDuplicatedCheck 버튼을 비활성화
 						 $("#email").prop("readonly", true); // memberId 입력란을 읽기 전용으로 설정
 						emailcheck = true;
+						
+						var emailElement = document.getElementById('Emailauthentication');
+						// display 속성을 변경
+						emailElement.style.display = 'inline-flex';
 						
 						$("#sysAuthentic").val(response.authentication);
 					}
