@@ -21,19 +21,12 @@ public class MCbestProduct implements MCommand{
 	4. Description : best제품 body 페이지 데이터 가져오기 및 페이징 처리 
 */
 		
-		
+		HttpSession session = request.getSession();
 		MainViewDao dao = new MainViewDao();
 		
-		int curPage = 0;
+		int curPage = (int) session.getAttribute("curPage");
 		
-		System.out.println(request.getAttribute("curPage") + " curPage adsfkalsdfnlasnfadnsfnal");
-		// 처음에 받아오는 페이지가 값이 없는 경우는 1로 설정하기 위한 트라이
-		try {
-			curPage = (int) (request.getAttribute("curPage"));
-		}
-		catch (Exception e) {
-			curPage = 1;
-		}
+		System.out.println(curPage + " insdie 151515151515");
 		
 		System.out.println("bestProduct command curPage : "  + curPage);
 		// 전체 페이지 수를 카운트하여 가져옴

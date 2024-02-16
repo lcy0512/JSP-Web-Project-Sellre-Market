@@ -44,7 +44,7 @@ public class MCpaging implements MCommand  {
 		}
 		
 		int curPage = 0;
-		System.out.println(request.getAttribute("curPage") + " 여기까지 찍히나?");
+		System.out.println(request.getAttribute("curPage") + " + McPaging.java 여기까지 찍히나?");
 		try {
 			curPage = Integer.parseInt(request.getParameter("curPage"));
 		}catch (Exception e) {
@@ -52,7 +52,7 @@ public class MCpaging implements MCommand  {
 			e.printStackTrace();
 		}
 		
-		System.out.println(request.getAttribute("curPage") + " after try catch");
+		System.out.println(request.getAttribute("curPage") + " + McPaging.javaafter try catch");
 		// 한 페이지에 몇개를 보여줄 것인가?
 		int countPerPage = 12;
 		// 한 블럭에 몇개의 블럭을 보여줄 것인가?
