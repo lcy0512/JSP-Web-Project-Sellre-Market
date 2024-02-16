@@ -234,7 +234,7 @@ public class AdminBrandDao {
 		try {
 			
 			conn = dataSource.getConnection();
-			String query = "select bname from brand order by bname asc";
+			String query = "select bname from brand group by bname order by bname asc";
 		
 			ps = conn.prepareStatement(query);
 			rs = ps.executeQuery();
