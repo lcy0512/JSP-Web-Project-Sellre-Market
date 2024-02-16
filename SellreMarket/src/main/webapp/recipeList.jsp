@@ -68,6 +68,7 @@
 
 <!-- // js 따로 관리한다. -->
 <script src="js/recipePage.js"></script>
+<script src="js/paging.js"></script>
 
 
 </head>
@@ -222,8 +223,8 @@
 	<!-- Products End -->
 
 	<!-- Paging Start -->
-	<div id="paging"></div>
-	<script src="js/paging.js"></script>
+	<div id="showPaging" style="text-align: center;"></div>
+	<input type="hidden" id="curPage" value="${curPage}">
 	<!-- Paging End -->
 
 

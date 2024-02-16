@@ -68,6 +68,7 @@
 
 <!-- // js 따로 관리한다. -->
 <script src="js/bestProductPage.js"></script>
+<script src="js/paging.js"></script>
 
 </head>
 <body>
@@ -178,8 +179,7 @@
 
 
 	<!-- Paging Start -->
-	<div id="paging"></div>
-	<script src="js/paging.js"></script>
+	<div id="showPaging" style="text-align: center;"></div>
 	<input type="hidden" id="curPage" value="${curPage}">
 	<!-- Paging End -->
 	

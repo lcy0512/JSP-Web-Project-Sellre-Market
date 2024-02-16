@@ -938,31 +938,6 @@ public class Controller extends HttpServlet {
 			viewPage = "bestProduct.jsp";
 			break;
 
-		// 장바구니 클릭 시 띄우는 팝업
-//			case "/popup.do" :
-//				
-//				String yName = request.getParameter("yName");
-//				String ySrc = request.getParameter("ySrc");
-//				String price =  request.getParameter("price");
-//				String yTitle = request.getParameter("yTitle");
-//				
-//				int recipeid = Integer.parseInt(request.getParameter("recipeid"));
-//				int productid = Integer.parseInt(request.getParameter("productid"));
-//				
-//				System.out.println(recipeid);
-//				System.out.println(productid);
-//				
-//				session.setAttribute("yName", yName);
-//				session.setAttribute("ySrc", ySrc);
-//				session.setAttribute("price", price);
-//				session.setAttribute("yTitle", yTitle);
-//				session.setAttribute("recipeid", recipeid);
-//				session.setAttribute("productid", productid);
-//				
-//				viewPage = "popup.jsp";
-//				
-//				break;
-
 		case "/paging.do" :
 			command = new MCpaging();
 			command.execute(request, response);
@@ -1031,28 +1006,6 @@ public class Controller extends HttpServlet {
 			command.execute(request, response);
 			return;
 
-//			case "/bestPageCart.do" :
-//				
-//				if (request.getParameter("customerid") != null) {
-//					id = request.getParameter("customerid");
-//				}
-//				
-//				productid = Integer.parseInt(request.getParameter("productid"));
-//				
-//				System.out.println(productid + " ?????????");
-//				
-//				session.setAttribute("customerid", id);
-//				session.setAttribute("productid", productid);
-//				command = new getCart();
-//				command.execute(request, response);
-//				
-//				viewPage = "newProductList.do";
-//				return;
-		// 수정필요
-		// 수정필요
-		// 수정필요
-		// 수정필요
-		// 수정필요
 
 		// TODO HTTP Method 구분할 수 있는 구조로 리팩토링 하면 URL에서 행위 제외
 		case "/api/cart.do":
