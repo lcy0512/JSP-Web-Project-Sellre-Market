@@ -75,6 +75,7 @@ import com.market.command.MCrecipeProduct;
 import com.market.command.MDeleteUserInfo;
 import com.market.command.MDuplicatedCheck;
 import com.market.command.MEventDetail;
+import com.market.command.MFindUserID;
 import com.market.command.MInquiryDetail;
 import com.market.command.MInsertInquiry;
 import com.market.command.MInsertPrice;
@@ -1229,6 +1230,12 @@ public class Controller extends HttpServlet {
 			
 		case "/authenticKeyCheck.do":
 			command = new MCheckAuthentic();
+			command.execute(request, response);
+			
+			return;
+			
+		case "/findUserID.do" :
+			command = new MFindUserID();
 			command.execute(request, response);
 			
 			return;
