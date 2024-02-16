@@ -397,5 +397,122 @@ public class AdminProductInputDao {
 		return num;
 	}	
 		
+	/************************************************************************************************
+	 * Function : 카테고리 제품과 연결 
+	 * @param 	: null
+	 * @return 	: null
+	************************************************************************************************/
 	
+	public int insertCategory (String type, String subtype, int productid) {
+		
+		int num = 0;
+		Connection conn = null;
+		PreparedStatement ps = null;
+		
+		try {
+			conn = dataSource.getConnection();	
+			String query = """
+							insert into 
+							catetory (
+										type,
+										subtype, 
+										productid
+								  ) values (?, ?, ?)
+							""";
+		
+			ps = conn.prepareStatement(query);
+			ps.setString(1, type);
+			ps.setString(2, subtype);
+			ps.setInt(3, productid);
+			
+			ps.executeUpdate();
+			num++;
+			conn.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return num;
+		}
+		return num;
+	}	
+	
+	
+	
+	/************************************************************************************************
+	 * Function : 포장타입 제품과 연결 
+	 * @param 	: null
+	 * @return 	: null
+	************************************************************************************************/
+	
+	public int insertPack (String packType, String packKind, int productid) {
+		
+		int num = 0;
+		Connection conn = null;
+		PreparedStatement ps = null;
+		
+		try {
+			conn = dataSource.getConnection();	
+			String query = """
+							insert into 
+							packing (
+										packtype,
+										packkind, 
+										productid
+								  ) values (?, ?, ?)
+							""";
+		
+			ps = conn.prepareStatement(query);
+			ps.setString(1, packType);
+			ps.setString(2, packKind);
+			ps.setInt(3, productid);
+			
+			ps.executeUpdate();
+			num++;
+			conn.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return num;
+		}
+		return num;
+	}
+	
+	/************************************************************************************************
+	 * Function : 중량 제품과 연결 
+	 * @param 	: null
+	 * @return 	: null
+	************************************************************************************************/
+	
+	public int insertUnit(String utype, String ugram, int productid) {
+		
+		int num = 0;
+		Connection conn = null;
+		PreparedStatement ps = null;
+		
+		try {
+			conn = dataSource.getConnection();	
+			String query = """
+							insert into 
+							saleunit (
+										utype,
+										ugram, 
+										productid
+								  ) values (?, ?, ?)
+							""";
+		
+			ps = conn.prepareStatement(query);
+			ps.setString(1, utype);
+			ps.setString(2, ugram);
+			ps.setInt(3, productid);
+			
+			ps.executeUpdate();
+			num++;
+			conn.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return num;
+		}
+		return num;
+	}	
 }
