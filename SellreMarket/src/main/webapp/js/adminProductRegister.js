@@ -4,10 +4,54 @@
 	
 	
 	function init() {
+		productNum();
+		questNum();
 		selectCategory();
 		selectPackType();
 		selectPackKind();
 		selectBrand();
+		selectDeliveryType();
+	}
+	
+	//제품현황 Header 알림표시
+	function productNum() {
+		
+		$.ajax({
+			type : "POST",
+			url : "adminProductNum.do",
+			success : function(response){
+				if(response == "0"){
+					document.getElementById('productNum').style.display = 'none';
+				} else {
+					document.getElementById('productNum').style.display = 'block';
+					document.getElementById('productNum').innerText = response	
+				}
+				
+			},
+			 error:function(request, status, error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	}
+	
+	//문의 진행중 갯수 Header 알림표시
+	function questNum() {
+		
+		$.ajax({
+			type : "POST",
+			url : "adminQuestNum.do",
+			success : function(response){
+				if(response == "0"){
+					document.getElementById('questNum').style.display = 'none';
+				} else {
+					document.getElementById('questNum').style.display = 'block';
+					document.getElementById('questNum').innerText = response
+				}
+			},
+			 error:function(request, status, error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
 	}
 	
 	 /************************************************************************************************
@@ -208,6 +252,42 @@
 		
 	}
 	
+	/************************************************************************************************
+	 * Function : 배달타입 조회 - ajax, 가져온 데이터 해당 id에 넣기
+	 * @param 	: null
+	 * @return 	: null
+	************************************************************************************************/
+	function selectDeliveryType() {
+		 
+		$.ajax({
+			type : "POST",
+			url : "selectDelivery.do",
+			success : function(response){
+				createDelivery(response)
+			},
+			error:function(request, status, error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	} 
+ 
+ 
+	function createDelivery(data) {
+		
+		let option = "";
+		
+		for (var i = 0; i < data.length; i++) {										
+			if(i == 0){
+				option +="<option value='option" + (i + 1) + "' selected='selected'>"+data[i].dname+"</option>";
+			} else {
+				option +="<option value='option" + (i + 1) + "'>"+data[i].dname+"</option>";
+			}
+		}
+		
+		$("#dname").html(option);
+		
+	}	
+	
 	
 	/************************************************************************************************
 	 * Function : 이미지 선택했을 때 preview에 이미지 넣기 이벤트 
@@ -372,7 +452,7 @@
 	 * @return 	: null
 	************************************************************************************************/
 	
-	function insertProduct() {
+/*	function insertProduct() {
 					 
 		try {
 			insertInfo();
@@ -389,8 +469,21 @@
 			console.error('error : '+error);
 		}
 			
-	}
+	} */
 
+function insertProduct() {
+	insertInfo();
+	insertPrice();
+	insertBrand();
+	insertCategory()
+	insertPacking()
+	insertUnit()
+	insertDelivery()
+	insertImage()
+	
+	alert('등록되었습니다.')
+	window.location.replace("/SellreMarket/admin_product.jsp");
+}	
 	
 function insertInfo() {
 	let pname = $("#pname").val();
@@ -405,6 +498,7 @@ function insertInfo() {
 		
 		type : "POST",
 		url : "insertProduct.do",
+		async : false,
 		data : {
 				pname : pname,
 				pEngname : pEngname,
@@ -417,7 +511,7 @@ function insertInfo() {
 		},
 		success : function(response){
 			if(response == 1){
-				return response;
+				return ;
 			} else {
 				console.log("error")
 			}
@@ -427,6 +521,7 @@ function insertInfo() {
 		}
 		
 	});
+	
 }	
 	
 //가격 insert하기	
@@ -437,6 +532,7 @@ function insertPrice() {
 		
 		type : "POST",
 		url : "insertPrice.do",
+		async : false,
 		data : {
 				price : price
 				
@@ -465,6 +561,7 @@ function insertBrand() {
 		
 		type : "POST",
 		url : "insertBrandToProduct.do",
+		async : false,
 		data : {
 				bname : selectedOption
 				
@@ -487,20 +584,21 @@ function insertBrand() {
 //category insert
 function insertCategory() { 
 	
-	var type = document.getElementById("type");
-	var typeText = selectElement.options[type.selectedIndex].text;
-	
-	var subType = document.getElementById("subType");
-	var subTypeText = selectElement.options[subType.selectedIndex].text;
-	
+ 	var typeElement = document.getElementById("type");
+    var typeText = typeElement.options[typeElement.selectedIndex].text;
+
+    var subTypeElement = document.getElementById("subType");
+    var subTypeText = subTypeElement.options[subTypeElement.selectedIndex].text;
+
 	
 	$.ajax({
 		
 		type : "POST",
 		url : "insertCategoryToProduct.do",
+		async : false,
 		data : {
-			type : typeText,
-			subtype : subTypeText
+			type: typeText,
+            subtype: subTypeText
 				
 		},
 		success : function(response){
@@ -521,16 +619,19 @@ function insertCategory() {
 //category insert
 function insertPacking() { 
 	
-	var packType = document.getElementById("packType");
-	var packTypeText = selectElement.options[packType.selectedIndex].text;
+	// packType select 요소에서 선택한 옵션의 텍스트 가져오기
+	var packTypeElement = document.getElementById("packType");
+	var packTypeText = packTypeElement.options[packTypeElement.selectedIndex].text;
 	
-	var packKind = document.getElementById("packKind");
-	var packKindText = selectElement.options[packKind.selectedIndex].text;
+	// packKind select 요소에서 선택한 옵션의 텍스트 가져오기
+	var packKindElement = document.getElementById("packKind");
+	var packKindText = packKindElement.options[packKindElement.selectedIndex].text;
 	
 	$.ajax({
 		
 		type : "POST",
 		url : "insertPackToProduct.do",
+		async : false,
 		data : {
 			packType : packTypeText,
 			packKind : packKindText
@@ -552,28 +653,60 @@ function insertPacking() {
 
 //unit insert
 function insertUnit() { 
-	
-	var utype = document.getElementById("utype");
-	var utypeText = selectElement.options[utype.selectedIndex].text;
-	
-	var ugram = document.getElementById("ugram");
-	var ugramText = selectElement.options[ugram.selectedIndex].text;
+	let utype = $("#utype").val();
+	let ugram = $("#ugram").val();
 	
 	$.ajax({
 		
 		type : "POST",
 		url : "insertUnitToProduct.do",
+		async : false,
 		data : {
-			utype : utypeText,
-			ugram : ugramText
+			utype : utype,
+			ugram : ugram
 				
 		},
 		success : function(response){
+			console.log('6')
 			if(response == 1){
-				window.location.replace("/SellreMarket/admin_product.jsp");
+				console.log('7')
+				return 			
+			} else {
+				console.log('8')
+				console.log("error")
+			}
+		},
+		
+		 error:function(request, status, error){
+			console.log('9')
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+	});
+	console.log('10')
+}	
+
+
+//delivery insert
+function insertDelivery() { 
+	
+	var dnameElement = document.getElementById("dname");
+	var dnameText = dnameElement.options[dnameElement.selectedIndex].text;
+	
+	$.ajax({
+		
+		type : "POST",
+		async : false,
+		url : "insertDelivery.do",
+		data : {
+			dname : dnameText
+		},
+		success : function(response){
+			if(response == 1){
+			//	window.location.replace("/SellreMarket/admin_product.jsp");
 				return response;			
 			} else {
 				console.log("error")
+				alert('배달타입 inser 오류! 시스템문의로 전화하세요')
 			}
 		},
 		 error:function(request, status, error){
@@ -582,4 +715,38 @@ function insertUnit() {
 		
 	});
 }	
+
+
+//image insert 
+function insertImage() {
+	
+	//let form = new FormData();
+	//form.append("image", $("#image"[0].files[0]))
+	
+	let image = $('input[name="image"]').get(0).files[0];
+	let formData = new FormData();
+	formData.append('image',image)
+
+	
+	$.ajax({
+		
+		type : "POST",
+		async : false,
+		url : "insertImage.do",
+		data : formData,
+		processData : false,
+		contentType : false,
+		success : function(response) {
+			if(response == 1){
+				return;
+			} else {
+				alert('이미지 insert 실패!')
+			}
+		},
+		error : function(request,status, error) {
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+		
+	});
+}
 

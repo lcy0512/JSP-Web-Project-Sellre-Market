@@ -1,5 +1,6 @@
 package com.market.dao;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,10 +8,13 @@ import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import com.market.dto.AdminProductDto;
 import com.market.dto.AdminProductInputDto;
+import com.oreilly.servlet.MultipartRequest;
 
 public class AdminProductInputDao {
 
@@ -515,4 +519,82 @@ public class AdminProductInputDao {
 		}
 		return num;
 	}	
+	
+	/************************************************************************************************
+	 * Function : 중량 제품과 연결 
+	 * @param 	: null
+	 * @return 	: null
+	************************************************************************************************/
+	
+	public int insertDelivery(String dname, int productid){
+		
+		int num = 0;
+		Connection conn = null;
+		PreparedStatement ps = null;
+		
+		try {
+			conn = dataSource.getConnection();	
+			String query = """
+							insert into 
+							delivery_type (
+										dname, 
+										productid
+								  ) values (?, ?)
+							""";
+		
+			ps = conn.prepareStatement(query);
+			ps.setString(1, dname);
+			ps.setInt(2, productid);
+			
+			ps.executeUpdate();
+			num++;
+			conn.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return num;
+		}
+		return num;
+	}	
+	
+	
+	
+	/************************************************************************************************
+	 * Function : 제품 이미지 insert
+	 * @param 	: null
+	 * @return 	: null
+	************************************************************************************************/
+	
+	public int insertImage (String fileName, int productid) {
+
+		int num = 0;
+		Connection conn = null;
+		PreparedStatement ps = null;
+		
+		try {
+			conn = dataSource.getConnection();	
+			String query = """
+							insert into 
+							product_image (
+										image, 
+										productid
+								  ) values (?, ?)
+							""";
+		
+			ps = conn.prepareStatement(query);
+			ps.setString(1, fileName);
+			ps.setInt(2, productid);
+			
+			ps.executeUpdate();
+			num++;
+			conn.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return num;
+		}
+		return num;
+	}	
+	
+	
 }
