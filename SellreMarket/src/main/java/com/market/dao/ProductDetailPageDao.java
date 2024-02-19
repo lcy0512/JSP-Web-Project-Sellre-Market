@@ -36,12 +36,13 @@ public class ProductDetailPageDao {
             
             String query = "select p.productid, p.pname, pr.price, "
             							+ "pr.price-(pr.price*(e.salerate/100)) as discountedPrice, "
-            							+ "e.salerate, d.dname "
-            					 + "from product p, price pr, event e, delivery_type d "
+            							+ "e.salerate, d.dname, i.image "
+            					 + "from product p, price pr, event e, delivery_type d, product_image i "
             					 + "where p.productid = ? "
             					 		+ "and p.productid = pr.productid "
             					 		+ "and e.eventid = '1' "
-            					 		+ "and d.productid = p.productid";
+            					 		+ "and d.productid = p.productid "
+            					 		+ "and i.productid = p.productid";
             
             ps = conn.prepareStatement(query);
             ps.setString(1, id);
@@ -55,14 +56,17 @@ public class ProductDetailPageDao {
                     rs.getInt("discountedPrice"),
                     rs.getInt("salerate"),
                     rs.getString("pname"),
-                    rs.getString("dname")
+                    rs.getString("dname"),
+                    rs.getString("image")
                 ); // DTO 객체 생성 및 초기화
                 resultList.add(dto); // 리스트에 DTO 객체 추가
                 System.out.println("DAO에서 상품명 출력 : " + dto.getProductName());
                 System.out.println("DAO에서 원가 출력 : " + dto.getPrice());
                 System.out.println("DAO에서 할인가 출력 : " + dto.getDiscountedPrice());
                 System.out.println("DAO에서 할인율 출력 : " + dto.getSalerate());
+                System.out.println("DAO에서 상품명 출력 : " + dto.getDeliveryName());
                 System.out.println("DAO에서 배송명 출력 : " + dto.getDeliveryName());
+                System.out.println("DAO에서 이미지 경로 출력 : " + dto.getImage());
             }       
         } catch (Exception e) {
             e.printStackTrace();
