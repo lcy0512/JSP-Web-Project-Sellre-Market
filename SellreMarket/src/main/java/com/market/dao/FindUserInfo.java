@@ -60,9 +60,43 @@ public class FindUserInfo {
 		return result;
 	}
 	
-	
-	
-	
+	public boolean findPW(String userid, String name, String email) {
+		boolean result = false;
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultset = null;
+		
+		String query = "select userid, name, email from customer where userid=? and name=? and email=?;";
+		try {
+			connection = dataSource.getConnection();
+			
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, userid);
+			preparedStatement.setString(2, name);
+			preparedStatement.setString(3, email);
+			resultset = preparedStatement.executeQuery();
+			
+			if(resultset.next()) {
+				result = true;
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally { 
+			// 메모리정리
+			try {
+				if(resultset != null) resultset.close();
+				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		} // finally
+		
+		return result;
+	}
 	
 	
 } // End

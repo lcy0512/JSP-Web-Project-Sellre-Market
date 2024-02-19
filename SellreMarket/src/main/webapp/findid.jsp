@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>아이디 찾기 - 셀리마켓</title>
 </head>
 <link rel="stylesheet" href="css/findid.css" />
 <script src="js/findid.js"></script>

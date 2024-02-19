@@ -76,6 +76,8 @@ import com.market.command.MDeleteUserInfo;
 import com.market.command.MDuplicatedCheck;
 import com.market.command.MEventDetail;
 import com.market.command.MFindUserID;
+import com.market.command.MFindUserInfoBeforePW;
+import com.market.command.MFindUserPW;
 import com.market.command.MInquiryDetail;
 import com.market.command.MInsertInquiry;
 import com.market.command.MInsertPrice;
@@ -86,6 +88,7 @@ import com.market.command.MMyPageDetail;
 import com.market.command.MProductDetailPageCommand;
 import com.market.command.MRecipeDetailPageCommand;
 import com.market.command.MSignUp;
+import com.market.command.MUpdateUserPW;
 import com.market.command.MinsertBrandToProduct;
 import com.market.command.MinsertCategoryToProduct;
 import com.market.command.MinsertPackToProduct;
@@ -1239,7 +1242,34 @@ public class Controller extends HttpServlet {
 			command.execute(request, response);
 			
 			return;
-
+		
+		case "/findUserPW.do" :
+			command = new MFindUserPW();
+			command.execute(request, response);
+			
+			return;
+		
+		// 비밀번호 찾기 시 유저가 입력한 정보가 DB에 존재하는지 확인
+		case "/findUserInfoBeforePW.do" :
+			command = new MFindUserInfoBeforePW();
+			command.execute(request, response);
+			
+			return;
+			
+		case "/updatePwPage.do" :
+			String userid = request.getParameter("userid");
+			request.setAttribute("userid", userid);
+			
+			viewPage = "updateuserpw.jsp";
+			break;
+		
+		case "/updateUserPW.do" :
+			command = new MUpdateUserPW();
+			command.execute(request, response);
+			
+			viewPage = "login.do";
+			break;
+			
 		default:
 			break;
 
