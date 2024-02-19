@@ -141,7 +141,7 @@ function inquirywrite() {
 							</c:if>
 						    <input type="hidden" value="${cartCount}" id="hiddenCount">
 						    <!-- 장바구니 카운트 끝 -->
-						    <button class="css-g25h97 e14oy6dx1" aria-label="장바구니" type="button" id="cartButton"></button>
+						    <button class="css-g25h97 e14oy6dx1" aria-label="장바구니" type="button" id="cartButton" onclick="window.location.href='cart.do'"></button>
 						</div>
 					</div>
 				</div>

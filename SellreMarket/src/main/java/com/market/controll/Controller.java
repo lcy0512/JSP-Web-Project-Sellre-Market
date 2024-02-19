@@ -60,6 +60,7 @@ import com.market.command.MCalignNewHighPrice;
 import com.market.command.MCalignNewLowPrice;
 import com.market.command.MCalignRecipeHighPrice;
 import com.market.command.MCalignRecipeLowPrice;
+import com.market.command.MCartItemDelete;
 import com.market.command.MCartListView;
 import com.market.command.MCartListViewApi;
 import com.market.command.MCartRegistry;
@@ -84,6 +85,7 @@ import com.market.command.MMyPage;
 import com.market.command.MMyPageDetail;
 import com.market.command.MProductDetailPageCommand;
 import com.market.command.MRecipeDetailPageCommand;
+import com.market.command.MSendCartCommand;
 import com.market.command.MSignUp;
 import com.market.command.MinsertBrandToProduct;
 import com.market.command.MinsertCategoryToProduct;
@@ -1243,31 +1245,31 @@ public class Controller extends HttpServlet {
 			
 			return;
 
-		case "/selectDelivery.do" :
-			command = new MAdminDelivery();
-			command.execute(request, response);
-			ArrayList<AdminGetPackTypeDto> delivery = (ArrayList) request.getAttribute("dname");
-			out.print(new Gson().toJson(delivery));
-			out.flush();
-			return;
-		
-		//배달방식 제품과 연결	
-		case "/insertDelivery.do" :
-			command = new MInsertDelivery();
-			command.execute(request, response);
-			int deliveryResult = (int) request.getAttribute("result");
-			out.print(new Gson().toJson(deliveryResult));
-			out.flush();
-			return;
-			
-		//디비에 이미지 넣기	
-		case "/insertImage.do" :
-			command = new MInsertImage();
-			command.execute(request, response);
-			int imageResult = (int) request.getAttribute("result");
-			out.print(new Gson().toJson(imageResult));
-			out.flush();
-			return;
+//		case "/selectDelivery.do" :
+//			command = new MAdminDelivery();
+//			command.execute(request, response);
+//			ArrayList<AdminGetPackTypeDto> delivery = (ArrayList) request.getAttribute("dname");
+//			out.print(new Gson().toJson(delivery));
+//			out.flush();
+//			return;
+//		
+//		//배달방식 제품과 연결	
+//		case "/insertDelivery.do" :
+//			command = new MInsertDelivery();
+//			command.execute(request, response);
+//			int deliveryResult = (int) request.getAttribute("result");
+//			out.print(new Gson().toJson(deliveryResult));
+//			out.flush();
+//			return;
+//			
+//		//디비에 이미지 넣기	
+//		case "/insertImage.do" :
+//			command = new MInsertImage();
+//			command.execute(request, response);
+//			int imageResult = (int) request.getAttribute("result");
+//			out.print(new Gson().toJson(imageResult));
+//			out.flush();
+//			return;
 
 		default:
 			break;
