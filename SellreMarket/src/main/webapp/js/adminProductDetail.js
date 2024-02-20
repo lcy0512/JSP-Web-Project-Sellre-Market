@@ -103,7 +103,7 @@ function select() {
 				} 
 				
 				$("#preview").attr("src", "/SellreMarket/image/" + image);
-				$("#img").val(image);
+				//$("#img").val(image);
 				$("#pname").val(response[0].pname);
 				$("#pEngname").val(response[0].pEngname);
 				$("#pstock").val(response[0].pstock);
