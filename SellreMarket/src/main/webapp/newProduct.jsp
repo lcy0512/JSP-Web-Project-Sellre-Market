@@ -139,14 +139,12 @@
 							</div>
 							<div
 								style="margin-top: 7px; margin-left: 1%; border: 1px solid lightgray; border-radius: 5px; width: 98%;">
-								<!-- <form action="newPageCart.do" method="get" id="myForm"> -->
 									<button
 										onclick="sendProductInfo(${dto.productid}); return false;"
 										class="btn btn-primary btn-light align-items-center"
 										style="width: 100%;">장바구니</button>
 									<input type="hidden" id="productid" value="${dto.productid}">
 									<input type="hidden" id="id" value="${id}">
-								<!-- </form> -->
 							</div>
 							
 							<div class="text-center py-4"

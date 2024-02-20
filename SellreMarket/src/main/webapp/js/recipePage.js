@@ -38,7 +38,7 @@ function sendProductInfo(recipeid, productid) {
 	    
 	}
 	*/
-function sendProductInfo(productid) {
+function sendProductInfo(recipeid) {
 	var productContainer = event.target.closest('.product-item');
 	var pname = productContainer.querySelector('.text-truncate').innerText;
     /* var form = document.myForm; */
@@ -60,7 +60,7 @@ function sendProductInfo(productid) {
 	            type: 'POST',
 	            url: 'recipePageCart.do',
 	            data: {
-	                productid: productid
+	                recipeid:recipeid
 	            },
 	            success: function(response) {
 	                // 서버로부터 장바구니 개수를 가져옵니다.

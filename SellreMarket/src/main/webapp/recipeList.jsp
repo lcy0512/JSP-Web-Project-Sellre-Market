@@ -178,11 +178,12 @@
 							
 							<div
 								style="margin-top: 7px; margin-left: 1%; border: 1px solid lightgray; border-radius: 5px; width: 98%;">
-								<button
-									onclick="sendProductInfo(${dto.recipeid}); return false;"
-									class="btn btn-primary btn-light align-items-center"
-									style="width: 100%;">장바구니</button>
-								<input type="hidden" id="userid" value="${id}">
+									<button
+										onclick="sendProductInfo(${dto.recipeid}); return false;"
+										class="btn btn-primary btn-light align-items-center"
+										style="width: 100%;">장바구니</button>
+									<input type="hidden" id="recipeid" value="${dto.recipeid}">
+									<input type="hidden" id="id" value="${id}">
 							</div>
 							
 							<div class="text-center py-4"
