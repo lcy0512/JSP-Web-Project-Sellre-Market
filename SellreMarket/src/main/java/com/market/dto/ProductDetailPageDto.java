@@ -3,14 +3,14 @@ package com.market.dto;
 public class ProductDetailPageDto {
 	
 	int id, price, discountedPrice, salerate;
-	String productName, deliveryName;
+	String productName, deliveryName, image;
 	
 	public ProductDetailPageDto() {
 		// TODO Auto-generated constructor stub
 	}	
 
 	public ProductDetailPageDto(int id, int price, int discountedPrice, int salerate,
-														String productName, String deliveryName) {
+														String productName, String deliveryName, String image) {
 		super();
 		this.id = id;
 		this.price = price;
@@ -18,6 +18,7 @@ public class ProductDetailPageDto {
 		this.salerate = salerate;
 		this.productName = productName;
 		this.deliveryName = deliveryName;
+		this.image = image;
 	}
 
 	public int getId() {
@@ -66,6 +67,14 @@ public class ProductDetailPageDto {
 
 	public void setDeliveryName(String deliveryName) {
 		this.deliveryName = deliveryName;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 	
 	

@@ -22,7 +22,7 @@
     width: 430px;
     height: 552px;
     background:
-    url(http://localhost:8080/SellreMarket/image/introduce1.jpeg);
+    url(${pageContext.request.contextPath}/image/${image});
     -webkit-background-size: cover,contain;
     background-size: cover,contain;
     background-color: #f5f5f5;

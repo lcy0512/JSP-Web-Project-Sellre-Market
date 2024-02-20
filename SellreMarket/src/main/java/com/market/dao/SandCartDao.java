@@ -15,13 +15,13 @@ public class SandCartDao {
     public SandCartDao() {
         try {
             Context context = new InitialContext();
-            dataSource = (DataSource) context.lookup("java:comp/env/jdbc/myDB");
+            dataSource = (DataSource) context.lookup("java:comp/env/jdbc/sellreMarket");
         } catch (NamingException e) {
             e.printStackTrace();
         }
     }
 
-    public void addCartItems(String[] cartItemNames) {
+    public void addCartItems(String[] cartItemNames, String[] cartItemQuantities) {
         Connection conn = null;
         
         try {
@@ -29,13 +29,20 @@ public class SandCartDao {
             conn = dataSource.getConnection();
 
             // SQL 쿼리문을 통해 DB에 cartItemNames를 추가하는 코드
-            String query = "INSERT INTO cart (productid, userid) VALUES ((SELECT productid FROM product WHERE pname = ?), 'baboya')";
+            String query = "INSERT INTO cart (productid, qty, userid) VALUES ((SELECT productid FROM product WHERE pname = ?), ?, 'baboya')";
 
             try (PreparedStatement statement = conn.prepareStatement(query)) {
-                // cartItemNames의 각 항목을 DB에 추가
-                for (String itemName : cartItemNames) {
+                // cartItemNames와 cartItemQuantities를 함께 처리
+                for (int i = 0; i < cartItemNames.length; i++) {
+                    String itemName = cartItemNames[i];
+                    String itemQuantity = cartItemQuantities[i];
+                    
                     statement.setString(1, itemName);
-                    System.out.println(itemName);
+                    statement.setString(2, itemQuantity);
+                    
+                    System.out.println("DAO에서 이름 쳐 넣음 : " + itemName);
+                    System.out.println("DAO에서 수량 쳐 넣음 : " + itemQuantity);
+                    
                     statement.executeUpdate(); // 각 항목을 개별적으로 추가
                 }
             }
