@@ -135,11 +135,11 @@
 						<div class="product-item bg-light mb-4"
 							style="width: 300px; height: 350px; display: flex; flex-direction: column; justify-content: center;">
 							<div class="product-img position-relative overflow-hidden">
-								<a href="" onclick="sendToDeatil(${dto.productid})"> <img class="img-fluid w-100"
-									src="${pageContext.request.contextPath}/image/product/${dto.pimage}"
-									alt="Product Image"
-									 style="object-fit: cover; width: 100%; height: 100%;">
-								</a>
+									<a href="productDetail.do?productId=${dto.productid}" ><img class="img-fluid w-100"
+										src="${pageContext.request.contextPath}/image/product/${dto.pimage}"
+										alt="Product Image"
+										 style="object-fit: cover; width: 100%; height: 100%;">
+									</a>
 							</div>
 							<div
 								style="margin-top: 7px; margin-left: 1%; border: 1px solid lightgray; border-radius: 5px; width: 98%;">
@@ -155,7 +155,7 @@
 							
 							<div class="text-center py-4"
 								style="display: flex; flex-direction: column; justify-content: center;">
-								<a class="h6 text-decoration-none text-truncate" href="" style="font-weight: bold;">${dto.pname}</a>
+								<a class="h6 text-decoration-none text-truncate" href="productDetail.do?productId=${dto.productid}" style="font-weight: bold;">${dto.pname}</a>
 								<div class="d-flex align-items-center justify-content-center mt-2">
 									<h7 class="text-muted ml-2">
 										<c:if test="${dto.price ne dto.dPrice}">
