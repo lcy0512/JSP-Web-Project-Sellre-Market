@@ -183,7 +183,7 @@
 										height: 1px;
 									}
 								</style>
-								<input type="checkbox" disabled class="cartItemCheckboxAll css-agvwxo e1dcessg2"/>
+								<input type="checkbox" disabled class="css-agvwxo e1dcessg2"/>
 									<style data-emotion="css 79hxr7">
 										.css-79hxr7 {
 											margin-right: 12px;
@@ -237,11 +237,7 @@
 										<section class="grid grid-cols-10 py-4 items-center">
 											<div class="col-span-1 flex justify-center items-center">
 												<label class="">
-													<input onchange="CartItemCheckbox__changed();"
-														type="checkbox"
-														class="cartItemCheckbox peer sr-only"
-														value="${cart.cartId()}"
-													>
+													<input type="checkbox" id="checkbox_cart_item_${cart.cartId()}" class="peer sr-only">
 													<div class="relative w-4 h-4 bg-white border-2 border-[#92a8d1] rounded-lg ring-[#92a8d1] ring-offset-2 peer-focus:ring-2 peer-checked:!bg-[#92a8d1]">
 														<svg class="scale-[0.8] -translate-x-[0.0625rem]" stroke="#000000" fill="#ffffff" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path></svg>
 													</div>
@@ -582,7 +578,7 @@
 		/**
 		* 전체선택 기능 구현하기.
 		*/
-		// 전체선택 체크박스
+/* 		// 전체선택 체크박스
 		const $cartItemCheckboxAll = $('.cartItemCheckboxAll');
 		// item of cart checkbox
 		const $cartItemCheckbox = $('.cartItemCheckbox');
@@ -596,25 +592,28 @@
 			const allChecked = $cartItemCheckbox.length == $('.cartItemCheckbox:checked').length;
 			
 			$cartItemCheckboxAll.prop('checked', allChecked);
-		}
-		
-		/* var checkboxAll = document.getElementById('cart_select_all');
-		checkboxAll.addEventListner('click', toggleCheckboxes);
-		
-		function toggleCheckboxes() {
-			var checkboxes = document.querySelectorAll('#cart_list input[type="checkbox"]');
-			for (var i=0; i<checkboxes.length; i++) {
-				checkboxes[i].checked= checkboxAll.checked;
-			}
 		} */
 		
+		/**
+		* 장바구니 아이템 선택 삭제하기.
+		*/
 		const deleteCartItem = (cartId) => {
-			const itemElement = document.querySelector('#checkbox_cart_item #cart_item' + cartId + '');
+			const cartIdElement = document.querySelector('#checkbox_cart_item_' + cartId +'');
+			const amountElement = document.querySelector('#cart_item_'+ cartId +' .amount-box .amount-value');
+			const currentAmount = Number(amountElement.innerHTML);
+			
+			if (currentAmount <= 0) {
+				// TODO remove item from cart list
+				return;
+			}
 			
 			const dto = {cartId: cartId, amount: 0};
 			updateCartAmount(dto);
 		}
 		
+		/**
+		* 장바구니 아이템 수량 변경하기.
+		*/
 		const decreaseAmount = (cartId) => {
 			const amountElement = document.querySelector('#cart_item_'+ cartId +' .amount-box .amount-value');
 			const currentAmount = Number(amountElement.innerHTML);
