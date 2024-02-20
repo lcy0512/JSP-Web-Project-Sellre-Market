@@ -42,9 +42,9 @@
 					</div>
 				</div>
 				<div class="css-1vjdduq e18ap6t75">
-					<a class="css-i4t6me e18ap6t74">아이디 찾기</a><span
+					<a class="css-i4t6me e18ap6t74" href="findid.jsp">아이디 찾기</a><span
 						class="css-1cgn39v e18ap6t73"></span><a
-						class="css-i4t6me e18ap6t74">비밀번호 찾기</a>
+						class="css-i4t6me e18ap6t74" href="findpassword.jsp">비밀번호 찾기</a>
 				</div>
 				<div class="css-s4i9n2 e18ap6t71">
 					<button class="css-qaxuc4 e4nu7ef3" type="button" height="54" radius="3" onclick="checkId()">

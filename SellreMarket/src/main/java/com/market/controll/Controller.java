@@ -1264,10 +1264,13 @@ public class Controller extends HttpServlet {
 			break;
 		
 		case "/updateUserPW.do" :
+			System.out.println("controller userid : " + request.getParameter("userid"));
+			System.out.println("controller password : " + request.getParameter("newPassword"));
 			command = new MUpdateUserPW();
 			command.execute(request, response);
 			
 			viewPage = "login.do";
+			session.invalidate();
 			break;
 			
 		default:

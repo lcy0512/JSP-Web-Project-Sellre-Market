@@ -76,7 +76,7 @@ function sendCodetoEmail(name, email) {
 			let systemPWauthentication = response.PWauthentication;
 			$("#sysAuthentic").val(systemPWauthentication);
 			
-			console.log("인증번호 : " + systemPWauthentication);
+			//console.log("인증번호 : " + systemPWauthentication);
 			
 			// 인증번호 입력 표시
 			var emailElement = document.getElementById('Emailauthentication');

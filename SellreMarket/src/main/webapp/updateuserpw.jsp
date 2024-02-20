@@ -14,13 +14,13 @@
 	<div class="css-140915z e13dlrpy2">
 		<div class="css-7500ra e13dlrpy0">비밀번호 변경</div>
 		<div class="css-u3y03b e13dlrpy1">
-			<form class="css-s3iz85 e1h5g482" method="post">
+			<form class="css-s3iz85 e1h5g482" method="post" id="updateForm" action="updateUserPW.do">
 				<div class="css-1blp8ou e1h5g481">
-					<input type="hidden" id="userid" value="${userid}">
+					<input type="hidden" id="userid" name="userid" value="${userid}">
 					<div class="css-1yjqrpx e1uzxhvi6">
 						<label for="newPassword" class="css-c3g9of e1uzxhvi4">새로운 비밀번호</label>
 						<div class="css-176lya2 e1uzxhvi3">
-							<input data-testid="input-box" id="newPassword" name="newPassword" placeholder="새로운 비밀번호를 입력해 주세요" type="password" class="css-u52dqk e1uzxhvi2" value="">
+							<input id="newPassword" name="newPassword" placeholder="새로운 비밀번호를 입력해 주세요" type="password" class="css-u52dqk e1uzxhvi2" value="">
 						</div>
 					</div>
 				</div>
@@ -28,7 +28,7 @@
 					<div class="css-1yjqrpx e1uzxhvi6">
 						<label for="authentication" class="css-c3g9of e1uzxhvi4">새로운 비밀번호 확인</label>
 						<div class="css-176lya2 e1uzxhvi3">
-							<input data-testid="input-box" id="confirmNewPassword" name="confirmNewPassword" placeholder="새로운 비밀번호 확인을 입력해 주세요" type="password" class="css-u52dqk e1uzxhvi2" value="">
+							<input id="confirmNewPassword" name="confirmNewPassword" placeholder="새로운 비밀번호 확인을 입력해 주세요" type="password" class="css-u52dqk e1uzxhvi2" value="">
 						</div>
 						<span id="passwordcheckmessage"></span>
 					</div>

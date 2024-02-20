@@ -12,6 +12,7 @@ public class MUpdateUserPW implements MCommand {
 		
 		String userid = request.getParameter("userid");
 		String password = request.getParameter("newPassword");
+		
 		System.out.println("userid : " + userid);
 		System.out.println("password : " + password);
 		

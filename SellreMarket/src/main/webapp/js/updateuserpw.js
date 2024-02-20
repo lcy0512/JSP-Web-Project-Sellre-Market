@@ -27,8 +27,9 @@ $(document).ready(function() {
 
 function updatePW() {
 	if(passwordcheck === true) {
-		alert("비밀번호가 변경되었습니다.");
-		window.location.href = "updateUserPW.do";
+		alert("비밀번호가 변경되었습니다.")
+		let updateform = document.getElementById('updateForm');
+		updateform.submit();
 	}
 	else {
 		alert("비밀번호가 일치하지 않습니다.");
