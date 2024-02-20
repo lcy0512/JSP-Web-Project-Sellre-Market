@@ -183,7 +183,7 @@
 										height: 1px;
 									}
 								</style>
-								<input type="checkbox" disabled class="css-agvwxo e1dcessg2"/>
+								<input type="checkbox" disabled class="cartItemCheckboxAll css-agvwxo e1dcessg2"/>
 									<style data-emotion="css 79hxr7">
 										.css-79hxr7 {
 											margin-right: 12px;
@@ -212,7 +212,10 @@
 								}
 							</style>
 							<span class="css-454d5e e149z641"></span>
-							<button disabled class="css-0 e149z640">선택삭제</button>
+							<button
+								disabled class="css-0 e149z640"
+								onclick="deleteCartItem(${cart.cartId()})"
+							>선택삭제</button>
 						</div>
 					</div>
 					<div id="cart_container" class="ej77nku0 flex flex-col border-t-2 border-t-black ${not empty carts ? "justify-start" : "justify-center py-32"} items-center border-b">
@@ -234,7 +237,11 @@
 										<section class="grid grid-cols-10 py-4 items-center">
 											<div class="col-span-1 flex justify-center items-center">
 												<label class="">
-													<input type="checkbox" class="peer sr-only">
+													<input onchange="CartItemCheckbox__changed();"
+														type="checkbox"
+														class="cartItemCheckbox peer sr-only"
+														value="${cart.cartId()}"
+													>
 													<div class="relative w-4 h-4 bg-white border-2 border-[#92a8d1] rounded-lg ring-[#92a8d1] ring-offset-2 peer-focus:ring-2 peer-checked:!bg-[#92a8d1]">
 														<svg class="scale-[0.8] -translate-x-[0.0625rem]" stroke="#000000" fill="#ffffff" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path></svg>
 													</div>
@@ -572,6 +579,42 @@
 			</div>
 		</div>
 		<script>
+		/**
+		* 전체선택 기능 구현하기.
+		*/
+		// 전체선택 체크박스
+		const $cartItemCheckboxAll = $('.cartItemCheckboxAll');
+		// item of cart checkbox
+		const $cartItemCheckbox = $('.cartItemCheckbox');
+		
+		$CartItemCheckboxAll.change(function () {
+			const allChecked = $(this).prop('checked');
+			$cartItemCheckbox.prop('checked', allChecked);	// 아이템 체크박스들에게 체크상태 동기화
+		});
+		
+		function CartItemCheckbox__changed() {
+			const allChecked = $cartItemCheckbox.length == $('.cartItemCheckbox:checked').length;
+			
+			$cartItemCheckboxAll.prop('checked', allChecked);
+		}
+		
+		/* var checkboxAll = document.getElementById('cart_select_all');
+		checkboxAll.addEventListner('click', toggleCheckboxes);
+		
+		function toggleCheckboxes() {
+			var checkboxes = document.querySelectorAll('#cart_list input[type="checkbox"]');
+			for (var i=0; i<checkboxes.length; i++) {
+				checkboxes[i].checked= checkboxAll.checked;
+			}
+		} */
+		
+		const deleteCartItem = (cartId) => {
+			const itemElement = document.querySelector('#checkbox_cart_item #cart_item' + cartId + '');
+			
+			const dto = {cartId: cartId, amount: 0};
+			updateCartAmount(dto);
+		}
+		
 		const decreaseAmount = (cartId) => {
 			const amountElement = document.querySelector('#cart_item_'+ cartId +' .amount-box .amount-value');
 			const currentAmount = Number(amountElement.innerHTML);
@@ -610,7 +653,7 @@
 			 $.ajax({
 					// 요청:
 					type: "POST",
-					url: "cart/amount/increase.do",
+					url: "cart/amount/update.do",
 					data: dto,
 					
 					// 성공 시 실행할 함수:
