@@ -87,6 +87,7 @@ import com.market.command.MMyPage;
 import com.market.command.MMyPageDetail;
 import com.market.command.MProductDetailPageCommand;
 import com.market.command.MRecipeDetailPageCommand;
+import com.market.command.MSendCartCommand;
 import com.market.command.MSignUp;
 import com.market.command.MUpdateUserPW;
 import com.market.command.MinsertBrandToProduct;
@@ -281,32 +282,72 @@ public class Controller extends HttpServlet {
 			viewPage = "noticedetail.jsp";
 			break;
 
-		case "/productDetail.do":
-			// 요청에서 선택된 상품 번호를 가져옴
-			String selectProductId = request.getParameter("productId");
-			// 선택된 상품 번호를 세션에 저장
-			session.setAttribute("productID", selectProductId);
-
+		case "/productDetail.do" :
+	        	// 요청에서 선택된 상품 번호를 가져옴
+			String selectProductId = request.getParameter("productId");				
+	        	// 선택된 상품 번호를 세션에 저장
+	        	session.setAttribute("productID", selectProductId);
+	      
 			System.out.println("보낼 아이디 : " + selectProductId);
-
+	      
 			command = new MProductDetailPageCommand();
 			command.execute(request, response);
 			viewPage = "ProductDetailPage.jsp";
 			break;
-
-		case "/recipeDetail.do":
-			// 요청에서 선택된 상품 번호를 가져옴
-			String selectRecipeId = request.getParameter("recipeId");
-			// 선택된 상품 번호를 세션에 저장
-			session.setAttribute("recipeID", selectRecipeId);
-
-			System.out.println("보낼 아이디 : " + selectRecipeId);
-
-			command = new MRecipeDetailPageCommand();
-			command.execute(request, response);
-			viewPage = "DetailPageTest.jsp";
+				
+		case "/testRecipe.do" :
+			viewPage = "TestRecipeSelection.jsp";
+			System.out.println(viewPage);
 			break;
 
+		case "/recipeDetail.do" :
+			System.out.println("----레시피 do----");
+			// 요청에서 선택된 상품 번호를 가져옴
+			String selectRecipeId = request.getParameter("recipeId");				
+	       		// 선택된 상품 번호를 세션에 저장
+	       		session.setAttribute("recipeID", selectRecipeId);
+	      
+			System.out.println("보낼 아이디 : " + selectRecipeId);
+	      
+			command = new MRecipeDetailPageCommand();
+			command.execute(request, response);
+			viewPage = "RecipeDetailPage.jsp";
+			break;
+
+		// recipeAjax.do 요청에 대한 처리
+		case "/recipeAjax.do" :
+			System.out.println("----아젝스 do----");
+		    // 클라이언트로부터 전달된 장바구니 상품 이름들을 가져옵니다.
+		    String cartItemNamesStr = request.getParameter("cartItemNames");
+		    String cartItemQuantitiesStr = request.getParameter("cartItemQuantities");
+		   
+		    System.out.println("컨트롤러, 잘 받아져왔나(이름) : " + cartItemNamesStr);
+		    System.out.println("컨트롤러, 잘 받아져왔나(수량) : " + cartItemQuantitiesStr);
+		   
+		    if (cartItemNamesStr != null && !cartItemNamesStr.isEmpty()) {
+		        // 상품 이름들을 쉼표로 구분하여 배열로 분리합니다.
+		        String[] cartItemNames = cartItemNamesStr.split(",");
+		        String[] cartItemQuantities = cartItemQuantitiesStr.split(",");
+		        // 상품 이름 배열을 request에 attribute로 설정합니다.
+		        request.setAttribute("cartItemNames", cartItemNames);
+		        request.setAttribute("cartItemQuantities", cartItemQuantities);
+		        // 상품 이름 배열을 그대로 출력합니다.
+		        System.out.println("컨트롤러에서 받은 상품이름들: ");
+		        for (String itemName : cartItemNames) {
+		            System.out.println(itemName + ", ");
+		        }
+		        System.out.println("컨트롤러에서 받은 상품수량들: ");
+		        for (String itemName : cartItemQuantities) {
+		            System.out.println(itemName + ", ");
+		        }
+		    } else {
+		        // 장바구니 상품 이름이 전달되지 않은 경우에 대한 처리
+		        System.out.println("cartItemNames 매개변수가 비어 있거나 null입니다.");
+		    }
+		    command = new MSendCartCommand();
+		    command.execute(request, response);
+		    break;
+				
 		// 관리자 제품 조회 + 페이징처리
 		case "/adminProduct.do":
 			command = new MAdminProductCount();
@@ -1066,13 +1107,22 @@ public class Controller extends HttpServlet {
 			command.execute(request, response);
 			return;
 
+		// 장바구니 page 보여주기.
 		case "/cart.do":
 			command = new MCartListView();
 			command.execute(request, response);
-
+			
 			request.setAttribute("router", "cart");
 			viewPage = "gwangyeong.jsp";
 			break;
+
+		// 장바구니 page에서 item 수량 변경하기.
+		case "/cart/amount/update.do":
+			// response.setStatus(200);
+			// response.setContentType("application/json");
+			command = new MCartUpdateAmount();
+			command.execute(request, response);
+			return;
 
 		case "/cart/amount/increase.do":
 			// response.setStatus(200);
@@ -1081,16 +1131,24 @@ public class Controller extends HttpServlet {
 			command.execute(request, response);
 			return;
 
+		// 장바구니 page에서 item 가격 계산하기.
 		case "/api/cart/query.do":
 			command = new MCartListViewApi();
 			command.execute(request, response);
 			return;
-
+				
+		// 장바구니 page 테스트를 위한 임시 로그인
 		case "/fake/login.do":
 			User user = new User("admin", "1234");
 			session.setAttribute("loginUser", user);
 			out.print("{\"success\": true}");
 			out.flush();
+			return;
+			
+		// 장바구니 page에서 item 선택 삭제.
+		case "/cart/item/delete.do":
+			command = new MCartItemDelete();
+			command.execute(request, response);
 			return;
 
 		case "/logout.do":
@@ -1236,6 +1294,32 @@ public class Controller extends HttpServlet {
 			command.execute(request, response);
 			
 			return;
+
+		case "/selectDelivery.do" :
+			command = new MAdminDelivery();
+			command.execute(request, response);
+			ArrayList<AdminGetPackTypeDto> delivery = (ArrayList) request.getAttribute("dname");
+			out.print(new Gson().toJson(delivery));
+			out.flush();
+			return;
+		
+		//배달방식 제품과 연결	
+		case "/insertDelivery.do" :
+			command = new MInsertDelivery();
+			command.execute(request, response);
+			int deliveryResult = (int) request.getAttribute("result");
+			out.print(new Gson().toJson(deliveryResult));
+			out.flush();
+			return;
+			
+		//디비에 이미지 넣기	
+		case "/insertImage.do" :
+			command = new MInsertImage();
+			command.execute(request, response);
+			int imageResult = (int) request.getAttribute("result");
+			out.print(new Gson().toJson(imageResult));
+			out.flush();
+			return;
 			
 		case "/findUserID.do" :
 			command = new MFindUserID();
@@ -1264,15 +1348,13 @@ public class Controller extends HttpServlet {
 			break;
 		
 		case "/updateUserPW.do" :
-			System.out.println("controller userid : " + request.getParameter("userid"));
-			System.out.println("controller password : " + request.getParameter("newPassword"));
 			command = new MUpdateUserPW();
 			command.execute(request, response);
 			
 			viewPage = "login.do";
 			session.invalidate();
 			break;
-			
+
 		default:
 			break;
 
