@@ -31,7 +31,9 @@
 	<div class="css-n48rgu ex9g78v0">
 		<div class="css-16c0d81 e1brqtzw0">
 			<main id="product-atf" class="css-1eoy87d e17iylht5">
-				<div class="css-5v50l3 e17iylht4"></div>
+				<div class="css-5v50l3 e17iylht4">
+					<img src="${pageContext.request.contextPath}/image/${image}" alt="Shoe Image">
+				</div>
 				<section class="css-1ua1wyk e17iylht3">
 					<div class="css-1qy9c46 ezpe9l12">
 						<h1 class="css-79gmk3 ezpe9l11">${pname}</h1>

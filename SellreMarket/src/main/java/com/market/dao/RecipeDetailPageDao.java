@@ -19,7 +19,7 @@ public class RecipeDetailPageDao {
     public RecipeDetailPageDao() {
         try {
             Context context = new InitialContext();
-            dataSource = (DataSource) context.lookup("java:comp/env/jdbc/myDB");
+            dataSource = (DataSource) context.lookup("java:comp/env/jdbc/sellreMarket");
         } catch (Exception e) {
             e.printStackTrace();
         }

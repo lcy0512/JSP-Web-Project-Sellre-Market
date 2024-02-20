@@ -117,8 +117,8 @@
 				</div>
 				<div class="css-1pjgd36 e744wfw6" id="Emailauthentication" style="display: none;">
 					<div class="css-1y8737n e744wfw5">
-						<input class="css-1obgjqh e744wfw4" type="hidden"><span
-							class="css-qq9ke6 e744wfw0"></span>
+						<input class="css-1obgjqh e744wfw4" type="hidden">
+						<span class="css-qq9ke6 e744wfw0"></span>
 					</div>
 					<div class="css-82a6rk e744wfw3">
 						<div class="css-jmalg e1uzxhvi6">
@@ -128,9 +128,14 @@
 									class="css-u52dqk e1uzxhvi2" value="">
 								<input type="hidden" id="sysAuthentic">
 							</div>
-						<div class="checkedEmail" value="">
+						<span class="checkedEmail" value=""></span>
 						</div>
 					</div>
+					<div class="css-1w0ksfz e744wfw2">
+ 						<button class="css-ufulao e4nu7ef3" type="button" id="confirmCheck" onclick="checkAuthentication()">
+ 							<span class="css-nytqmg e4nu7ef1">인증확인</span>
+ 						</button>
+ 					</div>
 				</div>
 				<div class="css-1pjgd36 e744wfw6">
 					<div class="css-1y8737n e744wfw5">
