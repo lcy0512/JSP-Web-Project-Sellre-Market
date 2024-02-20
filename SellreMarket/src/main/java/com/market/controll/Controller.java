@@ -1312,6 +1312,10 @@ public class Controller extends HttpServlet {
 			session.invalidate();
 			break;
 			
+		case "/order.do" :
+			
+			viewPage = "purchaseProduct.jsp";
+			
 		default:
 			break;
 
