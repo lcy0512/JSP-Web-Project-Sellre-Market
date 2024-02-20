@@ -30,8 +30,8 @@
  
  ## 개발환경
 ![Windows](https://img.shields.io/badge/Windows-0078D4.svg?&style=for-the-badge&logo=Windows&logoColor=white)
-![MacOs](https://img.shields.io/badge/Mac%20Os-8D8D8D.svg?&style=for-the-badge&logo=MacOs&logoColor=white)<br>
-![Eclipse%20IDE](https://img.shields.io/badge/Eclipse%20IDE-2C2255.svg?&style=for-the-badge&logo=Eclipse%20IDE&logoColor=white)<br>
+![MacOs](https://img.shields.io/badge/Mac%20Os-8D8D8D.svg?&style=for-the-badge&logo=MacOs&logoColor=white)
+![Eclipse%20IDE](https://img.shields.io/badge/Eclipse%20IDE-2C2255.svg?&style=for-the-badge&logo=Eclipse%20IDE&logoColor=white)
 
 <br><br>
 # 주요 기능
