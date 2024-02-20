@@ -36,13 +36,6 @@ function sendProductInfo(productid) {
 		}
 */
 
-function sendToDeatil(productid) {
-	
-	window.location.href = "productDetail.do?productid=" +productid;
-	
-}
-
-
 function sendProductInfo(productid) {
 	var productContainer = event.target.closest('.product-item');
 	var pname = productContainer.querySelector('.text-truncate').innerText;

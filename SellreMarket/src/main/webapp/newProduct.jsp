@@ -68,6 +68,8 @@
 
 <!-- // js 따로 관리한다. -->
 <script src="js/newProductPage.js"></script>
+<script src="js/paging.js"></script>
+
 
 </head>
 <body>
@@ -76,12 +78,6 @@
 	<jsp:include page="header.jsp"></jsp:include>
 	<!-- Topbar End -->
 
-
-	<!-- Navbar Start -->
-
-	<!-- Navbar End -->
-	
-	
 	<!-- Ad Start -->
 	<div class="container" style="width: 100%">
 		<a href="#"><img class="img-fluid w-100"
@@ -192,8 +188,7 @@
 
 
 	<!-- Paging Start -->
-	<div id="paging"></div>
-	<script src="js/paging.js"></script>
+	<div id="showPaging" style="text-align: center;"></div>
 	<input type="hidden" value="${curPage}" id="curPage">
 	<!-- Paging End -->
 

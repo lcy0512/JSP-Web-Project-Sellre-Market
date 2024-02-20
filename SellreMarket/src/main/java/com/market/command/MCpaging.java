@@ -27,6 +27,7 @@ public class MCpaging implements MCommand  {
 */
 
 		
+		System.out.println("get in MCpaging command");
 		HttpSession session = request.getSession();
 		MainViewDao dao = new MainViewDao();
 		// get images
