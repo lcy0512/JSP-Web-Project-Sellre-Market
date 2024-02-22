@@ -87,6 +87,7 @@
 	
 	<%-- jquery --%>
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	<script src="js/cart.js"></script>
 	</head>
 	<body>
 		<%-- Carts Start --%>
@@ -171,7 +172,7 @@
 									color: #ddd;
 								}
 							</style>
-							<label class="css-1vf8o8s e1dcessg3" disabled>
+							<label for="allCheck" onclick="selectAllItems()" class="css-1vf8o8s e1dcessg3">
 								<style data-emotion="css agvwxo">
 									.css-agvwxo {
 										overflow: hidden;
@@ -183,7 +184,7 @@
 										height: 1px;
 									}
 								</style>
-								<input type="checkbox" disabled class="css-agvwxo e1dcessg2"/>
+								<input type="checkbox" id="allCheck" class="css-agvwxo e1dcessg2"/>
 									<style data-emotion="css 79hxr7">
 										.css-79hxr7 {
 											margin-right: 12px;
@@ -237,7 +238,7 @@
 										<section class="grid grid-cols-10 py-4 items-center">
 											<div class="col-span-1 flex justify-center items-center">
 												<label class="">
-													<input type="checkbox" id="checkbox_cart_item_${cart.cartId()}" class="peer sr-only">
+													<input type="checkbox" class="cart-item-check peer sr-only">
 													<div class="relative w-4 h-4 bg-white border-2 border-[#92a8d1] rounded-lg ring-[#92a8d1] ring-offset-2 peer-focus:ring-2 peer-checked:!bg-[#92a8d1]">
 														<svg class="scale-[0.8] -translate-x-[0.0625rem]" stroke="#000000" fill="#ffffff" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path></svg>
 													</div>
@@ -249,7 +250,7 @@
 													alt="${cart.productName()} 이미지"
 													class="w-32 h-32 border rounded-lg"
 												>
-												${cart.productName()}
+												<a href="productDetail.do?productId=${cart.productId()}">${cart.productName()}</a>
 											</div>
 											<div
 												class="amount-box col-span-2 flex justify-center items-center border-2 border-black rounded-md h-8 w-24"
@@ -281,8 +282,8 @@
 					</div>
 					<div class="css-20o6z0 e149z643">
 						<div class="css-zbxehx e149z642">
-							<label class="css-1vf8o8s e1dcessg3" disabled>
-								<input type="checkbox" disabled class="css-agvwxo e1dcessg2"/>
+							<label for="allCheck" onclick="selectAllItems()" class="css-1vf8o8s e1dcessg3" disabled>
+								<input type="checkbox" id="allCheck" disabled class="css-agvwxo e1dcessg2"/>
 									<div class="css-79hxr7 e1dcessg1">
 										<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z" stroke="#ddd" fill="#f2f2f2"></path>
@@ -574,160 +575,5 @@
 				</div>
 			</div>
 		</div>
-		<script>
-		/**
-		* 전체선택 기능 구현하기.
-		*/
-/* 		// 전체선택 체크박스
-		const $cartItemCheckboxAll = $('.cartItemCheckboxAll');
-		// item of cart checkbox
-		const $cartItemCheckbox = $('.cartItemCheckbox');
-		
-		$CartItemCheckboxAll.change(function () {
-			const allChecked = $(this).prop('checked');
-			$cartItemCheckbox.prop('checked', allChecked);	// 아이템 체크박스들에게 체크상태 동기화
-		});
-		
-		function CartItemCheckbox__changed() {
-			const allChecked = $cartItemCheckbox.length == $('.cartItemCheckbox:checked').length;
-			
-			$cartItemCheckboxAll.prop('checked', allChecked);
-		} */
-		
-		/**
-		* 장바구니 아이템 선택 삭제하기.
-		*/
-		const deleteCartItem = (cartId) => {
-			const cartIdElement = document.querySelector('#checkbox_cart_item_' + cartId +'');
-			const amountElement = document.querySelector('#cart_item_'+ cartId +' .amount-box .amount-value');
-			const currentAmount = Number(amountElement.innerHTML);
-			
-			if (currentAmount <= 0) {
-				// TODO remove item from cart list
-				return;
-			}
-			
-			const dto = {cartId: cartId, amount: 0};
-			updateCartAmount(dto);
-		}
-		
-		/**
-		* 장바구니 아이템 수량 변경하기.
-		*/
-		const decreaseAmount = (cartId) => {
-			const amountElement = document.querySelector('#cart_item_'+ cartId +' .amount-box .amount-value');
-			const currentAmount = Number(amountElement.innerHTML);
-			
-			if (currentAmount <= 0) {
-				// TODO remove item from cart list
-				return;
-			}
-			
-			const newAmount = currentAmount - 1;
-			const dto = {cartId: cartId, amount: newAmount};
-			updateCartAmount(dto);
-		};
-		
-		const increaseAmount = (cartId) => {
-			const amountElement = document.querySelector('#cart_item_'+ cartId +' .amount-box .amount-value');
-			const currentAmount = Number(amountElement.innerHTML);
-			const newAmount = currentAmount + 1;
-			
-			const dto = {cartId: cartId, amount: newAmount};
-			updateCartAmount(dto);
-		};
-		
-		/**
-		 * @typedef {Object} CartAmountUpdateDto
-		 * @property {number} cartId - 카트 번호
-		 * @property {number} amount - 수량
-		 */
-		
-		/**
-		 * @param {CartAmountUpdateDto} dto
-		 */
-		const updateCartAmount = (dto) => {
-			const amountElement = document.querySelector('#cart_item_'+ dto.cartId +' .amount-box .amount-value');
-			
-			 $.ajax({
-					// 요청:
-					type: "POST",
-					url: "cart/amount/update.do",
-					data: dto,
-					
-					// 성공 시 실행할 함수:
-					success: function(response) {
-						updateCartsAndPriceSummary();
-					},
-					
-					error: function(e) {
-						console.error(e);
-					}
-				});
-		}
-		
-		const updateCartsAndPriceSummary = () => {
-			$.ajax({
-				// 요청:
-				type: "GET",
-				url: "api/cart/query.do",
-				
-				success: function(response) {
-					console.log('response: ', response);
-					const carts = response.carts;
-					const priceSummary = response.priceSummary;
-
-					total_price.innerHTML = priceSummary.totalPrice;
-					discount_price.innerHTML = priceSummary.discountPrice;
-					payment_price.innerHTML = priceSummary.paymentPrice;
-					
-					for (const item of carts) {
-						const amountElement = document.querySelector('#cart_list #cart_item_' + item.cartId + ' .amount-box .amount-value');
-						amountElement.innerHTML = item.amount;
-					}
-					
-					// rm removed cart li
-					const enableIds = carts.map((item) => 'cart_item_' + item.cartId);
-					
-					const disabledLi = Array.from(cart_list.children).filter((li) => !enableIds.includes(li.id));
-					console.log('disabled: ', disabledLi);
-					disabledLi.forEach((item, index, arr) => cart_list.removeChild(item));
-					
-					// when carts empty
-					if (carts.length === 0) {
-						cart_container.classList.remove('justify-start');
-						cart_container.classList.add('justify-center');
-						cart_container.classList.add('py-32');
-						
-						const emptyCartElement = document.createElement('p');
-						emptyCartElement.classList.add('css-l1lu2l');
-						emptyCartElement.classList.add('eqymnpn0');
-						emptyCartElement.innerHTML = '장바구니에 담긴 상품이 없습니다';
-						
-						cart_container.appendChild(emptyCartElement);
-					}
-				},
-				
-				error: function(e) {
-					console.error(e);
-				}
-			});
-		}
-		
-		// TODO rm later
-		const tempLogin = () => $.ajax({
-			// 요청:
-			type: "POST",
-			url: "fake/login.do",
-			
-			success: function(response) {
-				console.log('response: ', response);
-			},
-			
-			error: function(e) {
-				console.error(e);
-			}
-		});
-		</script>
 	</body>
 </html>
