@@ -17,25 +17,21 @@
 
 
  ## 개발 기간
- * 2024.01.31(수) ~ 2024.02.16(금) (진행중)
+ * 2024.01.31(수) ~ 2024.02.16(금)
 
 
- ## 맴버 구성
- *  신나라 : -
- *  조성진 : -
+ ## 맴버 구성 및 담당
+ *  신나라 : 관리자 Page
+ *  조성진 : View Page 및 Email 인증 API
  *  이천영 : Controller 관리
- *  이 휘 : -
- *  김광영 : -
+ *  이 휘 : 제품 상세 Page
+ *  김광영 : 장바구니(Cart) Page 담당
 
  
  ## 개발환경
 ![Windows](https://img.shields.io/badge/Windows-0078D4.svg?&style=for-the-badge&logo=Windows&logoColor=white)
-![MacOs](https://img.shields.io/badge/Mac%20Os-8D8D8D.svg?&style=for-the-badge&logo=MacOs&logoColor=white)<br>
-![Eclipse%20IDE](https://img.shields.io/badge/Eclipse%20IDE-2C2255.svg?&style=for-the-badge&logo=Eclipse%20IDE&logoColor=white)<br>
-
- ## 언어
-![javascript](https://img.shields.io/badge/javascript-F7DF1E.svg?&style=for-the-badge&logo=javascript&logoColor=white)
-![css3](https://img.shields.io/badge/css3-1572B6.svg?&style=for-the-badge&logo=css3&logoColor=white)
+![MacOs](https://img.shields.io/badge/Mac%20Os-8D8D8D.svg?&style=for-the-badge&logo=MacOs&logoColor=white)
+![Eclipse%20IDE](https://img.shields.io/badge/Eclipse%20IDE-2C2255.svg?&style=for-the-badge&logo=Eclipse%20IDE&logoColor=white)
 
 <br><br>
 # 주요 기능

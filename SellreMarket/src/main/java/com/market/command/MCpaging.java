@@ -27,6 +27,7 @@ public class MCpaging implements MCommand  {
 */
 
 		
+		System.out.println("get in MCpaging command");
 		HttpSession session = request.getSession();
 		MainViewDao dao = new MainViewDao();
 		// get images
@@ -43,16 +44,8 @@ public class MCpaging implements MCommand  {
 			cartCount = dao.cartCount(id);
 		}
 		
-		int curPage = 0;
-		System.out.println(request.getAttribute("curPage") + " 여기까지 찍히나?");
-		try {
-			curPage = Integer.parseInt(request.getParameter("curPage"));
-		}catch (Exception e) {
-			curPage = 1;
-			e.printStackTrace();
-		}
+		int curPage = (int) session.getAttribute("curPage");
 		
-		System.out.println(request.getAttribute("curPage") + " after try catch");
 		// 한 페이지에 몇개를 보여줄 것인가?
 		int countPerPage = 12;
 		// 한 블럭에 몇개의 블럭을 보여줄 것인가?
@@ -119,6 +112,7 @@ public class MCpaging implements MCommand  {
 		int endPage = (totalProductCount % countPerPage) == 0 ? totalProductCount / countPerPage : ((totalProductCount / countPerPage) + 1);
 		
 		session.setAttribute("cartCount", cartCount);
+		session.setAttribute("curPage", curPage);
 		
 		datas.put("curPage", curPage);
 		datas.put("endPage", endPage);
@@ -136,6 +130,7 @@ public class MCpaging implements MCommand  {
 				e.printStackTrace();
 				System.out.println("errorrrr");
 			}
+		
 		
 	}
 

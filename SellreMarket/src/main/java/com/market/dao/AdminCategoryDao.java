@@ -79,9 +79,9 @@ public class AdminCategoryDao {
 			conn = dataSource.getConnection();
 			String query = 
 							"""
-							select catetoryid, type, subtype from catetory 
+							select type, subtype from catetory 
 							where status = 1
-							order by catetoryid desc
+							group by type, subtype
 							limit ?, 15
 				
 					"""; //limit 시작번호, 출력갯수

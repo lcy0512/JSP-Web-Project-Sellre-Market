@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>제품현황 - 셀리</title>
+<title>관리자 - 셀리</title>
 <link rel="shortcut icon" href="http://localhost:8080/SellreMarket/image/logo.png" />
 <link rel="icon" href="http://localhost:8080/SellreMarket/image/logo.png" />
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:8080/SellreMarket/image/logo.png" />

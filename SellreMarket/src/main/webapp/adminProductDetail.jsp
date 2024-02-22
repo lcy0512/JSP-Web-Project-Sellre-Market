@@ -11,15 +11,27 @@
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:8080/SellreMarket/image/logo.png" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="css/adminProductDetail.css" />
-<script src="js/adminProductDetail.js"></script>
+
 </head>
 <body id="body">
 	<jsp:include page="adminHeader.jsp" flush="false" />
 		<div class="main">
-			<div class="title">제품 상세<span class="alarm">* 제품명과 입고갯수는 수정할 수 없습니다.</span></div>
+			<div class="title">제품 상세<span class="alarm">* 제품명, 이미지, 수량은 수정할 수 없습니다.</span></div>
 			
 			
-			<form name="categoryForm">
+			<form name="categoryForm" id="formPlease" enctype="multipart/form-data" method="post">
+			
+			
+				<div class="form-group1">
+					<label for="image">이미지 *</label>
+					<img id="preview" src="" style="max-width: 100%; max-height: 200px;">
+					
+					<!-- <div class="fileContainer">
+						<input type="file" id="image" name="image" onchange="readURL(this);">
+					</div> -->
+					<!-- <input type="text" id="ddddimg" name="iddddmg"> -->
+					
+				</div>
 				<div class="form-group">
 					<label for="pname">제품명</label>
 					<input type="text" id="pname" name="pname" readonly="readonly">
@@ -31,7 +43,7 @@
 				</div>
 				
 				<div class="form-group">
-					<label for="pstock">입고갯수</label>
+					<label for="pstock">수량</label>
 					<input type="text" id="pstock" name="pstock" readonly="readonly">
 				</div>
 				
@@ -58,10 +70,12 @@
 				
 				<input type="text" id="productid" name="productid" hidden="true">
 					
-				<input type="submit" class="updateBtn" onclick="updateProduct()" value="수정">
-				<input type="submit" class="deleteBtn" onclick="deleteProduct()" value="삭제">
 			</form>
+				<input type="submit" class="updateBtn" id="updateBtn" onclick="updateProduct()" value="수정">
+				<input type="submit" class="deleteBtn" id="deleteBtn" onclick="deleteProduct()" value="삭제">
 	</div>
+	
+	<script src="js/adminProductDetail.js"></script>
 </body>
 </html>
 		

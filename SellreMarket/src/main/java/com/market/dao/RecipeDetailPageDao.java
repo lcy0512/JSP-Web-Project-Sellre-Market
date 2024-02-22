@@ -34,11 +34,13 @@ public class RecipeDetailPageDao {
         try {
             conn = dataSource.getConnection();
             
-            String query = "select r.recipeid, p.pname "
-            					 + "from recipeOfYoutuber r, product p, productOfRecipe pr "
+            String query = "select r.recipeid, p.pname, pri.price, (pri.price - (pri.price * (e.salerate)/100)) as saleprice "
+            					 + "from recipeOfYoutuber r, product p, productOfRecipe pr, price pri, event e "
             					 + "where r.recipeid = ? "
             					 + "and r.recipeid = pr.recipeid "
-            					 + "and pr.productid = p.productid";
+            					 + "and pr.productid = p.productid "
+            					 + "and pri.productid = p.productid "
+            					 + "and e.productid = p.productid";
             
             ps = conn.prepareStatement(query);
             ps.setString(1, id);
@@ -48,10 +50,14 @@ public class RecipeDetailPageDao {
             while (rs.next()) {
             	RecipeDetailPageDto dto = new RecipeDetailPageDto(
                     rs.getInt("recipeid"),
-                    rs.getString("pname")
+                    rs.getString("pname"),
+                    rs.getInt("price"),
+                    rs.getInt("saleprice")
                 ); // DTO 객체 생성 및 초기화
                 resultList.add(dto); // 리스트에 DTO 객체 추가
                 System.out.println("DAO에서 상품명 출력 : " + dto.getProductName());
+                System.out.println("DAO에서 상품가격 출력 : " + dto.getProductPrice());
+                System.out.println("DAO에서 할인가격 출력 : " + dto.getDiscountedPrice());
             }       
         } catch (Exception e) {
             e.printStackTrace();

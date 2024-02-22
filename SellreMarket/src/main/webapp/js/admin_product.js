@@ -109,6 +109,7 @@ window.onload=function(){
 				
 			}
 			table += "</table>"
+			
 			div += "<button onclick='paging("+j+")'>"+j+"</button> ";
 			
 		}

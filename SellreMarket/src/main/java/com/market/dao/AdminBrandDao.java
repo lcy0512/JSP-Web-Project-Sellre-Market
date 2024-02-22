@@ -10,7 +10,6 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import com.market.dto.AdminBrandDto;
-import com.market.dto.AdminCategoryDto;
 
 public class AdminBrandDao {
 	
@@ -219,6 +218,39 @@ public class AdminBrandDao {
 			return num;
 		}
 		return num;
+	}
+		
+	/************************************************************************************************
+	 * Function : 제품등록을 위한 브랜드 조회하기
+	 * @param 	: null
+	 * @return 	: ArrayList
+	************************************************************************************************/
+	public ArrayList<AdminBrandDto> selectBrand() {
+		ArrayList<AdminBrandDto> dtos = new ArrayList<AdminBrandDto>();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			conn = dataSource.getConnection();
+			String query = "select bname from brand group by bname order by bname asc";
+		
+			ps = conn.prepareStatement(query);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				AdminBrandDto brand = new AdminBrandDto();
+				brand.setBname(rs.getString(1));
+				dtos.add(brand);
+			}
+			
+			conn.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dtos;
 	}
 		
 	
