@@ -5,7 +5,7 @@ const selectAllItems = () => {
 	// 제목 행의 체크박스의 체크여부를 확인
 	const allCheck = document.querySelector('#allCheck');
 	
-	//제목 줄의 체크박스가 클릭되면..
+	// 제목 줄의 체크박스가 클릭되면..
 	allCheck.addEventListener('click', function () {
 		//참고)
 		//alert(allCheck.checked);
@@ -67,18 +67,61 @@ for (const e of check) {
 /**
 * 장바구니에서 선택한 제품 선택삭제 하기 기능 구현.
 */
-const deleteCartItem = (cartId) => {
-	const cartIdElement = document.querySelector('#checkbox_cart_item_' + cartId +'');
-	const amountElement = document.querySelector('#cart_item_'+ cartId +' .amount-box .amount-value');
-	const currentAmount = Number(amountElement.innerHTML);
+const confirmDeletion = () => {
+	// 확인 대화상자를 표시하여 사용자의 의사를 확인합니다.
+	const result = confirm("정말로 삭제하시겠습니까?");
 	
-	if (currentAmount <= 0) {
-		// TODO remove item from cart list
+	if (result) {
+		// 사용자가 확인을 선택한 경우, 삭제 로직을 실행합니다.
+		const checkedItems = document.querySelectorAll('.cart-item-check:Checked');
+		// 선택한 제품이 없을 때
+		if (checkedItems.length == 0) {
+			alert('선택한 제품이 없습니다.');
+			return;
+		}
+		// 선택된 제품들이 있을 때
+		deleteCart(checkedItems);
+	} else {
+		// 사용자가 취소를 선택한 경우, 삭제를 취소합니다.
 		return;
 	}
+}
+
+const deleteCart = (checkedItems) => {
+	checkedItems.forEach((checkedItem) => {
+		const cartItem = checkedItem.closest('.cart-item');
+		const cartId = cartItem.id.split('_')[2];	// cartId를 id에서 추출
+		
+		const dto = {cartId: cartId};
+		deleteCartItem(dto);
+	});
+}
+
+/**
+ * @typedef {Object} CartDeleteDto
+ * @property {number} cartId - 카트 번호
+ */
+
+/**
+ * @param {CartDeleteDto} dto
+ */
+const deleteCartItem = (dto) => {
 	
-	const dto = {cartId: cartId, amount: 0};
-	updateCartAmount(dto);
+	 $.ajax({
+			// 요청:
+			type: "POST",
+			url: "cart/item/delete.do",
+			data: dto,
+			
+			// 성공 시 실행할 함수:
+			success: function(response) {
+				updateCartsAndPriceSummary();
+			},
+			
+			error: function(e) {
+				console.error(e);
+			}
+		});
 }
 
 /**

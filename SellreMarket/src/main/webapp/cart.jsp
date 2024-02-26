@@ -214,9 +214,12 @@
 							</style>
 							<span class="css-454d5e e149z641"></span>
 							<button
-								disabled class="css-0 e149z640"
-								onclick="deleteCartItem(${cart.cartId()})"
-							>선택삭제</button>
+								id="deleteButton"
+								class="px-2 duration-150 active:scale-95 css-0 e149z640"
+								onclick="confirmDeletion()"
+							>
+							선택삭제
+							</button>
 						</div>
 					</div>
 					<div id="cart_container" class="ej77nku0 flex flex-col border-t-2 border-t-black ${not empty carts ? "justify-start" : "justify-center py-32"} items-center border-b">
@@ -250,7 +253,7 @@
 													alt="${cart.productName()} 이미지"
 													class="w-32 h-32 border rounded-lg"
 												>
-												<a href="productDetail.do?productId=${cart.productId()}">${cart.productName()}</a>
+												<a href="/productDetail.do?productId=${cart.productId()}">${cart.productName()}</a>
 											</div>
 											<div
 												class="amount-box col-span-2 flex justify-center items-center border-2 border-black rounded-md h-8 w-24"
@@ -293,7 +296,13 @@
 									<span>전체선택 (0/0)</span>
 							</label>
 							<span class="css-454d5e e149z641"></span>
-							<button disabled class="css-0 e149z640">선택삭제</button>
+							<button
+								id="deleteButton"
+								class="px-2 duration-150 active:scale-95 css-0 e149z640"
+								onclick="confirmDeletion()"
+							>
+							선택삭제
+							</button>
 						</div>
 					</div>
 				</div>
